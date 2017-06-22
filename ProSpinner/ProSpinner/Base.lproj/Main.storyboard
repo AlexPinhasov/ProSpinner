@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Game View Controller-->
+        <scene sceneID="tXr-a1-R10">
+            <objects>
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="ProSpinner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
+                        <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
+                    </layoutGuides>
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Downloading View Controller-->
+        <scene sceneID="H88-iS-D8i">
+            <objects>
+                <viewController storyboardIdentifier="DownloadingViewController" modalPresentationStyle="overCurrentContext" id="msT-Hr-yAp" customClass="DownloadingViewController" customModule="ProSpinner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Msk-VW-XMA"/>
+                        <viewControllerLayoutGuide type="bottom" id="mDo-ED-yK5"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="ZJK-0O-mdb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0p-Kl-cTL">
+                                <rect key="frame" x="0.0" y="181" width="375" height="486"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cfT-0c-9JI">
+                                        <rect key="frame" x="0.0" y="53" width="375" height="396"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="T9T-Qu-F3F">
+                                            <size key="itemSize" width="115" height="115"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="fL1-qB-tIr" customClass="ImageCollectionCell" customModule="ProSpinner" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="8" width="115" height="115"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgS-z4-fKp">
+                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                            <color key="backgroundColor" red="0.93323702815517073" green="0.94247699873096447" blue="0.94247699873096447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </view>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner2" translatesAutoresizingMaskIntoConstraints="NO" id="xCu-5I-pvs">
+                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="xCu-5I-pvs" secondAttribute="trailing" id="5GY-Ve-Sdb"/>
+                                                    <constraint firstItem="cgS-z4-fKp" firstAttribute="leading" secondItem="fL1-qB-tIr" secondAttribute="leading" id="C09-aj-xMH"/>
+                                                    <constraint firstItem="xCu-5I-pvs" firstAttribute="top" secondItem="fL1-qB-tIr" secondAttribute="top" id="HJc-fE-DTC"/>
+                                                    <constraint firstAttribute="bottom" secondItem="xCu-5I-pvs" secondAttribute="bottom" id="OBI-AR-ANP"/>
+                                                    <constraint firstAttribute="trailing" secondItem="cgS-z4-fKp" secondAttribute="trailing" id="hfe-PM-zHS"/>
+                                                    <constraint firstItem="cgS-z4-fKp" firstAttribute="top" secondItem="fL1-qB-tIr" secondAttribute="top" id="oxR-5t-aKE"/>
+                                                    <constraint firstItem="xCu-5I-pvs" firstAttribute="leading" secondItem="fL1-qB-tIr" secondAttribute="leading" id="vHb-8V-Sgn"/>
+                                                    <constraint firstAttribute="bottom" secondItem="cgS-z4-fKp" secondAttribute="bottom" id="ygU-km-79A"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="customView" destination="cgS-z4-fKp" id="kNL-FL-nnu"/>
+                                                    <outlet property="image" destination="xCu-5I-pvs" id="TZj-FN-xeA"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="None" id="Bl3-Lw-2Zf" customClass="ImageCollectionCell" customModule="ProSpinner" customModuleProvider="target">
+                                                <rect key="frame" x="130" y="8" width="115" height="115"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IUo-S9-cGc">
+                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </view>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blackSpinner" translatesAutoresizingMaskIntoConstraints="NO" id="SBM-QF-GZ0">
+                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstItem="SBM-QF-GZ0" firstAttribute="leading" secondItem="Bl3-Lw-2Zf" secondAttribute="leading" id="19R-JJ-Azj"/>
+                                                    <constraint firstItem="IUo-S9-cGc" firstAttribute="top" secondItem="Bl3-Lw-2Zf" secondAttribute="top" id="4AF-WG-Ota"/>
+                                                    <constraint firstAttribute="trailing" secondItem="IUo-S9-cGc" secondAttribute="trailing" id="Jeb-Jj-OWa"/>
+                                                    <constraint firstItem="IUo-S9-cGc" firstAttribute="leading" secondItem="Bl3-Lw-2Zf" secondAttribute="leading" id="Rma-oH-zwz"/>
+                                                    <constraint firstItem="SBM-QF-GZ0" firstAttribute="top" secondItem="Bl3-Lw-2Zf" secondAttribute="top" id="TMB-hV-Agw"/>
+                                                    <constraint firstAttribute="bottom" secondItem="SBM-QF-GZ0" secondAttribute="bottom" id="pXn-l3-Unz"/>
+                                                    <constraint firstAttribute="bottom" secondItem="IUo-S9-cGc" secondAttribute="bottom" id="qkX-E6-z7z"/>
+                                                    <constraint firstAttribute="trailing" secondItem="SBM-QF-GZ0" secondAttribute="trailing" id="yGW-d4-V5a"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="image" destination="SBM-QF-GZ0" id="NW0-k6-xxb"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="None2" id="72K-e6-h2d" customClass="ImageCollectionCell" customModule="ProSpinner" customModuleProvider="target">
+                                                <rect key="frame" x="252" y="8" width="115" height="115"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Gf-V9-qbx">
+                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </view>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blackSpinner" translatesAutoresizingMaskIntoConstraints="NO" id="sG2-TS-mpa">
+                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="9Gf-V9-qbx" secondAttribute="trailing" id="0v0-eo-wBj"/>
+                                                    <constraint firstAttribute="bottom" secondItem="sG2-TS-mpa" secondAttribute="bottom" id="8E5-RS-TmW"/>
+                                                    <constraint firstItem="9Gf-V9-qbx" firstAttribute="top" secondItem="72K-e6-h2d" secondAttribute="top" id="8Fj-jo-jfp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="sG2-TS-mpa" secondAttribute="trailing" id="Iz0-yN-bOG"/>
+                                                    <constraint firstAttribute="bottom" secondItem="9Gf-V9-qbx" secondAttribute="bottom" id="Pf9-bJ-QqT"/>
+                                                    <constraint firstItem="sG2-TS-mpa" firstAttribute="top" secondItem="72K-e6-h2d" secondAttribute="top" id="XDt-yQ-bTe"/>
+                                                    <constraint firstItem="sG2-TS-mpa" firstAttribute="leading" secondItem="72K-e6-h2d" secondAttribute="leading" id="fi4-HA-Qwh"/>
+                                                    <constraint firstItem="9Gf-V9-qbx" firstAttribute="leading" secondItem="72K-e6-h2d" secondAttribute="leading" id="ln3-UM-Aa6"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="image" destination="sG2-TS-mpa" id="zyr-38-SY3"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="14"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </collectionView>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xil-v1-Y9W">
+                                        <rect key="frame" x="0.0" y="411" width="375" height="75"/>
+                                        <color key="backgroundColor" red="0.99990183115005493" green="1" blue="0.99987989664077759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="h0d-WX-SNF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="21"/>
+                                        <state key="normal" title="Close">
+                                            <color key="titleColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dismissViewControllerWithSender:" destination="msT-Hr-yAp" eventType="touchUpInside" id="DWK-f3-FFt"/>
+                                        </connections>
+                                    </button>
+                                    <activityIndicatorView contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cu3-yp-Wrn">
+                                        <rect key="frame" x="178" y="18" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Xil-v1-Y9W" secondAttribute="trailing" id="9Bz-F3-XEh"/>
+                                    <constraint firstItem="cu3-yp-Wrn" firstAttribute="centerX" secondItem="m0p-Kl-cTL" secondAttribute="centerX" id="MP4-bh-8uq"/>
+                                    <constraint firstAttribute="trailing" secondItem="cfT-0c-9JI" secondAttribute="trailing" id="MaE-zw-erY"/>
+                                    <constraint firstItem="cfT-0c-9JI" firstAttribute="top" secondItem="cu3-yp-Wrn" secondAttribute="bottom" constant="15" id="Q5y-nO-EGf"/>
+                                    <constraint firstItem="Xil-v1-Y9W" firstAttribute="leading" secondItem="m0p-Kl-cTL" secondAttribute="leading" id="dYm-S1-O3M"/>
+                                    <constraint firstItem="Xil-v1-Y9W" firstAttribute="top" secondItem="cfT-0c-9JI" secondAttribute="bottom" constant="-38" id="qDe-q1-fzT"/>
+                                    <constraint firstAttribute="bottom" secondItem="Xil-v1-Y9W" secondAttribute="bottom" id="u4d-L4-h76"/>
+                                    <constraint firstItem="cfT-0c-9JI" firstAttribute="leading" secondItem="m0p-Kl-cTL" secondAttribute="leading" id="yAK-OZ-qyT"/>
+                                    <constraint firstItem="cu3-yp-Wrn" firstAttribute="top" secondItem="m0p-Kl-cTL" secondAttribute="top" constant="18" id="zuK-og-Fsb"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="19"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="m0p-Kl-cTL" firstAttribute="top" secondItem="Msk-VW-XMA" secondAttribute="bottom" constant="161" id="I3J-8f-sAH"/>
+                            <constraint firstItem="mDo-ED-yK5" firstAttribute="top" secondItem="m0p-Kl-cTL" secondAttribute="bottom" id="ORl-rT-Hfw"/>
+                            <constraint firstItem="m0p-Kl-cTL" firstAttribute="leading" secondItem="ZJK-0O-mdb" secondAttribute="leading" id="PPe-a5-zyu"/>
+                            <constraint firstAttribute="trailing" secondItem="m0p-Kl-cTL" secondAttribute="trailing" id="cJd-Y9-yd5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="Xil-v1-Y9W" id="8Ms-Rc-jiO"/>
+                        <outlet property="collectionView" destination="cfT-0c-9JI" id="EpN-kS-FZz"/>
+                        <outlet property="indicator" destination="cu3-yp-Wrn" id="S8Z-FY-kqR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kS1-KG-if4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="829.60000000000002" y="92.203898050974516"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="blackSpinner" width="1000" height="1000"/>
+        <image name="spinner2" width="333" height="333"/>
+    </resources>
+</document>

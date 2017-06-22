@@ -1,0 +1,6 @@
+framework module SpriteKit_Spring {
+  umbrella header "SpriteKit-Spring-umbrella.h"
+
+  export *
+  module * { export * }
+}

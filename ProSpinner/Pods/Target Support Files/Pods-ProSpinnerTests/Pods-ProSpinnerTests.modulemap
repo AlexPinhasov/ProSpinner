@@ -1,0 +1,6 @@
+framework module Pods_ProSpinnerTests {
+  umbrella header "Pods-ProSpinnerTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
