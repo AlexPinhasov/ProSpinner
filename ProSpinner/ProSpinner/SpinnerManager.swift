@@ -23,7 +23,7 @@ class SpinnerManager: BaseClass,
     fileprivate let rotateLeftAngle = -(CGFloat.pi * 2)
     
     var spinnerNode : SKSpriteNode?
-    fileprivate var SpinnerLock : SKSpriteNode?
+    
 
 //  MARK: Private enums
     fileprivate enum Diraction
@@ -54,8 +54,9 @@ class SpinnerManager: BaseClass,
     
     func initNodesFromScene()
     {
-        SpinnerLock = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
+        
     }
+    
 //  MARK: Public methods
     func gameStarted()
     {
@@ -271,7 +272,6 @@ extension SpinnerManager
     {
         if currentlySwitchingSpinner == false
         {
-            animateSpinnerLockScaleUp()
             currentlySwitchingSpinner = true
             spinnerNode?.run(SKAction.rotate(byAngle: rotateLeftAngle,
                                              duration: 0.7,
@@ -279,6 +279,7 @@ extension SpinnerManager
                                              usingSpringWithDamping: 0.9,
                                              initialSpringVelocity: 0.2))
             {
+                self.spinnerNode?.zRotation = 0.0
                 self.currentlySwitchingSpinner = false
             }
 
@@ -297,14 +298,14 @@ extension SpinnerManager
     {
         if currentlySwitchingSpinner == false
         {
-            animateSpinnerLockScaleUp()
             currentlySwitchingSpinner = true
             spinnerNode?.run(SKAction.rotate(byAngle: rotateRightAngle,
                                              duration: 0.7,
                                              delay: 0,
                                              usingSpringWithDamping: 0.9,
-                                             initialSpringVelocity: 0.2))
+                                             initialSpringVelocity: 0.5))
             {
+                self.spinnerNode?.zRotation = 0.0
                 self.currentlySwitchingSpinner = false
             }
             
@@ -330,7 +331,6 @@ extension SpinnerManager
         }
         else if self.spinnerNode?.alpha == 0.4
         {
-            self.SpinnerLock?.run(SKAction.fadeOut(withDuration: 0.3))
             self.spinnerNode?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.2))
         }
     }
@@ -359,49 +359,29 @@ extension SpinnerManager
         }
     }
     
-//    func shakeSpinnerLocked(shouldShake shake: Bool)
-//    {
-//        let rotateCenterAction = SKAction.rotate(toAngle: 0.0, duration: 0.7)
-//        
-//        if shake
-//        {
-//            let rotateRightAction = SKAction.rotate(toAngle: -0.08, duration: 0.7)
-//            let rotateLeftAction = SKAction.rotate(toAngle: 0.05, duration: 0.7)
-//        
-//            let sequence = SKAction.sequence([rotateRightAction,
-//                                              rotateCenterAction,
-//                                              rotateRightAction,
-//                                              SKAction.wait(forDuration: 0.4),
-//                                              rotateCenterAction,
-//                                              rotateLeftAction,
-//                                              rotateCenterAction,
-//                                              SKAction.wait(forDuration: 0.3)])
-//            
-//            spinnerNode?.run(SKAction.repeat(sequence, count: 3), withKey: "ShakeLockedSpinner")
-//        }
-//        else
-//        {
-//            spinnerNode?.removeAction(forKey: "ShakeLockedSpinner")
-//            spinnerNode?.run(rotateCenterAction)
-//        }
-//    }
-    
-    func animateSpinnerLockScaleDown()
+    func shakeSpinnerLocked(shouldShake shake: Bool)
     {
-        SpinnerLock?.run(SKAction.sequence([SKAction.wait(forDuration: 0.3),SKAction.scale(to: 1.0, duration: 0.2)]))
+        if shake
         {
-            //self.shakeSpinnerLocked(shouldShake: true)
+            let rotateRightAction = SKAction.rotate(byAngle: -0.06, duration: 0.5)
+            let rotateCenterAction = SKAction.rotate(toAngle: 0.0, duration: 0.3)
+            let rotateLeftAction = SKAction.rotate(byAngle: 0.05, duration: 0.5)
+        
+            let sequence = SKAction.sequence([SKAction.wait(forDuration: 0.8),
+                                              rotateRightAction,
+                                              rotateCenterAction,
+                                              rotateRightAction,
+                                              SKAction.wait(forDuration: 0.4),
+                                              rotateCenterAction,
+                                              rotateLeftAction,
+                                              rotateCenterAction])
+            
+            spinnerNode?.run(SKAction.repeat(sequence, count: 3), withKey: "ShakeLockedSpinner")
         }
-    }
-    
-    func animateSpinnerLockScaleUp()
-    {
-        self.SpinnerLock?.run(SKAction.scale(to: 1.25, duration: 0.4))
+        else
         {
-            self.SpinnerLock?.run(SKAction.fadeIn(withDuration: 0.1))
-            {
-                self.animateSpinnerLockScaleDown()
-            }
+            spinnerNode?.removeAction(forKey: "ShakeLockedSpinner")
+            spinnerNode?.zRotation = 0.0
         }
     }
 }

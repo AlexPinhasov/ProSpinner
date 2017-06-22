@@ -54,9 +54,9 @@ class LoadingScene: SKScene
                                             SKAction.move(to: CGPoint(x: -0.7, y: -193), duration: 1.8),
                                             SKAction.wait(forDuration: 1)]))
         {
-            textures.append(Diamonds.red)
-            textures.append(Diamonds.blue)
-            textures.append(Diamonds.green)
+            textures.append(Constants.DiamondsTexture.red)
+            textures.append(Constants.DiamondsTexture.blue)
+            textures.append(Constants.DiamondsTexture.green)
             SKTexture.preload(textures)
             {
                 DispatchQueue.main.async

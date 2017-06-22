@@ -21,7 +21,6 @@
 		0A14F34A1EE175B300C5AA5D /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14F3491EE175B300C5AA5D /* PurchaseManager.swift */; };
 		0A15917E1EE3C142005320A9 /* DownloadingDelegateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15917D1EE3C142005320A9 /* DownloadingDelegateDataSource.swift */; };
 		0A1591801EE3C193005320A9 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15917F1EE3C193005320A9 /* ImageCollectionCell.swift */; };
-		0A1591821EE3C2D7005320A9 /* BaseAsyncProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1591811EE3C2D7005320A9 /* BaseAsyncProtocol.swift */; };
 		0A17F1281EE4B377002DE42F /* LoadingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0A17F1271EE4B377002DE42F /* LoadingScene.sks */; };
 		0A17F12A1EE4B6A5002DE42F /* LoadingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A17F1291EE4B6A5002DE42F /* LoadingScene.swift */; };
 		0A1C73EC1EF71EC00094119E /* MyriadPro-BoldCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E31EF71DB00094119E /* MyriadPro-BoldCond.otf */; };
@@ -87,7 +86,6 @@
 		0A14F3491EE175B300C5AA5D /* PurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		0A15917D1EE3C142005320A9 /* DownloadingDelegateDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadingDelegateDataSource.swift; sourceTree = "<group>"; };
 		0A15917F1EE3C193005320A9 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
-		0A1591811EE3C2D7005320A9 /* BaseAsyncProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAsyncProtocol.swift; sourceTree = "<group>"; };
 		0A17F1271EE4B377002DE42F /* LoadingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LoadingScene.sks; sourceTree = "<group>"; };
 		0A17F1291EE4B6A5002DE42F /* LoadingScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingScene.swift; sourceTree = "<group>"; };
 		0A1C73E21EF71DB00094119E /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Bold.otf"; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 		0AE83A731EDC8E680066E3DD /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				0A1591811EE3C2D7005320A9 /* BaseAsyncProtocol.swift */,
 				0A305A0A1EED9F5600BA3A4B /* Animateable.swift */,
 			);
 			name = Protocols;
@@ -452,7 +449,7 @@
 				TargetAttributes = {
 					918F18ED1EC9CC8600886039 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = FBW857G4BC;
+						DevelopmentTeam = 7P7ZPC546E;
 						ProvisioningStyle = Automatic;
 					};
 					918F19071EC9CC8700886039 = {
@@ -696,7 +693,6 @@
 				0A1E096C1EEEC21200041C45 /* ProgressBar.swift in Sources */,
 				918F18F81EC9CC8600886039 /* GameScene.swift in Sources */,
 				0A14F34A1EE175B300C5AA5D /* PurchaseManager.swift in Sources */,
-				0A1591821EE3C2D7005320A9 /* BaseAsyncProtocol.swift in Sources */,
 				0A04F47C1ED062F2004F374C /* SpinnerManager.swift in Sources */,
 				0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */,
 				918F18FA1EC9CC8600886039 /* GameViewController.swift in Sources */,
@@ -863,7 +859,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = FBW857G4BC;
+				DEVELOPMENT_TEAM = 7P7ZPC546E;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -871,7 +867,7 @@
 				INFOPLIST_FILE = ProSpinner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.APStudios.ProSpinner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.APStudios.ProSpinner2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -884,7 +880,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = FBW857G4BC;
+				DEVELOPMENT_TEAM = 7P7ZPC546E;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -892,7 +888,7 @@
 				INFOPLIST_FILE = ProSpinner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.APStudios.ProSpinner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.APStudios.ProSpinner2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;

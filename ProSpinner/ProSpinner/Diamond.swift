@@ -9,27 +9,6 @@
 import SpriteKit
 import GameplayKit
 
-struct Diamonds
-{
-    static let blue     = SKTexture(imageNamed: "BlueCleanDiamond")
-    static let red      = SKTexture(imageNamed: "RedCleanDiamond")
-    static let green    = SKTexture(imageNamed: "GreenCleanDiamond")
-}
-
-enum DiamondColor: UInt32
-{
-    case Blue   = 1
-    case Red    = 2
-    case Green  = 3
-}
-
-enum DiamondsName : String
-{
-    case red = "redDiamond"
-    case blue = "blueDiamond"
-    case green = "greenDiamond"
-}
-
 class Diamond: SKSpriteNode
 {
     static var diamondSpeed = 4.0
@@ -126,8 +105,8 @@ class redDiamond: Diamond
     override init()
     {
         super.init()
-        self.name = DiamondsName.red.rawValue
-        self.texture = Diamonds.red
+        self.name = Constants.DiamondsName.red.rawValue
+        self.texture = Constants.DiamondsTexture.red
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -141,8 +120,8 @@ class blueDiamond: Diamond
     override init()
     {
         super.init()
-        self.name = DiamondsName.blue.rawValue
-        self.texture = Diamonds.blue
+        self.name = Constants.DiamondsName.blue.rawValue
+        self.texture = Constants.DiamondsTexture.blue
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -157,8 +136,8 @@ class greenDiamond: Diamond
     override init()
     {
         super.init()
-        self.name = DiamondsName.green.rawValue
-        self.texture = Diamonds.green
+        self.name = Constants.DiamondsName.green.rawValue
+        self.texture = Constants.DiamondsTexture.green
     }
     
     required init?(coder aDecoder: NSCoder)

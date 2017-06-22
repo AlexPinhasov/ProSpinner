@@ -16,7 +16,6 @@ class ProgressBar: SKNode
     
     private let anchorPointX = -38
     private let anchorPointY = -2
-    private let cornerRadius : CGFloat = 0
     
     init(newName: String,diamondsNeeded: Int, diamondPossesed: Int)
     {
@@ -42,7 +41,7 @@ class ProgressBar: SKNode
         let cropBackgroundNode = SKCropNode()
         cropBackgroundNode.zPosition = 2
         
-        let backgroundMask = SKShapeNode(rect: CGRect(x: 0, y: 0, width: progressBarWidth, height: progressBarHeight) , cornerRadius: cornerRadius)
+        let backgroundMask = SKShapeNode(rect: CGRect(x: 0, y: 0, width: progressBarWidth, height: progressBarHeight))
         backgroundMask.fillColor = color
         backgroundMask.strokeColor = .clear
         backgroundMask.zPosition = 2
@@ -59,8 +58,7 @@ class ProgressBar: SKNode
         let mask = SKShapeNode(rect: CGRect(x: 0,
                                             y: 0,
                                             width: Int(barWidth),
-                                            height: progressBarHeight),
-                               cornerRadius: cornerRadius)
+                                            height: progressBarHeight))
         
         mask.strokeColor    = .clear
         mask.fillColor      = getMaskColor(for: newName)
@@ -73,7 +71,7 @@ class ProgressBar: SKNode
         let cropBackgroundNode = SKCropNode()
         cropBackgroundNode.zPosition = 2
         
-        let backgroundMask = SKShapeNode(rect: CGRect(x: anchorPointX, y: anchorPointY, width: progressBarWidth, height: progressBarHeight) , cornerRadius: cornerRadius)
+        let backgroundMask = SKShapeNode(rect: CGRect(x: anchorPointX, y: anchorPointY, width: progressBarWidth, height: progressBarHeight))
         backgroundMask.fillColor = .clear
         backgroundMask.strokeColor = .clear
         backgroundMask.zPosition = 2

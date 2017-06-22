@@ -9,8 +9,7 @@
 import UIKit
 import SpriteKit
 
-class DownloadingViewController: UIViewController,
-                                 BaseAsyncProtocol
+class DownloadingViewController: UIViewController                                 
 {
 //  MARK: Outlets
     @IBOutlet weak var indicator: UIActivityIndicatorView!

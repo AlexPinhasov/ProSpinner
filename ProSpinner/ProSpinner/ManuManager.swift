@@ -36,6 +36,7 @@ class ManuManager: BaseClass,
     
     private var gameExplanation  : SKLabelNode?
     private var lockedSpinnerViewManager : LockedSpinnerNodeManager?
+    fileprivate var spinnerLock : SKSpriteNode?
     
     fileprivate var redSuccessV      : SKSpriteNode?
     fileprivate var blueSuccessV     : SKSpriteNode?
@@ -77,6 +78,7 @@ class ManuManager: BaseClass,
         blueSuccessV        = self.scene?.childNode(withName: Constants.NodesInScene.BlueSuccess.rawValue) as? SKSpriteNode
         
         lockedSpinnerViewManager = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNodeManager
+       spinnerLock = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
     }
 
 //  MARK: Public methods
@@ -112,10 +114,12 @@ class ManuManager: BaseClass,
         displayProgressBars(shouldShow: true,with: diamondCount)
         showProgressBarOrV(withValues: diamondCount)
         PresentSpinnerView(shouldPresent: true)
+        animateSpinnerLockScaleUp()
     }
     
     func handleSpinnerPresentedIsUnlocked()
     {
+        self.spinnerLock?.run(SKAction.fadeOut(withDuration: 0.2))
         removeSuccessV()
         displayProgressBars(shouldShow: false, with: nil)
         PresentSpinnerView(shouldPresent: false)
@@ -221,6 +225,14 @@ class ManuManager: BaseClass,
         gameExplanation?.run(SKAction.sequence([SKAction.fadeIn(withDuration: 0.2),
                                                 SKAction.wait(forDuration: 2),
                                                 SKAction.fadeOut(withDuration: 0.2)]))
+    }
+    
+    func animateSpinnerLockScaleUp()
+    {
+        let sequene = SKAction.sequence([SKAction.scale(to: 1.25, duration: 0.3),
+                                         SKAction.fadeIn(withDuration: 0.1),
+                                         SKAction.scale(to: 1.0, duration: 0.2)])
+        self.spinnerLock?.run(sequene)
     }
 }
 

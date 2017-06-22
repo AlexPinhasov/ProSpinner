@@ -174,9 +174,9 @@ class DiamondsManager: BaseClass,
 //            pulse(node: greenDiamondNode, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.4)
             
             let bounceDiamond = shouldBounceDiamonds()
-            let redSequenceCount = bounceDiamond?.red == true ? 3 : 0
-            let blueSequenceCount = bounceDiamond?.blue == true ? 3 : 0
-            let greenSequenceCount = bounceDiamond?.green == true ? 3 : 0
+            let redSequenceCount = bounceDiamond?.red == true ? 2 : 0
+            let blueSequenceCount = bounceDiamond?.blue == true ? 2 : 0
+            let greenSequenceCount = bounceDiamond?.green == true ? 2 : 0
             
             
             let greenSequence = SKAction.sequence([SKAction.move(to: greenEndPoint, duration: 0.8),
@@ -394,9 +394,9 @@ class DiamondsManager: BaseClass,
     {
         switch diamond.name ?? ""
         {
-        case DiamondsName.red.rawValue   : redDiamondLabelNode.diamondsPlayerHave.text = String(Diamond.redCounter)
-        case DiamondsName.blue.rawValue  : blueDiamondLabelNode.diamondsPlayerHave.text = String(Diamond.blueCounter)
-        case DiamondsName.green.rawValue : greenDiamondLabelNode.diamondsPlayerHave.text = String(Diamond.greenCounter)
+        case Constants.DiamondsName.red.rawValue   : redDiamondLabelNode.diamondsPlayerHave.text = String(Diamond.redCounter)
+        case Constants.DiamondsName.blue.rawValue  : blueDiamondLabelNode.diamondsPlayerHave.text = String(Diamond.blueCounter)
+        case Constants.DiamondsName.green.rawValue : greenDiamondLabelNode.diamondsPlayerHave.text = String(Diamond.greenCounter)
             
         default: break
         }
@@ -407,9 +407,9 @@ class DiamondsManager: BaseClass,
         let random = arc4random_uniform(3)+1
         switch random
         {
-        case DiamondColor.Blue.rawValue     : return blueDiamond()
-        case DiamondColor.Red.rawValue      : return redDiamond()
-        case DiamondColor.Green.rawValue    : return greenDiamond()
+        case Constants.DiamondIntColor.Blue.rawValue     : return blueDiamond()
+        case Constants.DiamondIntColor.Red.rawValue      : return redDiamond()
+        case Constants.DiamondIntColor.Green.rawValue    : return greenDiamond()
         default                             : break
         }
         return blueDiamond()
@@ -428,7 +428,7 @@ extension DiamondsManager
     // MARK: Connect Outlets from scene
     fileprivate func loadRedDiamondCount()
     {
-        if let spriteNode = self.scene?.childNode(withName: DiamondsName.red.rawValue) as? SKSpriteNode
+        if let spriteNode = self.scene?.childNode(withName: Constants.DiamondsName.red.rawValue) as? SKSpriteNode
         {
             redDiamondNode = spriteNode
             redDiamondLocation = redDiamondNode.position
@@ -449,7 +449,7 @@ extension DiamondsManager
     
     fileprivate func loadBlueDiamondCount()
     {
-        if let spriteNode = self.scene?.childNode(withName: DiamondsName.blue.rawValue) as? SKSpriteNode
+        if let spriteNode = self.scene?.childNode(withName: Constants.DiamondsName.blue.rawValue) as? SKSpriteNode
         {
             blueDiamondNode = spriteNode
             blueDiamondLocation = blueDiamondNode.position
@@ -470,7 +470,7 @@ extension DiamondsManager
     
     fileprivate func loadGreenDiamondCount()
     {
-        if let spriteNode = self.scene?.childNode(withName: DiamondsName.green.rawValue) as? SKSpriteNode
+        if let spriteNode = self.scene?.childNode(withName: Constants.DiamondsName.green.rawValue) as? SKSpriteNode
         {
             greenDiamondNode = spriteNode
             greenDiamondLocation = greenDiamondNode.position

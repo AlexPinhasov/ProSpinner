@@ -50,7 +50,8 @@ class GameScene: SKScene,
         physicsWorld.contactDelegate = self
         handleSpinnerConfiguration()
         handleManuConfiguration()
-        handleDiamondConfiguration()        
+        handleDiamondConfiguration()
+        handleSwipeConfiguration()
     }
 //  MARK: Physics Contact Delegate
     func didBegin(_ contact: SKPhysicsContact)
@@ -217,12 +218,13 @@ class GameScene: SKScene,
             let diamondsCount = diamondsManager?.getDiamondsCount()
             diamondsManager?.handleDiamondsWhenSpinner(isLocked: true)
             manuManager?.handleSpinnerPresentedIsLocked(with: diamondsCount)
+            spinnerManager?.shakeSpinnerLocked(shouldShake: true)
         }
         else
         {
             diamondsManager?.handleDiamondsWhenSpinner(isLocked: false)
             manuManager?.handleSpinnerPresentedIsUnlocked()
-            //spinnerManager?.shakeSpinnerLocked(shouldShake: false)
+            spinnerManager?.shakeSpinnerLocked(shouldShake: false)
         }
     }
     
@@ -245,5 +247,32 @@ class GameScene: SKScene,
         self.addChild(spinnerNode)
         
         spinnerManager?.spinnerNode = self.childNode(withName: Constants.NodesInScene.Spinner.rawValue) as? SKSpriteNode
+    }
+    
+    func userSwipedRight()
+    {
+        spinnerManager?.userTappedNextSpinner()
+        {
+                self.handleLockViewAppearance()
+        }
+    }
+    
+    func userSwipedLeft()
+    {
+        spinnerManager?.userTappedPreviousSpinner()
+        {
+                self.handleLockViewAppearance()
+        }
+    }
+    
+    private func handleSwipeConfiguration()
+    {
+        let swipeRight: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(userSwipedRight))
+        swipeRight.direction = .right
+        view?.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(userSwipedLeft))
+        swipeLeft.direction = .left
+        view?.addGestureRecognizer(swipeLeft)
     }
 }

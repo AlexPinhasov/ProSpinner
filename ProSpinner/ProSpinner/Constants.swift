@@ -7,17 +7,38 @@
 //
 
 import UIKit
+import SpriteKit
 
 class Constants
 {
+    struct DiamondsTexture
+    {
+        static let blue     = SKTexture(imageNamed: "BlueCleanDiamond")
+        static let red      = SKTexture(imageNamed: "RedCleanDiamond")
+        static let green    = SKTexture(imageNamed: "GreenCleanDiamond")
+    }
+    
+    enum DiamondIntColor: UInt32
+    {
+        case Blue   = 1
+        case Red    = 2
+        case Green  = 3
+    }
+    
+    enum DiamondsName : String
+    {
+        case red = "redDiamond"
+        case blue = "blueDiamond"
+        case green = "greenDiamond"
+    }
+
     enum actionKeys: String
     {
         case rotate = "rotateAction"
         case shakeDiamond = "shakeDiamond"
-    
     }
     
-    enum DiamondsNeeded: String
+    enum DiamondsPlayerNeed: String
     {
         case red = "redNeeded"
         case blue = "blueNeeded"

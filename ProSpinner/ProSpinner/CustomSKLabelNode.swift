@@ -11,10 +11,10 @@ import SpriteKit
 class CustomSKLabelNode : SKNode,
                           Animateable
 {
-    var diamondsPlayerHave : SKLabelNode = SKLabelNode()
-    var separatorLabel : SKLabelNode = SKLabelNode()
-    var diamondsPlayerNeed : SKLabelNode = SKLabelNode()
-    var blackBackground : SKShapeNode = SKShapeNode()
+    var diamondsPlayerHave  : SKLabelNode = SKLabelNode()
+    var separatorLabel      : SKLabelNode = SKLabelNode()
+    var diamondsPlayerNeed  : SKLabelNode = SKLabelNode()
+    var blackBackground     : SKShapeNode = SKShapeNode()
 
     override init()
     {

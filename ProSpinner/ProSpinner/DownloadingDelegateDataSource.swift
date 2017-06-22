@@ -14,7 +14,6 @@ class DownloadingDelegateDataSource: NSObject,
                                      UICollectionViewDataSource,
                                      UICollectionViewDelegateFlowLayout
 {
-    private var downloadingViewController: BaseAsyncProtocol?
     private var dataModel = [SKTexture]()
     private weak var collectionView: UICollectionView?
     

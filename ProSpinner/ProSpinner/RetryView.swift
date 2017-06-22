@@ -25,10 +25,8 @@ class RetryView: BaseClass
     
     private let rotateRightAngle = -(CGFloat.pi * 2)
     
-    
     private var timer = Timer()
     private var secondsPassed: TimeInterval = 0.0
-    
     
     init(scene: SKScene)
     {
