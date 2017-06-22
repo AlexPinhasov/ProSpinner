@@ -51,6 +51,10 @@ class Constants
         case PlayButton = "PlayButton"
         case MuteSoundButton = "MuteSoundButton"
         case SettingsButton = "SettingsButton"
+        
+        case RedSuccess = "RedSuccess"
+        case BlueSuccess = "BlueSuccess"
+        case GreenSuccess = "GreenSuccess"
     }
     
     enum NodesInRetryView: String

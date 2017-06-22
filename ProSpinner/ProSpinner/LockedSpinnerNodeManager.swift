@@ -40,15 +40,15 @@ class LockedSpinnerNodeManager: SKNode
         LockSprite         = self.childNode(withName: Constants.NodesInLockedSpinnerView.LockSprite.rawValue) as? SKSpriteNode
     }
     
-    func presentNode(isHidden hidden: Bool)
+    func presentNode(shouldPresent present: Bool)
     {
-        if hidden
+        if present
         {
-            self.run(SKAction.fadeOut(withDuration: 0.3))
+            self.run(SKAction.fadeIn(withDuration: 0.3))
         }
         else
         {
-            self.run(SKAction.fadeIn(withDuration: 0.3))
+            self.run(SKAction.fadeOut(withDuration: 0.3))
         }
     }
 }

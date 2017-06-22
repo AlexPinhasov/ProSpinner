@@ -25,7 +25,7 @@ struct Arrows
 class ManuManager: BaseClass,
                    Animateable
 {
-    private var startGame        : SKSpriteNode?
+    fileprivate var startGame        : SKSpriteNode?
     private var settingsButton   : SKSpriteNode?
     private var muteSoundButton  : SKSpriteNode?
     
@@ -58,22 +58,23 @@ class ManuManager: BaseClass,
     
     private func initSpriteFromScene()
     {
+        // Main manu
         startGame               = scene?.childNode(withName: Constants.NodesInScene.StartGame.rawValue) as? SKSpriteNode
         leftArrowTriger         = scene?.childNode(withName: Constants.NodesInScene.LeftArrow.rawValue) as? SKSpriteNode
         rightArrowTriger        = scene?.childNode(withName: Constants.NodesInScene.RightArrow.rawValue) as? SKSpriteNode
         leftArrow               = leftArrowTriger?.childNode(withName: Constants.NodesInScene.ActualLeftArrow.rawValue) as? SKSpriteNode
         rightArrow              = rightArrowTriger?.childNode(withName: Constants.NodesInScene.ActualRightArrow.rawValue) as? SKSpriteNode
-        
-        
-        progressBars         = scene?.childNode(withName: Constants.NodesInScene.ProgressBars.rawValue)
         settingsButton          = scene?.childNode(withName: Constants.NodesInScene.SettingsButton.rawValue) as? SKSpriteNode
         muteSoundButton         = scene?.childNode(withName: Constants.NodesInScene.MuteSoundButton.rawValue) as? SKSpriteNode
         
+        
+        progressBars            = scene?.childNode(withName: Constants.NodesInScene.ProgressBars.rawValue)
+        
         gameExplanation         = scene?.childNode(withName: "gameExplanation") as? SKLabelNode
         
-        redSuccessV = self.scene?.childNode(withName: "RedSuccess") as? SKSpriteNode
-        greenSuccessV = self.scene?.childNode(withName: "GreenSuccess") as? SKSpriteNode
-        blueSuccessV = self.scene?.childNode(withName: "BlueSuccess") as? SKSpriteNode
+        redSuccessV         =  self.scene?.childNode(withName: Constants.NodesInScene.RedSuccess.rawValue) as? SKSpriteNode
+        greenSuccessV       = self.scene?.childNode(withName: Constants.NodesInScene.GreenSuccess.rawValue) as? SKSpriteNode
+        blueSuccessV        = self.scene?.childNode(withName: Constants.NodesInScene.BlueSuccess.rawValue) as? SKSpriteNode
         
         lockedSpinnerViewManager = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNodeManager
     }
@@ -104,22 +105,22 @@ class ManuManager: BaseClass,
         showArrows()
     }
     
-//  MARK: Progress Bars
-    func displayProgressBars(shouldShow bool: Bool,with diamonds: (Int,Int,Int)?)
+//  MARK: Spinner Locked/Unlocked master methods
+    func handleSpinnerPresentedIsLocked(with diamondCount: (red: Int, blue: Int, green: Int)?)
     {
-        if bool
-        {
-            decideBuyDiamondCashOrDiamonds(with: diamonds)
-            
-            startGame?.run(SKAction.scale(to: 0.0, duration: 0.2))
-            progressBars?.run(SKAction.fadeIn(withDuration: 0.4))
-        }
-        else
-        {
-            startGame?.run(SKAction.scale(to: 1.0, duration: 0.2))
-            progressBars?.run(SKAction.fadeOut(withDuration: 0.2))
-        }
+        removeSuccessV()
+        displayProgressBars(shouldShow: true,with: diamondCount)
+        showProgressBarOrV(withValues: diamondCount)
+        PresentSpinnerView(shouldPresent: true)
     }
+    
+    func handleSpinnerPresentedIsUnlocked()
+    {
+        removeSuccessV()
+        displayProgressBars(shouldShow: false, with: nil)
+        PresentSpinnerView(shouldPresent: false)
+    }
+    
     
     func RightArrowPressed(isPressed pressed: Bool)
     {
@@ -128,7 +129,6 @@ class ManuManager: BaseClass,
             //rightArrow?.zRotation = -3.5
             rightArrowTriger?.texture = Arrows.rightArrowPressed
             rightArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
-            lockedSpinnerViewManager?.presentNode(isHidden: false)
         }
         else
         {
@@ -145,7 +145,7 @@ class ManuManager: BaseClass,
             //leftArrow?.zRotation = 3.5
             leftArrowTriger?.texture = Arrows.leftArrowPressed
             leftArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
-            lockedSpinnerViewManager?.presentNode(isHidden: true)
+            
         }
         else
         {
@@ -155,6 +155,10 @@ class ManuManager: BaseClass,
         }
     }
     
+    func PresentSpinnerView(shouldPresent present: Bool)
+    {
+        lockedSpinnerViewManager?.presentNode(shouldPresent: present)
+    }
     
     func decideBuyDiamondCashOrDiamonds(with diamonds: (Int,Int,Int)?)
     {
@@ -223,6 +227,22 @@ class ManuManager: BaseClass,
 extension ManuManager
 {
 //  MARK: Progress Bar Logic
+    func displayProgressBars(shouldShow bool: Bool,with diamonds: (Int,Int,Int)?)
+    {
+        if bool
+        {
+            decideBuyDiamondCashOrDiamonds(with: diamonds)
+            
+            startGame?.run(SKAction.scale(to: 0.0, duration: 0.2))
+            progressBars?.run(SKAction.fadeIn(withDuration: 0.4))
+        }
+        else
+        {
+            startGame?.run(SKAction.scale(to: 1.0, duration: 0.2))
+            progressBars?.run(SKAction.fadeOut(withDuration: 0.2))
+        }
+    }
+    
     func removeProgressBars()
     {
         var progressBarNodes = [SKNode]()
@@ -239,6 +259,10 @@ extension ManuManager
             progressBarNodes.append(green)
         }
         progressBars?.removeChildren(in: progressBarNodes)
+    }
+    
+    func removeSuccessV()
+    {
         animateSuccessV(toFadeIn: false, forNode: redSuccessV)
         animateSuccessV(toFadeIn: false, forNode: blueSuccessV)
         animateSuccessV(toFadeIn: false, forNode: greenSuccessV)
@@ -282,7 +306,7 @@ extension ManuManager
         {
             node?.run(SKAction.fadeIn(withDuration: 0.3))
             {
-                self.pulse(node: node, scaleUpTo: 1.1, scaleDownTo: 1.0, duration: 0.3)
+                self.pulse(node: node, scaleUpTo: 1.3, scaleDownTo: 1.0, duration: 0.3)
             }
         }
         else

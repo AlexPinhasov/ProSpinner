@@ -216,13 +216,12 @@ class GameScene: SKScene,
         {
             let diamondsCount = diamondsManager?.getDiamondsCount()
             diamondsManager?.handleDiamondsWhenSpinner(isLocked: true)
-            manuManager?.displayProgressBars(shouldShow: true,with: diamondsCount)
-            manuManager?.showProgressBarOrV(withValues: diamondsCount)
+            manuManager?.handleSpinnerPresentedIsLocked(with: diamondsCount)
         }
         else
         {
             diamondsManager?.handleDiamondsWhenSpinner(isLocked: false)
-            manuManager?.displayProgressBars(shouldShow: false, with: nil)
+            manuManager?.handleSpinnerPresentedIsUnlocked()
             //spinnerManager?.shakeSpinnerLocked(shouldShake: false)
         }
     }

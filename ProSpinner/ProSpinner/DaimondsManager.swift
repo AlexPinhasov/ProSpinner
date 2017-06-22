@@ -33,11 +33,11 @@ class DiamondsManager: BaseClass,
     fileprivate var redDiamondNode: SKSpriteNode!
     fileprivate var blueDiamondNode: SKSpriteNode!
     fileprivate var greenDiamondNode: SKSpriteNode!
+    
     fileprivate var diamondsIsAtStartingPosition: Bool = true
-    fileprivate var LabelsIsAtStartingPosition: Bool = true
 
     private var nextXLocation: CGFloat = 160.0
-    
+
     fileprivate enum Count
     {
         case down
@@ -159,7 +159,7 @@ class DiamondsManager: BaseClass,
     func handleDiamondsWhenSpinner(isLocked spinnerIsLocked: Bool)
     {
         returnDiamondsToStartingPosition()
-        handleDiamondsNeededAndPossesLabels(whenSpinnerIsLocked :spinnerIsLocked)
+        handleDiamondsPlayerNeedAndHaveLabels(whenSpinnerIsLocked :spinnerIsLocked)
         
         if spinnerIsLocked && diamondsIsAtStartingPosition
         {
@@ -169,9 +169,9 @@ class DiamondsManager: BaseClass,
             let blueEndPoint    = CGPoint(x: blueDiamondLocation.x , y: blueDiamondLocation.y - 10)
             let greenEndPoint   = CGPoint(x: greenDiamondLocation.x , y: greenDiamondLocation.y - 10)
 
-            pulse(node: redDiamondNode, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.2)
-            pulse(node: blueDiamondNode, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.3)
-            pulse(node: greenDiamondNode, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.4)
+//            pulse(node: redDiamondNode, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.2)
+//            pulse(node: blueDiamondNode, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.3)
+//            pulse(node: greenDiamondNode, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.4)
             
             let bounceDiamond = shouldBounceDiamonds()
             let redSequenceCount = bounceDiamond?.red == true ? 3 : 0
@@ -213,44 +213,65 @@ class DiamondsManager: BaseClass,
         }
     }
     
-    func handleDiamondsNeededAndPossesLabels(whenSpinnerIsLocked isLocked: Bool)
+    func handleDiamondsPlayerNeedAndHaveLabels(whenSpinnerIsLocked spinnerIsLocked: Bool)
     {
-        let spinner = ArchiveManager.currentSpinner
-        
-        if isLocked
+        if spinnerIsLocked
         {
-            redDiamondLabelNode?.setText(diamondNeeded: spinner.redNeeded)
-            blueDiamondLabelNode?.setText(diamondNeeded: spinner.blueNeeded)
-            greenDiamondLabelNode?.setText(diamondNeeded: spinner.greenNeeded)
+            let diamondsCount = getDiamondsCount()
+            let spinner = ArchiveManager.currentSpinner
+            handleDiamondLabelNode(forNode: redDiamondLabelNode,withDiamondsPlayerHas: diamondsCount.red, diamondsPlayerNeed: spinner.redNeeded)
+            handleDiamondLabelNode(forNode: blueDiamondLabelNode,withDiamondsPlayerHas: diamondsCount.blue, diamondsPlayerNeed: spinner.blueNeeded)
+            handleDiamondLabelNode(forNode: greenDiamondLabelNode,withDiamondsPlayerHas: diamondsCount.green, diamondsPlayerNeed: spinner.greenNeeded)
             
             redDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
             blueDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
             greenDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
-            
-            if LabelsIsAtStartingPosition
-            {
-                blueDiamondLabelNode?.run(SKAction.move(to: CGPoint(x: blueDiamondLabelNode.position.x - 19, y: blueDiamondLabelNode.position.y), duration: 0.3))
-                redDiamondLabelNode?.run(SKAction.move(to: CGPoint(x: redDiamondLabelNode.position.x - 19, y: redDiamondLabelNode.position.y), duration: 0.3))
-                greenDiamondLabelNode?.run(SKAction.move(to: CGPoint(x: greenDiamondLabelNode.position.x - 19, y: greenDiamondLabelNode.position.y), duration: 0.3))
-                LabelsIsAtStartingPosition = false
-            }
         }
         else
         {
             redDiamondLabelNode?.hideSeparatorAndNeeded()
             blueDiamondLabelNode?.hideSeparatorAndNeeded()
             greenDiamondLabelNode?.hideSeparatorAndNeeded()
+
+            redDiamondLabelNode?.run(SKAction.move(to: redDiamondLabelNodeOriginalLocation , duration: 0.3))
+            blueDiamondLabelNode?.run(SKAction.move(to: blueDiamondLabelNodeOriginalLocation, duration: 0.3))
+            greenDiamondLabelNode?.run(SKAction.move(to: greenDiamondLabelNodeOriginalLocation, duration:0.3))
+        }
+    }
+    
+    private func handleDiamondLabelNode(forNode labelNode: CustomSKLabelNode?, withDiamondsPlayerHas diamondsPlayerHas: Int?, diamondsPlayerNeed: Int?)
+    {
+        guard let diamondsPlayerHas = diamondsPlayerHas else { return }
+        guard let diamondsPlayerNeed = diamondsPlayerNeed else { return }
+        guard let labelNode = labelNode else { return }
+        
+        if diamondsPlayerHas < diamondsPlayerNeed
+        {
+            labelNode.setText(diamondNeeded: diamondsPlayerNeed)
             
-            if LabelsIsAtStartingPosition == false
+            if labelsAreAtStartingPosition(currentLocation: labelNode.position)
             {
-                redDiamondLabelNode?.run(SKAction.move(to: redDiamondLabelNodeOriginalLocation , duration: 0.3))
-                blueDiamondLabelNode?.run(SKAction.move(to: blueDiamondLabelNodeOriginalLocation, duration: 0.3))
-                greenDiamondLabelNode?.run(SKAction.move(to: greenDiamondLabelNodeOriginalLocation, duration:0.3))
-                LabelsIsAtStartingPosition = true
+                labelNode.run(SKAction.move(to: CGPoint(x: labelNode.position.x - 19, y: labelNode.position.y), duration: 0.3))
             }
         }
-        
+        else
+        {
+            labelNode.setText(diamondNeeded: nil)
+            
+            if labelsAreAtStartingPosition(currentLocation: labelNode.position) == false
+            {
+                labelNode.run(SKAction.move(to: CGPoint(x: labelNode.position.x + 19, y: labelNode.position.y), duration: 0.3))
+            }
+        }
     }
+
+    func labelsAreAtStartingPosition(currentLocation: CGPoint) -> Bool
+    {
+        return  redDiamondLabelNodeOriginalLocation == currentLocation ||
+                blueDiamondLabelNodeOriginalLocation == currentLocation ||
+                greenDiamondLabelNodeOriginalLocation == currentLocation
+    }
+    
     
     func fadeInAndScaleDiamondsCountLabels()
     {

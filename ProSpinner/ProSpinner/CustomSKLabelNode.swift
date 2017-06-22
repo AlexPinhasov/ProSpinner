@@ -57,16 +57,16 @@ class CustomSKLabelNode : SKNode,
             self.separatorLabel.position.x = 0
             self.separatorLabel.position.x += (self.diamondsPlayerHave.frame.size.width - 7)
             
-//            self.diamondsPlayerNeed.position.x = 0
-//            self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width)
-//            
             self.blackBackground = SKShapeNode(rect: self.diamondsPlayerNeed.frame)
             self.blackBackground.fillColor = .black
             self.diamondsPlayerNeed.addChild(blackBackground)
             self.blackBackground.zPosition = 0
             self.diamondsPlayerNeed.position = CGPoint.zero
             self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width)
-            
+        }
+        else
+        {
+            hideSeparatorAndNeeded()
         }
     }
     
