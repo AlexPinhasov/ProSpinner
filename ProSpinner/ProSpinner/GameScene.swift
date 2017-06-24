@@ -9,18 +9,6 @@
 import SpriteKit
 import GameplayKit
 
-
-struct PhysicsCategory
-{
-    static let greenDiamond : UInt32 = 1
-    static let redDiamond : UInt32 = 2
-    static let blueDiamond : UInt32 = 3
-    
-    static let greenNode : UInt32 = 4
-    static let redNode : UInt32 = 5
-    static let blueNode : UInt32 = 6
-}
-
 struct GameStatus
 {
     static var Playing : Bool = false
@@ -35,6 +23,7 @@ class GameScene: SKScene,
     var purchaseManager : PurchaseManager?
     var tutorialManager : TutorialManager?
     var retryView       : RetryView?
+    var storeView       : StoreView?
     
     var spinnerNode     : SKSpriteNode = SKSpriteNode()
     
@@ -46,6 +35,8 @@ class GameScene: SKScene,
         manuManager = ManuManager(inScene: self)
         tutorialManager = TutorialManager(withScene: self)
         retryView = RetryView(scene: self)
+        storeView = StoreView(scene: self)
+        
         purchaseManager = PurchaseManager()
         physicsWorld.contactDelegate = self
         handleSpinnerConfiguration()
@@ -146,6 +137,14 @@ class GameScene: SKScene,
                 case Constants.NodesInRetryView.RetryButton.rawValue:
                     retryView?.hideRetryView()
                     notifyGameStarted()
+                    
+                case Constants.NodesInScene.StoreButton.rawValue:
+                    storeView?.presentRetryView()
+                    
+                case Constants.NodesInLockedSpinnerView.ViewInfoLabel.rawValue,
+                     Constants.NodesInLockedSpinnerView.unlockRedBack.rawValue:
+                    
+                    manuManager?.lockedSpinnerView.userRequestedToUnlockSpinner()
                     
                 default: break
                 }
@@ -251,17 +250,23 @@ class GameScene: SKScene,
     
     func userSwipedRight()
     {
-        spinnerManager?.userTappedNextSpinner()
+        if GameStatus.Playing == false
         {
-                self.handleLockViewAppearance()
+            spinnerManager?.userTappedNextSpinner()
+            {
+                    self.handleLockViewAppearance()
+            }
         }
     }
     
     func userSwipedLeft()
     {
-        spinnerManager?.userTappedPreviousSpinner()
+        if GameStatus.Playing == false
         {
-                self.handleLockViewAppearance()
+            spinnerManager?.userTappedPreviousSpinner()
+            {
+                    self.handleLockViewAppearance()
+            }
         }
     }
     

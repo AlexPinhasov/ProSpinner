@@ -28,7 +28,7 @@ class DiamondsManager: BaseClass,
     fileprivate var redDiamondLabelNode: CustomSKLabelNode!
     fileprivate var blueDiamondLabelNode: CustomSKLabelNode!
     fileprivate var greenDiamondLabelNode: CustomSKLabelNode!
-    fileprivate var diamondsCollectedDuringGame: (red: Int, blue: Int, green: Int) = (0,0,0)
+    fileprivate var diamondsCollectedDuringGame: DiamondsTuple = (0,0,0)
     
     fileprivate var redDiamondNode: SKSpriteNode!
     fileprivate var blueDiamondNode: SKSpriteNode!
@@ -101,14 +101,14 @@ class DiamondsManager: BaseClass,
         fadeInDiamondAndTheirCount()
     }
     
-    func getDiamondsCount() -> (red: Int, blue: Int, green: Int)
+    func getDiamondsCount() -> DiamondsTuple
     {
         return (red:Diamond.redCounter,
                 blue:Diamond.blueCounter,
                 green:Diamond.greenCounter)
     }
     
-    func getCollectedDiamondsDuringGame() -> (red: Int, blue: Int, green: Int)
+    func getCollectedDiamondsDuringGame() -> DiamondsTuple
     {
         return diamondsCollectedDuringGame
     }
@@ -134,13 +134,13 @@ class DiamondsManager: BaseClass,
         switch diamond
         {
         case is redDiamond:
-            diamondsCollectedDuringGame.red += 1
+            diamondsCollectedDuringGame?.red += 1
             
         case is blueDiamond:
-            diamondsCollectedDuringGame.blue += 1
+            diamondsCollectedDuringGame?.blue += 1
             
         case is greenDiamond:
-            diamondsCollectedDuringGame.green += 1
+            diamondsCollectedDuringGame?.green += 1
             
         default: break
         }
@@ -219,9 +219,9 @@ class DiamondsManager: BaseClass,
         {
             let diamondsCount = getDiamondsCount()
             let spinner = ArchiveManager.currentSpinner
-            handleDiamondLabelNode(forNode: redDiamondLabelNode,withDiamondsPlayerHas: diamondsCount.red, diamondsPlayerNeed: spinner.redNeeded)
-            handleDiamondLabelNode(forNode: blueDiamondLabelNode,withDiamondsPlayerHas: diamondsCount.blue, diamondsPlayerNeed: spinner.blueNeeded)
-            handleDiamondLabelNode(forNode: greenDiamondLabelNode,withDiamondsPlayerHas: diamondsCount.green, diamondsPlayerNeed: spinner.greenNeeded)
+            handleDiamondLabelNode(forNode: redDiamondLabelNode,withDiamondsPlayerHas: diamondsCount?.red, diamondsPlayerNeed: spinner.redNeeded)
+            handleDiamondLabelNode(forNode: blueDiamondLabelNode,withDiamondsPlayerHas: diamondsCount?.blue, diamondsPlayerNeed: spinner.blueNeeded)
+            handleDiamondLabelNode(forNode: greenDiamondLabelNode,withDiamondsPlayerHas: diamondsCount?.green, diamondsPlayerNeed: spinner.greenNeeded)
             
             redDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
             blueDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
@@ -309,21 +309,21 @@ class DiamondsManager: BaseClass,
         guard let blueNeeded = spinner.blueNeeded else { return  nil}
         guard let greenNeeded = spinner.greenNeeded else { return  nil}
         
-        let diamondsInStock = getDiamondsCount()
-        
         var enoughRedDiamonds = (red: false,blue: false,green: false)
-        
-        if diamondsInStock.red < redNeeded
+        if let diamondsInStock = getDiamondsCount()
         {
-            enoughRedDiamonds.red = true
-        }
-        if diamondsInStock.blue < blueNeeded
-        {
-            enoughRedDiamonds.blue = true
-        }
-        if diamondsInStock.green < greenNeeded
-        {
-            enoughRedDiamonds.green = true
+            if diamondsInStock.red < redNeeded
+            {
+                enoughRedDiamonds.red = true
+            }
+            if diamondsInStock.blue < blueNeeded
+            {
+                enoughRedDiamonds.blue = true
+            }
+            if diamondsInStock.green < greenNeeded
+            {
+                enoughRedDiamonds.green = true
+            }
         }
         
         return enoughRedDiamonds
@@ -382,6 +382,7 @@ class DiamondsManager: BaseClass,
     
     func addCollectedDiamondsToLabelScene()
     {
+        guard let diamondsCollectedDuringGame = diamondsCollectedDuringGame else { return }
         Diamond.redCounter += diamondsCollectedDuringGame.red
         Diamond.blueCounter += diamondsCollectedDuringGame.blue
         Diamond.greenCounter += diamondsCollectedDuringGame.green

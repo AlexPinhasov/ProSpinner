@@ -91,7 +91,7 @@ class RetryView: BaseClass
         }
     }
     
-    func setDiamondsCollected(diamonds: (red: Int,blue: Int,green: Int)?)
+    func setDiamondsCollected(diamonds: DiamondsTuple)
     {
         guard let diamonds = diamonds else { return }
         

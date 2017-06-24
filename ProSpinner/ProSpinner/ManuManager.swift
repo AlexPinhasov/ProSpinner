@@ -78,6 +78,7 @@ class ManuManager: BaseClass,
         blueSuccessV        = self.scene?.childNode(withName: Constants.NodesInScene.BlueSuccess.rawValue) as? SKSpriteNode
         
         lockedSpinnerViewManager = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNodeManager
+        lockedSpinnerViewManager?.connectOutletsToScene()
        spinnerLock = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
     }
 
@@ -108,12 +109,12 @@ class ManuManager: BaseClass,
     }
     
 //  MARK: Spinner Locked/Unlocked master methods
-    func handleSpinnerPresentedIsLocked(with diamondCount: (red: Int, blue: Int, green: Int)?)
+    func handleSpinnerPresentedIsLocked(with diamondCount: DiamondsTuple)
     {
         removeSuccessV()
+        PresentLockedSpinnerView(shouldPresent: true)
         displayProgressBars(shouldShow: true,with: diamondCount)
         showProgressBarOrV(withValues: diamondCount)
-        PresentSpinnerView(shouldPresent: true)
         animateSpinnerLockScaleUp()
     }
     
@@ -122,7 +123,7 @@ class ManuManager: BaseClass,
         self.spinnerLock?.run(SKAction.fadeOut(withDuration: 0.2))
         removeSuccessV()
         displayProgressBars(shouldShow: false, with: nil)
-        PresentSpinnerView(shouldPresent: false)
+        PresentLockedSpinnerView(shouldPresent: false)
     }
     
     
@@ -159,9 +160,10 @@ class ManuManager: BaseClass,
         }
     }
     
-    func PresentSpinnerView(shouldPresent present: Bool)
+    func PresentLockedSpinnerView(shouldPresent present: Bool)
     {
         lockedSpinnerViewManager?.presentNode(shouldPresent: present)
+        lockedSpinnerViewManager?.setDiamondsPlayerNeed()
     }
     
     func decideBuyDiamondCashOrDiamonds(with diamonds: (Int,Int,Int)?)
@@ -179,11 +181,11 @@ class ManuManager: BaseClass,
 
         if playerHasEnoghDiamonds
         {
-
+            lockedSpinnerViewManager?.userCanUnlockSpinner()
         }
         else
         {
-
+            lockedSpinnerViewManager?.userCantUnlockSpinner()
         }
     }
     
@@ -191,6 +193,7 @@ class ManuManager: BaseClass,
     {
         
     }
+    
 //  MARK: Private methods
     private func hideArrows()
     {

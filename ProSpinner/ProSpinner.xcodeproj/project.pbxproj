@@ -39,6 +39,7 @@
 		0A8B2E991ED8811E0025856E /* Tick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B2E981ED8811D0025856E /* Tick.mp3 */; };
 		0A8B2E9D1ED8C3ED0025856E /* Diamond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B2E9C1ED8C3EC0025856E /* Diamond.swift */; };
 		0ADCF0D41EDD9B2D00CE1C8B /* ArchiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCF0D31EDD9B2D00CE1C8B /* ArchiveManager.swift */; };
+		0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE7CD801EFCE55200236992 /* StoreView.swift */; };
 		0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE83A771EDC8F380066E3DD /* BaseClass.swift */; };
 		0AE83A7A1EDC91580066E3DD /* ManuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE83A791EDC91580066E3DD /* ManuManager.swift */; };
 		58D8CE085EEC2BF1CF77C9BF /* Pods_ProSpinnerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCB592AC0294D9475632625 /* Pods_ProSpinnerUITests.framework */; };
@@ -113,6 +114,7 @@
 		0A8B2E981ED8811D0025856E /* Tick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tick.mp3; sourceTree = "<group>"; };
 		0A8B2E9C1ED8C3EC0025856E /* Diamond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diamond.swift; sourceTree = "<group>"; };
 		0ADCF0D31EDD9B2D00CE1C8B /* ArchiveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveManager.swift; sourceTree = "<group>"; };
+		0AE7CD801EFCE55200236992 /* StoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		0AE83A771EDC8F380066E3DD /* BaseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseClass.swift; sourceTree = "<group>"; };
 		0AE83A791EDC91580066E3DD /* ManuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManuManager.swift; sourceTree = "<group>"; };
 		0E4E75FA348AA94CACB4B414 /* Pods_ProSpinnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProSpinnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,6 +260,7 @@
 				0A1E096B1EEEC21100041C45 /* ProgressBar.swift */,
 				0A8385871EF63A350044D1C7 /* RetryView.swift */,
 				0A0A24121EFA2D3E00044F8A /* LockedSpinnerNodeManager.swift */,
+				0AE7CD801EFCE55200236992 /* StoreView.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				918F18F81EC9CC8600886039 /* GameScene.swift in Sources */,
 				0A14F34A1EE175B300C5AA5D /* PurchaseManager.swift in Sources */,
 				0A04F47C1ED062F2004F374C /* SpinnerManager.swift in Sources */,
+				0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */,
 				0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */,
 				918F18FA1EC9CC8600886039 /* GameViewController.swift in Sources */,
 				918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */,

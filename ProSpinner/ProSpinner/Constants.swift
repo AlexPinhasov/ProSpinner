@@ -72,6 +72,7 @@ class Constants
         case PlayButton = "PlayButton"
         case MuteSoundButton = "MuteSoundButton"
         case SettingsButton = "SettingsButton"
+        case StoreButton = "StoreButton"
         
         case RedSuccess = "RedSuccess"
         case BlueSuccess = "BlueSuccess"
@@ -91,6 +92,17 @@ class Constants
         case AlertViewBackground = "AlertViewBackground"
     }
     
+    enum NodesInStoreView: String
+    {
+        case StoreBackground = "StoreBackground"
+        case storeAlert = "StoreAlert"
+        case exitButton = "ExitButton"
+        case bigDiamondGroupCost = "BigDiamondGroupCost"
+        case smallDiamondGroupCost = "SmallDiamondGroupCost"
+        case bigDiamondGroup = "BigDiamondGroup"
+        case smallDiamondGroup = "SmallDiamondGroup"
+    }
+    
     enum NodesInPriceTags: String
     {
         case PriceTags = "PriceTags"
@@ -106,16 +118,31 @@ class Constants
     enum NodesInLockedSpinnerView: String
     {
         case LockedSpinnerNode = "LockedSpinnerNode"
+        case unlockRedBack     =  "UnlockRedBack"
         
-        case GrayBackground = "GrayBackground"
-        case DarkBackground = "DarkBackground"
-        case RedPrice = "RedPrice"
-        case BluePrice = "BluePrice"
-        case GreenPrice = "GreenPrice"
-        case LockSprite = "LockSprite"
+        case LockedSpinnerBackground = "LockedSpinnerBackground"
+        case RedPrice = "RedPriceLabel"
+        case BluePrice = "BluePriceLabel"
+        case GreenPrice = "GreenPriceLabel"
         case SpinnerLock = "SpinnerLock"
+        case ViewInfoLabel = "ViewInfoLabel"
     }
+    
 }
+
+typealias DiamondsTuple = (red:Int,blue:Int,green:Int)?
+
+struct PhysicsCategory
+{
+    static let greenDiamond : UInt32 = 1
+    static let redDiamond : UInt32 = 2
+    static let blueDiamond : UInt32 = 3
+    
+    static let greenNode : UInt32 = 4
+    static let redNode : UInt32 = 5
+    static let blueNode : UInt32 = 6
+}
+
 
 extension Double
 {
