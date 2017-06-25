@@ -54,16 +54,19 @@ class DiamondsManager: BaseClass,
 //  MARK: Public Game methods
     func gameStarted()
     {
+        log.debug("")
         configureDiamonds()
     }
     
     func tutorialStarted()
     {
+        log.debug("")
         
     }
     
     func gameOver()
     {
+        log.debug("")
         resetDiamondsTimer()
         if let diamondsInScene = scene?.children.filter({  if $0 is Diamond { return true } ; return false })
         {
@@ -73,6 +76,7 @@ class DiamondsManager: BaseClass,
     
     func configureDiamonds()
     {
+        log.debug("")
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
         fadeOutDiamondsAndTheirCount()
     }
@@ -96,6 +100,7 @@ class DiamondsManager: BaseClass,
 
     func resetDiamondsTimer()
     {
+        log.debug("")
         Diamond.diamondSpeed = 4.0
         timer?.invalidate()
         fadeInDiamondAndTheirCount()
@@ -103,6 +108,7 @@ class DiamondsManager: BaseClass,
     
     func getDiamondsCount() -> DiamondsTuple
     {
+        log.debug("")
         return (red:Diamond.redCounter,
                 blue:Diamond.blueCounter,
                 green:Diamond.greenCounter)
@@ -110,12 +116,14 @@ class DiamondsManager: BaseClass,
     
     func getCollectedDiamondsDuringGame() -> DiamondsTuple
     {
+        log.debug("")
         return diamondsCollectedDuringGame
     }
 
 //  MARK: Physics mothods
     func contactBegan(for diamondNode: Diamond)
     {
+        log.debug("")
         playTickSound()
         Diamond.diamondSpeed -= 0.010
         collectedDiamondOf(kind: diamondNode)
@@ -129,6 +137,7 @@ class DiamondsManager: BaseClass,
     
     func collectedDiamondOf(kind diamond: Diamond?)
     {
+        log.debug("")
         guard let diamond = diamond else { return }
         
         switch diamond
@@ -149,6 +158,7 @@ class DiamondsManager: BaseClass,
     
     func loadDiamondCount()
     {
+        log.debug("")
         loadRedDiamondCount()
         loadBlueDiamondCount()
         loadGreenDiamondCount()
@@ -158,6 +168,7 @@ class DiamondsManager: BaseClass,
 //  MARK: Diamonds Animation
     func handleDiamondsWhenSpinner(isLocked spinnerIsLocked: Bool)
     {
+        log.debug("")
         returnDiamondsToStartingPosition()
         handleDiamondsPlayerNeedAndHaveLabels(whenSpinnerIsLocked :spinnerIsLocked)
         
@@ -215,6 +226,7 @@ class DiamondsManager: BaseClass,
     
     func handleDiamondsPlayerNeedAndHaveLabels(whenSpinnerIsLocked spinnerIsLocked: Bool)
     {
+        log.debug("")
         if spinnerIsLocked
         {
             let diamondsCount = getDiamondsCount()
@@ -241,6 +253,7 @@ class DiamondsManager: BaseClass,
     
     private func handleDiamondLabelNode(forNode labelNode: CustomSKLabelNode?, withDiamondsPlayerHas diamondsPlayerHas: Int?, diamondsPlayerNeed: Int?)
     {
+        log.debug("")
         guard let diamondsPlayerHas = diamondsPlayerHas else { return }
         guard let diamondsPlayerNeed = diamondsPlayerNeed else { return }
         guard let labelNode = labelNode else { return }
@@ -267,6 +280,7 @@ class DiamondsManager: BaseClass,
 
     func labelsAreAtStartingPosition(currentLocation: CGPoint) -> Bool
     {
+        log.debug("")
         return  redDiamondLabelNodeOriginalLocation == currentLocation ||
                 blueDiamondLabelNodeOriginalLocation == currentLocation ||
                 greenDiamondLabelNodeOriginalLocation == currentLocation
@@ -275,6 +289,7 @@ class DiamondsManager: BaseClass,
     
     func fadeInAndScaleDiamondsCountLabels()
     {
+        log.debug("")
         redDiamondLabelNode.position = redDiamondNode.position
         blueDiamondLabelNode.position = blueDiamondNode.position
         greenDiamondLabelNode.position = greenDiamondNode.position
@@ -290,6 +305,7 @@ class DiamondsManager: BaseClass,
     
     func returnDiamondsToStartingPosition()
     {
+        log.debug("")
         redDiamondNode.removeAllActions()
         blueDiamondNode.removeAllActions()
         greenDiamondNode.removeAllActions()
@@ -304,6 +320,7 @@ class DiamondsManager: BaseClass,
     
     func shouldBounceDiamonds() -> (red: Bool, blue: Bool, green: Bool)?
     {
+        log.debug("")
         let spinner = ArchiveManager.currentSpinner
         guard let redNeeded = spinner.redNeeded else { return  nil}
         guard let blueNeeded = spinner.blueNeeded else { return  nil}
@@ -331,6 +348,7 @@ class DiamondsManager: BaseClass,
     
     func fadeOutDiamondsAndTheirCount()
     {
+        log.debug("")
         // Sprite Nodes
         redDiamondNode.run(SKAction.fadeAlpha(to: 0.3, duration: 0.3))
         blueDiamondNode.run(SKAction.fadeAlpha(to: 0.3, duration: 0.3))
@@ -344,6 +362,7 @@ class DiamondsManager: BaseClass,
     
     func fadeInDiamondAndTheirCount()
     {
+        log.debug("")
         // Red Diamond
         redDiamondNode.size = originalDiamondNodeSize
         redDiamondNode.position = redDiamondLocation
@@ -371,6 +390,7 @@ class DiamondsManager: BaseClass,
     
     func purchasedNewSpinner()
     {
+        log.debug("")
         let spinner = ArchiveManager.currentSpinner
         guard let redNeeded = spinner.redNeeded else { return }
         guard let blueNeeded = spinner.blueNeeded else { return }
@@ -382,6 +402,7 @@ class DiamondsManager: BaseClass,
     
     func addCollectedDiamondsToLabelScene()
     {
+        log.debug("")
         guard let diamondsCollectedDuringGame = diamondsCollectedDuringGame else { return }
         Diamond.redCounter += diamondsCollectedDuringGame.red
         Diamond.blueCounter += diamondsCollectedDuringGame.blue
@@ -393,6 +414,7 @@ class DiamondsManager: BaseClass,
 //  MARK: Private methods
     fileprivate func updateDiamondCount(withDiamond diamond: SKSpriteNode)
     {
+        log.debug("")
         switch diamond.name ?? ""
         {
         case Constants.DiamondsName.red.rawValue   : redDiamondLabelNode.diamondsPlayerHave.text = String(Diamond.redCounter)
@@ -405,6 +427,7 @@ class DiamondsManager: BaseClass,
 
     private func randomizeDiamondType() -> Diamond
     {
+        log.debug("")
         let random = arc4random_uniform(3)+1
         switch random
         {
@@ -418,6 +441,7 @@ class DiamondsManager: BaseClass,
 
     private func calculateXLocation() -> CGFloat
     {
+        log.debug("")
         let leftLocation = Diamond.diamondsXPosition - 60
         return CGFloat(arc4random_uniform(120)+UInt32(leftLocation))
     }
@@ -429,6 +453,7 @@ extension DiamondsManager
     // MARK: Connect Outlets from scene
     fileprivate func loadRedDiamondCount()
     {
+        log.debug("")
         if let spriteNode = self.scene?.childNode(withName: Constants.DiamondsName.red.rawValue) as? SKSpriteNode
         {
             redDiamondNode = spriteNode
@@ -450,6 +475,7 @@ extension DiamondsManager
     
     fileprivate func loadBlueDiamondCount()
     {
+        log.debug("")
         if let spriteNode = self.scene?.childNode(withName: Constants.DiamondsName.blue.rawValue) as? SKSpriteNode
         {
             blueDiamondNode = spriteNode
@@ -471,6 +497,7 @@ extension DiamondsManager
     
     fileprivate func loadGreenDiamondCount()
     {
+        log.debug("")
         if let spriteNode = self.scene?.childNode(withName: Constants.DiamondsName.green.rawValue) as? SKSpriteNode
         {
             greenDiamondNode = spriteNode
@@ -496,6 +523,7 @@ extension DiamondsManager
 //  MARK: Count actions
     fileprivate func count(toDiraction diraction: Count,for redNeeded: Int,for blueNeeded: Int,for greenNeeded: Int)
     {
+        log.debug("")
         var redCounterDecrement = SKAction()
         var blueCounterDecrement = SKAction()
         var greenCounterDecrement = SKAction()
@@ -523,11 +551,18 @@ extension DiamondsManager
                                                       SKAction.repeat(greenCounterDecrement, count: greenNeeded)]))
         {
             self.diamondsCollectedDuringGame = (0,0,0)
+            if diraction == .down
+            {
+                Diamond.redCounter -= redNeeded
+                Diamond.blueCounter -= blueNeeded
+                Diamond.greenCounter -= greenNeeded
+            }
         }
     }
     
     private func redCountdownAction()
     {
+        log.debug("")
         if let possesText = redDiamondLabelNode!.diamondsPlayerHave.text,
             let possesInt = Int(possesText)
         {
@@ -537,6 +572,7 @@ extension DiamondsManager
     
     private func blueCountdownAction()
     {
+        log.debug("")
         if let possesText = blueDiamondLabelNode!.diamondsPlayerHave.text,
             let possesInt = Int(possesText)
         {
@@ -546,6 +582,7 @@ extension DiamondsManager
     
     private func greenCountdownAction()
     {
+        log.debug("")
         if let possesText = greenDiamondLabelNode!.diamondsPlayerHave.text,
             let possesInt = Int(possesText)
         {
@@ -555,6 +592,7 @@ extension DiamondsManager
     
     private func redCountUpAction()
     {
+        log.debug("")
         if let possesText = redDiamondLabelNode!.diamondsPlayerHave.text,
             let possesInt = Int(possesText)
         {
@@ -564,6 +602,7 @@ extension DiamondsManager
     
     private func blueCountUpAction()
     {
+        log.debug("")
         if let possesText = blueDiamondLabelNode!.diamondsPlayerHave.text,
             let possesInt = Int(possesText)
         {
@@ -573,6 +612,7 @@ extension DiamondsManager
     
     private func greenCountUpAction()
     {
+        log.debug("")
         if let possesText = greenDiamondLabelNode!.diamondsPlayerHave.text,
             let possesInt = Int(possesText)
         {

@@ -18,6 +18,7 @@ class NetworkManager
     
     static func checkForNewSpinners(withCompletion block: @escaping (Bool) -> Void)
     {
+        log.debug("")
         Database.database().reference().database.reference().child("NumberOfSpinners").observeSingleEvent(of: .value, with:
         { (snapshot) in
             
@@ -35,6 +36,7 @@ class NetworkManager
     
     static func handleNewSpinnersAvailable()
     {
+        log.debug("")
         getSpinnersFromDataBase()
         { (spinnerArray) in
             
@@ -50,6 +52,7 @@ class NetworkManager
     
     static func getSpinnersFromDataBase(withBlock completion: @escaping ([Spinner]) -> Void)
     {
+        log.debug("")
         var spinnersFound : [Spinner] = [Spinner]()
         let startingPosition = String(ArchiveManager.spinnersArrayInDisk.count + 1)
         Database.database().reference().database.reference().child("Spinners").queryOrderedByKey().queryStarting(atValue: startingPosition).observeSingleEvent(of: .value, with:
@@ -85,6 +88,7 @@ class NetworkManager
     
     static private func handleDownloadingImagesForNewSpinners()
     {
+        log.debug("")
         for eachSpinner in ArchiveManager.spinnersArrayInDisk
         {
             guard let imageUrl = eachSpinner.imageUrlLink else { continue }
@@ -113,6 +117,7 @@ class NetworkManager
     
     static func downloadTexture(withUrl url: String,withCompletion block: @escaping (SKTexture) -> Void)
     {
+        log.debug("")
         let islandRef = Storage.storage().reference(forURL: url)
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         islandRef.getData(maxSize: 1 * 1024 * 1024)

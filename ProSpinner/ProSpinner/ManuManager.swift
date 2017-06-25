@@ -59,6 +59,7 @@ class ManuManager: BaseClass,
     
     private func initSpriteFromScene()
     {
+        log.debug("")
         // Main manu
         startGame               = scene?.childNode(withName: Constants.NodesInScene.StartGame.rawValue) as? SKSpriteNode
         leftArrowTriger         = scene?.childNode(withName: Constants.NodesInScene.LeftArrow.rawValue) as? SKSpriteNode
@@ -85,6 +86,7 @@ class ManuManager: BaseClass,
 //  MARK: Public methods
     func configureManu()
     {
+        log.debug("")
         initSpriteFromScene()
         showArrows()
         saveProgressBarPosition()
@@ -93,6 +95,7 @@ class ManuManager: BaseClass,
 //  MARK: Game life cycle
     func gameStarted()
     {
+        log.debug("")
         hideArrows()
         hideManuItems()
         showGameExplanation()
@@ -100,17 +103,20 @@ class ManuManager: BaseClass,
     
     func tutorialStarted()
     {
+        log.debug("")
         hideArrows()
     }
     
     func gameOver()
     {
+        log.debug("")
         showArrows()
     }
     
 //  MARK: Spinner Locked/Unlocked master methods
     func handleSpinnerPresentedIsLocked(with diamondCount: DiamondsTuple)
     {
+        log.debug("")
         removeSuccessV()
         PresentLockedSpinnerView(shouldPresent: true)
         displayProgressBars(shouldShow: true,with: diamondCount)
@@ -120,6 +126,7 @@ class ManuManager: BaseClass,
     
     func handleSpinnerPresentedIsUnlocked()
     {
+        log.debug("")
         animateSpinnerLockFadeOut()
         removeSuccessV()
         displayProgressBars(shouldShow: false, with: nil)
@@ -129,45 +136,60 @@ class ManuManager: BaseClass,
     
     func RightArrowPressed(isPressed pressed: Bool)
     {
+        log.debug("")
         if pressed
         {
-            //rightArrow?.zRotation = -3.5
-            rightArrowTriger?.texture = Arrows.rightArrowPressed
-            rightArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
+            DispatchQueue.main.async
+            {
+                //rightArrow?.zRotation = -3.5
+                self.rightArrowTriger?.texture = Arrows.rightArrowPressed
+                self.rightArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
+            }
         }
         else
         {
-            //rightArrow?.zRotation = 0
-            rightArrowTriger?.texture = Arrows.rightArrow
-            rightArrowTriger?.run(SKAction.resize(toHeight: 55, duration: 0))
+            DispatchQueue.main.async
+            {
+                //rightArrow?.zRotation = 0
+                self.rightArrowTriger?.texture = Arrows.rightArrow
+                self.rightArrowTriger?.run(SKAction.resize(toHeight: 55, duration: 0))
+            }
         }
     }
     
     func LeftArrowPressed(isPressed pressed: Bool)
     {
+        log.debug("")
         if pressed
         {
             //leftArrow?.zRotation = 3.5
-            leftArrowTriger?.texture = Arrows.leftArrowPressed
-            leftArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
-            
+            DispatchQueue.main.async
+            {
+                self.leftArrowTriger?.texture = Arrows.leftArrowPressed
+                self.leftArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
+            }
         }
         else
         {
-            //leftArrow?.zRotation = 0
-            leftArrowTriger?.texture = Arrows.leftArrow
-            leftArrowTriger?.run(SKAction.resize(toHeight: 55, duration: 0))
+            DispatchQueue.main.async
+            {
+                //leftArrow?.zRotation = 0
+                self.leftArrowTriger?.texture = Arrows.leftArrow
+                self.leftArrowTriger?.run(SKAction.resize(toHeight: 55, duration: 0))
+            }
         }
     }
     
     func PresentLockedSpinnerView(shouldPresent present: Bool)
     {
+        log.debug("")
         lockedSpinnerViewManager?.presentNode(shouldPresent: present)
         lockedSpinnerViewManager?.setDiamondsPlayerNeed()
     }
     
     func decideBuyDiamondCashOrDiamonds(with diamonds: (Int,Int,Int)?)
     {
+        log.debug("")
         let spinner = ArchiveManager.currentSpinner
         guard let diamonds = diamonds else { return }
         guard let redNeeded = spinner.redNeeded else { return }
@@ -191,6 +213,7 @@ class ManuManager: BaseClass,
     
     func purchasedNewSpinner()
     {
+        log.debug("")
         lockedSpinnerViewManager?.presentNode(shouldPresent: false)
         animateSpinnerLockFadeOut()
         removeSuccessV()
@@ -200,12 +223,14 @@ class ManuManager: BaseClass,
 //  MARK: Private methods
     private func hideArrows()
     {
+        log.debug("")
         leftArrowTriger?.run(SKAction.scale(to: 0 , duration: 0.3))
         rightArrowTriger?.run(SKAction.scale(to: 0, duration: 0.3))
     }
     
     private func showArrows()
     {
+        log.debug("")
         leftArrowTriger?.size = CGSize(width: 71, height: 55)
         rightArrowTriger?.size = CGSize(width: 71, height: 55)
         leftArrowTriger?.run(SKAction.scale(to: 1, duration: 0.7))
@@ -214,6 +239,7 @@ class ManuManager: BaseClass,
     
     private func hideManuItems()
     {
+        log.debug("")
         startGame?.run(SKAction.scale(to: 0, duration: 0.0))
         settingsButton?.run(SKAction.scale(to: 0, duration: 0.3))
         muteSoundButton?.run(SKAction.scale(to: 0, duration: 0.3))
@@ -221,6 +247,7 @@ class ManuManager: BaseClass,
     
     func showManuItems()
     {
+        log.debug("")
         startGame?.run(SKAction.scale(to: 1, duration: 0.0))
         settingsButton?.run(SKAction.scale(to: 1, duration: 0.5))
         muteSoundButton?.run(SKAction.scale(to: 1, duration: 0.5))
@@ -228,6 +255,7 @@ class ManuManager: BaseClass,
     
     private func showGameExplanation()
     {
+        log.debug("")
         gameExplanation?.run(SKAction.sequence([SKAction.fadeIn(withDuration: 0.2),
                                                 SKAction.wait(forDuration: 2),
                                                 SKAction.fadeOut(withDuration: 0.2)]))
@@ -235,6 +263,7 @@ class ManuManager: BaseClass,
     
     func animateSpinnerLockScaleUp()
     {
+        log.debug("")
         let sequene = SKAction.sequence([SKAction.scale(to: 1.25, duration: 0.3),
                                          SKAction.fadeIn(withDuration: 0.1),
                                          SKAction.scale(to: 1.0, duration: 0.2)])
@@ -243,6 +272,7 @@ class ManuManager: BaseClass,
     
     func animateSpinnerLockFadeOut()
     {
+        log.debug("")
         self.spinnerLock?.run(SKAction.fadeOut(withDuration: 0.2))
     }
 }
@@ -252,6 +282,7 @@ extension ManuManager
 //  MARK: Progress Bar Logic
     func displayProgressBars(shouldShow bool: Bool,with diamonds: (Int,Int,Int)?)
     {
+        log.debug("")
         if bool
         {
             decideBuyDiamondCashOrDiamonds(with: diamonds)
@@ -268,6 +299,7 @@ extension ManuManager
     
     func removeProgressBars()
     {
+        log.debug("")
         var progressBarNodes = [SKNode]()
         if let red = progressBars?.childNode(withName: Constants.ProgressBars.red.rawValue)
         {
@@ -286,6 +318,7 @@ extension ManuManager
     
     func removeSuccessV()
     {
+        log.debug("")
         animateSuccessV(toFadeIn: false, forNode: redSuccessV)
         animateSuccessV(toFadeIn: false, forNode: blueSuccessV)
         animateSuccessV(toFadeIn: false, forNode: greenSuccessV)
@@ -293,6 +326,7 @@ extension ManuManager
     
     func saveProgressBarPosition()
     {
+        log.debug("")
         if let red = progressBars?.childNode(withName: Constants.ProgressBars.red.rawValue)
         {
             redProgressBarPosition = red.position
@@ -309,6 +343,7 @@ extension ManuManager
     
     func showProgressBarOrV(withValues values: (red:Int,blue:Int,green:Int)?)
     {
+        log.debug("")
         removeProgressBars()
         guard let diamondsCount = values else { return }
         let spinner = ArchiveManager.currentSpinner
@@ -325,6 +360,7 @@ extension ManuManager
     
     private func animateSuccessV(toFadeIn fadeIn: Bool,forNode node: SKSpriteNode?)
     {
+        log.debug("")
         if fadeIn
         {
             node?.run(SKAction.fadeIn(withDuration: 0.3))
@@ -340,6 +376,7 @@ extension ManuManager
     
     private func handleRedProgressBar(withDiamondsPlayerHas diamondsPlayerHas: Int,diamondsPlayerNeed: Int)
     {
+        log.debug("")
         if diamondsPlayerHas >= diamondsPlayerNeed
         {
             animateSuccessV(toFadeIn: true, forNode: redSuccessV)
@@ -358,6 +395,7 @@ extension ManuManager
     
     private func handleBlueProgressBar(withDiamondsPlayerHas diamondsPlayerHas: Int,diamondsPlayerNeed: Int)
     {
+        log.debug("")
         if diamondsPlayerHas >= diamondsPlayerNeed
         {
             animateSuccessV(toFadeIn: true, forNode: blueSuccessV)
@@ -376,6 +414,7 @@ extension ManuManager
     
     private func handleGreenProgressBar(withDiamondsPlayerHas diamondsPlayerHas: Int,diamondsPlayerNeed: Int)
     {
+        log.debug("")
         if diamondsPlayerHas >= diamondsPlayerNeed
         {
             animateSuccessV(toFadeIn: true, forNode: greenSuccessV)

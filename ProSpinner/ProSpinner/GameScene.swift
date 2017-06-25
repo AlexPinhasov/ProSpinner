@@ -30,6 +30,7 @@ class GameScene: SKScene,
 //  MARK: Scene life cycle
     override func didMove(to view: SKView)
     {
+        log.debug("")
         spinnerManager = SpinnerManager(inScene: self)
         diamondsManager = DiamondsManager(inScene: self)
         manuManager = ManuManager(inScene: self)
@@ -47,6 +48,7 @@ class GameScene: SKScene,
 //  MARK: Physics Contact Delegate
     func didBegin(_ contact: SKPhysicsContact)
     {
+        log.debug("")
        guard let spinnerNode = contact.bodyA.node  as? SKShapeNode else { return } // Spinner
        guard let diamondNode = contact.bodyB.node  as? Diamond  else { return } // Diamond
        guard let diamondName = diamondNode.name else { return }
@@ -72,6 +74,7 @@ class GameScene: SKScene,
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
     {
+        log.debug("")
         for touch in touches
         {
             let positionInScene = touch.location(in: self)
@@ -107,6 +110,7 @@ class GameScene: SKScene,
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
+        log.debug("")
         for touch in touches
         {
             let positionInScene = touch.location(in: self)
@@ -162,6 +166,7 @@ class GameScene: SKScene,
     
     func notifyGameStarted()
     {
+        log.debug("")
         if TutorialManager.tutorialIsInProgress
         {
             manuManager?.tutorialStarted()
@@ -181,6 +186,7 @@ class GameScene: SKScene,
     
     func finishedReseting()
     {
+        log.debug("")
         if GameStatus.Playing == false
         {
             manuManager?.showManuItems()
@@ -191,6 +197,7 @@ class GameScene: SKScene,
 //  MARK: Private methods
     private func handleInterstitialCount()
     {
+        log.debug("")
         ArchiveManager.interstitalCount += 1
         if ArchiveManager.interstitalCount >= 5
         {
@@ -199,6 +206,7 @@ class GameScene: SKScene,
     }
     private func handleBuySpinnerCase(for touchedNode: SKNode)
     {
+        log.debug("")
         if let buy = touchedNode as? SKLabelNode,
                let buyCase = buy.accessibilityValue
         {
@@ -219,6 +227,7 @@ class GameScene: SKScene,
     
     private func handleLockViewAppearance()
     {
+        log.debug("")
         if ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].unlocked == false
         {
             let diamondsCount = diamondsManager?.getDiamondsCount()
@@ -237,16 +246,20 @@ class GameScene: SKScene,
 //  MARK: Private Configuration methods
     private func handleDiamondConfiguration()
     {
+        log.debug("")
         diamondsManager?.loadDiamondCount()
         Diamond.diamondsXPosition = spinnerNode.position.x
     }
+    
     private func handleManuConfiguration()
     {
+        log.debug("")
         manuManager?.configureManu()
     }
 
     private func handleSpinnerConfiguration()
     {
+        log.debug("")
         guard let spinnerNode = spinnerManager?.configureSpinner(withPlaceHolder: self.spinnerNode) else { return }
         spinnerNode.name = Constants.NodesInScene.Spinner.rawValue
         
@@ -257,6 +270,7 @@ class GameScene: SKScene,
     
     func userSwipedRight()
     {
+        log.debug("")
         if GameStatus.Playing == false
         {
             spinnerManager?.userTappedNextSpinner()
@@ -268,6 +282,7 @@ class GameScene: SKScene,
     
     func userSwipedLeft()
     {
+        log.debug("")
         if GameStatus.Playing == false
         {
             spinnerManager?.userTappedPreviousSpinner()
@@ -279,6 +294,7 @@ class GameScene: SKScene,
     
     private func handleSwipeConfiguration()
     {
+        log.debug("")
         let swipeRight: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(userSwipedRight))
         swipeRight.direction = .right
         view?.addGestureRecognizer(swipeRight)

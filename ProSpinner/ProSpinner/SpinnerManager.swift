@@ -60,12 +60,14 @@ class SpinnerManager: BaseClass,
 //  MARK: Public methods
     func gameStarted()
     {
+        log.debug("")
         _ = scaleDownSpinner()
         handleNewMainSpinner()
     }
     
     func tutorialStarted()
     {
+        log.debug("")
         _ = scaleDownSpinner()
         TutorialManager.changeZposition(to: 0)
         TutorialManager.fadeInScreen()
@@ -75,11 +77,13 @@ class SpinnerManager: BaseClass,
     
     func gameOver()
     {
+        log.debug("")
         resetSpinner()
     }
     
     func configureSpinner(withPlaceHolder spinner: SKSpriteNode) -> SKSpriteNode
     {
+        log.debug("")
         guard let spinnerNode = self.scene?.childNode(withName: LocalStrings.spinnerNode.rawValue) as? SKSpriteNode  else { return SKSpriteNode() }
 
         configureSpinnerColorNodes(for: spinnerNode,andNew: spinner)
@@ -104,6 +108,7 @@ class SpinnerManager: BaseClass,
 
     func configureSpinnerColorNodes(for spinnerNode: SKSpriteNode,andNew spinner: SKSpriteNode)
     {
+        log.debug("")
         for coloredCirculNode in spinnerNode.children
         {
             let coloredNode = applyPhysicsAndName(for: coloredCirculNode)
@@ -113,6 +118,7 @@ class SpinnerManager: BaseClass,
     
     func rotateToOtherDirection()
     {
+        log.debug("")
         guard spiningToStratingPosition == false else { return }
         
         switch GameStatus.Playing
@@ -145,17 +151,20 @@ class SpinnerManager: BaseClass,
     }
     func contactBegan()
     {
+        log.debug("")
         spinnerSpeed -= 0.0010
         pulseSpinner()
     }
 
     private func pulseSpinner()
     {
+        log.debug("")
         pulse(node: spinnerNode, scaleUpTo: 0.65, scaleDownTo: 0.6, duration: 0.20)
     }
     
     func scaleDownSpinner() -> SKAction
     {
+        log.debug("")
         let scaleAction = SKAction.scale(to: 0.6, duration: 0.2)
         spinnerNode?.run(scaleAction)
         return scaleAction
@@ -163,6 +172,7 @@ class SpinnerManager: BaseClass,
     
     func scaleUpSpinner() -> SKAction
     {
+        log.debug("")
         let scaleAction = SKAction.scale(to: 1, duration: 0.2)
         spinnerNode?.run(scaleAction)
         return scaleAction
@@ -170,6 +180,7 @@ class SpinnerManager: BaseClass,
     
     func resetSpinner()
     {
+        log.debug("")
         spinnerSpeed = 1.2
         spiningToStratingPosition = true
         spinnerNode?.removeAllActions()
@@ -187,6 +198,7 @@ class SpinnerManager: BaseClass,
     
     func purchasedNewSpinner()
     {
+        log.debug("")
         ArchiveManager.currentSpinnerHasBeenUnlocked()
         spinnerNode?.removeAllActions()
         rotateToStartingPosition()
@@ -197,11 +209,13 @@ class SpinnerManager: BaseClass,
 //  MARK: Private methods
     private func rotateToStartingPosition()
     {
+        log.debug("")
         spinnerNode?.run(SKAction.rotate(toAngle: 0.0, duration: 0.1))
     }
     
     private func handleNewMainSpinner()
     {
+        log.debug("")
         let currentSpinnerDisplayed = ArchiveManager.currentSpinner
         
         ArchiveManager.spinnersArrayInDisk[ArchiveManager.mainSpinnerLocation].mainSpinner = false
@@ -213,6 +227,7 @@ class SpinnerManager: BaseClass,
     
     private func applyPhysicsAndName(for circulNode: SKNode) -> SKNode
     {
+        log.debug("")
         guard let circulNode = circulNode as? SKShapeNode else { return SKNode()}
         
         if let name = circulNode.name
@@ -262,6 +277,7 @@ extension SpinnerManager
 //  MARK: Spinner Selection Controller
     func userTappedNextSpinner(withCompletion didFinish: @escaping () -> Void)
     {
+        log.debug("")
         animateNextSpinnerMovement()
         {
             didFinish()
@@ -270,6 +286,7 @@ extension SpinnerManager
     
     func userTappedPreviousSpinner(withCompletion didFinish: @escaping () -> Void)
     {
+        log.debug("")
         animatePriviousSpinnerMovement()
         {
             didFinish()
@@ -278,6 +295,7 @@ extension SpinnerManager
     
     private func animateNextSpinnerMovement(withCompletion spinnerChanged: @escaping () -> Void)
     {
+        log.debug("")
         if currentlySwitchingSpinner == false
         {
             currentlySwitchingSpinner = true
@@ -304,6 +322,7 @@ extension SpinnerManager
     
     private func animatePriviousSpinnerMovement(withCompletion spinnerChanged: @escaping () -> Void)
     {
+        log.debug("")
         if currentlySwitchingSpinner == false
         {
             currentlySwitchingSpinner = true
@@ -330,6 +349,7 @@ extension SpinnerManager
     
     fileprivate func grayOutSpinnerIfLocked()
     {
+        log.debug("")
         if ArchiveManager.currentSpinner.unlocked == false
         {
             if self.spinnerNode?.alpha == 1.0
@@ -345,6 +365,7 @@ extension SpinnerManager
     
     func moveToNextSpinner()
     {
+        log.debug("")
         if ArchiveManager.currentlyAtIndex + 1 > ArchiveManager.spinnersArrayInDisk.count - 1
         {
             ArchiveManager.currentlyAtIndex = 0
@@ -357,6 +378,7 @@ extension SpinnerManager
     
     func moveToPreviousSpinner()
     {
+        log.debug("")
         if ArchiveManager.currentlyAtIndex - 1 < 0
         {
             ArchiveManager.currentlyAtIndex = ArchiveManager.spinnersArrayInDisk.count - 1
@@ -369,6 +391,7 @@ extension SpinnerManager
     
     func shakeSpinnerLocked(shouldShake shake: Bool)
     {
+        log.debug("")
         if shake
         {
             let rotateRightAction = SKAction.rotate(byAngle: -0.06, duration: 0.5)
@@ -398,6 +421,7 @@ extension SpinnerManager
 {
     func rotateSpinnerTutorial()
     {
+        log.debug("")
         guard spiningToStratingPosition == false else { return }
         
         switch diraction

@@ -93,18 +93,22 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSSAlertView/JSSAlertView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ObjcExceptionBridging/ObjcExceptionBridging.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Pantry/Pantry.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf/Protobuf.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SpriteKit-Spring/SpriteKit_Spring.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/XCGLogger/XCGLogger.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AwesomeCache/AwesomeCache.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSSAlertView/JSSAlertView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ObjcExceptionBridging/ObjcExceptionBridging.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Pantry/Pantry.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf/Protobuf.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SpriteKit-Spring/SpriteKit_Spring.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/XCGLogger/XCGLogger.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

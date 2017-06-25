@@ -113,9 +113,9 @@ class GameViewController: UIViewController
     
     private func set10DiamondsOnFirstRun()
     {
-        UserDefaults.standard.set(10, forKey: UserDefaultKeys.red.rawValue)
-        UserDefaults.standard.set(10, forKey: UserDefaultKeys.blue.rawValue)
-        UserDefaults.standard.set(10, forKey: UserDefaultKeys.green.rawValue)
+        UserDefaults.standard.set(49, forKey: UserDefaultKeys.red.rawValue)
+        UserDefaults.standard.set(49, forKey: UserDefaultKeys.blue.rawValue)
+        UserDefaults.standard.set(49, forKey: UserDefaultKeys.green.rawValue)
     }
     
     func beginDownload()
