@@ -412,7 +412,7 @@ extension SpinnerManager
         else
         {
             spinnerNode?.removeAction(forKey: "ShakeLockedSpinner")
-            spinnerNode?.zRotation = 0.0
+            //spinnerNode?.zRotation = 0.0
         }
     }
 }

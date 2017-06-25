@@ -27,7 +27,6 @@ class ArchiveManager
         didSet
         {
             ArchiveManager.write_SpinnerToUserDefault(spinners: spinnersArrayInDisk)
-            UserDefaults.standard.synchronize()
         }
     }
     
@@ -81,6 +80,8 @@ class ArchiveManager
         resetMainSpinners()
         ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].unlocked = true
         ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].mainSpinner = true
+        let updatedArray = ArchiveManager.spinnersArrayInDisk
+        write_SpinnerToUserDefault(spinners: updatedArray)
     }
     
     static func resetMainSpinners()
