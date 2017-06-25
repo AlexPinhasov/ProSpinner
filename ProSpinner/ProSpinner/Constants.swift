@@ -52,6 +52,12 @@ class Constants
         case green = "greenProgressBar"
     }
     
+    enum LockedScreenStrings: String
+    {
+        case DiamondsNeeded = "Diamonds Needed To Unlock"
+        case UnlockSpinner = "UNLOCK SPINNER !"
+    }
+    
     struct DiamondProgressBarColor
     {
         static let redColor   = UIColor(red: 196/255,green: 43/255,blue: 40/255,alpha: 1.0)

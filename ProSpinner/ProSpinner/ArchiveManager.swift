@@ -76,6 +76,19 @@ class ArchiveManager
         UserDefaults.standard.synchronize()
     }
     
+    static func currentSpinnerHasBeenUnlocked()
+    {
+        resetMainSpinners()
+        ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].unlocked = true
+        ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].mainSpinner = true
+        ArchiveManager.write_SpinnerToUserDefault(spinners: ArchiveManager.spinnersArrayInDisk)
+    }
+    
+    static func resetMainSpinners()
+    {
+        for spinner in spinnersArrayInDisk { spinner.mainSpinner = false }
+    }
+    
     static func read_SpinnersFromUserDefault() -> [Spinner]
     {
         if let data = UserDefaults.standard.data(forKey: UserDefaultKeys.spinnersInDisk.rawValue)

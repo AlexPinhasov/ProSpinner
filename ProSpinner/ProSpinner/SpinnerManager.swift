@@ -187,11 +187,19 @@ class SpinnerManager: BaseClass,
     
     func purchasedNewSpinner()
     {
+        ArchiveManager.currentSpinnerHasBeenUnlocked()
+        spinnerNode?.removeAllActions()
+        rotateToStartingPosition()
         grayOutSpinnerIfLocked()
     }
     
 
 //  MARK: Private methods
+    private func rotateToStartingPosition()
+    {
+        spinnerNode?.run(SKAction.rotate(toAngle: 0.0, duration: 0.1))
+    }
+    
     private func handleNewMainSpinner()
     {
         let currentSpinnerDisplayed = ArchiveManager.currentSpinner

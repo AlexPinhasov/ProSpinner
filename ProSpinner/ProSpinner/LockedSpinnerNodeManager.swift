@@ -67,7 +67,7 @@ class LockedSpinnerNodeManager: SKNode,
             viewInfoLabel?.run(SKAction.move(by: CGVector(dx: 0, dy: 8), duration: 0.4))
             {
                 self.viewInfoLabel?.fontSize = 22
-                self.viewInfoLabel?.text = "UNLOCK SPINNER !"
+                self.viewInfoLabel?.text = Constants.LockedScreenStrings.UnlockSpinner.rawValue
                 self.viewInfoLabel?.run(SKAction.fadeIn(withDuration: 0.1))
                 self.pulseUnlockSpinnerLabel()
             }
@@ -88,7 +88,7 @@ class LockedSpinnerNodeManager: SKNode,
                 self.viewInfoLabel?.removeAllActions()
                 self.viewInfoLabel?.setScale(1.0)
                 self.viewInfoLabel?.fontSize = 18
-                self.viewInfoLabel?.text = "Diamonds Needed To Unlock"
+                self.viewInfoLabel?.text = Constants.LockedScreenStrings.DiamondsNeeded.rawValue
                 self.viewInfoLabel?.run(SKAction.fadeIn(withDuration: 0.1))
             }
             lockedBackground?.run(SKAction.move(by: CGVector(dx: 0, dy: 20), duration: 0.3))
@@ -98,19 +98,22 @@ class LockedSpinnerNodeManager: SKNode,
         }
     }
     
-    func asd()
+    func userRequestedToUnlockSpinner(andPressedNode touchedNode: SKNode) -> Bool
     {
         if let unlockNowLabel = touchedNode as? SKLabelNode
         {
-            if unlockNowLabel.text == "UNLOCK NOW!"
+            if unlockNowLabel.text == Constants.LockedScreenStrings.UnlockSpinner.rawValue
             {
-                
+                return true
             }
-            else
+            else //shake view and
             {
-                
+                shake(node: lockedBackground, withDuration: 0.5)
+                shake(node: unlockRedBack, withDuration: 0.5)
+                return false
             }
         }
+        return false
     }
     
     func pulseUnlockSpinnerLabel()

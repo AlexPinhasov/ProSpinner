@@ -35,7 +35,7 @@ class ManuManager: BaseClass,
     private var rightArrow       : SKSpriteNode?
     
     private var gameExplanation  : SKLabelNode?
-    private var lockedSpinnerViewManager : LockedSpinnerNodeManager?
+    var lockedSpinnerViewManager : LockedSpinnerNodeManager?
     fileprivate var spinnerLock : SKSpriteNode?
     
     fileprivate var redSuccessV      : SKSpriteNode?
@@ -120,7 +120,7 @@ class ManuManager: BaseClass,
     
     func handleSpinnerPresentedIsUnlocked()
     {
-        self.spinnerLock?.run(SKAction.fadeOut(withDuration: 0.2))
+        animateSpinnerLockFadeOut()
         removeSuccessV()
         displayProgressBars(shouldShow: false, with: nil)
         PresentLockedSpinnerView(shouldPresent: false)
@@ -191,7 +191,10 @@ class ManuManager: BaseClass,
     
     func purchasedNewSpinner()
     {
-        
+        lockedSpinnerViewManager?.presentNode(shouldPresent: false)
+        animateSpinnerLockFadeOut()
+        removeSuccessV()
+        showManuItems()
     }
     
 //  MARK: Private methods
@@ -236,6 +239,11 @@ class ManuManager: BaseClass,
                                          SKAction.fadeIn(withDuration: 0.1),
                                          SKAction.scale(to: 1.0, duration: 0.2)])
         self.spinnerLock?.run(sequene)
+    }
+    
+    func animateSpinnerLockFadeOut()
+    {
+        self.spinnerLock?.run(SKAction.fadeOut(withDuration: 0.2))
     }
 }
 

@@ -11,6 +11,7 @@ import SpriteKit
 protocol Animateable
 {
     func pulse(node: SKNode?, scaleUpTo: CGFloat, scaleDownTo: CGFloat,duration: TimeInterval,delay: TimeInterval)
+    func shake(node: SKNode?, withDuration duration: TimeInterval)
 }
 
 extension Animateable
@@ -31,5 +32,14 @@ extension Animateable
                                            initialSpringVelocity: 2)
             node?.run(pulseDown)
         }
+    }
+    
+    func shake(node: SKNode?, withDuration duration: TimeInterval)
+    {
+        let shakeRight = SKAction.move(by: CGVector(dx: 10, dy: 0), duration: duration)
+        let shakeLeft = SKAction.move(by: CGVector(dx: -10, dy: 0), duration: duration)
+        let shakeSequene = SKAction.sequence([ shakeRight,shakeLeft,shakeLeft,shakeRight,shakeRight,shakeLeft ])
+        
+        node?.run(shakeSequene)
     }
 }
