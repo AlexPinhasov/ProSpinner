@@ -120,7 +120,7 @@ class GameScene: SKScene,
             {
                 switch name
                 {
-                case Constants.NodesInScene.StartGame.rawValue:
+                case Constants.NodesInScene.PlayLabel.rawValue:
                     notifyGameStarted()
                     
                 case Constants.NodesInScene.RightArrow.rawValue,

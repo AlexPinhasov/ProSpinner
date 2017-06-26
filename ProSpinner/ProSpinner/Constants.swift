@@ -71,7 +71,7 @@ class Constants
         case RightArrow = "nextSpinner"
         case ActualLeftArrow = "LeftArrow"
         case ActualRightArrow = "RightArrow"
-        case StartGame = "StartGame"
+        case PlayLabel = "PlayLabel"
         case Spinner   = "spinner"
         case ProgressBars  = "ProgressBars"
         case BuySpinner = "unlock now"

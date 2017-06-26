@@ -23,7 +23,8 @@ class CustomSKLabelNode : SKNode,
         self.diamondsPlayerHave.fontName = "OCRAStd"
         self.diamondsPlayerHave.position = CGPoint.zero
         self.diamondsPlayerHave.fontSize = 18
-         self.diamondsPlayerHave.zPosition = 4
+        self.diamondsPlayerHave.zPosition = 4
+        
         addChild(self.diamondsPlayerHave)
         
         self.separatorLabel.fontColor = .black
@@ -55,14 +56,14 @@ class CustomSKLabelNode : SKNode,
             
             self.separatorLabel.text = "/"
             self.separatorLabel.position.x = 0
-            self.separatorLabel.position.x += (self.diamondsPlayerHave.frame.size.width - 7)
+            self.separatorLabel.position.x += (self.diamondsPlayerHave.frame.size.width)
             
             self.blackBackground = SKShapeNode(rect: self.diamondsPlayerNeed.frame)
             self.blackBackground.fillColor = .black
             self.diamondsPlayerNeed.addChild(blackBackground)
             self.blackBackground.zPosition = 0
             self.diamondsPlayerNeed.position = CGPoint.zero
-            self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width)
+            self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width + 78)
         }
         else
         {
@@ -89,5 +90,4 @@ class CustomSKLabelNode : SKNode,
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
 }

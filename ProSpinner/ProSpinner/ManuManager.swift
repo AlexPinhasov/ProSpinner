@@ -25,7 +25,7 @@ struct Arrows
 class ManuManager: BaseClass,
                    Animateable
 {
-    fileprivate var startGame        : SKSpriteNode?
+    fileprivate var playLabel        : SKSpriteNode?
     private var settingsButton   : SKSpriteNode?
     private var muteSoundButton  : SKSpriteNode?
     
@@ -61,7 +61,7 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         // Main manu
-        startGame               = scene?.childNode(withName: Constants.NodesInScene.StartGame.rawValue) as? SKSpriteNode
+        playLabel               = scene?.childNode(withName: Constants.NodesInScene.PlayLabel.rawValue) as? SKSpriteNode
         leftArrowTriger         = scene?.childNode(withName: Constants.NodesInScene.LeftArrow.rawValue) as? SKSpriteNode
         rightArrowTriger        = scene?.childNode(withName: Constants.NodesInScene.RightArrow.rawValue) as? SKSpriteNode
         leftArrow               = leftArrowTriger?.childNode(withName: Constants.NodesInScene.ActualLeftArrow.rawValue) as? SKSpriteNode
@@ -231,8 +231,8 @@ class ManuManager: BaseClass,
     private func showArrows()
     {
         log.debug("")
-        leftArrowTriger?.size = CGSize(width: 71, height: 55)
-        rightArrowTriger?.size = CGSize(width: 71, height: 55)
+        leftArrowTriger?.size = CGSize(width: 60, height: 46.5)
+        rightArrowTriger?.size = CGSize(width: 60, height: 46.5)
         leftArrowTriger?.run(SKAction.scale(to: 1, duration: 0.7))
         rightArrowTriger?.run(SKAction.scale(to: 1, duration: 0.7))
     }
@@ -240,7 +240,7 @@ class ManuManager: BaseClass,
     private func hideManuItems()
     {
         log.debug("")
-        startGame?.run(SKAction.scale(to: 0, duration: 0.0))
+        playLabel?.run(SKAction.scale(to: 0, duration: 0.0))
         settingsButton?.run(SKAction.scale(to: 0, duration: 0.3))
         muteSoundButton?.run(SKAction.scale(to: 0, duration: 0.3))
     }
@@ -248,7 +248,7 @@ class ManuManager: BaseClass,
     func showManuItems()
     {
         log.debug("")
-        startGame?.run(SKAction.scale(to: 1, duration: 0.0))
+        playLabel?.run(SKAction.scale(to: 1, duration: 0.0))
         settingsButton?.run(SKAction.scale(to: 1, duration: 0.5))
         muteSoundButton?.run(SKAction.scale(to: 1, duration: 0.5))
     }
@@ -287,12 +287,12 @@ extension ManuManager
         {
             decideBuyDiamondCashOrDiamonds(with: diamonds)
             
-            startGame?.run(SKAction.scale(to: 0.0, duration: 0.2))
+            playLabel?.run(SKAction.scale(to: 0.0, duration: 0.2))
             progressBars?.run(SKAction.fadeIn(withDuration: 0.4))
         }
         else
         {
-            startGame?.run(SKAction.scale(to: 1.0, duration: 0.2))
+            playLabel?.run(SKAction.scale(to: 1.0, duration: 0.2))
             progressBars?.run(SKAction.fadeOut(withDuration: 0.2))
         }
     }

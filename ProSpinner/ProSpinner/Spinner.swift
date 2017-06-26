@@ -53,6 +53,6 @@ class Spinner : NSObject,NSCoding
         coder.encode(self.blueNeeded    , forKey: "blue"       )
         coder.encode(self.greenNeeded   , forKey: "green"      )
         coder.encode(self.mainSpinner   , forKey: "mainSpinner")
-        coder.encode(self.mainSpinner   , forKey: "unlocked"   )
+        coder.encode(self.unlocked      , forKey: "unlocked"   )
     }
 }

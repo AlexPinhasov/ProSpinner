@@ -350,14 +350,16 @@ extension SpinnerManager
     fileprivate func grayOutSpinnerIfLocked()
     {
         log.debug("")
+        guard let spinnerAlpha = spinnerNode?.alpha else { return }
+        
         if ArchiveManager.currentSpinner.unlocked == false
         {
-            if self.spinnerNode?.alpha == 1.0
+            if Float(spinnerAlpha) == 1.0
             {
                 self.spinnerNode?.run(SKAction.fadeAlpha(to: 0.4, duration: 0.2))
             }
         }
-        else if self.spinnerNode?.alpha == 0.4
+        else if Float(spinnerAlpha) == 0.4
         {
             self.spinnerNode?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.2))
         }

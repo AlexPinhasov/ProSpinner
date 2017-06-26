@@ -45,12 +45,14 @@ class LockedSpinnerNodeManager: SKNode,
             self.isHidden = false
             
             unlockRedBack?.run(SKAction.scaleX(to: 1, y: 1, duration: 0.7, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-            
+            unlockRedBack?.run(SKAction.fadeIn(withDuration: 0.2))
             lockedBackground?.run(SKAction.scaleX(to: 1, y: 1, duration: 0.7, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-
+            lockedBackground?.run(SKAction.fadeIn(withDuration: 0.2))
         }
         else if present == false
         {
+            unlockRedBack?.run(SKAction.fadeOut(withDuration: 0.2))
+            lockedBackground?.run(SKAction.fadeOut(withDuration: 0.2))
             unlockRedBack?.run(SKAction.scaleX(to: 0, y: 1, duration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1))
             lockedBackground?.run(SKAction.scaleX(to: 0, y: 1, duration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1))
             {
