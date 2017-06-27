@@ -15,6 +15,8 @@ class CustomSKLabelNode : SKNode,
     var separatorLabel      : SKLabelNode = SKLabelNode()
     var diamondsPlayerNeed  : SKLabelNode = SKLabelNode()
     var blackBackground     : SKShapeNode = SKShapeNode()
+    
+    var addX : CGFloat = 0
 
     override init()
     {
@@ -51,35 +53,42 @@ class CustomSKLabelNode : SKNode,
             self.hideSeparatorAndNeeded()
             self.separatorLabel.isHidden = false
             self.diamondsPlayerNeed.isHidden = false
-            self.diamondsPlayerHave.text = String(1000)
-            
-            self.blackBackground = SKShapeNode(rect: self.diamondsPlayerHave.frame)
-            self.blackBackground.fillColor = .yellow
-            self.diamondsPlayerHave.addChild(blackBackground)
-            self.blackBackground.zPosition = 0
-
-            
-            
             self.diamondsPlayerNeed.text = String(describing: diamondInt)
-            
             self.separatorLabel.text = "/"
-            
-            
+            self.changeFontToAllLabels(fontSize: 18)
             self.separatorLabel.position.x = diamondsPlayerHave.frame.width
-            self.blackBackground = SKShapeNode(rect: self.separatorLabel.frame)
-            self.blackBackground.fillColor = .red
-            self.blackBackground.position = CGPoint.zero
-            self.separatorLabel.addChild(blackBackground)
-            self.blackBackground.zPosition = 0
             
-            
+            if let diamondsPlayerHaveText = diamondsPlayerHave.text,
+               let diamondsPlayerHaveInt = Int(diamondsPlayerHaveText)
+            {
+                let diamondsPlayerHaveCGFloat = CGFloat(diamondsPlayerHaveInt)
+                if diamondsPlayerHaveCGFloat < 10
+                {
+                    addX = 0
+                }
+                else if diamondsPlayerHaveCGFloat >= 10 &&  diamondsPlayerHaveCGFloat < 100
+                {
+                    addX = 7
+                }
+                else if diamondsPlayerHaveCGFloat >= 100 && diamondsPlayerHaveCGFloat < 1000
+                {
+                    addX = 13
+                }
+                else if diamondsPlayerHaveCGFloat >= 1000 && diamondsPlayerHaveCGFloat < 10000
+                {
+                    changeFontToAllLabels(fontSize: 15)
+                    addX = 22.5
+                }
+                
+                self.diamondsPlayerHave.position.x += addX
+            }
             
             self.blackBackground = SKShapeNode(rect: self.diamondsPlayerNeed.frame)
             self.blackBackground.fillColor = .black
             self.diamondsPlayerNeed.addChild(blackBackground)
             self.blackBackground.zPosition = 0
             self.diamondsPlayerNeed.position = CGPoint.zero
-            self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width + 7)
+            self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width + addX)
         }
         else
         {
@@ -89,15 +98,31 @@ class CustomSKLabelNode : SKNode,
     
     func hideSeparatorAndNeeded()
     {
-        self.separatorLabel.text = ""
+        self.separatorLabel.text = nil
         self.separatorLabel.isHidden = true
-        
-        self.diamondsPlayerNeed.text = ""
+         self.diamondsPlayerHave.position.x = 0
+        self.diamondsPlayerNeed.text = nil
         self.diamondsPlayerNeed.isHidden = true
         self.diamondsPlayerNeed.position = CGPoint.zero
         self.diamondsPlayerNeed.removeChildren(in: [blackBackground])
     }
 
+    func frameTotalWidth() -> CGFloat
+    {
+        if addX == 22.5
+        {
+            return diamondsPlayerHave.frame.width + 8
+        }
+        return diamondsPlayerHave.frame.width 
+    }
+    
+    func changeFontToAllLabels(fontSize size: CGFloat)
+    {
+        self.diamondsPlayerHave.fontSize = size
+        self.diamondsPlayerNeed.fontSize = size
+        self.separatorLabel.fontSize = size
+    }
+    
     func pulseNeededDiamonds(withDuration duration: TimeInterval,delay: TimeInterval)
     {
         pulse(node: diamondsPlayerNeed, scaleUpTo: 1.3, scaleDownTo: 1.0, duration: duration,delay: delay)
