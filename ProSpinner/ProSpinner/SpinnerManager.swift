@@ -62,7 +62,6 @@ class SpinnerManager: BaseClass,
     {
         log.debug("")
         _ = scaleDownSpinner()
-        handleNewMainSpinner()
     }
     
     func tutorialStarted()
@@ -89,11 +88,16 @@ class SpinnerManager: BaseClass,
         configureSpinnerColorNodes(for: spinnerNode,andNew: spinner)
     
         let spinnersInMemory = ArchiveManager.spinnersArrayInDisk
-        for eachSpinner in spinnersInMemory where eachSpinner.mainSpinner == true
+        for (index,eachSpinner) in spinnersInMemory.enumerated() where eachSpinner.mainSpinner == true
         {
             if let textureExist = eachSpinner.texture
             {
                 spinner.texture = textureExist
+            }
+            
+            if index >= 0 && index < spinnersInMemory.count
+            {
+                ArchiveManager.currentlyAtIndex = index
             }
             break
         }
@@ -211,18 +215,6 @@ class SpinnerManager: BaseClass,
     {
         log.debug("")
         spinnerNode?.run(SKAction.rotate(toAngle: 0.0, duration: 0.1))
-    }
-    
-    private func handleNewMainSpinner()
-    {
-        log.debug("")
-        let currentSpinnerDisplayed = ArchiveManager.currentSpinner
-        
-        ArchiveManager.spinnersArrayInDisk[ArchiveManager.mainSpinnerLocation].mainSpinner = false
-        ArchiveManager.mainSpinnerLocation = ArchiveManager.currentlyAtIndex
-        currentSpinnerDisplayed.mainSpinner = true
-    
-        UserDefaults.standard.set(ArchiveManager.mainSpinnerLocation, forKey: UserDefaultKeys.mainSpinnerIndex.rawValue)
     }
     
     private func applyPhysicsAndName(for circulNode: SKNode) -> SKNode

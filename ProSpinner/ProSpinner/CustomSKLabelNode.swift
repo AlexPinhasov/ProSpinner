@@ -51,19 +51,35 @@ class CustomSKLabelNode : SKNode,
             self.hideSeparatorAndNeeded()
             self.separatorLabel.isHidden = false
             self.diamondsPlayerNeed.isHidden = false
+            self.diamondsPlayerHave.text = String(1000)
+            
+            self.blackBackground = SKShapeNode(rect: self.diamondsPlayerHave.frame)
+            self.blackBackground.fillColor = .yellow
+            self.diamondsPlayerHave.addChild(blackBackground)
+            self.blackBackground.zPosition = 0
+
+            
             
             self.diamondsPlayerNeed.text = String(describing: diamondInt)
             
             self.separatorLabel.text = "/"
-            self.separatorLabel.position.x = 0
-            self.separatorLabel.position.x += (self.diamondsPlayerHave.frame.size.width)
+            
+            
+            self.separatorLabel.position.x = diamondsPlayerHave.frame.width
+            self.blackBackground = SKShapeNode(rect: self.separatorLabel.frame)
+            self.blackBackground.fillColor = .red
+            self.blackBackground.position = CGPoint.zero
+            self.separatorLabel.addChild(blackBackground)
+            self.blackBackground.zPosition = 0
+            
+            
             
             self.blackBackground = SKShapeNode(rect: self.diamondsPlayerNeed.frame)
             self.blackBackground.fillColor = .black
             self.diamondsPlayerNeed.addChild(blackBackground)
             self.blackBackground.zPosition = 0
             self.diamondsPlayerNeed.position = CGPoint.zero
-            self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width + 78)
+            self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width + 7)
         }
         else
         {

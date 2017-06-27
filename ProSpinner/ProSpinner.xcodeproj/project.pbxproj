@@ -27,6 +27,7 @@
 		0A1D71341ED9826600331753 /* Flea Market Finds.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1D71331ED9824900331753 /* Flea Market Finds.ttf */; };
 		0A1E096C1EEEC21200041C45 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E096B1EEEC21100041C45 /* ProgressBar.swift */; };
 		0A1E096E1EF0142600041C45 /* OpenSansHebrew-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1E096D1EF0142600041C45 /* OpenSansHebrew-Regular.ttf */; };
+		0A2168631F00C614003B9701 /* MyriadPro-Cond.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E61EF71DB00094119E /* MyriadPro-Cond.otf */; };
 		0A289C0C1EEE5C21000AED6B /* TutorialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A289C0B1EEE5C21000AED6B /* TutorialManager.swift */; };
 		0A2E86471EDD6B9600380D41 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E86461EDD6B9600380D41 /* NetworkManager.swift */; };
 		0A305A071EEC33B600BA3A4B /* OpenSansHebrew-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A305A061EEC33B600BA3A4B /* OpenSansHebrew-Light.ttf */; };
@@ -496,11 +497,12 @@
 				0A1D71341ED9826600331753 /* Flea Market Finds.ttf in Resources */,
 				918F18FD1EC9CC8600886039 /* Main.storyboard in Resources */,
 				918F18F41EC9CC8600886039 /* GameScene.sks in Resources */,
-				0A1C73EC1EF71EC00094119E /* MyriadPro-BoldCond.otf in Resources */,
 				918F18FF1EC9CC8600886039 /* Assets.xcassets in Resources */,
 				0A8B2E991ED8811E0025856E /* Tick.mp3 in Resources */,
 				0A1E096E1EF0142600041C45 /* OpenSansHebrew-Regular.ttf in Resources */,
+				0A1C73EC1EF71EC00094119E /* MyriadPro-BoldCond.otf in Resources */,
 				0A0A24101EF9355500044F8A /* MyriadPro-BoldCondIt.otf in Resources */,
+				0A2168631F00C614003B9701 /* MyriadPro-Cond.otf in Resources */,
 				0A0A24111EF935A100044F8A /* MyriadPro-CondIt.otf in Resources */,
 				0A305A091EEC496800BA3A4B /* OpenSansHebrew-Bold.ttf in Resources */,
 				0A305A071EEC33B600BA3A4B /* OpenSansHebrew-Light.ttf in Resources */,

@@ -41,6 +41,8 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string></string>
+		<string>MyriadPro-Cond.otf</string>
 		<string>MyriadPro-CondIt.otf</string>
 		<string>MyriadPro-BoldCond.otf</string>
 		<string>MyriadPro-BoldCondIt.otf</string>

@@ -136,6 +136,7 @@ class GameScene: SKScene,
                     
                 case Constants.NodesInRetryView.ExitButton.rawValue:
                     retryView?.hideRetryView()
+                    storeView?.hideStoreView()
                     diamondsManager?.addCollectedDiamondsToLabelScene()
                     
                 case Constants.NodesInRetryView.RetryButton.rawValue:
@@ -143,7 +144,7 @@ class GameScene: SKScene,
                     notifyGameStarted()
                     
                 case Constants.NodesInScene.StoreButton.rawValue:
-                    storeView?.presentRetryView()
+                    storeView?.presentStoreView()
                     
                 case Constants.NodesInLockedSpinnerView.ViewInfoLabel.rawValue,
                      Constants.NodesInLockedSpinnerView.unlockRedBack.rawValue:

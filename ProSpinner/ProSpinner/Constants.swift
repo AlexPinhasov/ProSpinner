@@ -77,7 +77,6 @@ class Constants
         case BuySpinner = "unlock now"
         case PlayButton = "PlayButton"
         case MuteSoundButton = "MuteSoundButton"
-        case SettingsButton = "SettingsButton"
         case StoreButton = "StoreButton"
         
         case RedSuccess = "RedSuccess"

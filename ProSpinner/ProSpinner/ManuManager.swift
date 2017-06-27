@@ -25,9 +25,8 @@ struct Arrows
 class ManuManager: BaseClass,
                    Animateable
 {
-    fileprivate var playLabel        : SKSpriteNode?
-    private var settingsButton   : SKSpriteNode?
-    private var muteSoundButton  : SKSpriteNode?
+    fileprivate var playLabel    : SKSpriteNode?
+    fileprivate var storeLabel   : SKSpriteNode?
     
     private var leftArrowTriger  : SKSpriteNode?
     private var rightArrowTriger : SKSpriteNode?
@@ -62,14 +61,13 @@ class ManuManager: BaseClass,
         log.debug("")
         // Main manu
         playLabel               = scene?.childNode(withName: Constants.NodesInScene.PlayLabel.rawValue) as? SKSpriteNode
+        storeLabel               = scene?.childNode(withName: Constants.NodesInScene.StoreButton.rawValue) as? SKSpriteNode
+        
         leftArrowTriger         = scene?.childNode(withName: Constants.NodesInScene.LeftArrow.rawValue) as? SKSpriteNode
         rightArrowTriger        = scene?.childNode(withName: Constants.NodesInScene.RightArrow.rawValue) as? SKSpriteNode
         leftArrow               = leftArrowTriger?.childNode(withName: Constants.NodesInScene.ActualLeftArrow.rawValue) as? SKSpriteNode
         rightArrow              = rightArrowTriger?.childNode(withName: Constants.NodesInScene.ActualRightArrow.rawValue) as? SKSpriteNode
-        settingsButton          = scene?.childNode(withName: Constants.NodesInScene.SettingsButton.rawValue) as? SKSpriteNode
-        muteSoundButton         = scene?.childNode(withName: Constants.NodesInScene.MuteSoundButton.rawValue) as? SKSpriteNode
-        
-        
+
         progressBars            = scene?.childNode(withName: Constants.NodesInScene.ProgressBars.rawValue)
         
         gameExplanation         = scene?.childNode(withName: "gameExplanation") as? SKLabelNode
@@ -139,21 +137,13 @@ class ManuManager: BaseClass,
         log.debug("")
         if pressed
         {
-            DispatchQueue.main.async
-            {
-                //rightArrow?.zRotation = -3.5
-                self.rightArrowTriger?.texture = Arrows.rightArrowPressed
-                self.rightArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
-            }
+            //self.rightArrowTriger?.texture = Arrows.rightArrowPressed
+            //self.rightArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
         }
         else
         {
-            DispatchQueue.main.async
-            {
-                //rightArrow?.zRotation = 0
-                self.rightArrowTriger?.texture = Arrows.rightArrow
-                self.rightArrowTriger?.run(SKAction.resize(toHeight: 55, duration: 0))
-            }
+            //self.rightArrowTriger?.texture = Arrows.rightArrow
+            //self.rightArrowTriger?.run(SKAction.resize(toHeight: 55, duration: 0))
         }
     }
     
@@ -162,21 +152,13 @@ class ManuManager: BaseClass,
         log.debug("")
         if pressed
         {
-            //leftArrow?.zRotation = 3.5
-            DispatchQueue.main.async
-            {
-                self.leftArrowTriger?.texture = Arrows.leftArrowPressed
-                self.leftArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
-            }
+            //self.leftArrowTriger?.texture = Arrows.leftArrowPressed
+            //self.leftArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
         }
         else
         {
-            DispatchQueue.main.async
-            {
-                //leftArrow?.zRotation = 0
-                self.leftArrowTriger?.texture = Arrows.leftArrow
-                self.leftArrowTriger?.run(SKAction.resize(toHeight: 55, duration: 0))
-            }
+            //self.leftArrowTriger?.texture = Arrows.leftArrow
+            //self.leftArrowTriger?.run(SKAction.resize(toHeight: 55, duration: 0))
         }
     }
     
@@ -231,8 +213,8 @@ class ManuManager: BaseClass,
     private func showArrows()
     {
         log.debug("")
-        leftArrowTriger?.size = CGSize(width: 60, height: 46.5)
-        rightArrowTriger?.size = CGSize(width: 60, height: 46.5)
+        leftArrowTriger?.size = CGSize(width: 30, height: 28)
+        rightArrowTriger?.size = CGSize(width: 30, height: 28)
         leftArrowTriger?.run(SKAction.scale(to: 1, duration: 0.7))
         rightArrowTriger?.run(SKAction.scale(to: 1, duration: 0.7))
     }
@@ -241,16 +223,14 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         playLabel?.run(SKAction.scale(to: 0, duration: 0.0))
-        settingsButton?.run(SKAction.scale(to: 0, duration: 0.3))
-        muteSoundButton?.run(SKAction.scale(to: 0, duration: 0.3))
+        storeLabel?.run(SKAction.scale(to: 0, duration: 0.3))
     }
     
     func showManuItems()
     {
         log.debug("")
         playLabel?.run(SKAction.scale(to: 1, duration: 0.0))
-        settingsButton?.run(SKAction.scale(to: 1, duration: 0.5))
-        muteSoundButton?.run(SKAction.scale(to: 1, duration: 0.5))
+        storeLabel?.run(SKAction.scale(to: 1, duration: 0.5))
     }
     
     private func showGameExplanation()
@@ -287,12 +267,14 @@ extension ManuManager
         {
             decideBuyDiamondCashOrDiamonds(with: diamonds)
             
-            playLabel?.run(SKAction.scale(to: 0.0, duration: 0.2))
+            playLabel?.run(SKAction.scale(to: 0.0, duration: 0.4))
+            storeLabel?.run(SKAction.scale(to: 0.0, duration: 0.4))
             progressBars?.run(SKAction.fadeIn(withDuration: 0.4))
         }
         else
         {
-            playLabel?.run(SKAction.scale(to: 1.0, duration: 0.2))
+            playLabel?.run(SKAction.scale(to: 1.0, duration: 0.4))
+            storeLabel?.run(SKAction.scale(to: 1.0, duration: 0.4))
             progressBars?.run(SKAction.fadeOut(withDuration: 0.2))
         }
     }

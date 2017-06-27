@@ -261,19 +261,20 @@ class DiamondsManager: BaseClass,
         if diamondsPlayerHas < diamondsPlayerNeed
         {
             labelNode.setText(diamondNeeded: diamondsPlayerNeed)
+            let labelCenter = (labelNode.diamondsPlayerHave.frame.width + labelNode.diamondsPlayerNeed.frame.width + labelNode.separatorLabel.frame.width) / 2
             
             if labelsAreAtStartingPosition(currentLocation: labelNode.position)
             {
-                labelNode.run(SKAction.move(to: CGPoint(x: labelNode.position.x - 19, y: labelNode.position.y), duration: 0.3))
+                labelNode.run(SKAction.move(to: CGPoint(x: labelNode.position.x - labelCenter, y: labelNode.position.y), duration: 0.3))
             }
         }
         else
         {
             labelNode.setText(diamondNeeded: nil)
-            
+            let labelCenter = (labelNode.diamondsPlayerHave.frame.width + labelNode.diamondsPlayerNeed.frame.width + labelNode.separatorLabel.frame.width) / 2
             if labelsAreAtStartingPosition(currentLocation: labelNode.position) == false
             {
-                labelNode.run(SKAction.move(to: CGPoint(x: labelNode.position.x + 19, y: labelNode.position.y), duration: 0.3))
+                labelNode.run(SKAction.move(to: CGPoint(x: labelNode.position.x + labelCenter, y: labelNode.position.y), duration: 0.3))
             }
         }
     }

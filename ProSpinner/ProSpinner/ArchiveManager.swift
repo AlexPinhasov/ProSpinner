@@ -40,7 +40,7 @@ class ArchiveManager
         }
         set
         {
-            UserDefaults.standard.set(ArchiveManager.mainSpinnerLocation, forKey: UserDefaultKeys.mainSpinnerIndex.rawValue)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.mainSpinnerIndex.rawValue)
             UserDefaults.standard.synchronize()
                 
         }
@@ -80,6 +80,7 @@ class ArchiveManager
         resetMainSpinners()
         ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].unlocked = true
         ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].mainSpinner = true
+        mainSpinnerLocation = ArchiveManager.currentlyAtIndex
         let updatedArray = ArchiveManager.spinnersArrayInDisk
         write_SpinnerToUserDefault(spinners: updatedArray)
     }

@@ -44,20 +44,29 @@ class LockedSpinnerNodeManager: SKNode,
         {
             self.isHidden = false
             
-            unlockRedBack?.run(SKAction.scaleX(to: 1, y: 1, duration: 0.7, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             unlockRedBack?.run(SKAction.fadeIn(withDuration: 0.2))
-            lockedBackground?.run(SKAction.scaleX(to: 1, y: 1, duration: 0.7, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             lockedBackground?.run(SKAction.fadeIn(withDuration: 0.2))
+            
+            unlockRedBack?.run(SKAction.scaleX(to: 1, duration: 0.7, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            lockedBackground?.run(SKAction.scaleX(to: 1, duration: 0.7, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            
+            unlockRedBack?.run(SKAction.scaleY(to: 1, duration: 0.4, delay: 0.3, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            lockedBackground?.run(SKAction.scaleY(to: 1, duration: 0.4, delay: 0.3, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            
         }
         else if present == false
         {
-            unlockRedBack?.run(SKAction.fadeOut(withDuration: 0.2))
-            lockedBackground?.run(SKAction.fadeOut(withDuration: 0.2))
-            unlockRedBack?.run(SKAction.scaleX(to: 0, y: 1, duration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1))
-            lockedBackground?.run(SKAction.scaleX(to: 0, y: 1, duration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1))
+            unlockRedBack?.run(SKAction.scaleY(to: 0, duration: 0.2, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            lockedBackground?.run(SKAction.scaleY(to: 0, duration: 0.2, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            
+            unlockRedBack?.run(SKAction.scaleX(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1))
+            lockedBackground?.run(SKAction.scaleX(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1))
             {
                 self.isHidden = true
             }
+            
+            unlockRedBack?.run(SKAction.fadeOut(withDuration: 0.2))
+            lockedBackground?.run(SKAction.fadeOut(withDuration: 0.2))
         }
     }
     
@@ -110,8 +119,8 @@ class LockedSpinnerNodeManager: SKNode,
             }
             else //shake view and
             {
-                shake(node: lockedBackground, withDuration: 0.5)
-                shake(node: unlockRedBack, withDuration: 0.5)
+                shake(node: lockedBackground, withDuration: 0.1)
+                shake(node: unlockRedBack, withDuration: 0.1)
                 return false
             }
         }

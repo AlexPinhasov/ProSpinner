@@ -52,7 +52,7 @@ class StoreView: BaseClass
     }
     
     //  MARK: Presentation methods
-    func presentRetryView()
+    func presentStoreView()
     {
         storeBackground?.isHidden = false
         storeBackground?.run(SKAction.fadeIn(withDuration: 0.2))
@@ -61,7 +61,7 @@ class StoreView: BaseClass
         }
     }
     
-    func hideRetryView()
+    func hideStoreView()
     {
         storeAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 400), duration: 0.3))
         {
