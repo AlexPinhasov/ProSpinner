@@ -21,12 +21,9 @@ class StoreView: BaseClass
     private var storeAlert             :SKSpriteNode?
     private var storeBackground        :SKSpriteNode?
     
-    private var smallPackButton        :SKSpriteNode?
-    private var bigPackButton          :SKSpriteNode?
-    
-    private var smallPackButtonStartingPosition        :Bool = true
-    private var bigPackButtonStartingPosition          :Bool = true
-    
+    private var smallPackButton        :SKSpriteButton?
+    private var bigPackButton          :SKSpriteButton?
+
     init(scene: SKScene)
     {
         super.init()
@@ -45,8 +42,8 @@ class StoreView: BaseClass
         smallDiamondGroup      = storeAlert?.childNode(withName: Constants.NodesInStoreView.smallDiamondGroup.rawValue) as? SKSpriteNode
         smallDiamondGroupCost  = storeAlert?.childNode(withName: Constants.NodesInStoreView.smallDiamondGroupCost.rawValue) as? SKLabelNode
         
-        smallPackButton        = storeAlert?.childNode(withName: Constants.NodesInStoreView.smallPackButton.rawValue) as? SKSpriteNode
-        bigPackButton          = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigPackButton.rawValue) as? SKSpriteNode
+        smallPackButton        = storeAlert?.childNode(withName: Constants.NodesInStoreView.smallPackButton.rawValue) as? SKSpriteButton
+        bigPackButton          = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigPackButton.rawValue) as? SKSpriteButton
         
         bigDiamondGroup        = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroup.rawValue) as? SKSpriteNode
         bigDiamondGroupCost    = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroupCost.rawValue) as? SKLabelNode
@@ -77,37 +74,20 @@ class StoreView: BaseClass
         self.storeBackground?.run(SKAction.sequence([ SKAction.wait(forDuration: 0.2) , SKAction.fadeOut(withDuration: 0.1) ]))
     }
     
-    func touchedUpForButton(buttonNode node: SKNode)
+    func touchedUpSmallPackButton()
     {
-        guard let buttonSelected = node as? SKSpriteNode else { return }
-        
-        if buttonSelected === smallPackButton
-        {
-            smallPackButtonStartingPosition = false
-            smallPackButton?.run(SKAction.move(by: CGVector(dx: 0, dy: -6), duration: 0.05))
-        }
-        else if buttonSelected === bigPackButton
-        {
-            bigPackButtonStartingPosition = false
-            bigPackButton?.run(SKAction.move(by: CGVector(dx: 0, dy: -6), duration: 0.05))
-        }
-
+        smallPackButton?.touchedUpInside()
+    }
+    
+    func touchedUpBigPackButton()
+    {
+        bigPackButton?.touchedUpInside()
     }
     
     func releasedButton(button: SKNode?)
     {
-        guard let buttonSelected = button as? SKSpriteNode else { return }
-        
-        if smallPackButtonStartingPosition == false
-        {
-            smallPackButtonStartingPosition = true
-            smallPackButton?.run(SKAction.move(by: CGVector(dx: 0, dy: 6), duration: 0.05))
-        }
-        else if bigPackButtonStartingPosition == false
-        {
-            bigPackButtonStartingPosition = true
-            bigPackButton?.run(SKAction.move(by: CGVector(dx: 0, dy: 6), duration: 0.05))
-        }
+        smallPackButton?.releasedButton()
+        bigPackButton?.releasedButton()
     }
     
     func setSmallDiamondsGroupCost()

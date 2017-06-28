@@ -11,7 +11,7 @@ import SpriteKit
 class ProgressBar: SKNode
 {
     private var cropNode = SKCropNode()
-    private var progressBarWidth = 76
+    private var progressBarWidth = 60
     private var progressBarHeight = 4
     
     private let anchorPointX = -38

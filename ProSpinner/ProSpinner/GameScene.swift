@@ -114,6 +114,10 @@ class GameScene: SKScene,
                     
                     purchaseManager?.buyProduct()
                     
+                case Constants.NodesInRetryView.RetryButton.rawValue:
+                    retryView?.hideRetryView()
+                    notifyGameStarted()
+                    
                 default: break
                 }
             }
@@ -146,10 +150,6 @@ class GameScene: SKScene,
                 case Constants.NodesInScene.BuySpinner.rawValue:
                     handleBuySpinnerCase(for: touchedNode)
                     
-                case Constants.NodesInRetryView.RetryButton.rawValue:
-                    retryView?.hideRetryView()
-                    notifyGameStarted()
-                    
                 case Constants.NodesInScene.StoreButton.rawValue:
                     storeView?.presentStoreView()
                     
@@ -165,9 +165,14 @@ class GameScene: SKScene,
                     }
                     
                 case Constants.NodesInStoreView.smallPackButton.rawValue,
-                     Constants.NodesInStoreView.bigPackButton.rawValue:
+                     Constants.NodesInStoreView.smallDiamondGroupCost.rawValue:
                     
-                    storeView?.touchedUpForButton(buttonNode: touchedNode)
+                    storeView?.touchedUpSmallPackButton()
+                    
+                case Constants.NodesInStoreView.bigPackButton.rawValue,
+                     Constants.NodesInStoreView.bigDiamondGroupCost.rawValue:
+                    
+                    storeView?.touchedUpBigPackButton()
                     
                 default: break
                 }

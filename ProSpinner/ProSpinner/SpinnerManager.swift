@@ -295,7 +295,7 @@ extension SpinnerManager
                                              duration: 0.7,
                                              delay: 0,
                                              usingSpringWithDamping: 0.9,
-                                             initialSpringVelocity: 0.2))
+                                             initialSpringVelocity: 0.5))
             {
                 self.spinnerNode?.zRotation = 0.0
                 self.currentlySwitchingSpinner = false
@@ -406,7 +406,6 @@ extension SpinnerManager
         else
         {
             spinnerNode?.removeAction(forKey: "ShakeLockedSpinner")
-            //spinnerNode?.zRotation = 0.0
         }
     }
 }

@@ -54,6 +54,7 @@
 		918F19021EC9CC8600886039 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 918F19001EC9CC8600886039 /* LaunchScreen.storyboard */; };
 		918F190D1EC9CC8700886039 /* ProSpinnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F190C1EC9CC8700886039 /* ProSpinnerTests.swift */; };
 		918F19181EC9CC8700886039 /* ProSpinnerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F19171EC9CC8700886039 /* ProSpinnerUITests.swift */; };
+		9190A2791F03B698005DD47C /* SKSpriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9190A2781F03B698005DD47C /* SKSpriteButton.swift */; };
 		C2CA48EAF48DA5B02959DF81 /* Pods_ProSpinnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4E75FA348AA94CACB4B414 /* Pods_ProSpinnerTests.framework */; };
 		DF8F4E427A0F79FC450494A0 /* Pods_ProSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C975129446750B0FD8E9718 /* Pods_ProSpinner.framework */; };
 /* End PBXBuildFile section */
@@ -139,6 +140,7 @@
 		918F19131EC9CC8700886039 /* ProSpinnerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProSpinnerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		918F19171EC9CC8700886039 /* ProSpinnerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProSpinnerUITests.swift; sourceTree = "<group>"; };
 		918F19191EC9CC8700886039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9190A2781F03B698005DD47C /* SKSpriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKSpriteButton.swift; sourceTree = "<group>"; };
 		9C975129446750B0FD8E9718 /* Pods_ProSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A587CEF11A1F771654946F81 /* Pods-ProSpinnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinnerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinnerTests/Pods-ProSpinnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2B0A04A5A52208058D9F105 /* Pods-ProSpinnerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinnerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinnerUITests/Pods-ProSpinnerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				0A8385871EF63A350044D1C7 /* RetryView.swift */,
 				0A0A24121EFA2D3E00044F8A /* LockedSpinnerNodeManager.swift */,
 				0AE7CD801EFCE55200236992 /* StoreView.swift */,
+				9190A2781F03B698005DD47C /* SKSpriteButton.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				0A04F47E1ED06E7C004F374C /* DaimondsManager.swift in Sources */,
 				0A0D16F81EE6695500C4DD45 /* Constants.swift in Sources */,
 				0A15917E1EE3C142005320A9 /* DownloadingDelegateDataSource.swift in Sources */,
+				9190A2791F03B698005DD47C /* SKSpriteButton.swift in Sources */,
 				0ADCF0D41EDD9B2D00CE1C8B /* ArchiveManager.swift in Sources */,
 				0A305A0B1EED9F5600BA3A4B /* Animateable.swift in Sources */,
 				0AE83A7A1EDC91580066E3DD /* ManuManager.swift in Sources */,
