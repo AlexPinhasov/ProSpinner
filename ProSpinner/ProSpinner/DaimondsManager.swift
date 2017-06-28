@@ -55,7 +55,7 @@ class DiamondsManager: BaseClass,
     func gameStarted()
     {
         log.debug("")
-        configureDiamonds()
+        fadeOutDiamondsAndTheirCount()
     }
     
     func tutorialStarted()
@@ -78,7 +78,6 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
-        fadeOutDiamondsAndTheirCount()
     }
 
     @objc func spawnDiamonds()

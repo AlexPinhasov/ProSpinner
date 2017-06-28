@@ -75,7 +75,7 @@ class RetryView: BaseClass
         AlertViewBackground?.run(SKAction.fadeIn(withDuration: 0.2))
         {
             self.EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 18), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-            self.RetryButton?.run(SKAction.move(to: CGPoint(x: 0, y: -185), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            self.RetryButton?.run(SKAction.move(to: CGPoint(x: 0, y: -182), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
         }
 
         rotateRetryButton()

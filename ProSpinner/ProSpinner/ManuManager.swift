@@ -33,7 +33,7 @@ class ManuManager: BaseClass,
     private var leftArrow        : SKSpriteNode?
     private var rightArrow       : SKSpriteNode?
     
-    private var gameExplanation  : SKLabelNode?
+    private var gameExplanation  : SKNode?
     var lockedSpinnerViewManager : LockedSpinnerNodeManager?
     fileprivate var spinnerLock : SKSpriteNode?
     
@@ -61,7 +61,7 @@ class ManuManager: BaseClass,
         log.debug("")
         // Main manu
         playLabel               = scene?.childNode(withName: Constants.NodesInScene.PlayLabel.rawValue) as? SKSpriteNode
-        storeLabel               = scene?.childNode(withName: Constants.NodesInScene.StoreButton.rawValue) as? SKSpriteNode
+        storeLabel              = scene?.childNode(withName: Constants.NodesInScene.StoreButton.rawValue) as? SKSpriteNode
         
         leftArrowTriger         = scene?.childNode(withName: Constants.NodesInScene.LeftArrow.rawValue) as? SKSpriteNode
         rightArrowTriger        = scene?.childNode(withName: Constants.NodesInScene.RightArrow.rawValue) as? SKSpriteNode
@@ -70,7 +70,7 @@ class ManuManager: BaseClass,
 
         progressBars            = scene?.childNode(withName: Constants.NodesInScene.ProgressBars.rawValue)
         
-        gameExplanation         = scene?.childNode(withName: "gameExplanation") as? SKLabelNode
+        gameExplanation         = scene?.childNode(withName: Constants.NodesInScene.BreifTutorial.rawValue)
         
         redSuccessV         =  self.scene?.childNode(withName: Constants.NodesInScene.RedSuccess.rawValue) as? SKSpriteNode
         greenSuccessV       = self.scene?.childNode(withName: Constants.NodesInScene.GreenSuccess.rawValue) as? SKSpriteNode
@@ -78,7 +78,7 @@ class ManuManager: BaseClass,
         
         lockedSpinnerViewManager = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNodeManager
         lockedSpinnerViewManager?.connectOutletsToScene()
-       spinnerLock = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
+        spinnerLock = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
     }
 
 //  MARK: Public methods
@@ -96,7 +96,7 @@ class ManuManager: BaseClass,
         log.debug("")
         hideArrows()
         hideManuItems()
-        showGameExplanation()
+        showGameExplanation(shouldShow: true)
     }
     
     func tutorialStarted()
@@ -233,12 +233,19 @@ class ManuManager: BaseClass,
         storeLabel?.run(SKAction.scale(to: 1, duration: 0.3))
     }
     
-    private func showGameExplanation()
+    func showGameExplanation(shouldShow show: Bool)
     {
         log.debug("")
-        gameExplanation?.run(SKAction.sequence([SKAction.fadeIn(withDuration: 0.2),
-                                                SKAction.wait(forDuration: 2),
-                                                SKAction.fadeOut(withDuration: 0.2)]))
+        
+        if show
+        {
+            gameExplanation?.run(SKAction.fadeIn(withDuration: 0.2))
+        }
+        else
+        {
+            gameExplanation?.run(SKAction.fadeOut(withDuration: 0.2))
+
+        }
     }
     
     func animateSpinnerLockScaleUp()

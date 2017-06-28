@@ -15,7 +15,7 @@ struct GameStatus
 }
 
 class GameScene: SKScene,
-                 SKPhysicsContactDelegate
+                 SKPhysicsContactDelegate,UIGestureRecognizerDelegate
 {
     var spinnerManager  : SpinnerManager?
     var diamondsManager : DiamondsManager?
@@ -24,6 +24,8 @@ class GameScene: SKScene,
     var tutorialManager : TutorialManager?
     var retryView       : RetryView?
     var storeView       : StoreView?
+    
+    var enableSwipe = true
     
     var spinnerNode     : SKSpriteNode = SKSpriteNode()
     
@@ -61,10 +63,11 @@ class GameScene: SKScene,
         }
         else
         {
+            enableSwipe = false
+            GameStatus.Playing = false
             retryView?.gameOver()
             retryView?.setDiamondsCollected(diamonds: diamondsManager?.getCollectedDiamondsDuringGame())
             retryView?.presentRetryView()
-            GameStatus.Playing = false
             manuManager?.gameOver()
             diamondsManager?.gameOver()
             spinnerManager?.gameOver()
@@ -75,7 +78,6 @@ class GameScene: SKScene,
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         log.debug("")
-        
         
         for touch in touches
         {
@@ -105,6 +107,7 @@ class GameScene: SKScene,
                         }
                     
                 case Constants.NodesInRetryView.ExitButton.rawValue:
+                    enableSwipe = true
                     retryView?.hideRetryView()
                     storeView?.hideStoreView()
                     diamondsManager?.addCollectedDiamondsToLabelScene()
@@ -117,16 +120,27 @@ class GameScene: SKScene,
                 case Constants.NodesInRetryView.RetryButton.rawValue:
                     retryView?.hideRetryView()
                     notifyGameStarted()
+                    spinnerManager?.rotateToOtherDirection()
                     
                 default: break
                 }
             }
         }
     }
-    
+    var shouldNotifyDiamondsManagerToStartGame = false
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         log.debug("")
+        
+        if GameStatus.Playing && shouldNotifyDiamondsManagerToStartGame
+        {
+            shouldNotifyDiamondsManagerToStartGame = false
+            spinnerManager?.rotateToOtherDirection()
+            diamondsManager?.configureDiamonds()
+            manuManager?.showGameExplanation(shouldShow: false)
+            return
+        }
+        
         for touch in touches
         {
             let positionInScene = touch.location(in: self)
@@ -138,6 +152,7 @@ class GameScene: SKScene,
                 {
                 case Constants.NodesInScene.PlayLabel.rawValue:
                     notifyGameStarted()
+                    enableSwipe = false
                     
                 case Constants.NodesInScene.RightArrow.rawValue,
                      Constants.NodesInScene.ActualRightArrow.rawValue:
@@ -152,6 +167,7 @@ class GameScene: SKScene,
                     
                 case Constants.NodesInScene.StoreButton.rawValue:
                     storeView?.presentStoreView()
+                    enableSwipe = false
                     
                 case Constants.NodesInLockedSpinnerView.ViewInfoLabel.rawValue,
                      Constants.NodesInLockedSpinnerView.unlockRedBack.rawValue:
@@ -196,6 +212,7 @@ class GameScene: SKScene,
             manuManager?.gameStarted()
             diamondsManager?.gameStarted()
             spinnerManager?.gameStarted()
+            shouldNotifyDiamondsManagerToStartGame = true
         }
         
         GameStatus.Playing = true
@@ -285,39 +302,45 @@ class GameScene: SKScene,
         spinnerManager?.spinnerNode = self.childNode(withName: Constants.NodesInScene.Spinner.rawValue) as? SKSpriteNode
     }
     
-    func userSwipedRight()
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool
     {
         log.debug("")
-        if GameStatus.Playing == false
+
+        if let gesture = gestureRecognizer as? UISwipeGestureRecognizer, enableSwipe == true
         {
-            spinnerManager?.userTappedNextSpinner()
+            switch gesture.direction
             {
-                    self.handleLockViewAppearance()
-            }
-        }
-    }
-    
-    func userSwipedLeft()
-    {
-        log.debug("")
-        if GameStatus.Playing == false
-        {
+            case UISwipeGestureRecognizerDirection.left:
+
             spinnerManager?.userTappedPreviousSpinner()
             {
-                    self.handleLockViewAppearance()
+                self.handleLockViewAppearance()
+            }
+                
+            case UISwipeGestureRecognizerDirection.right:
+                
+            spinnerManager?.userTappedNextSpinner()
+            {
+                self.handleLockViewAppearance()
+            }
+                
+            default: break
             }
         }
+        return enableSwipe
     }
     
     private func handleSwipeConfiguration()
     {
         log.debug("")
-        let swipeRight: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(userSwipedRight))
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: nil)
         swipeRight.direction = .right
+        swipeRight.delegate = self
         view?.addGestureRecognizer(swipeRight)
         
-        let swipeLeft: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(userSwipedLeft))
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: nil)
         swipeLeft.direction = .left
+        swipeLeft.delegate = self
         view?.addGestureRecognizer(swipeLeft)
     }
 }

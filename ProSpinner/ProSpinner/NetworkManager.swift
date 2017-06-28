@@ -86,6 +86,46 @@ class NetworkManager
         }
     }
     
+    static private func requestCoruptedSpinnerData()
+    {
+        log.debug("")
+        
+        let currentlyAtIndex = ArchiveManager.currentlyAtIndex
+        Database.database().reference().database.reference().child("Spinners").queryOrderedByKey().queryEqual(toValue: currentlyAtIndex.description).observeSingleEvent(of: .value, with:
+            { (snapshot) in
+                
+                if let snapshotChildArray = snapshot.value as? NSArray
+                {
+                    let filterdSnapshot = snapshotChildArray.filter() { return $0 is NSDictionary }
+                    
+                    if let filterdSnapshot = filterdSnapshot as? [NSDictionary],
+                       let spinner = filterdSnapshot.last
+                    {
+                        let spinnerNewData =     Spinner(id:            spinner["id"] as? Int,
+                                                         imageUrlLink:  spinner["imagePath"] as? String,
+                                                         texture:       nil,
+                                                         redNeeded:     spinner["redNeeded"] as? Int,
+                                                         blueNeeded:    spinner["blueNeeded"] as? Int,
+                                                         greenNeeded:   spinner["greenNeeded"] as? Int,
+                                                         mainSpinner:   false,
+                                                         unlocked:      false)
+                        
+                        ArchiveManager.spinnersArrayInDisk[currentlyAtIndex] = spinnerNewData
+                        
+                        if let imageUrl = spinnerNewData.imageUrlLink
+                        {
+                            downloadTexture(withUrl: imageUrl, withCompletion: { (texture) in
+                                    ArchiveManager.spinnersArrayInDisk[currentlyAtIndex].texture = texture
+                            })
+                        }
+                    }
+                }
+        })
+        { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
     static private func handleDownloadingImagesForNewSpinners()
     {
         log.debug("")

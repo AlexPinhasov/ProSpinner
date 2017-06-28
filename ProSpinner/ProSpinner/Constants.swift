@@ -82,6 +82,8 @@ class Constants
         case RedSuccess = "RedSuccess"
         case BlueSuccess = "BlueSuccess"
         case GreenSuccess = "GreenSuccess"
+        
+        case BreifTutorial = "BreifTutorial"
     }
     
     enum NodesInRetryView: String

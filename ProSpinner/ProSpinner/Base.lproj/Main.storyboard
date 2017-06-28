@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -61,15 +61,15 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner2" translatesAutoresizingMaskIntoConstraints="NO" id="xCu-5I-pvs">
-                                                                    <rect key="frame" x="-30" y="-30" width="180" height="178"/>
+                                                                    <rect key="frame" x="0.0" y="-20" width="115" height="155"/>
                                                                 </imageView>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.93323702815517073" green="0.94247699873096447" blue="0.94247699873096447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="xCu-5I-pvs" secondAttribute="trailing" constant="-35" id="aXm-5E-MfV"/>
-                                                                <constraint firstItem="xCu-5I-pvs" firstAttribute="top" secondItem="cgS-z4-fKp" secondAttribute="top" constant="-30" id="bRO-hF-gEe"/>
-                                                                <constraint firstItem="xCu-5I-pvs" firstAttribute="leading" secondItem="cgS-z4-fKp" secondAttribute="leading" constant="-30" id="frq-zt-x4z"/>
-                                                                <constraint firstAttribute="bottom" secondItem="xCu-5I-pvs" secondAttribute="bottom" constant="-33" id="zOa-oZ-lxq"/>
+                                                                <constraint firstAttribute="trailing" secondItem="xCu-5I-pvs" secondAttribute="trailing" id="aXm-5E-MfV"/>
+                                                                <constraint firstItem="xCu-5I-pvs" firstAttribute="top" secondItem="cgS-z4-fKp" secondAttribute="top" constant="-20" id="bRO-hF-gEe"/>
+                                                                <constraint firstItem="xCu-5I-pvs" firstAttribute="leading" secondItem="cgS-z4-fKp" secondAttribute="leading" id="frq-zt-x4z"/>
+                                                                <constraint firstAttribute="bottom" secondItem="xCu-5I-pvs" secondAttribute="bottom" constant="-20" id="zOa-oZ-lxq"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
