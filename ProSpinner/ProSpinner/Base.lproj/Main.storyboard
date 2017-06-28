@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -59,21 +59,25 @@
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgS-z4-fKp">
                                                             <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner2" translatesAutoresizingMaskIntoConstraints="NO" id="xCu-5I-pvs">
+                                                                    <rect key="frame" x="-30" y="-30" width="180" height="178"/>
+                                                                </imageView>
+                                                            </subviews>
                                                             <color key="backgroundColor" red="0.93323702815517073" green="0.94247699873096447" blue="0.94247699873096447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="xCu-5I-pvs" secondAttribute="trailing" constant="-35" id="aXm-5E-MfV"/>
+                                                                <constraint firstItem="xCu-5I-pvs" firstAttribute="top" secondItem="cgS-z4-fKp" secondAttribute="top" constant="-30" id="bRO-hF-gEe"/>
+                                                                <constraint firstItem="xCu-5I-pvs" firstAttribute="leading" secondItem="cgS-z4-fKp" secondAttribute="leading" constant="-30" id="frq-zt-x4z"/>
+                                                                <constraint firstAttribute="bottom" secondItem="xCu-5I-pvs" secondAttribute="bottom" constant="-33" id="zOa-oZ-lxq"/>
+                                                            </constraints>
                                                         </view>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner2" translatesAutoresizingMaskIntoConstraints="NO" id="xCu-5I-pvs">
-                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
-                                                        </imageView>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="xCu-5I-pvs" secondAttribute="trailing" id="5GY-Ve-Sdb"/>
                                                     <constraint firstItem="cgS-z4-fKp" firstAttribute="leading" secondItem="fL1-qB-tIr" secondAttribute="leading" id="C09-aj-xMH"/>
-                                                    <constraint firstItem="xCu-5I-pvs" firstAttribute="top" secondItem="fL1-qB-tIr" secondAttribute="top" id="HJc-fE-DTC"/>
-                                                    <constraint firstAttribute="bottom" secondItem="xCu-5I-pvs" secondAttribute="bottom" id="OBI-AR-ANP"/>
                                                     <constraint firstAttribute="trailing" secondItem="cgS-z4-fKp" secondAttribute="trailing" id="hfe-PM-zHS"/>
                                                     <constraint firstItem="cgS-z4-fKp" firstAttribute="top" secondItem="fL1-qB-tIr" secondAttribute="top" id="oxR-5t-aKE"/>
-                                                    <constraint firstItem="xCu-5I-pvs" firstAttribute="leading" secondItem="fL1-qB-tIr" secondAttribute="leading" id="vHb-8V-Sgn"/>
                                                     <constraint firstAttribute="bottom" secondItem="cgS-z4-fKp" secondAttribute="bottom" id="ygU-km-79A"/>
                                                 </constraints>
                                                 <connections>
@@ -93,19 +97,19 @@
                                                             <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                                         </view>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blackSpinner" translatesAutoresizingMaskIntoConstraints="NO" id="SBM-QF-GZ0">
-                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                            <rect key="frame" x="-30" y="-30" width="180" height="178"/>
                                                         </imageView>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
-                                                    <constraint firstItem="SBM-QF-GZ0" firstAttribute="leading" secondItem="Bl3-Lw-2Zf" secondAttribute="leading" id="19R-JJ-Azj"/>
+                                                    <constraint firstItem="SBM-QF-GZ0" firstAttribute="leading" secondItem="Bl3-Lw-2Zf" secondAttribute="leading" constant="-30" id="19R-JJ-Azj"/>
                                                     <constraint firstItem="IUo-S9-cGc" firstAttribute="top" secondItem="Bl3-Lw-2Zf" secondAttribute="top" id="4AF-WG-Ota"/>
                                                     <constraint firstAttribute="trailing" secondItem="IUo-S9-cGc" secondAttribute="trailing" id="Jeb-Jj-OWa"/>
                                                     <constraint firstItem="IUo-S9-cGc" firstAttribute="leading" secondItem="Bl3-Lw-2Zf" secondAttribute="leading" id="Rma-oH-zwz"/>
-                                                    <constraint firstItem="SBM-QF-GZ0" firstAttribute="top" secondItem="Bl3-Lw-2Zf" secondAttribute="top" id="TMB-hV-Agw"/>
-                                                    <constraint firstAttribute="bottom" secondItem="SBM-QF-GZ0" secondAttribute="bottom" id="pXn-l3-Unz"/>
+                                                    <constraint firstItem="SBM-QF-GZ0" firstAttribute="top" secondItem="Bl3-Lw-2Zf" secondAttribute="top" constant="-30" id="TMB-hV-Agw"/>
+                                                    <constraint firstAttribute="bottom" secondItem="SBM-QF-GZ0" secondAttribute="bottom" constant="-33" id="pXn-l3-Unz"/>
                                                     <constraint firstAttribute="bottom" secondItem="IUo-S9-cGc" secondAttribute="bottom" id="qkX-E6-z7z"/>
-                                                    <constraint firstAttribute="trailing" secondItem="SBM-QF-GZ0" secondAttribute="trailing" id="yGW-d4-V5a"/>
+                                                    <constraint firstAttribute="trailing" secondItem="SBM-QF-GZ0" secondAttribute="trailing" constant="-35" id="yGW-d4-V5a"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="image" destination="SBM-QF-GZ0" id="NW0-k6-xxb"/>
@@ -123,18 +127,18 @@
                                                             <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                                         </view>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blackSpinner" translatesAutoresizingMaskIntoConstraints="NO" id="sG2-TS-mpa">
-                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                            <rect key="frame" x="-30" y="-30" width="180" height="178"/>
                                                         </imageView>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="9Gf-V9-qbx" secondAttribute="trailing" id="0v0-eo-wBj"/>
-                                                    <constraint firstAttribute="bottom" secondItem="sG2-TS-mpa" secondAttribute="bottom" id="8E5-RS-TmW"/>
+                                                    <constraint firstAttribute="bottom" secondItem="sG2-TS-mpa" secondAttribute="bottom" constant="-33" id="8E5-RS-TmW"/>
                                                     <constraint firstItem="9Gf-V9-qbx" firstAttribute="top" secondItem="72K-e6-h2d" secondAttribute="top" id="8Fj-jo-jfp"/>
-                                                    <constraint firstAttribute="trailing" secondItem="sG2-TS-mpa" secondAttribute="trailing" id="Iz0-yN-bOG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="sG2-TS-mpa" secondAttribute="trailing" constant="-35" id="Iz0-yN-bOG"/>
                                                     <constraint firstAttribute="bottom" secondItem="9Gf-V9-qbx" secondAttribute="bottom" id="Pf9-bJ-QqT"/>
-                                                    <constraint firstItem="sG2-TS-mpa" firstAttribute="top" secondItem="72K-e6-h2d" secondAttribute="top" id="XDt-yQ-bTe"/>
-                                                    <constraint firstItem="sG2-TS-mpa" firstAttribute="leading" secondItem="72K-e6-h2d" secondAttribute="leading" id="fi4-HA-Qwh"/>
+                                                    <constraint firstItem="sG2-TS-mpa" firstAttribute="top" secondItem="72K-e6-h2d" secondAttribute="top" constant="-30" id="XDt-yQ-bTe"/>
+                                                    <constraint firstItem="sG2-TS-mpa" firstAttribute="leading" secondItem="72K-e6-h2d" secondAttribute="leading" constant="-30" id="fi4-HA-Qwh"/>
                                                     <constraint firstItem="9Gf-V9-qbx" firstAttribute="leading" secondItem="72K-e6-h2d" secondAttribute="leading" id="ln3-UM-Aa6"/>
                                                 </constraints>
                                                 <connections>
