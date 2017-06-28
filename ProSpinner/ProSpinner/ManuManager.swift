@@ -222,15 +222,15 @@ class ManuManager: BaseClass,
     private func hideManuItems()
     {
         log.debug("")
-        playLabel?.run(SKAction.scale(to: 0, duration: 0.0))
+        playLabel?.run(SKAction.scale(to: 0, duration: 0.3))
         storeLabel?.run(SKAction.scale(to: 0, duration: 0.3))
     }
     
     func showManuItems()
     {
         log.debug("")
-        playLabel?.run(SKAction.scale(to: 1, duration: 0.0))
-        storeLabel?.run(SKAction.scale(to: 1, duration: 0.5))
+        playLabel?.run(SKAction.scale(to: 1, duration: 0.3))
+        storeLabel?.run(SKAction.scale(to: 1, duration: 0.3))
     }
     
     private func showGameExplanation()
@@ -267,14 +267,14 @@ extension ManuManager
         {
             decideBuyDiamondCashOrDiamonds(with: diamonds)
             
-            playLabel?.run(SKAction.scale(to: 0.0, duration: 0.4))
-            storeLabel?.run(SKAction.scale(to: 0.0, duration: 0.4))
+            playLabel?.run(SKAction.scale(to: 0.0, duration: 0.3))
+            storeLabel?.run(SKAction.scale(to: 0.0, duration: 0.3))
             progressBars?.run(SKAction.fadeIn(withDuration: 0.4))
         }
         else
         {
-            playLabel?.run(SKAction.scale(to: 1.0, duration: 0.4))
-            storeLabel?.run(SKAction.scale(to: 1.0, duration: 0.4))
+            playLabel?.run(SKAction.sequence([SKAction.wait(forDuration: 0.3) ,SKAction.scale(to: 1.0, duration: 0.3)]))
+            storeLabel?.run(SKAction.sequence([SKAction.wait(forDuration: 0.3) ,SKAction.scale(to: 1.0, duration: 0.3)]))
             progressBars?.run(SKAction.fadeOut(withDuration: 0.2))
         }
     }

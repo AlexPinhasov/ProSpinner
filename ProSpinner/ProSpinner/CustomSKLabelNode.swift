@@ -16,7 +16,8 @@ class CustomSKLabelNode : SKNode,
     var diamondsPlayerNeed  : SKLabelNode = SKLabelNode()
     var blackBackground     : SKShapeNode = SKShapeNode()
     
-    var addX : CGFloat = 0
+    var addXPaddingForDiamondsPlayer_Have : CGFloat = 0
+    var addXPaddingForDiamondsPlayer_Need : CGFloat = 0
 
     override init()
     {
@@ -64,23 +65,27 @@ class CustomSKLabelNode : SKNode,
                 let diamondsPlayerHaveCGFloat = CGFloat(diamondsPlayerHaveInt)
                 if diamondsPlayerHaveCGFloat < 10
                 {
-                    addX = 0
+                    addXPaddingForDiamondsPlayer_Have = 0
+                    addXPaddingForDiamondsPlayer_Need = 7
                 }
                 else if diamondsPlayerHaveCGFloat >= 10 &&  diamondsPlayerHaveCGFloat < 100
                 {
-                    addX = 7
+                    addXPaddingForDiamondsPlayer_Have = 7
+                    addXPaddingForDiamondsPlayer_Need = 7
                 }
                 else if diamondsPlayerHaveCGFloat >= 100 && diamondsPlayerHaveCGFloat < 1000
                 {
-                    addX = 13
+                    addXPaddingForDiamondsPlayer_Have = 13
+                    addXPaddingForDiamondsPlayer_Need = 13
                 }
                 else if diamondsPlayerHaveCGFloat >= 1000 && diamondsPlayerHaveCGFloat < 10000
                 {
                     changeFontToAllLabels(fontSize: 15)
-                    addX = 22.5
+                    addXPaddingForDiamondsPlayer_Have = 22.5
+                    addXPaddingForDiamondsPlayer_Need = 22.5
                 }
                 
-                self.diamondsPlayerHave.position.x += addX
+                self.diamondsPlayerHave.position.x += addXPaddingForDiamondsPlayer_Have
             }
             
             self.blackBackground = SKShapeNode(rect: self.diamondsPlayerNeed.frame)
@@ -88,7 +93,7 @@ class CustomSKLabelNode : SKNode,
             self.diamondsPlayerNeed.addChild(blackBackground)
             self.blackBackground.zPosition = 0
             self.diamondsPlayerNeed.position = CGPoint.zero
-            self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width + addX)
+            self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width + addXPaddingForDiamondsPlayer_Need)
         }
         else
         {
@@ -109,7 +114,7 @@ class CustomSKLabelNode : SKNode,
 
     func frameTotalWidth() -> CGFloat
     {
-        if addX == 22.5
+        if addXPaddingForDiamondsPlayer_Have == 22.5
         {
             return diamondsPlayerHave.frame.width + 8
         }

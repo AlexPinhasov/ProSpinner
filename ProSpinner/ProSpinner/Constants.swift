@@ -106,6 +106,8 @@ class Constants
         case smallDiamondGroupCost = "SmallDiamondGroupCost"
         case bigDiamondGroup = "BigDiamondGroup"
         case smallDiamondGroup = "SmallDiamondGroup"
+        case smallPackButton = "smallPackButton"
+        case bigPackButton = "bigPackButton"
     }
     
     enum NodesInPriceTags: String

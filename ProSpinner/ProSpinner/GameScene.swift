@@ -75,10 +75,16 @@ class GameScene: SKScene,
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         log.debug("")
+        
+        
         for touch in touches
         {
             let positionInScene = touch.location(in: self)
             let touchedNode = self.atPoint(positionInScene)
+            
+            storeView?.releasedButton(button: touchedNode)
+            manuManager?.RightArrowPressed(isPressed: false)
+            manuManager?.LeftArrowPressed(isPressed: false)
             
             if let name = touchedNode.name
             {
@@ -98,14 +104,20 @@ class GameScene: SKScene,
                                 self.handleLockViewAppearance()
                         }
                     
+                case Constants.NodesInRetryView.ExitButton.rawValue:
+                    retryView?.hideRetryView()
+                    storeView?.hideStoreView()
+                    diamondsManager?.addCollectedDiamondsToLabelScene()
+                    
+                case Constants.NodesInStoreView.smallPackButton.rawValue,
+                     Constants.NodesInStoreView.bigPackButton.rawValue:
+                    
+                    purchaseManager?.buyProduct()
+                    
                 default: break
                 }
             }
-            manuManager?.RightArrowPressed(isPressed: false)
-            manuManager?.LeftArrowPressed(isPressed: false)
         }
-        
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
@@ -134,11 +146,6 @@ class GameScene: SKScene,
                 case Constants.NodesInScene.BuySpinner.rawValue:
                     handleBuySpinnerCase(for: touchedNode)
                     
-                case Constants.NodesInRetryView.ExitButton.rawValue:
-                    retryView?.hideRetryView()
-                    storeView?.hideStoreView()
-                    diamondsManager?.addCollectedDiamondsToLabelScene()
-                    
                 case Constants.NodesInRetryView.RetryButton.rawValue:
                     retryView?.hideRetryView()
                     notifyGameStarted()
@@ -157,6 +164,10 @@ class GameScene: SKScene,
                         manuManager?.purchasedNewSpinner()
                     }
                     
+                case Constants.NodesInStoreView.smallPackButton.rawValue,
+                     Constants.NodesInStoreView.bigPackButton.rawValue:
+                    
+                    storeView?.touchedUpForButton(buttonNode: touchedNode)
                     
                 default: break
                 }
