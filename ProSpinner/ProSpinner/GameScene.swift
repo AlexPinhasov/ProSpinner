@@ -38,7 +38,7 @@ class GameScene: SKScene,
         manuManager = ManuManager(inScene: self)
         tutorialManager = TutorialManager(withScene: self)
         retryView = RetryView(scene: self)
-        storeView = StoreView(scene: self)
+        storeView = scene?.childNode(withName: Constants.NodesInStoreView.StoreView.rawValue) as? StoreView
         
         purchaseManager = PurchaseManager()
         physicsWorld.contactDelegate = self
@@ -85,6 +85,9 @@ class GameScene: SKScene,
             let touchedNode = self.atPoint(positionInScene)
             
             storeView?.releasedButton(button: touchedNode)
+            
+            manuManager?.playNode?.playLabel?.releasedButton()
+            manuManager?.storeNode?.storeButton?.releasedButton()
             manuManager?.RightArrowPressed(isPressed: false)
             manuManager?.LeftArrowPressed(isPressed: false)
             
@@ -92,6 +95,14 @@ class GameScene: SKScene,
             {
                 switch name
                 {
+                case Constants.NodesInPlayNode.PlayLabel.rawValue:
+                    notifyGameStarted()
+                    enableSwipe = false
+                    
+                case Constants.NodesInStoreView.StoreButton.rawValue:
+                    storeView?.presentStoreView()
+                    enableSwipe = false
+                    
                 case Constants.NodesInScene.RightArrow.rawValue,
                      Constants.NodesInScene.ActualRightArrow.rawValue:
                         spinnerManager?.userTappedNextSpinner()
@@ -150,24 +161,20 @@ class GameScene: SKScene,
             {
                 switch name
                 {
-                case Constants.NodesInScene.PlayLabel.rawValue:
-                    notifyGameStarted()
-                    enableSwipe = false
+                case Constants.NodesInPlayNode.PlayLabel.rawValue:
+                    manuManager?.playNode?.playLabel?.touchedUpInside()
                     
-                case Constants.NodesInScene.RightArrow.rawValue,
-                     Constants.NodesInScene.ActualRightArrow.rawValue:
+                case Constants.NodesInScene.RightArrow.rawValue:
                     manuManager?.RightArrowPressed(isPressed: true)
                     
-                case Constants.NodesInScene.LeftArrow.rawValue,
-                     Constants.NodesInScene.ActualLeftArrow.rawValue:
+                case Constants.NodesInScene.LeftArrow.rawValue:
                     manuManager?.LeftArrowPressed(isPressed: true)
 
                 case Constants.NodesInScene.BuySpinner.rawValue:
                     handleBuySpinnerCase(for: touchedNode)
                     
-                case Constants.NodesInScene.StoreButton.rawValue:
-                    storeView?.presentStoreView()
-                    enableSwipe = false
+                case Constants.NodesInStoreView.StoreButton.rawValue:
+                    manuManager?.storeNode?.storeButton?.touchedUpInside()
                     
                 case Constants.NodesInLockedSpinnerView.ViewInfoLabel.rawValue,
                      Constants.NodesInLockedSpinnerView.unlockRedBack.rawValue:

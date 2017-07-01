@@ -10,7 +10,9 @@ import SpriteKit
 
 class SKSpriteButton: SKSpriteNode
 {
-    var originalPosition: CGPoint = CGPoint.zero
+    var originalPosition   : CGPoint = CGPoint.zero
+    var moveBy             : CGFloat = 0
+    var delegate           : ButtonProtocol?
     
     required init?(coder aDecoder: NSCoder)
     {
@@ -22,7 +24,8 @@ class SKSpriteButton: SKSpriteNode
     {
         if self.position == originalPosition
         {
-            self.run(SKAction.move(by: CGVector(dx: 0, dy: -6), duration: 0.05))
+            self.run(SKAction.move(by: CGVector(dx: 0, dy: moveBy), duration: 0.05))
+            self.delegate?.buttonIsPressed()
         }
     }
     
@@ -31,6 +34,7 @@ class SKSpriteButton: SKSpriteNode
         if self.position != originalPosition
         {
             self.run(SKAction.move(to: originalPosition, duration: 0.05))
+            self.delegate?.buttonReleased()
         }
     }
 }

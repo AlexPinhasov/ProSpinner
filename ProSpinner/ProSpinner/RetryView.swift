@@ -75,7 +75,7 @@ class RetryView: BaseClass
         AlertViewBackground?.run(SKAction.fadeIn(withDuration: 0.2))
         {
             self.EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 18), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-            self.RetryButton?.run(SKAction.move(to: CGPoint(x: 0, y: -182), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            self.RetryButton?.run(SKAction.move(to: CGPoint(x: 0, y: -90), duration: 0.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 1))
         }
 
         rotateRetryButton()
@@ -84,7 +84,7 @@ class RetryView: BaseClass
     func hideRetryView()
     {
         secondsPassed = 0.0
-        RetryButton?.run(SKAction.move(to: CGPoint(x: 0, y: -350), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+        RetryButton?.run(SKAction.move(to: CGPoint(x: 0, y: -350), duration: 0.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 1))
         EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 600), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
         self.AlertViewBackground?.run(SKAction.sequence([ SKAction.wait(forDuration: 0.2) , SKAction.fadeOut(withDuration: 0.1) ]))
     }

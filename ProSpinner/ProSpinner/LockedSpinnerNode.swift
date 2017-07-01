@@ -1,5 +1,5 @@
 //
-//  LockedSpinnerNodeManager.swift
+//  LockedSpinnerNode.swift
 //  ProSpinner
 //
 //  Created by AlexP on 21.6.2017.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class LockedSpinnerNodeManager: SKNode,
+class LockedSpinnerNode: SKNode,
                                 Animateable
 {
     private var lockedBackground : SKSpriteNode?

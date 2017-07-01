@@ -71,19 +71,24 @@ class Constants
         case RightArrow = "nextSpinner"
         case ActualLeftArrow = "LeftArrow"
         case ActualRightArrow = "RightArrow"
-        case PlayLabel = "PlayLabel"
         case Spinner   = "spinner"
         case ProgressBars  = "ProgressBars"
         case BuySpinner = "unlock now"
-        case PlayButton = "PlayButton"
-        case MuteSoundButton = "MuteSoundButton"
-        case StoreButton = "StoreButton"
         
         case RedSuccess = "RedSuccess"
         case BlueSuccess = "BlueSuccess"
         case GreenSuccess = "GreenSuccess"
         
         case BreifTutorial = "BreifTutorial"
+    }
+    
+    enum NodesInPlayNode : String
+    {
+        case PlayNode   = "PlayNode"
+        case PlayLabel  = "PlayLabel"
+        case PlayShadow = "PlayShadow"
+        case RightEar   = "RightEar"
+        case LeftEar    = "LeftEar"
     }
     
     enum NodesInRetryView: String
@@ -101,6 +106,10 @@ class Constants
     
     enum NodesInStoreView: String
     {
+        case StoreNode       = "StoreNode"
+        case StoreView       = "StoreView"
+        case StoreButton     = "StoreButton"
+        case StoreButtonShadow       = "StoreButtonShadow"
         case StoreBackground = "StoreBackground"
         case storeAlert = "StoreAlert"
         case exitButton = "ExitButton"
