@@ -74,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Add basic app info, version info etc, to the start of the logs
         log.logAppDetails()
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: "path/to/file", fileLevel: .debug)
-
     }
 }
 

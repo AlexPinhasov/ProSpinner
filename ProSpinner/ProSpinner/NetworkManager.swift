@@ -19,19 +19,23 @@ class NetworkManager
     static func checkForNewSpinners(withCompletion block: @escaping (Bool) -> Void)
     {
         log.debug("")
-        Database.database().reference().database.reference().child("NumberOfSpinners").observeSingleEvent(of: .value, with:
-        { (snapshot) in
-            
-            if let newSpinnersAvailable = snapshot.value as? Int
-            {
-                block(newSpinnersAvailable > ArchiveManager.spinnersArrayInDisk.count)
+        let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+        backgroundQueue.async(execute:
+        {
+            Database.database().reference().database.reference().child("NumberOfSpinners").observeSingleEvent(of: .value, with:
+            { (snapshot) in
+                
+                if let newSpinnersAvailable = snapshot.value as? Int
+                {
+                    block(newSpinnersAvailable > ArchiveManager.spinnersArrayInDisk.count)
+                }
+                block(false)
+            })
+            { (error) in
+                print(error.localizedDescription)
+                block(false)
             }
-            block(false)
         })
-        { (error) in
-            print(error.localizedDescription)
-            block(false)
-        }
     }
     
     static func handleNewSpinnersAvailable()

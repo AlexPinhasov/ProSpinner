@@ -10,8 +10,10 @@ import SpriteKit
 
 class LoadingScene2: SKScene
 {
-    var spinnerInScene : SKSpriteNode?
-    var timer          : Timer?
+    private var nextScene      : GameScene?
+    private var spinnerInScene : SKSpriteNode?
+    private var timer          : Timer?
+    private var textures       : [SKTexture]?
     
     override func didMove(to view: SKView)
     {
@@ -27,45 +29,76 @@ class LoadingScene2: SKScene
         spinnerInScene?.run(SKAction.repeatForever(rotateAction))
     }
 
-
     func getTexturesToLoad()
     {
-        let spinnerArray = ArchiveManager.read_SpinnersFromUserDefault()
-        
-        var textures = spinnerArray.map({ (spinner) -> SKTexture in
+        let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+        backgroundQueue.async(execute:
+        {
+            let spinnerArray = ArchiveManager.read_SpinnersFromUserDefault()
+            self.loadNextScene()
+            self.textures = spinnerArray.map({ (spinner) -> SKTexture in
+                
+                if let texture = spinner.texture
+                {
+                    return texture
+                }
+                return SKTexture()
+            })
             
-            if let texture = spinner.texture
+            self.textures?.append(Constants.DiamondsTexture.red)
+            self.textures?.append(Constants.DiamondsTexture.blue)
+            self.textures?.append(Constants.DiamondsTexture.green)
+            self.textures?.append(SKTexture(imageNamed: "RightEar"))
+            self.textures?.append(SKTexture(imageNamed: "LeftEar"))
+            self.textures?.append(SKTexture(imageNamed: "PlayPath"))
+            self.textures?.append(SKTexture(imageNamed: "LockMech"))
+            self.textures?.append(SKTexture(imageNamed: "ArrowLeft"))
+            self.textures?.append(SKTexture(imageNamed: "ArrowRight"))
+            
+            DispatchQueue.main.async
             {
-                return texture
+                self.timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.preloadTextures), userInfo: nil, repeats: false)
             }
-            return SKTexture()
         })
-        
-        textures.append(Constants.DiamondsTexture.red)
-        textures.append(Constants.DiamondsTexture.blue)
-        textures.append(Constants.DiamondsTexture.green)
-        textures.append(SKTexture(imageNamed: "RightEar"))
-        textures.append(SKTexture(imageNamed: "LeftEar"))
-        textures.append(SKTexture(imageNamed: "PlayPath"))
-        textures.append(SKTexture(imageNamed: "LockMech"))
-        
+    }
+    
+    func preloadTextures()
+    {
+        guard let textures = textures else { presentNextScene() ; return }
         SKTexture.preload(textures)
         {
-            self.timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.presentNextScene), userInfo: nil, repeats: false)
+            self.presentNextScene()
         }
     }
     
     @objc func presentNextScene()
     {
-        print("")
         DispatchQueue.main.async
-            {
-                if let nextScene = SKScene(fileNamed: "GameScene")
-                {
-                    nextScene.scaleMode = .aspectFill
-                    NotificationCenter.default.post(name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
-                    self.scene?.view?.presentScene(nextScene, transition: SKTransition.push(with: .up, duration: 1))
-                }
+        {
+            guard let nextScene = self.nextScene else { return }
+            nextScene.scaleMode = .aspectFill
+            self.scene?.view?.presentScene(nextScene, transition: SKTransition.push(with: .left, duration: 0.7))
+        }
+    }
+    
+    @objc func loadNextScene()
+    {
+        if let scene = GameScene(fileNamed: "GameScene")
+        {
+            nextScene = scene
+            scene.spinnerManager    = SpinnerManager(inScene: scene)
+            scene.diamondsManager   = DiamondsManager(inScene: scene)
+            scene.manuManager       = ManuManager(inScene: scene)
+            scene.tutorialManager   = TutorialManager(withScene: scene)
+            scene.retryView         = RetryView(scene: scene)
+            scene.storeView         = scene.childNode(withName: Constants.NodesInStoreView.StoreView.rawValue) as? StoreView
+            scene.purchaseManager   = PurchaseManager()
+            scene.physicsWorld.contactDelegate = scene
+            
+            scene.handleSpinnerConfiguration()
+            scene.handleManuConfiguration()
+            scene.handleDiamondConfiguration()
+            scene.handleSwipeConfiguration()
         }
     }
 }

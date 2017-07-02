@@ -54,8 +54,9 @@ class StoreView: SKNode
     
     func configureViewBeforePresentation()
     {
+        self.isHidden = true
         storeBackground?.alpha = 0.0
-        storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 400), duration: 0))
+        storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 700), duration: 0))
     }
     
     //  MARK: Presentation methods

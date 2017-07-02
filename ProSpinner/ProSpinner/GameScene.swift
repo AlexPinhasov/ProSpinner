@@ -33,19 +33,6 @@ class GameScene: SKScene,
     override func didMove(to view: SKView)
     {
         log.debug("")
-        spinnerManager = SpinnerManager(inScene: self)
-        diamondsManager = DiamondsManager(inScene: self)
-        manuManager = ManuManager(inScene: self)
-        tutorialManager = TutorialManager(withScene: self)
-        retryView = RetryView(scene: self)
-        storeView = scene?.childNode(withName: Constants.NodesInStoreView.StoreView.rawValue) as? StoreView
-        
-        purchaseManager = PurchaseManager()
-        physicsWorld.contactDelegate = self
-        handleSpinnerConfiguration()
-        handleManuConfiguration()
-        handleDiamondConfiguration()
-        handleSwipeConfiguration()
     }
 //  MARK: Physics Contact Delegate
     func didBegin(_ contact: SKPhysicsContact)
@@ -285,20 +272,20 @@ class GameScene: SKScene,
     }
     
 //  MARK: Private Configuration methods
-    private func handleDiamondConfiguration()
+    func handleDiamondConfiguration()
     {
         log.debug("")
         diamondsManager?.loadDiamondCount()
         Diamond.diamondsXPosition = spinnerNode.position.x
     }
     
-    private func handleManuConfiguration()
+    func handleManuConfiguration()
     {
         log.debug("")
         manuManager?.configureManu()
     }
 
-    private func handleSpinnerConfiguration()
+    func handleSpinnerConfiguration()
     {
         log.debug("")
         guard let spinnerNode = spinnerManager?.configureSpinner(withPlaceHolder: self.spinnerNode) else { return }
@@ -337,7 +324,7 @@ class GameScene: SKScene,
         return enableSwipe
     }
     
-    private func handleSwipeConfiguration()
+    func handleSwipeConfiguration()
     {
         log.debug("")
         let swipeRight = UISwipeGestureRecognizer(target: self, action: nil)

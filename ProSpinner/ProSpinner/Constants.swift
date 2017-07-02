@@ -13,6 +13,13 @@ class Constants
 {
     struct DiamondsTexture
     {
+        static let blue     = SKTexture(imageNamed: "BlueDiamond")
+        static let red      = SKTexture(imageNamed: "RedDiamond")
+        static let green    = SKTexture(imageNamed: "GreenDiamond")
+    }
+    
+    struct DiamondsCleanTexture
+    {
         static let blue     = SKTexture(imageNamed: "BlueCleanDiamond")
         static let red      = SKTexture(imageNamed: "RedCleanDiamond")
         static let green    = SKTexture(imageNamed: "GreenCleanDiamond")

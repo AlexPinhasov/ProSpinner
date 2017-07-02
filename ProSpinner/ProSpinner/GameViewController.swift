@@ -29,25 +29,18 @@ class GameViewController: UIViewController
         super.viewDidLoad()
         setSpinnerInArrayOnFirstRun()
         loadScene()
+        loadingScreenDidFinish()
     }
 
-    override func viewDidAppear(_ animated: Bool)
-    {
-        NotificationCenter.default.addObserver(self, selector: #selector(loadingScreenDidFinish), name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
-    }
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
     
 //  MARK: Private methods
     func loadingScreenDidFinish()
     {
          admobManager = AdMobManager(rootViewController: self)
          checkForNewSpinners()
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
     
     private func checkForNewSpinners()

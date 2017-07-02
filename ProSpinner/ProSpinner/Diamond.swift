@@ -106,7 +106,7 @@ class redDiamond: Diamond
     {
         super.init()
         self.name = Constants.DiamondsName.red.rawValue
-        self.texture = Constants.DiamondsTexture.red
+        self.texture = Constants.DiamondsCleanTexture.red
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -121,7 +121,7 @@ class blueDiamond: Diamond
     {
         super.init()
         self.name = Constants.DiamondsName.blue.rawValue
-        self.texture = Constants.DiamondsTexture.blue
+        self.texture = Constants.DiamondsCleanTexture.blue
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -137,7 +137,7 @@ class greenDiamond: Diamond
     {
         super.init()
         self.name = Constants.DiamondsName.green.rawValue
-        self.texture = Constants.DiamondsTexture.green
+        self.texture = Constants.DiamondsCleanTexture.green
     }
     
     required init?(coder aDecoder: NSCoder)
