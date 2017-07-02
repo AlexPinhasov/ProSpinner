@@ -179,7 +179,7 @@ class GameScene: SKScene,
                 case Constants.NodesInLockedSpinnerView.ViewInfoLabel.rawValue,
                      Constants.NodesInLockedSpinnerView.unlockRedBack.rawValue:
                     
-                    let canUnlockSpinner = manuManager?.lockedSpinnerViewManager?.userRequestedToUnlockSpinner(andPressedNode: touchedNode)
+                    let canUnlockSpinner = manuManager?.lockedSpinnerView?.userRequestedToUnlockSpinner(andPressedNode: touchedNode)
                     if canUnlockSpinner == true
                     {
                         spinnerManager?.purchasedNewSpinner()

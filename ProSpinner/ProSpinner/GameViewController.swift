@@ -76,7 +76,7 @@ class GameViewController: UIViewController
     
     private func loadScene()
     {
-        if let sceneNode = SKScene(fileNamed: "LoadingScene")
+        if let sceneNode = SKScene(fileNamed: "LoadingScene2")
         {
             sceneNode.scaleMode = .aspectFill
             // Present the scene

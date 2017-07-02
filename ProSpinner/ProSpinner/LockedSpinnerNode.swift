@@ -9,7 +9,7 @@
 import SpriteKit
 
 class LockedSpinnerNode: SKNode,
-                                Animateable
+                         Animateable
 {
     private var lockedBackground : SKSpriteNode?
     private var unlockRedBack    : SKSpriteNode?
@@ -25,6 +25,7 @@ class LockedSpinnerNode: SKNode,
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
+        connectOutletsToScene()
     }
     
     func connectOutletsToScene()

@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,6 +25,72 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Loading Scene2-->
+        <scene sceneID="ISg-8O-d1G">
+            <objects>
+                <viewController id="f3X-yk-sq4" customClass="LoadingScene2" customModule="ProSpinner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dRB-c4-0PC"/>
+                        <viewControllerLayoutGuide type="bottom" id="i4G-ku-L0A"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yy7-t2-Nmg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZp-Ua-syh">
+                                <rect key="frame" x="37" y="199" width="301" height="315"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="newspinner" translatesAutoresizingMaskIntoConstraints="NO" id="0zK-nQ-bBI">
+                                        <rect key="frame" x="20" y="54.5" width="261" height="241"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="241" id="DsZ-f5-tY7"/>
+                                            <constraint firstAttribute="width" constant="261" id="nIn-JN-7Mq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building Spinners" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9P-Au-G8g">
+                                        <rect key="frame" x="74.5" y="288.5" width="153" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="23"/>
+                                        <color key="textColor" red="0.33333333333333331" green="0.33725490196078434" blue="0.33725490196078434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="RedDiamond" translatesAutoresizingMaskIntoConstraints="NO" id="NVx-ra-sgv">
+                                        <rect key="frame" x="106" y="24" width="87" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="NVx-ra-sgv" secondAttribute="height" multiplier="24:17" constant="2.3529411764705799" id="6v2-F0-u1C"/>
+                                            <constraint firstAttribute="width" constant="87" id="v6v-Ny-VkB"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="301" id="1Gl-mP-jLB"/>
+                                    <constraint firstItem="Y9P-Au-G8g" firstAttribute="centerX" secondItem="0zK-nQ-bBI" secondAttribute="centerX" id="3yb-OX-CZ6"/>
+                                    <constraint firstItem="0zK-nQ-bBI" firstAttribute="centerX" secondItem="gZp-Ua-syh" secondAttribute="centerX" id="Hxg-aI-d9T"/>
+                                    <constraint firstItem="NVx-ra-sgv" firstAttribute="top" secondItem="gZp-Ua-syh" secondAttribute="top" constant="24" id="JAz-i5-Dce"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y9P-Au-G8g" secondAttribute="bottom" id="N50-hE-2IU"/>
+                                    <constraint firstItem="Y9P-Au-G8g" firstAttribute="centerX" secondItem="gZp-Ua-syh" secondAttribute="centerX" constant="0.5" id="Ny6-JA-7nZ"/>
+                                    <constraint firstItem="0zK-nQ-bBI" firstAttribute="top" secondItem="NVx-ra-sgv" secondAttribute="bottom" constant="-29.5" id="V6w-qC-dIb"/>
+                                    <constraint firstAttribute="height" constant="315" id="Z8E-iw-BrN"/>
+                                    <constraint firstItem="NVx-ra-sgv" firstAttribute="centerX" secondItem="0zK-nQ-bBI" secondAttribute="centerX" constant="-1" id="pHB-ZX-Sbk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gZp-Ua-syh" firstAttribute="centerY" secondItem="yy7-t2-Nmg" secondAttribute="centerY" constant="23" id="2j9-TZ-Drd"/>
+                            <constraint firstItem="gZp-Ua-syh" firstAttribute="centerX" secondItem="yy7-t2-Nmg" secondAttribute="centerX" id="rwI-qU-6C5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="diamondInView" destination="NVx-ra-sgv" id="bIu-Bd-Y1E"/>
+                        <outlet property="labelInView" destination="Y9P-Au-G8g" id="RqH-Ya-7rz"/>
+                        <outlet property="spinnerInView" destination="0zK-nQ-bBI" id="Opg-Ic-rrc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bbg-Pn-JGq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="124" y="716"/>
         </scene>
         <!--Downloading View Controller-->
         <scene sceneID="H88-iS-D8i">
@@ -209,7 +276,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="RedDiamond" width="586" height="455"/>
         <image name="blackSpinner" width="1000" height="1000"/>
+        <image name="newspinner" width="700" height="700"/>
         <image name="spinner2" width="333" height="333"/>
     </resources>
 </document>

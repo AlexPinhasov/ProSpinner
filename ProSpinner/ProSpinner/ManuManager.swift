@@ -25,14 +25,14 @@ struct Arrows
 class ManuManager: BaseClass,
                    Animateable
 {
-    var playNode    : PlayNode?
-    var storeNode   : StoreNode?
+    var playNode                 : PlayNode?
+    var storeNode                : StoreNode?
+    var lockedSpinnerView        : LockedSpinnerNode?
     
     private var leftArrow        : SKSpriteNode?
     private var rightArrow       : SKSpriteNode?
     
     private var gameExplanation  : SKNode?
-    var lockedSpinnerViewManager : LockedSpinnerNode?
     fileprivate var spinnerLock : SKSpriteNode?
     
     fileprivate var redSuccessV      : SKSpriteNode?
@@ -41,7 +41,6 @@ class ManuManager: BaseClass,
     
     // Unlock Spinner Master Node
     internal var progressBars: SKNode?
-    internal var lockedSpinnerView: SKNode?
     
     internal var redProgressBarPosition = CGPoint.zero
     internal var blueProgressBarPosition = CGPoint.zero
@@ -73,7 +72,7 @@ class ManuManager: BaseClass,
         blueSuccessV        = self.scene?.childNode(withName: Constants.NodesInScene.BlueSuccess.rawValue) as? SKSpriteNode
         
         lockedSpinnerView = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNode
-        lockedSpinnerViewManager?.connectOutletsToScene()
+        
         spinnerLock = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
     }
 
@@ -163,8 +162,8 @@ class ManuManager: BaseClass,
     func PresentLockedSpinnerView(shouldPresent present: Bool)
     {
         log.debug("")
-        lockedSpinnerViewManager?.presentNode(shouldPresent: present)
-        lockedSpinnerViewManager?.setDiamondsPlayerNeed()
+        lockedSpinnerView?.presentNode(shouldPresent: present)
+        lockedSpinnerView?.setDiamondsPlayerNeed()
     }
     
     func decideBuyDiamondCashOrDiamonds(with diamonds: (Int,Int,Int)?)
@@ -183,18 +182,18 @@ class ManuManager: BaseClass,
 
         if playerHasEnoghDiamonds
         {
-            lockedSpinnerViewManager?.userCanUnlockSpinner()
+            lockedSpinnerView?.userCanUnlockSpinner()
         }
         else
         {
-            lockedSpinnerViewManager?.userCantUnlockSpinner()
+            lockedSpinnerView?.userCantUnlockSpinner()
         }
     }
     
     func purchasedNewSpinner()
     {
         log.debug("")
-        lockedSpinnerViewManager?.presentNode(shouldPresent: false)
+        lockedSpinnerView?.presentNode(shouldPresent: false)
         animateSpinnerLockFadeOut()
         removeSuccessV()
         showManuItems()
@@ -239,12 +238,14 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         playNode?.showNode()
+        storeNode?.showNode()
     }
     
     func showManuItems()
     {
         log.debug("")
         playNode?.hideNode()
+        storeNode?.hideNode()
     }
     
     func showGameExplanation(shouldShow show: Bool)
