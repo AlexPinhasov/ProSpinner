@@ -36,7 +36,7 @@ class Spinner : NSObject,NSCoding
     {
         self.id             = decoder.decodeObject(forKey: "id"          ) as? Int  ?? 0
         self.imageUrlLink   = decoder.decodeObject(forKey: "link"        ) as? String  ?? ""
-        self.texture        = decoder.decodeObject(forKey: "texture"     ) as? SKTexture  ?? SKTexture()
+        self.texture        = decoder.decodeObject(forKey: "texture"     ) as? SKTexture  ?? nil
         self.redNeeded      = decoder.decodeObject(forKey: "red"         ) as? Int  ?? 0
         self.blueNeeded     = decoder.decodeObject(forKey: "blue"        ) as? Int ?? 0
         self.greenNeeded    = decoder.decodeObject(forKey: "green"       ) as? Int ?? 0

@@ -35,6 +35,7 @@ class LoadingScene2: SKScene
         backgroundQueue.async(execute:
         {
             let spinnerArray = ArchiveManager.read_SpinnersFromUserDefault()
+            self.checkForCorruptedSpinnersObjects(inArray : spinnerArray)
             self.loadNextScene()
             self.textures = spinnerArray.map({ (spinner) -> SKTexture in
                 
@@ -60,6 +61,17 @@ class LoadingScene2: SKScene
                 self.timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.preloadTextures), userInfo: nil, repeats: false)
             }
         })
+    }
+    
+    func checkForCorruptedSpinnersObjects(inArray spinnersArray: [Spinner])
+    {
+        for (index,spinner) in spinnersArray.enumerated()
+        {
+            if spinner.texture == nil
+            {
+                NetworkManager.requestCoruptedSpinnerData(forIndex: index)
+            }
+        }
     }
     
     func preloadTextures()

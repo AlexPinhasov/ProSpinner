@@ -15,6 +15,7 @@ import FirebaseCore
 class NetworkManager
 {
     static private var numberOfImagesInDownload: Int = 0
+    static private var database = Database.database().reference().database.reference()
     
     static func checkForNewSpinners(withCompletion block: @escaping (Bool) -> Void)
     {
@@ -22,7 +23,7 @@ class NetworkManager
         let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
         backgroundQueue.async(execute:
         {
-            Database.database().reference().database.reference().child("NumberOfSpinners").observeSingleEvent(of: .value, with:
+            database.child("NumberOfSpinners").observeSingleEvent(of: .value, with:
             { (snapshot) in
                 
                 if let newSpinnersAvailable = snapshot.value as? Int
@@ -59,7 +60,7 @@ class NetworkManager
         log.debug("")
         var spinnersFound : [Spinner] = [Spinner]()
         let startingPosition = String(ArchiveManager.spinnersArrayInDisk.count + 1)
-        Database.database().reference().database.reference().child("Spinners").queryOrderedByKey().queryStarting(atValue: startingPosition).observeSingleEvent(of: .value, with:
+        database.child("Spinners").queryOrderedByKey().queryStarting(atValue: startingPosition).observeSingleEvent(of: .value, with:
         { (snapshot) in
             
             if let snapshotChildArray = snapshot.value as? NSArray
@@ -90,38 +91,32 @@ class NetworkManager
         }
     }
     
-    static private func requestCoruptedSpinnerData()
+    static func requestCoruptedSpinnerData(forIndex index: Int)
     {
         log.debug("")
-        
-        let currentlyAtIndex = ArchiveManager.currentlyAtIndex
-        Database.database().reference().database.reference().child("Spinners").queryOrderedByKey().queryEqual(toValue: currentlyAtIndex.description).observeSingleEvent(of: .value, with:
+        let indexInFirebase = index + 1
+        database.child("Spinners").child(indexInFirebase.description).observeSingleEvent(of: .value, with:
             { (snapshot) in
                 
-                if let snapshotChildArray = snapshot.value as? NSArray
+                if let spinnerFix = snapshot.value as? NSDictionary
                 {
-                    let filterdSnapshot = snapshotChildArray.filter() { return $0 is NSDictionary }
-                    
-                    if let filterdSnapshot = filterdSnapshot as? [NSDictionary],
-                       let spinner = filterdSnapshot.last
+                    let imageUrlLink = spinnerFix["imagePath"] as? String
+                   
+                    if let imageUrl = imageUrlLink
                     {
-                        let spinnerNewData =     Spinner(id:            spinner["id"] as? Int,
-                                                         imageUrlLink:  spinner["imagePath"] as? String,
-                                                         texture:       nil,
-                                                         redNeeded:     spinner["redNeeded"] as? Int,
-                                                         blueNeeded:    spinner["blueNeeded"] as? Int,
-                                                         greenNeeded:   spinner["greenNeeded"] as? Int,
-                                                         mainSpinner:   false,
-                                                         unlocked:      false)
-                        
-                        ArchiveManager.spinnersArrayInDisk[currentlyAtIndex] = spinnerNewData
-                        
-                        if let imageUrl = spinnerNewData.imageUrlLink
-                        {
-                            downloadTexture(withUrl: imageUrl, withCompletion: { (texture) in
-                                    ArchiveManager.spinnersArrayInDisk[currentlyAtIndex].texture = texture
-                            })
-                        }
+                        downloadTexture(withUrl: imageUrl, withCompletion: { (texture) in
+                            
+                            let spinnerNewData =     Spinner(id:            spinnerFix["id"] as? Int,
+                                                             imageUrlLink:  imageUrlLink,
+                                                             texture:       texture,
+                                                             redNeeded:     spinnerFix["redNeeded"] as? Int,
+                                                             blueNeeded:    spinnerFix["blueNeeded"] as? Int,
+                                                             greenNeeded:   spinnerFix["greenNeeded"] as? Int,
+                                                             mainSpinner:   false,
+                                                             unlocked:      false)
+                            
+                                ArchiveManager.spinnersArrayInDisk[index] = spinnerNewData
+                        })
                     }
                 }
         })

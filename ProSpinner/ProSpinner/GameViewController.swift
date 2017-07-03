@@ -85,6 +85,17 @@ class GameViewController: UIViewController
     
     private func setSpinnerInArrayOnFirstRun()
     {
+//        let spinner = Spinner(id: 1,
+//                              imageUrlLink: "",
+//                              texture: SKTexture(imageNamed: "newspinner") ,
+//                              redNeeded: 10,
+//                              blueNeeded: 10,
+//                              greenNeeded: 10,
+//                              mainSpinner: true,
+//                              unlocked: true)
+//        ArchiveManager.write_SpinnerToUserDefault(spinners: [spinner])
+//        UserDefaults.standard.synchronize()
+//        
         if ArchiveManager.firstTimeRun == false
         {
             ArchiveManager.firstTimeRun = true

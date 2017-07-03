@@ -104,6 +104,7 @@ class Constants
         case RedDiamondLabel = "RedDiamondLabel"
         case GreenDiamondLabel = "GreenDiamondLabel"
         case RetryButton = "RetryButton"
+        case RetryButtonArrow = "RetryButtonArrow"
         case ExitButton = "ExitButton"
         case TimePassed = "TimePassed"
         case TotalDiamondsCollected = "TotalDiamondsCollected"
