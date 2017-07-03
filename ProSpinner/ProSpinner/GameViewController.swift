@@ -112,6 +112,7 @@ class GameViewController: UIViewController
             
             ArchiveManager.write_SpinnerToUserDefault(spinners: [spinner])
             set10DiamondsOnFirstRun()
+            UserDefaults.standard.set(0, forKey: UserDefaultKeys.highScore.rawValue)
         }
     }
     

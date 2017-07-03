@@ -18,6 +18,7 @@ enum UserDefaultKeys: String
     case interstitialCount          = "interstitalCount"
     case spinnersInDisk             = "Spinners"
     case firstTimeRun               = "firstTimeRun"
+    case highScore                  = "highScore"
 }
 
 class ArchiveManager
@@ -105,6 +106,22 @@ class ArchiveManager
             print("There is an issue")
         }
         return [Spinner]()
+    }
+    
+    static var highScoreRecord : Int
+    {
+        get
+        {
+            return UserDefaults.standard.integer(forKey: UserDefaultKeys.highScore.rawValue)
+        }
+        set
+        {
+            if newValue > highScoreRecord
+            {
+                UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.highScore.rawValue)
+                UserDefaults.standard.synchronize()
+            }
+        }
     }
     
     static var firstTimeRun : Bool

@@ -392,17 +392,17 @@ extension SpinnerManager
             let rotateCenterAction = SKAction.rotate(toAngle: 0.0, duration: 0.2)
             let rotateLeftAction = SKAction.rotate(byAngle: 0.05, duration: 0.4)
         
-            let rightSequence = SKAction.sequence([SKAction.wait(forDuration: 0.4),
+            let rightSequence = SKAction.sequence([SKAction.wait(forDuration: 0.1),
                                               rotateRightAction,
                                               rotateCenterAction,
                                               rotateRightAction,
-                                              SKAction.wait(forDuration: 0.2),
+                                              SKAction.wait(forDuration: 0.1),
                                               rotateCenterAction,
                                               rotateLeftAction,
                                               rotateCenterAction])
             
             let leftSequence = rightSequence.reversed()
-            spinnerNode?.run(SKAction.sequence([rightSequence,leftSequence,rightSequence]), withKey: "ShakeLockedSpinner")
+            spinnerNode?.run(SKAction.sequence([rightSequence]), withKey: "ShakeLockedSpinner")
         }
         else
         {

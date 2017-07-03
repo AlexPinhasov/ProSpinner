@@ -87,6 +87,8 @@ class Constants
         case GreenSuccess = "GreenSuccess"
         
         case BreifTutorial = "BreifTutorial"
+        
+        case HighScoreRecord = "HighScoreRecord"
     }
     
     enum NodesInPlayNode : String

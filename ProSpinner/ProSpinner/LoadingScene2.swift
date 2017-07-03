@@ -110,7 +110,6 @@ class LoadingScene2: SKScene
             scene.handleSpinnerConfiguration()
             scene.handleManuConfiguration()
             scene.handleDiamondConfiguration()
-            scene.handleSwipeConfiguration()
         }
     }
 }

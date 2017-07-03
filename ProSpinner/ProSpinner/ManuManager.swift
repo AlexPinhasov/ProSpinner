@@ -39,6 +39,8 @@ class ManuManager: BaseClass,
     fileprivate var blueSuccessV     : SKSpriteNode?
     fileprivate var greenSuccessV    : SKSpriteNode?
     
+    fileprivate var highScoreRecord  : SKLabelNode?
+    
     // Unlock Spinner Master Node
     internal var progressBars: SKNode?
     
@@ -58,7 +60,9 @@ class ManuManager: BaseClass,
         log.debug("")
         // Main manu
         playNode                = scene?.childNode(withName: Constants.NodesInPlayNode.PlayNode.rawValue) as? PlayNode
-        storeNode              = scene?.childNode(withName: Constants.NodesInStoreView.StoreNode.rawValue) as? StoreNode
+        storeNode               = scene?.childNode(withName: Constants.NodesInStoreView.StoreNode.rawValue) as? StoreNode
+        
+        highScoreRecord         = scene?.childNode(withName: Constants.NodesInScene.HighScoreRecord.rawValue) as? SKLabelNode
         
         leftArrow               = scene?.childNode(withName: Constants.NodesInScene.LeftArrow.rawValue) as? SKSpriteNode
         rightArrow              = scene?.childNode(withName: Constants.NodesInScene.RightArrow.rawValue) as? SKSpriteNode
@@ -83,6 +87,7 @@ class ManuManager: BaseClass,
         initSpriteFromScene()
         showArrows()
         saveProgressBarPosition()
+        updateHighScore()
     }
     
 //  MARK: Game life cycle
@@ -104,6 +109,7 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         showArrows()
+        updateHighScore()
     }
     
 //  MARK: Spinner Locked/Unlocked master methods
@@ -210,13 +216,19 @@ class ManuManager: BaseClass,
     private func showArrows()
     {
         log.debug("")
-        leftArrow?.size = CGSize(width: 30, height: 28)
-        rightArrow?.size = CGSize(width: 30, height: 28)
         leftArrow?.run(SKAction.scale(to: 1, duration: 0.7))
         rightArrow?.run(SKAction.scale(to: 1, duration: 0.7))
         {
             self.pointDirectionArrowsMoveAction()
         }
+    }
+    
+    private func updateHighScore()
+    {
+        let highScorePrefix = "High Score: "
+        let actualHighScore = String(ArchiveManager.highScoreRecord)
+        
+        self.highScoreRecord?.text = highScorePrefix + actualHighScore
     }
     
     private func pointDirectionArrowsMoveAction()
@@ -239,6 +251,7 @@ class ManuManager: BaseClass,
         log.debug("")
         playNode?.showNode()
         storeNode?.showNode()
+        highScoreRecord?.run(SKAction.fadeOut(withDuration: 0.3))
     }
     
     func showManuItems()
@@ -246,6 +259,7 @@ class ManuManager: BaseClass,
         log.debug("")
         playNode?.hideNode()
         storeNode?.hideNode()
+        highScoreRecord?.run(SKAction.fadeIn(withDuration: 0.4))
     }
     
     func showGameExplanation(shouldShow show: Bool)

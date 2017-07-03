@@ -33,6 +33,7 @@ class GameScene: SKScene,
     override func didMove(to view: SKView)
     {
         log.debug("")
+        handleSwipeConfiguration()
     }
 //  MARK: Physics Contact Delegate
     func didBegin(_ contact: SKPhysicsContact)
@@ -75,7 +76,6 @@ class GameScene: SKScene,
             
             manuManager?.playNode?.playLabel?.releasedButton()
             manuManager?.storeNode?.storeButton?.releasedButton()
-            retryView?.RetryButton?.releasedButton()
             
             manuManager?.RightArrowPressed(isPressed: false)
             manuManager?.LeftArrowPressed(isPressed: false)
@@ -159,10 +159,6 @@ class GameScene: SKScene,
                 case Constants.NodesInScene.LeftArrow.rawValue:
                     manuManager?.LeftArrowPressed(isPressed: true)
 
-                case Constants.NodesInRetryView.RetryButton.rawValue,
-                     Constants.NodesInRetryView.RetryButtonArrow.rawValue:
-                    retryView?.RetryButton?.touchedUpInside()
-                    
                 case Constants.NodesInScene.BuySpinner.rawValue:
                     handleBuySpinnerCase(for: touchedNode)
                     

@@ -18,8 +18,8 @@ class RetryView: BaseClass
     private var TotalDiamondsCollected  :SKLabelNode?
     private var TimePassed              :SKLabelNode?
     
-    var RetryButton                     :SKSpriteButton?
-    var RetryButtonArrow                :SKSpriteNode?
+    private var RetryButton             :SKSpriteNode?
+    private var RetryButtonArrow        :SKSpriteNode?
     private var ExitButton              :SKSpriteNode?
     private var EndGameAlert            :SKSpriteNode?
     private var AlertViewBackground     :SKSpriteNode?
@@ -53,9 +53,8 @@ class RetryView: BaseClass
     {
         AlertViewBackground     = self.scene?.childNode(withName: Constants.NodesInRetryView.AlertViewBackground.rawValue) as? SKSpriteNode
         EndGameAlert            = AlertViewBackground?.childNode(withName: Constants.NodesInRetryView.EndGameAlert.rawValue) as? SKSpriteNode
-        RetryButton             = EndGameAlert?.childNode(withName: Constants.NodesInRetryView.RetryButton.rawValue) as? SKSpriteButton
-        RetryButton?.moveBy     = -5
-        
+        RetryButton             = EndGameAlert?.childNode(withName: Constants.NodesInRetryView.RetryButton.rawValue) as? SKSpriteNode
+   
         RetryButtonArrow        = RetryButton?.childNode(withName: Constants.NodesInRetryView.RetryButtonArrow.rawValue) as? SKSpriteNode
         
         ExitButton              = EndGameAlert?.childNode(withName: Constants.NodesInRetryView.ExitButton.rawValue) as? SKSpriteNode
@@ -79,7 +78,7 @@ class RetryView: BaseClass
         AlertViewBackground?.isHidden = false
         AlertViewBackground?.run(SKAction.fadeIn(withDuration: 0.2))
         {
-            self.EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 18), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            self.EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 37), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
         }
 
         rotateRetryButton()
@@ -104,6 +103,8 @@ class RetryView: BaseClass
         self.BlueDiamondLabel?.text = bluePlusSign + String(diamonds.blue)
         self.GreenDiamondLabel?.text = greenPlusSign + String(diamonds.green)
         self.TotalDiamondsCollected?.text = String(diamonds.red + diamonds.blue + diamonds.green)
+        
+        ArchiveManager.highScoreRecord = (diamonds.red + diamonds.blue + diamonds.green)
     }
  
     private func rotateRetryButton()

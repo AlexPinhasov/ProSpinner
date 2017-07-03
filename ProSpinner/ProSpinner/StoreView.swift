@@ -39,7 +39,7 @@ class StoreView: SKNode
         exitButton             = storeAlert?.childNode(withName: Constants.NodesInStoreView.exitButton.rawValue) as? SKSpriteNode
         
         smallDiamondGroup      = storeAlert?.childNode(withName: Constants.NodesInStoreView.smallDiamondGroup.rawValue) as? SKSpriteNode
-        smallDiamondGroupCost  = storeAlert?.childNode(withName: Constants.NodesInStoreView.smallDiamondGroupCost.rawValue) as? SKLabelNode
+        smallDiamondGroupCost  = smallDiamondGroup?.childNode(withName: Constants.NodesInStoreView.smallDiamondGroupCost.rawValue) as? SKLabelNode
         
         smallPackButton         = storeAlert?.childNode(withName: Constants.NodesInStoreView.smallPackButton.rawValue) as? SKSpriteButton
         bigPackButton           = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigPackButton.rawValue) as? SKSpriteButton
@@ -47,7 +47,7 @@ class StoreView: SKNode
         bigPackButton?.moveBy   = -6
         
         bigDiamondGroup        = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroup.rawValue) as? SKSpriteNode
-        bigDiamondGroupCost    = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroupCost.rawValue) as? SKLabelNode
+        bigDiamondGroupCost    = bigDiamondGroup?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroupCost.rawValue) as? SKLabelNode
         
 
     }

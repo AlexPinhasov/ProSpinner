@@ -52,7 +52,7 @@ class Diamond: SKSpriteNode
         self.physicsBody?.categoryBitMask = physicsCategory
         self.physicsBody?.contactTestBitMask = TouchEventFor
         self.physicsBody?.isDynamic = true
-        self.zPosition = 1
+        self.zPosition = 5
     }
     
     required init?(coder aDecoder: NSCoder)
