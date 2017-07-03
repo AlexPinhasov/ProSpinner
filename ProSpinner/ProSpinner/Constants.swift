@@ -108,6 +108,7 @@ class Constants
         case RetryButton = "RetryButton"
         case RetryButtonArrow = "RetryButtonArrow"
         case ExitButton = "ExitButton"
+        case MenuLines = "MenuLines"
         case TimePassed = "TimePassed"
         case TotalDiamondsCollected = "TotalDiamondsCollected"
         case EndGameAlert = "EndGameAlert"
@@ -146,7 +147,8 @@ class Constants
     enum NodesInLockedSpinnerView: String
     {
         case LockedSpinnerNode = "LockedSpinnerNode"
-        case unlockRedBack     =  "UnlockRedBack"
+        case TopLockedView     =  "TopLockedView"
+        case BottomLockedView     =  "BottomLockedView"
         
         case LockedSpinnerBackground = "LockedSpinnerBackground"
         case RedPrice = "RedPriceLabel"

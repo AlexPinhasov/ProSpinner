@@ -106,7 +106,8 @@ class GameScene: SKScene,
                                 self.handleLockViewAppearance()
                         }
                     
-                case Constants.NodesInRetryView.ExitButton.rawValue:
+                case Constants.NodesInRetryView.ExitButton.rawValue,
+                     Constants.NodesInRetryView.MenuLines.rawValue:
                     enableSwipe = true
                     retryView?.hideRetryView()
                     storeView?.hideStoreView()
@@ -166,9 +167,10 @@ class GameScene: SKScene,
                     manuManager?.storeNode?.storeButton?.touchedUpInside()
                     
                 case Constants.NodesInLockedSpinnerView.ViewInfoLabel.rawValue,
-                     Constants.NodesInLockedSpinnerView.unlockRedBack.rawValue:
+                     Constants.NodesInLockedSpinnerView.BottomLockedView.rawValue,
+                     Constants.NodesInLockedSpinnerView.TopLockedView.rawValue:
                     
-                    let canUnlockSpinner = manuManager?.lockedSpinnerView?.userRequestedToUnlockSpinner(andPressedNode: touchedNode)
+                    let canUnlockSpinner = manuManager?.lockedSpinnerView?.userRequestedToUnlockSpinner()
                     if canUnlockSpinner == true
                     {
                         spinnerManager?.purchasedNewSpinner()
