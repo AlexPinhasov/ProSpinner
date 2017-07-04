@@ -62,6 +62,11 @@ class SpinnerManager: BaseClass,
     {
         log.debug("")
         _ = scaleDownSpinner()
+        
+        if ArchiveManager.mainSpinnerLocation != ArchiveManager.currentlyAtIndex
+        {
+            ArchiveManager.changeMainSpinner()
+        }
     }
     
     func tutorialStarted()

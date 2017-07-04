@@ -35,6 +35,7 @@ class AdMobManager: NSObject,
     func addObserver()
     {
         NotificationCenter.default.addObserver(self, selector: #selector(shouldShowInterstitial), name: NSNotification.Name(NotifictionKey.interstitalCount.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addBannerToView), name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
     
     func shouldShowInterstitial()
@@ -51,12 +52,17 @@ class AdMobManager: NSObject,
     func configureGADBanner()
     {
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-        rootViewController?.view.addSubview(bannerView)
         bannerView.adUnitID = "ca-app-pub-9437548574063413/3716115489"
         bannerView.rootViewController = rootViewController
         
         let request = GADRequest()
         bannerView.load(request)
+    }
+    
+    func addBannerToView()
+    {
+        rootViewController?.view.addSubview(bannerView)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
     
     func configureGADInterstitial()

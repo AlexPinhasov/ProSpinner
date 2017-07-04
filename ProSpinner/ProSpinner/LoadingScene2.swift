@@ -11,15 +11,21 @@ import SpriteKit
 class LoadingScene2: SKScene
 {
     private var nextScene      : GameScene?
-    private var spinnerInScene : SKSpriteNode?
+    var spinnerInScene : SKSpriteNode?
     private var timer          : Timer?
     private var textures       : [SKTexture]?
     
     override func didMove(to view: SKView)
     {
-        spinnerInScene = self.childNode(withName: "spinner") as? SKSpriteNode
         rotateSpinner()
         getTexturesToLoad()
+    }
+    
+    func getMainSpinnerTexture() -> SKTexture?
+    {
+        _ = ArchiveManager.read_SpinnersFromUserDefault()
+        let mainSpinner = ArchiveManager.spinnersArrayInDisk[ArchiveManager.mainSpinnerLocation]
+        return mainSpinner.texture
     }
     
     func rotateSpinner()
@@ -34,7 +40,7 @@ class LoadingScene2: SKScene
         let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
         backgroundQueue.async(execute:
         {
-            let spinnerArray = ArchiveManager.read_SpinnersFromUserDefault()
+            let spinnerArray = ArchiveManager.spinnersArrayInDisk
             self.checkForCorruptedSpinnersObjects(inArray : spinnerArray)
             self.loadNextScene()
             self.textures = spinnerArray.map({ (spinner) -> SKTexture in

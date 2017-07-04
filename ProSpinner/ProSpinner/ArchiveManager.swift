@@ -86,6 +86,15 @@ class ArchiveManager
         write_SpinnerToUserDefault(spinners: updatedArray)
     }
     
+    static func changeMainSpinner()
+    {
+        resetMainSpinners()
+        ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].mainSpinner = true
+        mainSpinnerLocation = ArchiveManager.currentlyAtIndex
+        let updatedArray = ArchiveManager.spinnersArrayInDisk
+        write_SpinnerToUserDefault(spinners: updatedArray)
+    }
+    
     static func resetMainSpinners()
     {
         for spinner in spinnersArrayInDisk { spinner.mainSpinner = false }

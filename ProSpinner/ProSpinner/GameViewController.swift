@@ -69,13 +69,17 @@ class GameViewController: UIViewController
     
     private func loadScene()
     {
-        if let sceneNode = SKScene(fileNamed: "LoadingScene2")
+        if let loadingSceneNode = LoadingScene2(fileNamed: "LoadingScene2")
         {
-            sceneNode.scaleMode = .aspectFill
+            loadingSceneNode.scaleMode = .aspectFill
+            loadingSceneNode.spinnerInScene = loadingSceneNode.childNode(withName: "spinner") as? SKSpriteNode
+            loadingSceneNode.spinnerInScene?.texture = loadingSceneNode.getMainSpinnerTexture()
+            loadingSceneNode.spinnerInScene?.size = CGSize(width: 261.25, height: 261.25)
+            
             // Present the scene
             if let view = self.view as? SKView
             {
-                view.presentScene(sceneNode)
+                view.presentScene(loadingSceneNode)
                 view.ignoresSiblingOrder = true
                 view.showsFPS = true
                 view.showsNodeCount = true
@@ -85,21 +89,11 @@ class GameViewController: UIViewController
     
     private func setSpinnerInArrayOnFirstRun()
     {
-//        let spinner = Spinner(id: 1,
-//                              imageUrlLink: "",
-//                              texture: SKTexture(imageNamed: "newspinner") ,
-//                              redNeeded: 10,
-//                              blueNeeded: 10,
-//                              greenNeeded: 10,
-//                              mainSpinner: true,
-//                              unlocked: true)
-//        ArchiveManager.write_SpinnerToUserDefault(spinners: [spinner])
-//        UserDefaults.standard.synchronize()
-//        
         if ArchiveManager.firstTimeRun == false
         {
             ArchiveManager.firstTimeRun = true
             UserDefaults.standard.set(nil, forKey: "Spinners")
+            UserDefaults.standard.set(0  , forKey: UserDefaultKeys.highScore.rawValue)
 
             let spinner = Spinner(id: 1,
                                   imageUrlLink: "",
@@ -112,7 +106,6 @@ class GameViewController: UIViewController
             
             ArchiveManager.write_SpinnerToUserDefault(spinners: [spinner])
             set10DiamondsOnFirstRun()
-            UserDefaults.standard.set(0, forKey: UserDefaultKeys.highScore.rawValue)
         }
     }
     

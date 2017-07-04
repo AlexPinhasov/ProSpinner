@@ -34,6 +34,7 @@ class GameScene: SKScene,
     {
         log.debug("")
         handleSwipeConfiguration()
+        NotificationCenter.default.post(name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
 //  MARK: Physics Contact Delegate
     func didBegin(_ contact: SKPhysicsContact)

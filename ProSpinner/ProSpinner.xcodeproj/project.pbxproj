@@ -51,7 +51,6 @@
 		58D8CE085EEC2BF1CF77C9BF /* Pods_ProSpinnerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCB592AC0294D9475632625 /* Pods_ProSpinnerUITests.framework */; };
 		918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F11EC9CC8600886039 /* AppDelegate.swift */; };
 		918F18F41EC9CC8600886039 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 918F18F31EC9CC8600886039 /* GameScene.sks */; };
-		918F18F61EC9CC8600886039 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 918F18F51EC9CC8600886039 /* Actions.sks */; };
 		918F18F81EC9CC8600886039 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F71EC9CC8600886039 /* GameScene.swift */; };
 		918F18FA1EC9CC8600886039 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F91EC9CC8600886039 /* GameViewController.swift */; };
 		918F18FD1EC9CC8600886039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 918F18FB1EC9CC8600886039 /* Main.storyboard */; };
@@ -137,7 +136,6 @@
 		918F18EE1EC9CC8600886039 /* ProSpinner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProSpinner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918F18F11EC9CC8600886039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		918F18F31EC9CC8600886039 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		918F18F51EC9CC8600886039 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		918F18F71EC9CC8600886039 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		918F18F91EC9CC8600886039 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		918F18FC1EC9CC8600886039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -189,6 +187,7 @@
 		0A04F47A1ED0629A004F374C /* Associated Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A1D71321ED9822D00331753 /* Font */,
 				918F18F11EC9CC8600886039 /* AppDelegate.swift */,
 				918F18FB1EC9CC8600886039 /* Main.storyboard */,
 				918F18FE1EC9CC8600886039 /* Assets.xcassets */,
@@ -292,11 +291,20 @@
 			isa = PBXGroup;
 			children = (
 				918F18F31EC9CC8600886039 /* GameScene.sks */,
-				918F18F51EC9CC8600886039 /* Actions.sks */,
-				0A17F1271EE4B377002DE42F /* LoadingScene.sks */,
+				918F18F71EC9CC8600886039 /* GameScene.swift */,
 				0AF508901F08ADAE0062F8E8 /* LoadingScene2.sks */,
+				0AF5088E1F08AD770062F8E8 /* LoadingScene2.swift */,
 			);
 			name = Scenes;
+			sourceTree = "<group>";
+		};
+		0AD5CF861F0B4FC700E4E9DE /* OldLoadingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				0A17F1271EE4B377002DE42F /* LoadingScene.sks */,
+				0A17F1291EE4B6A5002DE42F /* LoadingScene.swift */,
+			);
+			name = OldLoadingScreen;
 			sourceTree = "<group>";
 		};
 		0AE83A731EDC8E680066E3DD /* Protocols */ = {
@@ -354,16 +362,13 @@
 		918F18F01EC9CC8600886039 /* ProSpinner */ = {
 			isa = PBXGroup;
 			children = (
+				0AD5CF861F0B4FC700E4E9DE /* OldLoadingScreen */,
 				0AE83A761EDC8F260066E3DD /* Base Class */,
 				0AE83A731EDC8E680066E3DD /* Protocols */,
-				0A1D71321ED9822D00331753 /* Font */,
 				0A1734271F0679E300140277 /* Nodes */,
 				0A8B2E9B1ED8C3A20025856E /* Models */,
 				0A8B2E9A1ED8C3920025856E /* Managers */,
 				0A8B2E9E1ED8C5140025856E /* Scenes */,
-				918F18F71EC9CC8600886039 /* GameScene.swift */,
-				0A17F1291EE4B6A5002DE42F /* LoadingScene.swift */,
-				0AF5088E1F08AD770062F8E8 /* LoadingScene2.swift */,
 				0A11F5EB1EE333B30036A00F /* View Controllers */,
 				0A04F47A1ED0629A004F374C /* Associated Files */,
 			);
@@ -534,7 +539,6 @@
 				0A305A091EEC496800BA3A4B /* OpenSansHebrew-Bold.ttf in Resources */,
 				0A305A071EEC33B600BA3A4B /* OpenSansHebrew-Light.ttf in Resources */,
 				918F19021EC9CC8600886039 /* LaunchScreen.storyboard in Resources */,
-				918F18F61EC9CC8600886039 /* Actions.sks in Resources */,
 				0A3658A71ED20D9900322024 /* Woosh.mp3 in Resources */,
 				0A17F1281EE4B377002DE42F /* LoadingScene.sks in Resources */,
 				0A11F5EA1EE3259C0036A00F /* GoogleService-Info.plist in Resources */,
