@@ -15,23 +15,28 @@ import FirebaseCore
 class NetworkManager
 {
     static private var numberOfImagesInDownload: Int = 0
+    static private var database = Database.database().reference().database.reference()
     
     static func checkForNewSpinners(withCompletion block: @escaping (Bool) -> Void)
     {
         log.debug("")
-        Database.database().reference().database.reference().child("NumberOfSpinners").observeSingleEvent(of: .value, with:
-        { (snapshot) in
-            
-            if let newSpinnersAvailable = snapshot.value as? Int
-            {
-                block(newSpinnersAvailable > ArchiveManager.spinnersArrayInDisk.count)
+        let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+        backgroundQueue.async(execute:
+        {
+            database.child("NumberOfSpinners").observeSingleEvent(of: .value, with:
+            { (snapshot) in
+                
+                if let newSpinnersAvailable = snapshot.value as? Int
+                {
+                    block(newSpinnersAvailable > ArchiveManager.spinnersArrayInDisk.count)
+                }
+                block(false)
+            })
+            { (error) in
+                print(error.localizedDescription)
+                block(false)
             }
-            block(false)
         })
-        { (error) in
-            print(error.localizedDescription)
-            block(false)
-        }
     }
     
     static func handleNewSpinnersAvailable()
@@ -55,7 +60,7 @@ class NetworkManager
         log.debug("")
         var spinnersFound : [Spinner] = [Spinner]()
         let startingPosition = String(ArchiveManager.spinnersArrayInDisk.count + 1)
-        Database.database().reference().database.reference().child("Spinners").queryOrderedByKey().queryStarting(atValue: startingPosition).observeSingleEvent(of: .value, with:
+        database.child("Spinners").queryOrderedByKey().queryStarting(atValue: startingPosition).observeSingleEvent(of: .value, with:
         { (snapshot) in
             
             if let snapshotChildArray = snapshot.value as? NSArray
@@ -80,6 +85,40 @@ class NetworkManager
 
             completion(spinnersFound)
                 
+        })
+        { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    static func requestCoruptedSpinnerData(forIndex index: Int)
+    {
+        log.debug("")
+        let indexInFirebase = index + 1
+        database.child("Spinners").child(indexInFirebase.description).observeSingleEvent(of: .value, with:
+            { (snapshot) in
+                
+                if let spinnerFix = snapshot.value as? NSDictionary
+                {
+                    let imageUrlLink = spinnerFix["imagePath"] as? String
+                   
+                    if let imageUrl = imageUrlLink
+                    {
+                        downloadTexture(withUrl: imageUrl, withCompletion: { (texture) in
+                            
+                            let spinnerNewData =     Spinner(id:            spinnerFix["id"] as? Int,
+                                                             imageUrlLink:  imageUrlLink,
+                                                             texture:       texture,
+                                                             redNeeded:     spinnerFix["redNeeded"] as? Int,
+                                                             blueNeeded:    spinnerFix["blueNeeded"] as? Int,
+                                                             greenNeeded:   spinnerFix["greenNeeded"] as? Int,
+                                                             mainSpinner:   false,
+                                                             unlocked:      false)
+                            
+                                ArchiveManager.spinnersArrayInDisk[index] = spinnerNewData
+                        })
+                    }
+                }
         })
         { (error) in
             print(error.localizedDescription)

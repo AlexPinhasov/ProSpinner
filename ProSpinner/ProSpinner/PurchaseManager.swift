@@ -48,10 +48,10 @@ class PurchaseManager: NSObject,
     
     func buyProduct()
     {
-        print("buy " + product.productIdentifier)
-        let pay = SKPayment(product: product)
-        SKPaymentQueue.default().add(self)
-        SKPaymentQueue.default().add(pay)
+//        print("buy " + product.productIdentifier)
+//        let pay = SKPayment(product: product)
+//        SKPaymentQueue.default().add(self)
+//        SKPaymentQueue.default().add(pay)
     }
     
     

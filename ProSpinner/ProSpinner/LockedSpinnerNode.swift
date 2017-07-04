@@ -1,5 +1,5 @@
 //
-//  LockedSpinnerNodeManager.swift
+//  LockedSpinnerNode.swift
 //  ProSpinner
 //
 //  Created by AlexP on 21.6.2017.
@@ -8,11 +8,11 @@
 
 import SpriteKit
 
-class LockedSpinnerNodeManager: SKNode,
-                                Animateable
+class LockedSpinnerNode: SKNode,
+                         Animateable
 {
     private var lockedBackground : SKSpriteNode?
-    private var unlockRedBack    : SKSpriteNode?
+    private var bottomLockedView : SKSpriteNode?
     
     private var redPriceLabel : SKLabelNode?
     private var bluePriceLabel : SKLabelNode?
@@ -25,17 +25,18 @@ class LockedSpinnerNodeManager: SKNode,
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
+        connectOutletsToScene()
     }
     
     func connectOutletsToScene()
     {
         lockedBackground    = self.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerBackground.rawValue) as? SKSpriteNode
-        unlockRedBack       = self.childNode(withName: Constants.NodesInLockedSpinnerView.unlockRedBack.rawValue) as? SKSpriteNode
+        bottomLockedView   = lockedBackground?.childNode(withName: Constants.NodesInLockedSpinnerView.BottomLockedView.rawValue) as? SKSpriteNode
         
         viewInfoLabel      = lockedBackground?.childNode(withName: Constants.NodesInLockedSpinnerView.ViewInfoLabel.rawValue) as? SKLabelNode
-        redPriceLabel      = lockedBackground?.childNode(withName: Constants.NodesInLockedSpinnerView.RedPrice.rawValue) as? SKLabelNode
-        greenPriceLabel    = lockedBackground?.childNode(withName: Constants.NodesInLockedSpinnerView.GreenPrice.rawValue) as? SKLabelNode
-        bluePriceLabel     = lockedBackground?.childNode(withName: Constants.NodesInLockedSpinnerView.BluePrice.rawValue) as? SKLabelNode
+        redPriceLabel      = bottomLockedView?.childNode(withName: Constants.NodesInLockedSpinnerView.RedPrice.rawValue) as? SKLabelNode
+        greenPriceLabel    = bottomLockedView?.childNode(withName: Constants.NodesInLockedSpinnerView.GreenPrice.rawValue) as? SKLabelNode
+        bluePriceLabel     = bottomLockedView?.childNode(withName: Constants.NodesInLockedSpinnerView.BluePrice.rawValue) as? SKLabelNode
     }
     
     func presentNode(shouldPresent present: Bool)
@@ -44,29 +45,23 @@ class LockedSpinnerNodeManager: SKNode,
         {
             self.isHidden = false
             
-            unlockRedBack?.run(SKAction.fadeIn(withDuration: 0.2))
             lockedBackground?.run(SKAction.fadeIn(withDuration: 0.2))
             
-            unlockRedBack?.run(SKAction.scaleX(to: 1, duration: 0.7, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             lockedBackground?.run(SKAction.scaleX(to: 1, duration: 0.7, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             
-            unlockRedBack?.run(SKAction.scaleY(to: 1, duration: 0.4, delay: 0.3, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             lockedBackground?.run(SKAction.scaleY(to: 1, duration: 0.4, delay: 0.3, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             
         }
         else if present == false
         {
-            unlockRedBack?.run(SKAction.scaleY(to: 0, duration: 0.2, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-            lockedBackground?.run(SKAction.scaleY(to: 0, duration: 0.2, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            lockedBackground?.run(SKAction.scaleY(to: 0, duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             
-            unlockRedBack?.run(SKAction.scaleX(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1))
-            lockedBackground?.run(SKAction.scaleX(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1))
+            lockedBackground?.run(SKAction.scaleX(to: 0, duration: 0.3, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             {
                 self.isHidden = true
             }
             
-            unlockRedBack?.run(SKAction.fadeOut(withDuration: 0.2))
-            lockedBackground?.run(SKAction.fadeOut(withDuration: 0.2))
+            lockedBackground?.run(SKAction.fadeOut(withDuration: 0.6))
         }
     }
     
@@ -75,14 +70,15 @@ class LockedSpinnerNodeManager: SKNode,
         if lockedBackgroundIsAtStartingPosition
         {
             viewInfoLabel?.run(SKAction.fadeOut(withDuration: 0.1))
-            viewInfoLabel?.run(SKAction.move(by: CGVector(dx: 0, dy: 8), duration: 0.4))
+            viewInfoLabel?.run(SKAction.move(by: CGVector(dx: 0, dy: -4), duration: 0.4))
             {
                 self.viewInfoLabel?.fontSize = 22
+                self.viewInfoLabel?.fontName = "MyriadPro-BoldCond"
                 self.viewInfoLabel?.text = Constants.LockedScreenStrings.UnlockSpinner.rawValue
                 self.viewInfoLabel?.run(SKAction.fadeIn(withDuration: 0.1))
                 self.pulseUnlockSpinnerLabel()
             }
-            lockedBackground?.run(SKAction.move(by: CGVector(dx: 0, dy: -20), duration: 0.3))
+            bottomLockedView?.run(SKAction.move(by: CGVector(dx: 0, dy: -7), duration: 0.3))
             {
                 self.lockedBackgroundIsAtStartingPosition = false
             }
@@ -94,37 +90,33 @@ class LockedSpinnerNodeManager: SKNode,
         if lockedBackgroundIsAtStartingPosition == false
         {
             viewInfoLabel?.run(SKAction.fadeOut(withDuration: 0.1))
-            viewInfoLabel?.run(SKAction.move(by: CGVector(dx: 0, dy: -8), duration: 0.4))
+            viewInfoLabel?.run(SKAction.move(by: CGVector(dx: 0, dy: 4), duration: 0.4))
             {
                 self.viewInfoLabel?.removeAllActions()
                 self.viewInfoLabel?.setScale(1.0)
-                self.viewInfoLabel?.fontSize = 18
+                self.viewInfoLabel?.fontSize = 20
+                self.viewInfoLabel?.fontName = "MyriadPro-Cond"
                 self.viewInfoLabel?.text = Constants.LockedScreenStrings.DiamondsNeeded.rawValue
                 self.viewInfoLabel?.run(SKAction.fadeIn(withDuration: 0.1))
             }
-            lockedBackground?.run(SKAction.move(by: CGVector(dx: 0, dy: 20), duration: 0.3))
+            bottomLockedView?.run(SKAction.move(by: CGVector(dx: 0, dy: 7), duration: 0.3))
             {
                 self.lockedBackgroundIsAtStartingPosition = true
             }
         }
     }
     
-    func userRequestedToUnlockSpinner(andPressedNode touchedNode: SKNode) -> Bool
+    func userRequestedToUnlockSpinner() -> Bool
     {
-        if let unlockNowLabel = touchedNode as? SKLabelNode
+        if viewInfoLabel?.text == Constants.LockedScreenStrings.UnlockSpinner.rawValue
         {
-            if unlockNowLabel.text == Constants.LockedScreenStrings.UnlockSpinner.rawValue
-            {
-                return true
-            }
-            else //shake view and
-            {
-                shake(node: lockedBackground, withDuration: 0.1)
-                shake(node: unlockRedBack, withDuration: 0.1)
-                return false
-            }
+            return true
         }
-        return false
+        else //shake view and
+        {
+            shake(node: lockedBackground, withDuration: 0.07)
+            return false
+        }
     }
     
     func pulseUnlockSpinnerLabel()

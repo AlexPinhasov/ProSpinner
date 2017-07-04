@@ -13,6 +13,13 @@ class Constants
 {
     struct DiamondsTexture
     {
+        static let blue     = SKTexture(imageNamed: "BlueDiamond")
+        static let red      = SKTexture(imageNamed: "RedDiamond")
+        static let green    = SKTexture(imageNamed: "GreenDiamond")
+    }
+    
+    struct DiamondsCleanTexture
+    {
         static let blue     = SKTexture(imageNamed: "BlueCleanDiamond")
         static let red      = SKTexture(imageNamed: "RedCleanDiamond")
         static let green    = SKTexture(imageNamed: "GreenCleanDiamond")
@@ -71,17 +78,26 @@ class Constants
         case RightArrow = "nextSpinner"
         case ActualLeftArrow = "LeftArrow"
         case ActualRightArrow = "RightArrow"
-        case PlayLabel = "PlayLabel"
         case Spinner   = "spinner"
         case ProgressBars  = "ProgressBars"
         case BuySpinner = "unlock now"
-        case PlayButton = "PlayButton"
-        case MuteSoundButton = "MuteSoundButton"
-        case StoreButton = "StoreButton"
         
         case RedSuccess = "RedSuccess"
         case BlueSuccess = "BlueSuccess"
         case GreenSuccess = "GreenSuccess"
+        
+        case BreifTutorial = "BreifTutorial"
+        
+        case HighScoreRecord = "HighScoreRecord"
+    }
+    
+    enum NodesInPlayNode : String
+    {
+        case PlayNode   = "PlayNode"
+        case PlayLabel  = "PlayLabel"
+        case PlayShadow = "PlayShadow"
+        case RightEar   = "RightEar"
+        case LeftEar    = "LeftEar"
     }
     
     enum NodesInRetryView: String
@@ -90,7 +106,9 @@ class Constants
         case RedDiamondLabel = "RedDiamondLabel"
         case GreenDiamondLabel = "GreenDiamondLabel"
         case RetryButton = "RetryButton"
+        case RetryButtonArrow = "RetryButtonArrow"
         case ExitButton = "ExitButton"
+        case MenuLines = "MenuLines"
         case TimePassed = "TimePassed"
         case TotalDiamondsCollected = "TotalDiamondsCollected"
         case EndGameAlert = "EndGameAlert"
@@ -99,6 +117,10 @@ class Constants
     
     enum NodesInStoreView: String
     {
+        case StoreNode       = "StoreNode"
+        case StoreView       = "StoreView"
+        case StoreButton     = "StoreButton"
+        case StoreButtonShadow       = "StoreButtonShadow"
         case StoreBackground = "StoreBackground"
         case storeAlert = "StoreAlert"
         case exitButton = "ExitButton"
@@ -106,6 +128,8 @@ class Constants
         case smallDiamondGroupCost = "SmallDiamondGroupCost"
         case bigDiamondGroup = "BigDiamondGroup"
         case smallDiamondGroup = "SmallDiamondGroup"
+        case smallPackButton = "smallPackButton"
+        case bigPackButton = "bigPackButton"
     }
     
     enum NodesInPriceTags: String
@@ -123,7 +147,8 @@ class Constants
     enum NodesInLockedSpinnerView: String
     {
         case LockedSpinnerNode = "LockedSpinnerNode"
-        case unlockRedBack     =  "UnlockRedBack"
+        case TopLockedView     =  "TopLockedView"
+        case BottomLockedView     =  "BottomLockedView"
         
         case LockedSpinnerBackground = "LockedSpinnerBackground"
         case RedPrice = "RedPriceLabel"

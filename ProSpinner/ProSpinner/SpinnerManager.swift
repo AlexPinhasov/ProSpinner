@@ -295,7 +295,7 @@ extension SpinnerManager
                                              duration: 0.7,
                                              delay: 0,
                                              usingSpringWithDamping: 0.9,
-                                             initialSpringVelocity: 0.2))
+                                             initialSpringVelocity: 0.5))
             {
                 self.spinnerNode?.zRotation = 0.0
                 self.currentlySwitchingSpinner = false
@@ -388,25 +388,25 @@ extension SpinnerManager
         log.debug("")
         if shake
         {
-            let rotateRightAction = SKAction.rotate(byAngle: -0.06, duration: 0.5)
-            let rotateCenterAction = SKAction.rotate(toAngle: 0.0, duration: 0.3)
-            let rotateLeftAction = SKAction.rotate(byAngle: 0.05, duration: 0.5)
+            let rotateRightAction = SKAction.rotate(byAngle: -0.06, duration: 0.4)
+            let rotateCenterAction = SKAction.rotate(toAngle: 0.0, duration: 0.2)
+            let rotateLeftAction = SKAction.rotate(byAngle: 0.05, duration: 0.4)
         
-            let sequence = SKAction.sequence([SKAction.wait(forDuration: 0.8),
+            let rightSequence = SKAction.sequence([SKAction.wait(forDuration: 0.1),
                                               rotateRightAction,
                                               rotateCenterAction,
                                               rotateRightAction,
-                                              SKAction.wait(forDuration: 0.4),
+                                              SKAction.wait(forDuration: 0.1),
                                               rotateCenterAction,
                                               rotateLeftAction,
                                               rotateCenterAction])
             
-            spinnerNode?.run(SKAction.repeat(sequence, count: 3), withKey: "ShakeLockedSpinner")
+            let leftSequence = rightSequence.reversed()
+            spinnerNode?.run(SKAction.sequence([rightSequence]), withKey: "ShakeLockedSpinner")
         }
         else
         {
             spinnerNode?.removeAction(forKey: "ShakeLockedSpinner")
-            //spinnerNode?.zRotation = 0.0
         }
     }
 }

@@ -29,25 +29,18 @@ class GameViewController: UIViewController
         super.viewDidLoad()
         setSpinnerInArrayOnFirstRun()
         loadScene()
+        loadingScreenDidFinish()
     }
 
-    override func viewDidAppear(_ animated: Bool)
-    {
-        NotificationCenter.default.addObserver(self, selector: #selector(loadingScreenDidFinish), name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
-    }
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
     
 //  MARK: Private methods
     func loadingScreenDidFinish()
     {
          admobManager = AdMobManager(rootViewController: self)
          checkForNewSpinners()
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
     
     private func checkForNewSpinners()
@@ -76,7 +69,7 @@ class GameViewController: UIViewController
     
     private func loadScene()
     {
-        if let sceneNode = SKScene(fileNamed: "LoadingScene")
+        if let sceneNode = SKScene(fileNamed: "LoadingScene2")
         {
             sceneNode.scaleMode = .aspectFill
             // Present the scene
@@ -92,6 +85,17 @@ class GameViewController: UIViewController
     
     private func setSpinnerInArrayOnFirstRun()
     {
+//        let spinner = Spinner(id: 1,
+//                              imageUrlLink: "",
+//                              texture: SKTexture(imageNamed: "newspinner") ,
+//                              redNeeded: 10,
+//                              blueNeeded: 10,
+//                              greenNeeded: 10,
+//                              mainSpinner: true,
+//                              unlocked: true)
+//        ArchiveManager.write_SpinnerToUserDefault(spinners: [spinner])
+//        UserDefaults.standard.synchronize()
+//        
         if ArchiveManager.firstTimeRun == false
         {
             ArchiveManager.firstTimeRun = true
@@ -108,6 +112,7 @@ class GameViewController: UIViewController
             
             ArchiveManager.write_SpinnerToUserDefault(spinners: [spinner])
             set10DiamondsOnFirstRun()
+            UserDefaults.standard.set(0, forKey: UserDefaultKeys.highScore.rawValue)
         }
     }
     

@@ -35,6 +35,7 @@ class DiamondsManager: BaseClass,
     fileprivate var greenDiamondNode: SKSpriteNode!
     
     fileprivate var diamondsIsAtStartingPosition: Bool = true
+    fileprivate var highScoreLabel: SKLabelNode?
 
     private var nextXLocation: CGFloat = 160.0
 
@@ -49,13 +50,14 @@ class DiamondsManager: BaseClass,
     {
         super.init()
         self.scene = scene
+        highScoreLabel = self.scene?.childNode(withName: "HighScore") as? SKLabelNode
     }
     
 //  MARK: Public Game methods
     func gameStarted()
     {
         log.debug("")
-        configureDiamonds()
+        fadeOutDiamondsAndTheirCount()
     }
     
     func tutorialStarted()
@@ -78,7 +80,6 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
-        fadeOutDiamondsAndTheirCount()
     }
 
     @objc func spawnDiamonds()
@@ -153,6 +154,7 @@ class DiamondsManager: BaseClass,
             
         default: break
         }
+        updateHighScore()
         //updateDiamondCount(withDiamond: diamond)
     }
     
@@ -219,7 +221,7 @@ class DiamondsManager: BaseClass,
         {
             if diamondsIsAtStartingPosition
             {
-                fadeInDiamondAndTheirCount()
+                returnDiamondsToStartingPosition()
             }
         }
     }
@@ -258,23 +260,32 @@ class DiamondsManager: BaseClass,
         guard let diamondsPlayerNeed = diamondsPlayerNeed else { return }
         guard let labelNode = labelNode else { return }
         
+        var originalPosition = CGPoint.zero
+        
+        switch labelNode
+        {
+        case redDiamondLabelNode: originalPosition = redDiamondLabelNodeOriginalLocation
+        case blueDiamondLabelNode: originalPosition = blueDiamondLabelNodeOriginalLocation
+        case greenDiamondLabelNode: originalPosition = greenDiamondLabelNodeOriginalLocation
+        default: break
+        }
+        
+        
         if diamondsPlayerHas < diamondsPlayerNeed
         {
             labelNode.setText(diamondNeeded: diamondsPlayerNeed)
-            let labelCenter = (labelNode.diamondsPlayerHave.frame.width + labelNode.diamondsPlayerNeed.frame.width + labelNode.separatorLabel.frame.width) / 2
             
             if labelsAreAtStartingPosition(currentLocation: labelNode.position)
             {
-                labelNode.run(SKAction.move(to: CGPoint(x: labelNode.position.x - labelCenter, y: labelNode.position.y), duration: 0.3))
+                labelNode.run(SKAction.move(to: CGPoint(x: labelNode.position.x - labelNode.frameTotalWidth(), y: labelNode.position.y), duration: 0.3))
             }
         }
         else
         {
             labelNode.setText(diamondNeeded: nil)
-            let labelCenter = (labelNode.diamondsPlayerHave.frame.width + labelNode.diamondsPlayerNeed.frame.width + labelNode.separatorLabel.frame.width) / 2
             if labelsAreAtStartingPosition(currentLocation: labelNode.position) == false
             {
-                labelNode.run(SKAction.move(to: CGPoint(x: labelNode.position.x + labelCenter, y: labelNode.position.y), duration: 0.3))
+                labelNode.run(SKAction.move(to: originalPosition, duration: 0.3))
             }
         }
     }
@@ -351,19 +362,28 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         // Sprite Nodes
-        redDiamondNode.run(SKAction.fadeAlpha(to: 0.3, duration: 0.3))
-        blueDiamondNode.run(SKAction.fadeAlpha(to: 0.3, duration: 0.3))
-        greenDiamondNode.run(SKAction.fadeAlpha(to: 0.3, duration: 0.3))
+        redDiamondNode.run(SKAction.fadeAlpha(to: 0, duration: 0.3))
+        blueDiamondNode.run(SKAction.fadeAlpha(to: 0, duration: 0.3))
+        greenDiamondNode.run(SKAction.fadeAlpha(to: 0, duration: 0.3))
         
         // Label Nodes
-        redDiamondLabelNode.run(SKAction.fadeAlpha(to: 0.4, duration: 0.4))
-        blueDiamondLabelNode.run(SKAction.fadeAlpha(to: 0.4, duration: 0.4))
-        greenDiamondLabelNode.run(SKAction.fadeAlpha(to: 0.4, duration: 0.4))
+        redDiamondLabelNode.run(SKAction.fadeAlpha(to: 0, duration: 0.4))
+        blueDiamondLabelNode.run(SKAction.fadeAlpha(to: 0, duration: 0.4))
+        greenDiamondLabelNode.run(SKAction.fadeAlpha(to: 0, duration: 0.4))
+        
+        highScoreLabel?.text = "0"
+        highScoreLabel?.isHidden = false
+        highScoreLabel?.run(SKAction.fadeAlpha(to: 0.7, duration: 0.5))
     }
     
     func fadeInDiamondAndTheirCount()
     {
         log.debug("")
+        
+        highScoreLabel?.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
+        highScoreLabel?.text = "0"
+        highScoreLabel?.isHidden = true
+        
         // Red Diamond
         redDiamondNode.size = originalDiamondNodeSize
         redDiamondNode.position = redDiamondLocation
@@ -426,6 +446,15 @@ class DiamondsManager: BaseClass,
         }
     }
 
+    private func updateHighScore()
+    {
+        guard let highScoreLabel = highScoreLabel else { return }
+        
+        var highScore = Int(highScoreLabel.text ?? "0") ?? 0
+        highScore += 1
+        highScoreLabel.text = String(highScore)
+    }
+    
     private func randomizeDiamondType() -> Diamond
     {
         log.debug("")

@@ -25,25 +25,24 @@ struct Arrows
 class ManuManager: BaseClass,
                    Animateable
 {
-    fileprivate var playLabel    : SKSpriteNode?
-    fileprivate var storeLabel   : SKSpriteNode?
+    var playNode                 : PlayNode?
+    var storeNode                : StoreNode?
+    var lockedSpinnerView        : LockedSpinnerNode?
     
-    private var leftArrowTriger  : SKSpriteNode?
-    private var rightArrowTriger : SKSpriteNode?
     private var leftArrow        : SKSpriteNode?
     private var rightArrow       : SKSpriteNode?
     
-    private var gameExplanation  : SKLabelNode?
-    var lockedSpinnerViewManager : LockedSpinnerNodeManager?
+    private var gameExplanation  : SKNode?
     fileprivate var spinnerLock : SKSpriteNode?
     
     fileprivate var redSuccessV      : SKSpriteNode?
     fileprivate var blueSuccessV     : SKSpriteNode?
     fileprivate var greenSuccessV    : SKSpriteNode?
     
+    fileprivate var highScoreRecord  : SKLabelNode?
+    
     // Unlock Spinner Master Node
     internal var progressBars: SKNode?
-    internal var lockedSpinnerView: SKNode?
     
     internal var redProgressBarPosition = CGPoint.zero
     internal var blueProgressBarPosition = CGPoint.zero
@@ -60,25 +59,25 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         // Main manu
-        playLabel               = scene?.childNode(withName: Constants.NodesInScene.PlayLabel.rawValue) as? SKSpriteNode
-        storeLabel               = scene?.childNode(withName: Constants.NodesInScene.StoreButton.rawValue) as? SKSpriteNode
+        playNode                = scene?.childNode(withName: Constants.NodesInPlayNode.PlayNode.rawValue) as? PlayNode
+        storeNode               = scene?.childNode(withName: Constants.NodesInStoreView.StoreNode.rawValue) as? StoreNode
         
-        leftArrowTriger         = scene?.childNode(withName: Constants.NodesInScene.LeftArrow.rawValue) as? SKSpriteNode
-        rightArrowTriger        = scene?.childNode(withName: Constants.NodesInScene.RightArrow.rawValue) as? SKSpriteNode
-        leftArrow               = leftArrowTriger?.childNode(withName: Constants.NodesInScene.ActualLeftArrow.rawValue) as? SKSpriteNode
-        rightArrow              = rightArrowTriger?.childNode(withName: Constants.NodesInScene.ActualRightArrow.rawValue) as? SKSpriteNode
+        highScoreRecord         = scene?.childNode(withName: Constants.NodesInScene.HighScoreRecord.rawValue) as? SKLabelNode
+        
+        leftArrow               = scene?.childNode(withName: Constants.NodesInScene.LeftArrow.rawValue) as? SKSpriteNode
+        rightArrow              = scene?.childNode(withName: Constants.NodesInScene.RightArrow.rawValue) as? SKSpriteNode
 
         progressBars            = scene?.childNode(withName: Constants.NodesInScene.ProgressBars.rawValue)
         
-        gameExplanation         = scene?.childNode(withName: "gameExplanation") as? SKLabelNode
+        gameExplanation         = scene?.childNode(withName: Constants.NodesInScene.BreifTutorial.rawValue)
         
-        redSuccessV         =  self.scene?.childNode(withName: Constants.NodesInScene.RedSuccess.rawValue) as? SKSpriteNode
+        redSuccessV         = self.scene?.childNode(withName: Constants.NodesInScene.RedSuccess.rawValue) as? SKSpriteNode
         greenSuccessV       = self.scene?.childNode(withName: Constants.NodesInScene.GreenSuccess.rawValue) as? SKSpriteNode
         blueSuccessV        = self.scene?.childNode(withName: Constants.NodesInScene.BlueSuccess.rawValue) as? SKSpriteNode
         
-        lockedSpinnerViewManager = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNodeManager
-        lockedSpinnerViewManager?.connectOutletsToScene()
-       spinnerLock = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
+        lockedSpinnerView = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNode
+        
+        spinnerLock = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
     }
 
 //  MARK: Public methods
@@ -88,6 +87,7 @@ class ManuManager: BaseClass,
         initSpriteFromScene()
         showArrows()
         saveProgressBarPosition()
+        updateHighScore()
     }
     
 //  MARK: Game life cycle
@@ -96,7 +96,7 @@ class ManuManager: BaseClass,
         log.debug("")
         hideArrows()
         hideManuItems()
-        showGameExplanation()
+        showGameExplanation(shouldShow: true)
     }
     
     func tutorialStarted()
@@ -109,6 +109,7 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         showArrows()
+        updateHighScore()
     }
     
 //  MARK: Spinner Locked/Unlocked master methods
@@ -120,6 +121,7 @@ class ManuManager: BaseClass,
         displayProgressBars(shouldShow: true,with: diamondCount)
         showProgressBarOrV(withValues: diamondCount)
         animateSpinnerLockScaleUp()
+        pointDirectionArrowsMoveAction()
     }
     
     func handleSpinnerPresentedIsUnlocked()
@@ -129,6 +131,7 @@ class ManuManager: BaseClass,
         removeSuccessV()
         displayProgressBars(shouldShow: false, with: nil)
         PresentLockedSpinnerView(shouldPresent: false)
+        pointDirectionArrowsMoveAction()
     }
     
     
@@ -165,8 +168,8 @@ class ManuManager: BaseClass,
     func PresentLockedSpinnerView(shouldPresent present: Bool)
     {
         log.debug("")
-        lockedSpinnerViewManager?.presentNode(shouldPresent: present)
-        lockedSpinnerViewManager?.setDiamondsPlayerNeed()
+        lockedSpinnerView?.presentNode(shouldPresent: present)
+        lockedSpinnerView?.setDiamondsPlayerNeed()
     }
     
     func decideBuyDiamondCashOrDiamonds(with diamonds: (Int,Int,Int)?)
@@ -185,18 +188,18 @@ class ManuManager: BaseClass,
 
         if playerHasEnoghDiamonds
         {
-            lockedSpinnerViewManager?.userCanUnlockSpinner()
+            lockedSpinnerView?.userCanUnlockSpinner()
         }
         else
         {
-            lockedSpinnerViewManager?.userCantUnlockSpinner()
+            lockedSpinnerView?.userCantUnlockSpinner()
         }
     }
     
     func purchasedNewSpinner()
     {
         log.debug("")
-        lockedSpinnerViewManager?.presentNode(shouldPresent: false)
+        lockedSpinnerView?.presentNode(shouldPresent: false)
         animateSpinnerLockFadeOut()
         removeSuccessV()
         showManuItems()
@@ -206,39 +209,72 @@ class ManuManager: BaseClass,
     private func hideArrows()
     {
         log.debug("")
-        leftArrowTriger?.run(SKAction.scale(to: 0 , duration: 0.3))
-        rightArrowTriger?.run(SKAction.scale(to: 0, duration: 0.3))
+        leftArrow?.run(SKAction.scale(to: 0 , duration: 0.3))
+        rightArrow?.run(SKAction.scale(to: 0, duration: 0.3))
     }
     
     private func showArrows()
     {
         log.debug("")
-        leftArrowTriger?.size = CGSize(width: 30, height: 28)
-        rightArrowTriger?.size = CGSize(width: 30, height: 28)
-        leftArrowTriger?.run(SKAction.scale(to: 1, duration: 0.7))
-        rightArrowTriger?.run(SKAction.scale(to: 1, duration: 0.7))
+        leftArrow?.run(SKAction.scale(to: 1, duration: 0.7))
+        rightArrow?.run(SKAction.scale(to: 1, duration: 0.7))
+        {
+            self.pointDirectionArrowsMoveAction()
+        }
     }
     
-    private func hideManuItems()
+    private func updateHighScore()
+    {
+        let highScorePrefix = "High Score: "
+        let actualHighScore = String(ArchiveManager.highScoreRecord)
+        
+        self.highScoreRecord?.text = highScorePrefix + actualHighScore
+    }
+    
+    private func pointDirectionArrowsMoveAction()
+    {
+        let moveRightArrow_Right = SKAction.moveTo(x: 282, duration: 0.2)
+        let moveRightArrow_Left = SKAction.moveTo(x: 272, duration: 0.2)
+        
+        let moveLeftArrow_Left = SKAction.moveTo(x: 36, duration: 0.2)
+        let moveLeftArrow_Right = SKAction.moveTo(x: 46, duration: 0.2)
+        
+        let rightArrowSequence = SKAction.sequence([moveRightArrow_Right,moveRightArrow_Left,moveRightArrow_Right,moveRightArrow_Left])
+        let leftArrowSequence = SKAction.sequence([moveLeftArrow_Left,moveLeftArrow_Right,moveLeftArrow_Left,moveLeftArrow_Right])
+        
+        rightArrow?.run(rightArrowSequence)
+        leftArrow?.run(leftArrowSequence)
+    }
+    
+    func hideManuItems()
     {
         log.debug("")
-        playLabel?.run(SKAction.scale(to: 0, duration: 0.0))
-        storeLabel?.run(SKAction.scale(to: 0, duration: 0.3))
+        playNode?.showNode()
+        storeNode?.showNode()
+        highScoreRecord?.run(SKAction.fadeOut(withDuration: 0.3))
     }
     
     func showManuItems()
     {
         log.debug("")
-        playLabel?.run(SKAction.scale(to: 1, duration: 0.0))
-        storeLabel?.run(SKAction.scale(to: 1, duration: 0.5))
+        playNode?.hideNode()
+        storeNode?.hideNode()
+        highScoreRecord?.run(SKAction.fadeIn(withDuration: 0.4))
     }
     
-    private func showGameExplanation()
+    func showGameExplanation(shouldShow show: Bool)
     {
         log.debug("")
-        gameExplanation?.run(SKAction.sequence([SKAction.fadeIn(withDuration: 0.2),
-                                                SKAction.wait(forDuration: 2),
-                                                SKAction.fadeOut(withDuration: 0.2)]))
+        
+        if show
+        {
+            gameExplanation?.run(SKAction.fadeIn(withDuration: 0.2))
+        }
+        else
+        {
+            gameExplanation?.run(SKAction.fadeOut(withDuration: 0.2))
+
+        }
     }
     
     func animateSpinnerLockScaleUp()
@@ -267,14 +303,12 @@ extension ManuManager
         {
             decideBuyDiamondCashOrDiamonds(with: diamonds)
             
-            playLabel?.run(SKAction.scale(to: 0.0, duration: 0.4))
-            storeLabel?.run(SKAction.scale(to: 0.0, duration: 0.4))
+            hideManuItems()
             progressBars?.run(SKAction.fadeIn(withDuration: 0.4))
         }
         else
         {
-            playLabel?.run(SKAction.scale(to: 1.0, duration: 0.4))
-            storeLabel?.run(SKAction.scale(to: 1.0, duration: 0.4))
+            showManuItems()
             progressBars?.run(SKAction.fadeOut(withDuration: 0.2))
         }
     }

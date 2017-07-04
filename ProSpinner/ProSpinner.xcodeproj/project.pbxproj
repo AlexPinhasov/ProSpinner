@@ -12,7 +12,7 @@
 		0A089F461EDF0D7700415EFC /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A089F451EDF0D7700415EFC /* Spinner.swift */; };
 		0A0A24101EF9355500044F8A /* MyriadPro-BoldCondIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E41EF71DB00094119E /* MyriadPro-BoldCondIt.otf */; };
 		0A0A24111EF935A100044F8A /* MyriadPro-CondIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E71EF71DB00094119E /* MyriadPro-CondIt.otf */; };
-		0A0A24131EFA2D3E00044F8A /* LockedSpinnerNodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0A24121EFA2D3E00044F8A /* LockedSpinnerNodeManager.swift */; };
+		0A0A24131EFA2D3E00044F8A /* LockedSpinnerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0A24121EFA2D3E00044F8A /* LockedSpinnerNode.swift */; };
 		0A0D16F81EE6695500C4DD45 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0D16F71EE6695500C4DD45 /* Constants.swift */; };
 		0A11F5E61EE3104B0036A00F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A11F5E51EE3104B0036A00F /* StoreKit.framework */; };
 		0A11F5E81EE3175F0036A00F /* AdMobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11F5E71EE3175F0036A00F /* AdMobManager.swift */; };
@@ -21,6 +21,8 @@
 		0A14F34A1EE175B300C5AA5D /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14F3491EE175B300C5AA5D /* PurchaseManager.swift */; };
 		0A15917E1EE3C142005320A9 /* DownloadingDelegateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15917D1EE3C142005320A9 /* DownloadingDelegateDataSource.swift */; };
 		0A1591801EE3C193005320A9 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15917F1EE3C193005320A9 /* ImageCollectionCell.swift */; };
+		0A1734261F0679DE00140277 /* PlayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1734251F0679DE00140277 /* PlayNode.swift */; };
+		0A1734291F067F5500140277 /* ButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1734281F067F5500140277 /* ButtonProtocol.swift */; };
 		0A17F1281EE4B377002DE42F /* LoadingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0A17F1271EE4B377002DE42F /* LoadingScene.sks */; };
 		0A17F12A1EE4B6A5002DE42F /* LoadingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A17F1291EE4B6A5002DE42F /* LoadingScene.swift */; };
 		0A1C73EC1EF71EC00094119E /* MyriadPro-BoldCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E31EF71DB00094119E /* MyriadPro-BoldCond.otf */; };
@@ -35,6 +37,7 @@
 		0A305A0B1EED9F5600BA3A4B /* Animateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A305A0A1EED9F5600BA3A4B /* Animateable.swift */; };
 		0A3081A61EEA07CF00892266 /* CustomSKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3081A51EEA07CF00892266 /* CustomSKLabelNode.swift */; };
 		0A3658A71ED20D9900322024 /* Woosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A3658A61ED20D9900322024 /* Woosh.mp3 */; };
+		0A75A04B1F07CFDA00A9752F /* StoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75A04A1F07CFDA00A9752F /* StoreNode.swift */; };
 		0A8385861EF5394B0044D1C7 /* OCRAStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A8385851EF5393C0044D1C7 /* OCRAStd.otf */; };
 		0A8385881EF63A350044D1C7 /* RetryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8385871EF63A350044D1C7 /* RetryView.swift */; };
 		0A8B2E991ED8811E0025856E /* Tick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B2E981ED8811D0025856E /* Tick.mp3 */; };
@@ -43,6 +46,8 @@
 		0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE7CD801EFCE55200236992 /* StoreView.swift */; };
 		0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE83A771EDC8F380066E3DD /* BaseClass.swift */; };
 		0AE83A7A1EDC91580066E3DD /* ManuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE83A791EDC91580066E3DD /* ManuManager.swift */; };
+		0AF5088F1F08AD770062F8E8 /* LoadingScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5088E1F08AD770062F8E8 /* LoadingScene2.swift */; };
+		0AF508911F08ADAE0062F8E8 /* LoadingScene2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0AF508901F08ADAE0062F8E8 /* LoadingScene2.sks */; };
 		58D8CE085EEC2BF1CF77C9BF /* Pods_ProSpinnerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCB592AC0294D9475632625 /* Pods_ProSpinnerUITests.framework */; };
 		918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F11EC9CC8600886039 /* AppDelegate.swift */; };
 		918F18F41EC9CC8600886039 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 918F18F31EC9CC8600886039 /* GameScene.sks */; };
@@ -54,6 +59,7 @@
 		918F19021EC9CC8600886039 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 918F19001EC9CC8600886039 /* LaunchScreen.storyboard */; };
 		918F190D1EC9CC8700886039 /* ProSpinnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F190C1EC9CC8700886039 /* ProSpinnerTests.swift */; };
 		918F19181EC9CC8700886039 /* ProSpinnerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F19171EC9CC8700886039 /* ProSpinnerUITests.swift */; };
+		9190A2791F03B698005DD47C /* SKSpriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9190A2781F03B698005DD47C /* SKSpriteButton.swift */; };
 		C2CA48EAF48DA5B02959DF81 /* Pods_ProSpinnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4E75FA348AA94CACB4B414 /* Pods_ProSpinnerTests.framework */; };
 		DF8F4E427A0F79FC450494A0 /* Pods_ProSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C975129446750B0FD8E9718 /* Pods_ProSpinner.framework */; };
 /* End PBXBuildFile section */
@@ -79,7 +85,7 @@
 		0A04F47B1ED062F2004F374C /* SpinnerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerManager.swift; sourceTree = "<group>"; };
 		0A04F47D1ED06E7C004F374C /* DaimondsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaimondsManager.swift; sourceTree = "<group>"; };
 		0A089F451EDF0D7700415EFC /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
-		0A0A24121EFA2D3E00044F8A /* LockedSpinnerNodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockedSpinnerNodeManager.swift; sourceTree = "<group>"; };
+		0A0A24121EFA2D3E00044F8A /* LockedSpinnerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockedSpinnerNode.swift; sourceTree = "<group>"; };
 		0A0D16F71EE6695500C4DD45 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0A11F5E51EE3104B0036A00F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0A11F5E71EE3175F0036A00F /* AdMobManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdMobManager.swift; sourceTree = "<group>"; };
@@ -88,6 +94,8 @@
 		0A14F3491EE175B300C5AA5D /* PurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		0A15917D1EE3C142005320A9 /* DownloadingDelegateDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadingDelegateDataSource.swift; sourceTree = "<group>"; };
 		0A15917F1EE3C193005320A9 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
+		0A1734251F0679DE00140277 /* PlayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayNode.swift; sourceTree = "<group>"; };
+		0A1734281F067F5500140277 /* ButtonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonProtocol.swift; sourceTree = "<group>"; };
 		0A17F1271EE4B377002DE42F /* LoadingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LoadingScene.sks; sourceTree = "<group>"; };
 		0A17F1291EE4B6A5002DE42F /* LoadingScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingScene.swift; sourceTree = "<group>"; };
 		0A1C73E21EF71DB00094119E /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Bold.otf"; sourceTree = "<group>"; };
@@ -110,6 +118,7 @@
 		0A305A0A1EED9F5600BA3A4B /* Animateable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animateable.swift; sourceTree = "<group>"; };
 		0A3081A51EEA07CF00892266 /* CustomSKLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSKLabelNode.swift; sourceTree = "<group>"; };
 		0A3658A61ED20D9900322024 /* Woosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Woosh.mp3; sourceTree = "<group>"; };
+		0A75A04A1F07CFDA00A9752F /* StoreNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreNode.swift; sourceTree = "<group>"; };
 		0A8385851EF5393C0044D1C7 /* OCRAStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OCRAStd.otf; sourceTree = "<group>"; };
 		0A8385871EF63A350044D1C7 /* RetryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryView.swift; sourceTree = "<group>"; };
 		0A8B2E981ED8811D0025856E /* Tick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tick.mp3; sourceTree = "<group>"; };
@@ -118,6 +127,8 @@
 		0AE7CD801EFCE55200236992 /* StoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		0AE83A771EDC8F380066E3DD /* BaseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseClass.swift; sourceTree = "<group>"; };
 		0AE83A791EDC91580066E3DD /* ManuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManuManager.swift; sourceTree = "<group>"; };
+		0AF5088E1F08AD770062F8E8 /* LoadingScene2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingScene2.swift; sourceTree = "<group>"; };
+		0AF508901F08ADAE0062F8E8 /* LoadingScene2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LoadingScene2.sks; sourceTree = "<group>"; };
 		0E4E75FA348AA94CACB4B414 /* Pods_ProSpinnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProSpinnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FCB592AC0294D9475632625 /* Pods_ProSpinnerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProSpinnerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36BDCBC0E9A2285D9458F24E /* Pods-ProSpinnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinnerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinnerTests/Pods-ProSpinnerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +150,7 @@
 		918F19131EC9CC8700886039 /* ProSpinnerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProSpinnerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		918F19171EC9CC8700886039 /* ProSpinnerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProSpinnerUITests.swift; sourceTree = "<group>"; };
 		918F19191EC9CC8700886039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9190A2781F03B698005DD47C /* SKSpriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKSpriteButton.swift; sourceTree = "<group>"; };
 		9C975129446750B0FD8E9718 /* Pods_ProSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A587CEF11A1F771654946F81 /* Pods-ProSpinnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinnerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinnerTests/Pods-ProSpinnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2B0A04A5A52208058D9F105 /* Pods-ProSpinnerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinnerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinnerUITests/Pods-ProSpinnerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -216,6 +228,18 @@
 			name = "Downloading View Controller";
 			sourceTree = "<group>";
 		};
+		0A1734271F0679E300140277 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				0A0A24121EFA2D3E00044F8A /* LockedSpinnerNode.swift */,
+				0A8385871EF63A350044D1C7 /* RetryView.swift */,
+				0AE7CD801EFCE55200236992 /* StoreView.swift */,
+				0A1734251F0679DE00140277 /* PlayNode.swift */,
+				0A75A04A1F07CFDA00A9752F /* StoreNode.swift */,
+			);
+			name = Nodes;
+			sourceTree = "<group>";
+		};
 		0A1D71321ED9822D00331753 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,9 +283,7 @@
 				0A089F451EDF0D7700415EFC /* Spinner.swift */,
 				0A3081A51EEA07CF00892266 /* CustomSKLabelNode.swift */,
 				0A1E096B1EEEC21100041C45 /* ProgressBar.swift */,
-				0A8385871EF63A350044D1C7 /* RetryView.swift */,
-				0A0A24121EFA2D3E00044F8A /* LockedSpinnerNodeManager.swift */,
-				0AE7CD801EFCE55200236992 /* StoreView.swift */,
+				9190A2781F03B698005DD47C /* SKSpriteButton.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -272,6 +294,7 @@
 				918F18F31EC9CC8600886039 /* GameScene.sks */,
 				918F18F51EC9CC8600886039 /* Actions.sks */,
 				0A17F1271EE4B377002DE42F /* LoadingScene.sks */,
+				0AF508901F08ADAE0062F8E8 /* LoadingScene2.sks */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -280,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				0A305A0A1EED9F5600BA3A4B /* Animateable.swift */,
+				0A1734281F067F5500140277 /* ButtonProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -333,11 +357,13 @@
 				0AE83A761EDC8F260066E3DD /* Base Class */,
 				0AE83A731EDC8E680066E3DD /* Protocols */,
 				0A1D71321ED9822D00331753 /* Font */,
+				0A1734271F0679E300140277 /* Nodes */,
 				0A8B2E9B1ED8C3A20025856E /* Models */,
 				0A8B2E9A1ED8C3920025856E /* Managers */,
 				0A8B2E9E1ED8C5140025856E /* Scenes */,
 				918F18F71EC9CC8600886039 /* GameScene.swift */,
 				0A17F1291EE4B6A5002DE42F /* LoadingScene.swift */,
+				0AF5088E1F08AD770062F8E8 /* LoadingScene2.swift */,
 				0A11F5EB1EE333B30036A00F /* View Controllers */,
 				0A04F47A1ED0629A004F374C /* Associated Files */,
 			);
@@ -493,6 +519,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AF508911F08ADAE0062F8E8 /* LoadingScene2.sks in Resources */,
 				0A8385861EF5394B0044D1C7 /* OCRAStd.otf in Resources */,
 				0A1D71341ED9826600331753 /* Flea Market Finds.ttf in Resources */,
 				918F18FD1EC9CC8600886039 /* Main.storyboard in Resources */,
@@ -687,7 +714,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A2E86471EDD6B9600380D41 /* NetworkManager.swift in Sources */,
+				0A1734291F067F5500140277 /* ButtonProtocol.swift in Sources */,
 				0A289C0C1EEE5C21000AED6B /* TutorialManager.swift in Sources */,
+				0A75A04B1F07CFDA00A9752F /* StoreNode.swift in Sources */,
 				0A1591801EE3C193005320A9 /* ImageCollectionCell.swift in Sources */,
 				0A8385881EF63A350044D1C7 /* RetryView.swift in Sources */,
 				0A3081A61EEA07CF00892266 /* CustomSKLabelNode.swift in Sources */,
@@ -702,15 +731,18 @@
 				0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */,
 				0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */,
 				918F18FA1EC9CC8600886039 /* GameViewController.swift in Sources */,
+				0AF5088F1F08AD770062F8E8 /* LoadingScene2.swift in Sources */,
 				918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */,
 				0A04F47E1ED06E7C004F374C /* DaimondsManager.swift in Sources */,
+				0A1734261F0679DE00140277 /* PlayNode.swift in Sources */,
 				0A0D16F81EE6695500C4DD45 /* Constants.swift in Sources */,
 				0A15917E1EE3C142005320A9 /* DownloadingDelegateDataSource.swift in Sources */,
+				9190A2791F03B698005DD47C /* SKSpriteButton.swift in Sources */,
 				0ADCF0D41EDD9B2D00CE1C8B /* ArchiveManager.swift in Sources */,
 				0A305A0B1EED9F5600BA3A4B /* Animateable.swift in Sources */,
 				0AE83A7A1EDC91580066E3DD /* ManuManager.swift in Sources */,
 				0A11F5E81EE3175F0036A00F /* AdMobManager.swift in Sources */,
-				0A0A24131EFA2D3E00044F8A /* LockedSpinnerNodeManager.swift in Sources */,
+				0A0A24131EFA2D3E00044F8A /* LockedSpinnerNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
