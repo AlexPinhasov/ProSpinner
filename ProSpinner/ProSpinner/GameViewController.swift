@@ -26,6 +26,7 @@ class GameViewController: UIViewController
 //  MARK: View's Life cycle
     override func viewDidLoad()
     {
+        log.debug()
         super.viewDidLoad()
         setSpinnerInArrayOnFirstRun()
         loadScene()
@@ -39,8 +40,9 @@ class GameViewController: UIViewController
 //  MARK: Private methods
     func loadingScreenDidFinish()
     {
-         admobManager = AdMobManager(rootViewController: self)
-         checkForNewSpinners()
+        log.debug()
+        admobManager = AdMobManager(rootViewController: self)
+        checkForNewSpinners()
     }
     
     private func checkForNewSpinners()
@@ -69,6 +71,7 @@ class GameViewController: UIViewController
     
     private func loadScene()
     {
+        log.debug()
         if let loadingSceneNode = LoadingScene2(fileNamed: "LoadingScene2")
         {
             loadingSceneNode.scaleMode = .aspectFill
@@ -89,6 +92,7 @@ class GameViewController: UIViewController
     
     private func setSpinnerInArrayOnFirstRun()
     {
+        log.debug()
         if ArchiveManager.firstTimeRun == false
         {
             ArchiveManager.firstTimeRun = true
@@ -111,6 +115,7 @@ class GameViewController: UIViewController
     
     private func set10DiamondsOnFirstRun()
     {
+        log.debug()
         UserDefaults.standard.set(49, forKey: UserDefaultKeys.red.rawValue)
         UserDefaults.standard.set(49, forKey: UserDefaultKeys.blue.rawValue)
         UserDefaults.standard.set(49, forKey: UserDefaultKeys.green.rawValue)
@@ -118,6 +123,7 @@ class GameViewController: UIViewController
     
     func beginDownload()
     {
+        log.debug()
         NetworkManager.handleNewSpinnersAvailable()
 
         if let downloadViewController = storyboard?.instantiateViewController(withIdentifier: "DownloadingViewController")

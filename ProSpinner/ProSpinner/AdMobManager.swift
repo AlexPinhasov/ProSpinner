@@ -54,6 +54,7 @@ class AdMobManager: NSObject,
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
         bannerView.adUnitID = "ca-app-pub-9437548574063413/3716115489"
         bannerView.rootViewController = rootViewController
+        rootViewController?.view.addSubview(bannerView)
         
         let request = GADRequest()
         bannerView.load(request)
@@ -61,7 +62,6 @@ class AdMobManager: NSObject,
     
     func addBannerToView()
     {
-        rootViewController?.view.addSubview(bannerView)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
     

@@ -19,10 +19,10 @@ class NetworkManager
     
     static func checkForNewSpinners(withCompletion block: @escaping (Bool) -> Void)
     {
-        log.debug("")
         let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
         backgroundQueue.async(execute:
         {
+            log.debug("")
             database.child("NumberOfSpinners").observeSingleEvent(of: .value, with:
             { (snapshot) in
                 

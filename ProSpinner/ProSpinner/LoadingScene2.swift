@@ -17,12 +17,14 @@ class LoadingScene2: SKScene
     
     override func didMove(to view: SKView)
     {
+        log.debug()
         rotateSpinner()
         getTexturesToLoad()
     }
     
     func getMainSpinnerTexture() -> SKTexture?
     {
+        log.debug()
         _ = ArchiveManager.read_SpinnersFromUserDefault()
         let mainSpinner = ArchiveManager.spinnersArrayInDisk[ArchiveManager.mainSpinnerLocation]
         return mainSpinner.texture
@@ -30,6 +32,7 @@ class LoadingScene2: SKScene
     
     func rotateSpinner()
     {
+        log.debug()
         let rotateLeftAngle = -(CGFloat.pi * 2)
         let rotateAction = SKAction.rotate(byAngle: rotateLeftAngle, duration: 2)
         spinnerInScene?.run(SKAction.repeatForever(rotateAction))
@@ -40,6 +43,7 @@ class LoadingScene2: SKScene
         let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
         backgroundQueue.async(execute:
         {
+            log.debug()
             let spinnerArray = ArchiveManager.spinnersArrayInDisk
             self.checkForCorruptedSpinnersObjects(inArray : spinnerArray)
             self.loadNextScene()
@@ -55,6 +59,10 @@ class LoadingScene2: SKScene
             self.textures?.append(Constants.DiamondsTexture.red)
             self.textures?.append(Constants.DiamondsTexture.blue)
             self.textures?.append(Constants.DiamondsTexture.green)
+            self.textures?.append(SKTexture(imageNamed: "RedCleanDiamond"))
+            self.textures?.append(SKTexture(imageNamed: "BlueCleanDiamond"))
+            self.textures?.append(SKTexture(imageNamed: "GreenCleanDiamond"))
+
             self.textures?.append(SKTexture(imageNamed: "RightEar"))
             self.textures?.append(SKTexture(imageNamed: "LeftEar"))
             self.textures?.append(SKTexture(imageNamed: "PlayPath"))
@@ -71,6 +79,7 @@ class LoadingScene2: SKScene
     
     func checkForCorruptedSpinnersObjects(inArray spinnersArray: [Spinner])
     {
+        log.debug()
         for (index,spinner) in spinnersArray.enumerated()
         {
             if spinner.texture == nil
@@ -82,6 +91,7 @@ class LoadingScene2: SKScene
     
     func preloadTextures()
     {
+        log.debug()
         guard let textures = textures else { presentNextScene() ; return }
         SKTexture.preload(textures)
         {
@@ -91,6 +101,7 @@ class LoadingScene2: SKScene
     
     @objc func presentNextScene()
     {
+        log.debug()
         DispatchQueue.main.async
         {
             guard let nextScene = self.nextScene else { return }
@@ -101,6 +112,7 @@ class LoadingScene2: SKScene
     
     @objc func loadNextScene()
     {
+        log.debug()
         if let scene = GameScene(fileNamed: "GameScene")
         {
             nextScene = scene

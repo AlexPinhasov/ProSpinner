@@ -34,7 +34,6 @@ class GameScene: SKScene,
     {
         log.debug("")
         handleSwipeConfiguration()
-        NotificationCenter.default.post(name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
 //  MARK: Physics Contact Delegate
     func didBegin(_ contact: SKPhysicsContact)
@@ -129,19 +128,10 @@ class GameScene: SKScene,
             }
         }
     }
-    var shouldNotifyDiamondsManagerToStartGame = false
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         log.debug("")
-        
-        if GameStatus.Playing && shouldNotifyDiamondsManagerToStartGame
-        {
-            shouldNotifyDiamondsManagerToStartGame = false
-            spinnerManager?.rotateToOtherDirection()
-            diamondsManager?.configureDiamonds()
-            manuManager?.showGameExplanation(shouldShow: false)
-            return
-        }
         
         for touch in touches
         {
@@ -207,14 +197,16 @@ class GameScene: SKScene,
         }
         else
         {
+            GameStatus.Playing = true
             retryView?.gameStarted()
             manuManager?.gameStarted()
             diamondsManager?.gameStarted()
             spinnerManager?.gameStarted()
-            shouldNotifyDiamondsManagerToStartGame = true
+            manuManager?.showGameExplanation(startSpining: {
+                self.spinnerManager?.rotateToOtherDirection()
+                self.diamondsManager?.configureDiamonds()
+            })
         }
-        
-        GameStatus.Playing = true
     }
     
     func finishedReseting()

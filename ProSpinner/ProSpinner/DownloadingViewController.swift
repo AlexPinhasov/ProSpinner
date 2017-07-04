@@ -21,6 +21,7 @@ class DownloadingViewController: UIViewController
 //  MARK: View lifecycle
     override func viewDidLoad()
     {
+        log.debug()
         super.viewDidLoad()
         downloadingDelegateDataSource = DownloadingDelegateDataSource(collectionView: collectionView)
         collectionView.delegate = downloadingDelegateDataSource
@@ -30,6 +31,7 @@ class DownloadingViewController: UIViewController
     
     override func viewDidAppear(_ animated: Bool)
     {
+        log.debug()
         UIView.animate(withDuration: 0.2)
         {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
@@ -39,6 +41,7 @@ class DownloadingViewController: UIViewController
 //  MARK: Private methods
     private func addObservers()
     {
+        log.debug()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(newSpinnerAvailable),
                                                name: NSNotification.Name(rawValue: NotificationName.notifyWithNewTexture.rawValue),
@@ -51,6 +54,7 @@ class DownloadingViewController: UIViewController
     
     @objc private func newSpinnerAvailable(notification: NSNotification)
     {
+        log.debug()
         if let spinnerTexture = notification.userInfo?["spinner"] as? SKTexture
         {
             downloadingDelegateDataSource?.newSpinnerAvailable(spinnerTexture: spinnerTexture)
@@ -59,6 +63,7 @@ class DownloadingViewController: UIViewController
     
     @objc private func removeDownloadView()
     {
+        log.debug()
         indicator.stopAnimating()
         closeButton.isEnabled = true
         downloadingDelegateDataSource?.removeObserver()
@@ -67,7 +72,7 @@ class DownloadingViewController: UIViewController
 
     @IBAction func dismissViewController(sender: UIButton)
     {
-
+        log.debug()
         UIView.animate(withDuration: 0.2, animations: {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
 

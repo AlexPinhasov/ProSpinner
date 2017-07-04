@@ -75,8 +75,6 @@ class SpinnerManager: BaseClass,
         _ = scaleDownSpinner()
         TutorialManager.changeZposition(to: 0)
         TutorialManager.fadeInScreen()
-        //TutorialManager.present(sprite)
-        //rotateSpinnerTutorial()
     }
     
     func gameOver()

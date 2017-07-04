@@ -96,7 +96,6 @@ class ManuManager: BaseClass,
         log.debug("")
         hideArrows()
         hideManuItems()
-        showGameExplanation(shouldShow: true)
     }
     
     func tutorialStarted()
@@ -244,36 +243,38 @@ class ManuManager: BaseClass,
         
         rightArrow?.run(rightArrowSequence)
         leftArrow?.run(leftArrowSequence)
+        {
+            NotificationCenter.default.post(name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
+        }
     }
     
     func hideManuItems()
     {
         log.debug("")
-        playNode?.showNode()
-        storeNode?.showNode()
+        playNode?.hideNode()
+        storeNode?.hideNode()
         highScoreRecord?.run(SKAction.fadeOut(withDuration: 0.3))
     }
     
     func showManuItems()
     {
         log.debug("")
-        playNode?.hideNode()
-        storeNode?.hideNode()
+        playNode?.showNode()
+        storeNode?.showNode()
         highScoreRecord?.run(SKAction.fadeIn(withDuration: 0.4))
     }
     
-    func showGameExplanation(shouldShow show: Bool)
+    func showGameExplanation(startSpining: @escaping () -> Void)
     {
         log.debug("")
-        
-        if show
-        {
-            gameExplanation?.run(SKAction.fadeIn(withDuration: 0.2))
-        }
-        else
-        {
-            gameExplanation?.run(SKAction.fadeOut(withDuration: 0.2))
 
+        let fadeIn = SKAction.fadeIn(withDuration: 0.3)
+        let wait = SKAction.wait(forDuration: 1.4)
+        let fadeOut = SKAction.fadeOut(withDuration: 0.3)
+        
+        gameExplanation?.run(SKAction.sequence([ fadeIn,wait,fadeOut ]))
+        {
+            startSpining()
         }
     }
     

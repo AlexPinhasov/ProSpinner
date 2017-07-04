@@ -84,6 +84,7 @@ class DiamondsManager: BaseClass,
 
     @objc func spawnDiamonds()
     {
+        log.debug("")
         guard let scene = scene else { return }
         let nextDiamond = randomizeDiamondType()
         

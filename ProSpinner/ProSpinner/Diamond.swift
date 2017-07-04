@@ -16,6 +16,7 @@ class Diamond: SKSpriteNode
     
     init()
     {
+        log.debug()
         super.init(texture: nil, color: .clear, size: CGSize(width: 35, height: 27))
   
         var physicsCategory : UInt32! = 1
