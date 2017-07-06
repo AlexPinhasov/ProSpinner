@@ -24,7 +24,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NCv-RO-ANR">
                                 <rect key="frame" x="9.5" y="149.5" width="301" height="315"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="newspinner" translatesAutoresizingMaskIntoConstraints="NO" id="4ET-dT-B0b">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="blackSpinner" translatesAutoresizingMaskIntoConstraints="NO" id="4ET-dT-B0b">
                                         <rect key="frame" x="20" y="54.5" width="261" height="241"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="261" id="6pR-C7-gxJ"/>
@@ -73,6 +73,6 @@
     </scenes>
     <resources>
         <image name="RedDiamond" width="586" height="455"/>
-        <image name="newspinner" width="700" height="700"/>
+        <image name="blackSpinner" width="700" height="700"/>
     </resources>
 </document>

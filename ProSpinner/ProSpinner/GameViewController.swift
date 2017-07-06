@@ -101,7 +101,7 @@ class GameViewController: UIViewController
 
             let spinner = Spinner(id: 1,
                                   imageUrlLink: "",
-                                  texture: SKTexture(imageNamed: "newspinner") ,
+                                  texture: SKTexture(imageNamed: "blackSpinner") ,
                                   redNeeded: 10,
                                   blueNeeded: 10,
                                   greenNeeded: 10,

@@ -351,10 +351,10 @@ extension SpinnerManager
         {
             if Float(spinnerAlpha) == 1.0
             {
-                self.spinnerNode?.run(SKAction.fadeAlpha(to: 0.4, duration: 0.2))
+                self.spinnerNode?.run(SKAction.fadeAlpha(to: 0.7, duration: 0.6))
             }
         }
-        else if Float(spinnerAlpha) == 0.4
+        else if Float(spinnerAlpha) == 0.7
         {
             self.spinnerNode?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.2))
         }
