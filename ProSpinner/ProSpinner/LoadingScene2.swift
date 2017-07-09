@@ -59,16 +59,18 @@ class LoadingScene2: SKScene
             self.textures?.append(Constants.DiamondsTexture.red)
             self.textures?.append(Constants.DiamondsTexture.blue)
             self.textures?.append(Constants.DiamondsTexture.green)
-            self.textures?.append(SKTexture(imageNamed: "RedCleanDiamond"))
-            self.textures?.append(SKTexture(imageNamed: "BlueCleanDiamond"))
-            self.textures?.append(SKTexture(imageNamed: "GreenCleanDiamond"))
+            self.textures?.append(Constants.DiamondsCleanTexture.red)
+            self.textures?.append(Constants.DiamondsCleanTexture.blue)
+            self.textures?.append(Constants.DiamondsCleanTexture.green)
 
             self.textures?.append(SKTexture(imageNamed: "RightEar"))
             self.textures?.append(SKTexture(imageNamed: "LeftEar"))
             self.textures?.append(SKTexture(imageNamed: "PlayPath"))
+            self.textures?.append(SKTexture(imageNamed: "NewPlayButton"))
+            self.textures?.append(SKTexture(imageNamed: "NewStoreButton"))
             self.textures?.append(SKTexture(imageNamed: "LockMech"))
-            self.textures?.append(SKTexture(imageNamed: "ArrowLeft"))
-            self.textures?.append(SKTexture(imageNamed: "ArrowRight"))
+            self.textures?.append(SKTexture(imageNamed: "RightHez"))
+            self.textures?.append(SKTexture(imageNamed: "LeftRHez"))
             
             DispatchQueue.main.async
             {
@@ -120,8 +122,8 @@ class LoadingScene2: SKScene
             scene.diamondsManager   = DiamondsManager(inScene: scene)
             scene.manuManager       = ManuManager(inScene: scene)
             scene.tutorialManager   = TutorialManager(withScene: scene)
-            scene.retryView         = RetryView(scene: scene)
             scene.storeView         = scene.childNode(withName: Constants.NodesInStoreView.StoreView.rawValue) as? StoreView
+            scene.retryView         = scene.childNode(withName: Constants.NodesInRetryView.RetryView.rawValue) as? RetryView
             scene.purchaseManager   = PurchaseManager()
             scene.physicsWorld.contactDelegate = scene
             

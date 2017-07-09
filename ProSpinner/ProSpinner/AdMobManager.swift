@@ -54,10 +54,8 @@ class AdMobManager: NSObject,
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
         bannerView.adUnitID = "ca-app-pub-9437548574063413/3716115489"
         bannerView.rootViewController = rootViewController
+        bannerView.load(GADRequest())
         rootViewController?.view.addSubview(bannerView)
-        
-        let request = GADRequest()
-        bannerView.load(request)
     }
     
     func addBannerToView()

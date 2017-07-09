@@ -17,7 +17,7 @@ class SpinnerManager: BaseClass,
     fileprivate var spinnerSpeed = 1.2
     fileprivate var spiningToStratingPosition = false
     fileprivate var rotateAction: SKAction?
-    fileprivate var currentlySwitchingSpinner: Bool = false
+    var currentlySwitchingSpinner: Bool = false
     
     fileprivate let rotateRightAngle = (CGFloat.pi * 2)
     fileprivate let rotateLeftAngle = -(CGFloat.pi * 2)
@@ -169,20 +169,28 @@ class SpinnerManager: BaseClass,
         pulse(node: spinnerNode, scaleUpTo: 0.65, scaleDownTo: 0.6, duration: 0.20)
     }
     
-    func scaleDownSpinner() -> SKAction
+    func scaleDownSpinner()
     {
         log.debug("")
-        let scaleAction = SKAction.scale(to: 0.6, duration: 0.2)
-        spinnerNode?.run(scaleAction)
-        return scaleAction
+        guard let spinnerXScale = spinnerNode?.xScale else { return }
+        if spinnerXScale >= CGFloat(1)
+        {
+            spinnerNode?.removeAction(forKey: "ScaleSpinenr")
+            let scaleAction = SKAction.scale(to: 0.6, duration: 0.2)
+            spinnerNode?.run(scaleAction, withKey: "ScaleSpinenr")
+        }
     }
     
-    func scaleUpSpinner() -> SKAction
+    func scaleUpSpinner()
     {
         log.debug("")
-        let scaleAction = SKAction.scale(to: 1, duration: 0.2)
-        spinnerNode?.run(scaleAction)
-        return scaleAction
+        guard let spinnerXScale = spinnerNode?.xScale else { return }
+        if spinnerXScale < CGFloat(1)
+        {
+            spinnerNode?.removeAction(forKey: "ScaleSpinenr")
+            let scaleAction = SKAction.scale(to: 1, duration: 0.2)
+            spinnerNode?.run(scaleAction, withKey: "ScaleSpinenr")
+        }
     }
     
     func resetSpinner()
@@ -198,7 +206,6 @@ class SpinnerManager: BaseClass,
             if let scene = self.scene as? GameScene
             {
                 scene.finishedReseting()
-                _ = self.scaleUpSpinner()
             }
         }
     }

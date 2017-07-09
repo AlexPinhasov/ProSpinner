@@ -80,7 +80,7 @@ class GameScene: SKScene,
             manuManager?.RightArrowPressed(isPressed: false)
             manuManager?.LeftArrowPressed(isPressed: false)
             
-            if let name = touchedNode.name
+            if let name = touchedNode.name, spinnerManager?.currentlySwitchingSpinner == false
             {
                 switch name
                 {
@@ -94,21 +94,19 @@ class GameScene: SKScene,
                     
                 case Constants.NodesInScene.RightArrow.rawValue,
                      Constants.NodesInScene.ActualRightArrow.rawValue:
-                        spinnerManager?.userTappedNextSpinner()
-                        {
-                                self.handleLockViewAppearance()
-                        }
+                        userTappedNextSpinner()
                     
                 case Constants.NodesInScene.LeftArrow.rawValue,
                      Constants.NodesInScene.ActualLeftArrow.rawValue:
-                        spinnerManager?.userTappedPreviousSpinner()
-                        {
-                                self.handleLockViewAppearance()
-                        }
+                    userTappedPreviousSpinner()
                     
                 case Constants.NodesInRetryView.ExitButton.rawValue,
-                     Constants.NodesInRetryView.MenuLines.rawValue:
+                     Constants.NodesInRetryView.MenuLines.rawValue,
+                     Constants.NodesInRetryView.AlertViewBackground.rawValue,
+                     Constants.NodesInStoreView.StoreBackground.rawValue:
+                    
                     enableSwipe = true
+                    spinnerManager?.scaleUpSpinner()
                     retryView?.hideRetryView()
                     storeView?.hideStoreView()
                     diamondsManager?.addCollectedDiamondsToLabelScene()
@@ -138,7 +136,7 @@ class GameScene: SKScene,
             let positionInScene = touch.location(in: self)
             let touchedNode = self.atPoint(positionInScene)
             
-            if let name = touchedNode.name
+            if let name = touchedNode.name, spinnerManager?.currentlySwitchingSpinner == false
             {
                 switch name
                 {
@@ -157,9 +155,7 @@ class GameScene: SKScene,
                 case Constants.NodesInStoreView.StoreButton.rawValue:
                     manuManager?.storeNode?.storeButton?.touchedUpInside()
                     
-                case Constants.NodesInLockedSpinnerView.ViewInfoLabel.rawValue,
-                     Constants.NodesInLockedSpinnerView.BottomLockedView.rawValue,
-                     Constants.NodesInLockedSpinnerView.TopLockedView.rawValue:
+                case Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue:
                     
                     let canUnlockSpinner = manuManager?.lockedSpinnerView?.userRequestedToUnlockSpinner()
                     if canUnlockSpinner == true
@@ -195,7 +191,7 @@ class GameScene: SKScene,
             diamondsManager?.tutorialStarted()
             spinnerManager?.tutorialStarted()
         }
-        else
+        else 
         {
             GameStatus.Playing = true
             retryView?.gameStarted()
@@ -232,22 +228,9 @@ class GameScene: SKScene,
     private func handleBuySpinnerCase(for touchedNode: SKNode)
     {
         log.debug("")
-        if let buy = touchedNode as? SKLabelNode,
-               let buyCase = buy.accessibilityValue
-        {
-            switch buyCase
-            {
-            case PurchaseOptions.BuySpinnerWithCash.rawValue: break
-            purchaseManager?.BuySpinner()
-                
-            case PurchaseOptions.BuySpinnerWithDiamonds.rawValue:
-                diamondsManager?.purchasedNewSpinner()
-                manuManager?.purchasedNewSpinner()
-                spinnerManager?.purchasedNewSpinner()
-                
-            default: break
-            }
-        }
+        diamondsManager?.purchasedNewSpinner()
+        manuManager?.purchasedNewSpinner()
+        spinnerManager?.purchasedNewSpinner()
     }
     
     private func handleLockViewAppearance()
@@ -257,12 +240,14 @@ class GameScene: SKScene,
         {
             let diamondsCount = diamondsManager?.getDiamondsCount()
             diamondsManager?.handleDiamondsWhenSpinner(isLocked: true)
+            diamondsManager?.handleDiamondsPlayerNeedAndHaveLabels(isLocked :true)
             manuManager?.handleSpinnerPresentedIsLocked(with: diamondsCount)
             spinnerManager?.shakeSpinnerLocked(shouldShake: true)
         }
         else
         {
             diamondsManager?.handleDiamondsWhenSpinner(isLocked: false)
+            diamondsManager?.handleDiamondsPlayerNeedAndHaveLabels(isLocked : false)
             manuManager?.handleSpinnerPresentedIsUnlocked()
             spinnerManager?.shakeSpinnerLocked(shouldShake: false)
         }
@@ -293,6 +278,23 @@ class GameScene: SKScene,
         spinnerManager?.spinnerNode = self.childNode(withName: Constants.NodesInScene.Spinner.rawValue) as? SKSpriteNode
     }
     
+    func userTappedNextSpinner()
+    {
+        spinnerManager?.userTappedNextSpinner()
+            {
+                self.handleLockViewAppearance()
+        }
+    }
+    
+    func userTappedPreviousSpinner()
+    {
+        spinnerManager?.userTappedPreviousSpinner()
+            {
+                self.handleLockViewAppearance()
+        }
+    }
+    
+    
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool
     {
         log.debug("")
@@ -301,20 +303,8 @@ class GameScene: SKScene,
         {
             switch gesture.direction
             {
-            case UISwipeGestureRecognizerDirection.left:
-
-            spinnerManager?.userTappedPreviousSpinner()
-            {
-                self.handleLockViewAppearance()
-            }
-                
-            case UISwipeGestureRecognizerDirection.right:
-                
-            spinnerManager?.userTappedNextSpinner()
-            {
-                self.handleLockViewAppearance()
-            }
-                
+            case UISwipeGestureRecognizerDirection.right: userTappedNextSpinner()
+            case UISwipeGestureRecognizerDirection.left: userTappedPreviousSpinner()
             default: break
             }
         }

@@ -79,6 +79,7 @@ class DiamondsManager: BaseClass,
     func configureDiamonds()
     {
         log.debug("")
+        timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
     }
 
@@ -121,6 +122,15 @@ class DiamondsManager: BaseClass,
         log.debug("")
         return diamondsCollectedDuringGame
     }
+    
+    func loadDiamondCount()
+    {
+        log.debug("")
+        loadRedDiamondCount()
+        loadBlueDiamondCount()
+        loadGreenDiamondCount()
+        fadeInDiamondAndTheirCount()
+    }
 
 //  MARK: Physics mothods
     func contactBegan(for diamondNode: Diamond)
@@ -156,108 +166,84 @@ class DiamondsManager: BaseClass,
         default: break
         }
         updateHighScore()
-        //updateDiamondCount(withDiamond: diamond)
-    }
-    
-    func loadDiamondCount()
-    {
-        log.debug("")
-        loadRedDiamondCount()
-        loadBlueDiamondCount()
-        loadGreenDiamondCount()
-        fadeInDiamondAndTheirCount()
     }
     
 //  MARK: Diamonds Animation
     func handleDiamondsWhenSpinner(isLocked spinnerIsLocked: Bool)
     {
         log.debug("")
-        returnDiamondsToStartingPosition()
-        handleDiamondsPlayerNeedAndHaveLabels(whenSpinnerIsLocked :spinnerIsLocked)
         
-        if spinnerIsLocked && diamondsIsAtStartingPosition
+        if spinnerIsLocked
         {
-            
-            diamondsIsAtStartingPosition = false
-            let redEndPoint     = CGPoint(x: redDiamondLocation.x , y: redDiamondLocation.y - 10)
-            let blueEndPoint    = CGPoint(x: blueDiamondLocation.x , y: blueDiamondLocation.y - 10)
-            let greenEndPoint   = CGPoint(x: greenDiamondLocation.x , y: greenDiamondLocation.y - 10)
-
-//            pulse(node: redDiamondNode, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.2)
-//            pulse(node: blueDiamondNode, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.3)
-//            pulse(node: greenDiamondNode, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.4)
-            
-            let bounceDiamond = shouldBounceDiamonds()
-            let redSequenceCount = bounceDiamond?.red == true ? 2 : 0
-            let blueSequenceCount = bounceDiamond?.blue == true ? 2 : 0
-            let greenSequenceCount = bounceDiamond?.green == true ? 2 : 0
-            
-            
-            let greenSequence = SKAction.sequence([SKAction.move(to: greenEndPoint, duration: 0.8),
-                                                 SKAction.move(to: greenDiamondLocation, duration: 0.8)])
-            
-            greenDiamondNode.run(SKAction.repeat(greenSequence, count: greenSequenceCount))
-            
-            
-            let redSequence = SKAction.sequence([SKAction.move(to: redEndPoint, duration: 0.8),
-                                                   SKAction.move(to: redDiamondLocation, duration: 0.8)])
-            
-            redDiamondNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.2),
-                                                 SKAction.repeat(redSequence, count: redSequenceCount)]))
-            
-            let blueSequence = SKAction.sequence([SKAction.move(to: blueEndPoint, duration: 0.8),
-                                                   SKAction.move(to: blueDiamondLocation, duration: 0.8)])
-            
-            blueDiamondNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.3),
-                                                   SKAction.repeat(blueSequence, count: blueSequenceCount)]))
-            {
-                self.diamondsIsAtStartingPosition = true
-            }
-            
-//            redDiamondLabelNode.run(SKAction.scale(to: 0.0, duration: 0.1))
-//            blueDiamondLabelNode.run(SKAction.scale(to: 0.0, duration: 0.1))
-//            greenDiamondLabelNode.run(SKAction.scale(to: 0.0, duration: 0.1))
+            positionDiamondsAtLockedLocation()
         }
         else
         {
-            if diamondsIsAtStartingPosition
-            {
-                returnDiamondsToStartingPosition()
-            }
+            redDiamondLabelNode?.changeLabelColor(color: .black)
+            blueDiamondLabelNode?.changeLabelColor(color: .black)
+            greenDiamondLabelNode?.changeLabelColor(color: .black)
+            returnDiamondsToStartingPosition()
         }
     }
     
-    func handleDiamondsPlayerNeedAndHaveLabels(whenSpinnerIsLocked spinnerIsLocked: Bool)
+    private func positionDiamondsAtLockedLocation()
+    {
+        log.debug()
+        redDiamondNode?.run(SKAction.moveTo(y: 444 , duration: 0.2))
+        blueDiamondNode?.run(SKAction.moveTo(y: 444, duration: 0.2))
+        greenDiamondNode?.run(SKAction.moveTo(y: 444, duration:0.2))
+
+    }
+    
+    func handleDiamondsPlayerNeedAndHaveLabels(isLocked spinnerIsLocked: Bool)
     {
         log.debug("")
         if spinnerIsLocked
         {
-            let diamondsCount = getDiamondsCount()
-            let spinner = ArchiveManager.currentSpinner
-            handleDiamondLabelNode(forNode: redDiamondLabelNode,withDiamondsPlayerHas: diamondsCount?.red, diamondsPlayerNeed: spinner.redNeeded)
-            handleDiamondLabelNode(forNode: blueDiamondLabelNode,withDiamondsPlayerHas: diamondsCount?.blue, diamondsPlayerNeed: spinner.blueNeeded)
-            handleDiamondLabelNode(forNode: greenDiamondLabelNode,withDiamondsPlayerHas: diamondsCount?.green, diamondsPlayerNeed: spinner.greenNeeded)
-            
-            redDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
-            blueDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
-            greenDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
+            positionDiamondLabelNodeAtLockedLocation()
+            {
+                    let spinner = ArchiveManager.currentSpinner
+                    self.setTextForDiamondLabelNode(forNode: self.redDiamondLabelNode, diamondsPlayerNeed: spinner.redNeeded)
+                    self.setTextForDiamondLabelNode(forNode: self.blueDiamondLabelNode, diamondsPlayerNeed: spinner.blueNeeded)
+                    self.setTextForDiamondLabelNode(forNode: self.greenDiamondLabelNode, diamondsPlayerNeed: spinner.greenNeeded)
+                    
+                    self.redDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
+                    self.blueDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
+                    self.greenDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
+            }
         }
         else
         {
             redDiamondLabelNode?.hideSeparatorAndNeeded()
             blueDiamondLabelNode?.hideSeparatorAndNeeded()
             greenDiamondLabelNode?.hideSeparatorAndNeeded()
-
-            redDiamondLabelNode?.run(SKAction.move(to: redDiamondLabelNodeOriginalLocation , duration: 0.3))
-            blueDiamondLabelNode?.run(SKAction.move(to: blueDiamondLabelNodeOriginalLocation, duration: 0.3))
-            greenDiamondLabelNode?.run(SKAction.move(to: greenDiamondLabelNodeOriginalLocation, duration:0.3))
+            
+            returnDiamondsLabelNodeToStartingPosition()
         }
     }
     
-    private func handleDiamondLabelNode(forNode labelNode: CustomSKLabelNode?, withDiamondsPlayerHas diamondsPlayerHas: Int?, diamondsPlayerNeed: Int?)
+    private func positionDiamondLabelNodeAtLockedLocation(completion block: @escaping () -> Void)
+    {
+        log.debug()
+        redDiamondLabelNode?.run(SKAction.moveTo(y: 399 , duration: 0.2))
+        blueDiamondLabelNode?.run(SKAction.moveTo(y: 399, duration: 0.2))
+        greenDiamondLabelNode?.run(SKAction.moveTo(y: 399, duration:0.2))
+        {
+            block()
+            //self.changeDiamondsPlayerHaveLabelColor(toColor: .white)
+        }
+    }
+    
+    private func changeDiamondsPlayerHaveLabelColor(toColor color: UIColor)
+    {
+        self.redDiamondLabelNode?.changeLabelColor(color: color)
+        self.blueDiamondLabelNode?.changeLabelColor(color: color)
+        self.greenDiamondLabelNode?.changeLabelColor(color: color)
+    }
+    
+    private func setTextForDiamondLabelNode(forNode labelNode: CustomSKLabelNode?, diamondsPlayerNeed: Int?)
     {
         log.debug("")
-        guard let diamondsPlayerHas = diamondsPlayerHas else { return }
         guard let diamondsPlayerNeed = diamondsPlayerNeed else { return }
         guard let labelNode = labelNode else { return }
         
@@ -272,34 +258,10 @@ class DiamondsManager: BaseClass,
         }
         
         
-        if diamondsPlayerHas < diamondsPlayerNeed
-        {
-            labelNode.setText(diamondNeeded: diamondsPlayerNeed)
-            
-            if labelsAreAtStartingPosition(currentLocation: labelNode.position)
-            {
-                labelNode.run(SKAction.move(to: CGPoint(x: labelNode.position.x - labelNode.frameTotalWidth(), y: labelNode.position.y), duration: 0.3))
-            }
-        }
-        else
-        {
-            labelNode.setText(diamondNeeded: nil)
-            if labelsAreAtStartingPosition(currentLocation: labelNode.position) == false
-            {
-                labelNode.run(SKAction.move(to: originalPosition, duration: 0.3))
-            }
-        }
+        labelNode.setText(diamondNeeded: diamondsPlayerNeed)
+        labelNode.run(SKAction.moveTo(x: originalPosition.x - (labelNode.frameTotalWidth() / 2), duration: 0.3))
     }
 
-    func labelsAreAtStartingPosition(currentLocation: CGPoint) -> Bool
-    {
-        log.debug("")
-        return  redDiamondLabelNodeOriginalLocation == currentLocation ||
-                blueDiamondLabelNodeOriginalLocation == currentLocation ||
-                greenDiamondLabelNodeOriginalLocation == currentLocation
-    }
-    
-    
     func fadeInAndScaleDiamondsCountLabels()
     {
         log.debug("")
@@ -316,16 +278,17 @@ class DiamondsManager: BaseClass,
         greenDiamondLabelNode.run(SKAction.move(to: greenDiamondLabelNodeOriginalLocation, duration: 0.3))
     }
     
+    func returnDiamondsLabelNodeToStartingPosition()
+    {
+        redDiamondLabelNode?.run(SKAction.move(to: redDiamondLabelNodeOriginalLocation , duration: 0.4))
+        blueDiamondLabelNode?.run(SKAction.move(to: blueDiamondLabelNodeOriginalLocation, duration: 0.4))
+        greenDiamondLabelNode?.run(SKAction.move(to: greenDiamondLabelNodeOriginalLocation, duration:0.4))
+    }
+    
     func returnDiamondsToStartingPosition()
     {
         log.debug("")
-        redDiamondNode.removeAllActions()
-        blueDiamondNode.removeAllActions()
-        greenDiamondNode.removeAllActions()
         redDiamondNode.run(SKAction.move(to: redDiamondLocation, duration: 0.4))
-        {
-            self.diamondsIsAtStartingPosition = true
-        }
         blueDiamondNode.run(SKAction.move(to: blueDiamondLocation, duration: 0.4))
         greenDiamondNode.run(SKAction.move(to: greenDiamondLocation, duration: 0.4))
         
@@ -417,9 +380,22 @@ class DiamondsManager: BaseClass,
         guard let redNeeded = spinner.redNeeded else { return }
         guard let blueNeeded = spinner.blueNeeded else { return }
         guard let greenNeeded = spinner.greenNeeded else { return }
+        
+        resetNodesToNormalPlayState()
   
         count(toDiraction: .down,for: redNeeded,for: blueNeeded,for: greenNeeded)
-        // When Finished should update values in disk
+    }
+    
+    private func resetNodesToNormalPlayState()
+    {
+        redDiamondLabelNode.hideSeparatorAndNeeded()
+        blueDiamondLabelNode.hideSeparatorAndNeeded()
+        greenDiamondLabelNode.hideSeparatorAndNeeded()
+        
+        changeDiamondsPlayerHaveLabelColor(toColor: .black)
+        
+        returnDiamondsToStartingPosition()
+        returnDiamondsLabelNodeToStartingPosition()
     }
     
     func addCollectedDiamondsToLabelScene()

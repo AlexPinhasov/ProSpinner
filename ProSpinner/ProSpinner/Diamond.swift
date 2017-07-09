@@ -132,8 +132,6 @@ class blueDiamond: Diamond
 }
 class greenDiamond: Diamond
 {
-
-    
     override init()
     {
         super.init()

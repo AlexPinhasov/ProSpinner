@@ -24,6 +24,8 @@ class StoreView: SKNode
     private var smallPackButton        :SKSpriteButton?
     private var bigPackButton          :SKSpriteButton?
 
+    private var finishedPresentingView: Bool = false
+    
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
@@ -56,7 +58,7 @@ class StoreView: SKNode
     {
         self.isHidden = true
         storeBackground?.alpha = 0.0
-        storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 700), duration: 0))
+        storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 800), duration: 0))
     }
     
     //  MARK: Presentation methods
@@ -66,17 +68,24 @@ class StoreView: SKNode
         storeBackground?.run(SKAction.fadeIn(withDuration: 0.1))
         {
             self.storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 278), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            {
+                self.finishedPresentingView = true
+            }
         }
     }
     
     func hideStoreView()
     {
-        storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 700), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+        if finishedPresentingView == true
         {
-            self.isHidden = true
+            finishedPresentingView = false
+            storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 800), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            {
+                self.isHidden = true
+            }
+            
+            self.storeBackground?.run(SKAction.sequence([ SKAction.wait(forDuration: 0.2) , SKAction.fadeOut(withDuration: 0.1) ]))
         }
-        
-        self.storeBackground?.run(SKAction.sequence([ SKAction.wait(forDuration: 0.2) , SKAction.fadeOut(withDuration: 0.1) ]))
     }
     
     func touchedUpSmallPackButton()

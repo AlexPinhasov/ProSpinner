@@ -12,124 +12,92 @@ class CustomSKLabelNode : SKNode,
                           Animateable
 {
     var diamondsPlayerHave  : SKLabelNode = SKLabelNode()
-    var separatorLabel      : SKLabelNode = SKLabelNode()
     var diamondsPlayerNeed  : SKLabelNode = SKLabelNode()
     var blackBackground     : SKShapeNode = SKShapeNode()
-    
-    var addXPaddingForDiamondsPlayer_Have : CGFloat = 0
-    var addXPaddingForDiamondsPlayer_Need : CGFloat = 0
 
     override init()
     {
         super.init()
         self.diamondsPlayerHave.fontColor = .black
-        self.diamondsPlayerHave.fontName = "OCRAStd"
+        self.diamondsPlayerHave.fontName = "MyriadPro-Cond"
         self.diamondsPlayerHave.position = CGPoint.zero
-        self.diamondsPlayerHave.fontSize = 18
+        self.diamondsPlayerHave.fontSize = 26
         self.diamondsPlayerHave.zPosition = 4
         
         addChild(self.diamondsPlayerHave)
-        
-        self.separatorLabel.fontColor = .black
-        self.separatorLabel.fontName = "OCRAStd"
-        self.separatorLabel.position = CGPoint.zero
-        self.separatorLabel.fontSize = 18
-        self.separatorLabel.zPosition = 4
-        
-        addChild(self.separatorLabel)
-        
+
         self.diamondsPlayerNeed.fontColor = .white
-        self.diamondsPlayerNeed.fontName = "OCRAStd"
-        self.diamondsPlayerNeed.zPosition = 4
+        self.diamondsPlayerNeed.fontName = "MyriadPro-Cond"
+        self.diamondsPlayerNeed.zPosition = 5
         self.diamondsPlayerNeed.position = CGPoint.zero
-        self.diamondsPlayerNeed.fontSize = 18
+        self.diamondsPlayerNeed.fontSize = 26
+        self.diamondsPlayerNeed.horizontalAlignmentMode = .left
     
         addChild(self.diamondsPlayerNeed)
     }
     
     func setText(diamondNeeded : Int?)
     {
+        log.debug()
+        hideSeparatorAndNeeded()
+        
         if let diamondInt = diamondNeeded
         {
-            self.hideSeparatorAndNeeded()
-            self.separatorLabel.isHidden = false
-            self.diamondsPlayerNeed.isHidden = false
-            self.diamondsPlayerNeed.text = String(describing: diamondInt)
-            self.separatorLabel.text = "/"
-            self.changeFontToAllLabels(fontSize: 18)
-            self.separatorLabel.position.x = diamondsPlayerHave.frame.width
+            diamondsPlayerNeed.text = String(describing: diamondInt)
+            //changeFontToAllLabels(fontSize: 24)
             
-            if let diamondsPlayerHaveText = diamondsPlayerHave.text,
-               let diamondsPlayerHaveInt = Int(diamondsPlayerHaveText)
-            {
-                let diamondsPlayerHaveCGFloat = CGFloat(diamondsPlayerHaveInt)
-                if diamondsPlayerHaveCGFloat < 10
-                {
-                    addXPaddingForDiamondsPlayer_Have = 0
-                    addXPaddingForDiamondsPlayer_Need = 7
-                }
-                else if diamondsPlayerHaveCGFloat >= 10 &&  diamondsPlayerHaveCGFloat < 100
-                {
-                    addXPaddingForDiamondsPlayer_Have = 7
-                    addXPaddingForDiamondsPlayer_Need = 7
-                }
-                else if diamondsPlayerHaveCGFloat >= 100 && diamondsPlayerHaveCGFloat < 1000
-                {
-                    addXPaddingForDiamondsPlayer_Have = 13
-                    addXPaddingForDiamondsPlayer_Need = 13
-                }
-                else if diamondsPlayerHaveCGFloat >= 1000 && diamondsPlayerHaveCGFloat < 10000
-                {
-                    changeFontToAllLabels(fontSize: 15)
-                    addXPaddingForDiamondsPlayer_Have = 22.5
-                    addXPaddingForDiamondsPlayer_Need = 22.5
-                }
-                
-                self.diamondsPlayerHave.position.x += addXPaddingForDiamondsPlayer_Have
-            }
-            
-            self.blackBackground = SKShapeNode(rect: self.diamondsPlayerNeed.frame)
-            self.blackBackground.fillColor = .black
-            self.diamondsPlayerNeed.addChild(blackBackground)
-            self.blackBackground.zPosition = 0
-            self.diamondsPlayerNeed.position = CGPoint.zero
-            self.diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.size.width + self.separatorLabel.frame.size.width + addXPaddingForDiamondsPlayer_Need)
-        }
-        else
-        {
-            hideSeparatorAndNeeded()
+            diamondsPlayerHave.horizontalAlignmentMode = .left
+            diamondsPlayerHave.text?.append(" / " + (diamondsPlayerNeed.text ?? ""))
+
+            blackBackground = SKShapeNode(rect: self.diamondsPlayerNeed.frame)
+            blackBackground.fillColor = .black
+            //blackBackground.strokeColor = .clear
+            diamondsPlayerNeed.addChild(blackBackground)
+            blackBackground.zPosition = 0
+            diamondsPlayerNeed.position = CGPoint.zero
+            diamondsPlayerNeed.isHidden = false
+            diamondsPlayerNeed.position.x += (self.diamondsPlayerHave.frame.width - diamondsPlayerNeed.frame.width )
         }
     }
     
     func hideSeparatorAndNeeded()
     {
-        self.separatorLabel.text = nil
-        self.separatorLabel.isHidden = true
-         self.diamondsPlayerHave.position.x = 0
-        self.diamondsPlayerNeed.text = nil
-        self.diamondsPlayerNeed.isHidden = true
-        self.diamondsPlayerNeed.position = CGPoint.zero
-        self.diamondsPlayerNeed.removeChildren(in: [blackBackground])
+        log.debug()
+        diamondsPlayerNeed.isHidden = true
+        diamondsPlayerNeed.text = nil
+        diamondsPlayerNeed.position = CGPoint.zero
+        diamondsPlayerNeed.removeChildren(in: [blackBackground])
+    
+        diamondsPlayerHave.text = diamondsPlayerHave.text?.replacingOccurrences(of: " ", with: "")
+        if let i = diamondsPlayerHave.text?.characters.index(of: "/"),
+           let endIndex = diamondsPlayerHave.text?.characters.endIndex
+        {
+            diamondsPlayerHave.text!.removeSubrange(i..<endIndex)
+        }
+        diamondsPlayerHave.horizontalAlignmentMode = .center
     }
-
+    
+    func changeLabelColor(color: UIColor)
+    {
+        diamondsPlayerHave.fontColor = color
+    }
+    
     func frameTotalWidth() -> CGFloat
     {
-        if addXPaddingForDiamondsPlayer_Have == 22.5
-        {
-            return diamondsPlayerHave.frame.width + 8
-        }
+        log.debug()
         return diamondsPlayerHave.frame.width 
     }
     
     func changeFontToAllLabels(fontSize size: CGFloat)
     {
-        self.diamondsPlayerHave.fontSize = size
-        self.diamondsPlayerNeed.fontSize = size
-        self.separatorLabel.fontSize = size
+        log.debug()
+        diamondsPlayerHave.fontSize = size
+        diamondsPlayerNeed.fontSize = size
     }
     
     func pulseNeededDiamonds(withDuration duration: TimeInterval,delay: TimeInterval)
     {
+        log.debug()
         pulse(node: diamondsPlayerNeed, scaleUpTo: 1.3, scaleDownTo: 1.0, duration: duration,delay: delay)
     }
     

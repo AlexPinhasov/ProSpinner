@@ -9,7 +9,7 @@
 import SpriteKit
 import UIKit
 
-class RetryView: BaseClass
+class RetryView: SKNode
 {
 //  MARK: Outlets
     private var BlueDiamondLabel        :SKLabelNode?
@@ -28,11 +28,11 @@ class RetryView: BaseClass
     
     private var timer = Timer()
     private var secondsPassed: TimeInterval = 0.0
+    private var finishedPresentingView: Bool = false
     
-    init(scene: SKScene)
+    required init?(coder aDecoder: NSCoder)
     {
-        super.init()
-        self.scene = scene
+        super.init(coder: aDecoder)
         secondsPassed = 0.0
         connectOutletsToScene()
         configureViewBeforePresentation()
@@ -41,17 +41,17 @@ class RetryView: BaseClass
 //  MARK: Game Life cycle
     func gameStarted()
     {
-        startTimer()
+        
     }
     
     func gameOver()
     {
-        endTimer()
+        
     }
 
     private func connectOutletsToScene()
     {
-        AlertViewBackground     = self.scene?.childNode(withName: Constants.NodesInRetryView.AlertViewBackground.rawValue) as? SKSpriteNode
+        AlertViewBackground     = self.childNode(withName: Constants.NodesInRetryView.AlertViewBackground.rawValue) as? SKSpriteNode
         EndGameAlert            = AlertViewBackground?.childNode(withName: Constants.NodesInRetryView.EndGameAlert.rawValue) as? SKSpriteNode
         RetryButton             = EndGameAlert?.childNode(withName: Constants.NodesInRetryView.RetryButton.rawValue) as? SKSpriteNode
    
@@ -68,17 +68,21 @@ class RetryView: BaseClass
     
     func configureViewBeforePresentation()
     {
+        
         AlertViewBackground?.alpha = 0.0
-        EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 400), duration: 0))
+        EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 500), duration: 0))
     }
     
 //  MARK: Presentation methods
     func presentRetryView()
     {
-        AlertViewBackground?.isHidden = false
+        self.isHidden = false
         AlertViewBackground?.run(SKAction.fadeIn(withDuration: 0.2))
         {
             self.EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 37), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            {
+                self.finishedPresentingView = true
+            }
         }
 
         rotateRetryButton()
@@ -86,9 +90,16 @@ class RetryView: BaseClass
     
     func hideRetryView()
     {
-        secondsPassed = 0.0
-        EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 600), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-        self.AlertViewBackground?.run(SKAction.sequence([ SKAction.wait(forDuration: 0.2) , SKAction.fadeOut(withDuration: 0.1) ]))
+        if finishedPresentingView
+        {
+            finishedPresentingView = false
+            secondsPassed = 0.0
+            EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 500), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            {
+                self.isHidden = true
+            }
+            self.AlertViewBackground?.run(SKAction.sequence([ SKAction.wait(forDuration: 0.2) , SKAction.fadeOut(withDuration: 0.1) ]))
+        }
     }
     
     func setDiamondsCollected(diamonds: DiamondsTuple)
@@ -112,28 +123,17 @@ class RetryView: BaseClass
         let rotateAction = SKAction.rotate(byAngle: rotateRightAngle, duration: 4)
         RetryButtonArrow?.run(SKAction.repeatForever(rotateAction),withKey: Constants.actionKeys.rotate.rawValue)
     }
-    
+
 //  MARK: Private timer methods
-    private func startTimer()
-    {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(counter), userInfo: nil, repeats: true)
-    }
-    
-    private func endTimer()
-    {
-        self.timer.invalidate()
-        self.TimePassed?.text = timeString(time: secondsPassed)
-    }
-    
     @objc private func counter()
     {
         secondsPassed += 1
     }
-    
-    private func timeString(time: TimeInterval) -> String
-    {
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        return String(format:"%02i:%02i", minutes, seconds)
-    }
+//    
+//    private func timeString(time: TimeInterval) -> String
+//    {
+//        let minutes = Int(time) / 60 % 60
+//        let seconds = Int(time) % 60
+//        return String(format:"%02i:%02i", minutes, seconds)
+//    }
 }

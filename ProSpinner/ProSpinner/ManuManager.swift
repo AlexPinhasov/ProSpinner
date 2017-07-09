@@ -35,10 +35,6 @@ class ManuManager: BaseClass,
     private var gameExplanation  : SKNode?
     fileprivate var spinnerLock : SKSpriteNode?
     
-    fileprivate var redSuccessV      : SKSpriteNode?
-    fileprivate var blueSuccessV     : SKSpriteNode?
-    fileprivate var greenSuccessV    : SKSpriteNode?
-    
     fileprivate var highScoreRecord  : SKLabelNode?
     
     // Unlock Spinner Master Node
@@ -70,10 +66,6 @@ class ManuManager: BaseClass,
         progressBars            = scene?.childNode(withName: Constants.NodesInScene.ProgressBars.rawValue)
         
         gameExplanation         = scene?.childNode(withName: Constants.NodesInScene.BreifTutorial.rawValue)
-        
-        redSuccessV         = self.scene?.childNode(withName: Constants.NodesInScene.RedSuccess.rawValue) as? SKSpriteNode
-        greenSuccessV       = self.scene?.childNode(withName: Constants.NodesInScene.GreenSuccess.rawValue) as? SKSpriteNode
-        blueSuccessV        = self.scene?.childNode(withName: Constants.NodesInScene.BlueSuccess.rawValue) as? SKSpriteNode
         
         lockedSpinnerView = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNode
         
@@ -115,7 +107,6 @@ class ManuManager: BaseClass,
     func handleSpinnerPresentedIsLocked(with diamondCount: DiamondsTuple)
     {
         log.debug("")
-        removeSuccessV()
         PresentLockedSpinnerView(shouldPresent: true)
         displayProgressBars(shouldShow: true,with: diamondCount)
         showProgressBarOrV(withValues: diamondCount)
@@ -127,7 +118,6 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         animateSpinnerLockFadeOut()
-        removeSuccessV()
         displayProgressBars(shouldShow: false, with: nil)
         PresentLockedSpinnerView(shouldPresent: false)
         pointDirectionArrowsMoveAction()
@@ -168,7 +158,6 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         lockedSpinnerView?.presentNode(shouldPresent: present)
-        lockedSpinnerView?.setDiamondsPlayerNeed()
     }
     
     func decideBuyDiamondCashOrDiamonds(with diamonds: (Int,Int,Int)?)
@@ -183,16 +172,12 @@ class ManuManager: BaseClass,
         let redInStock = diamonds.0
         let blueInStock = diamonds.1
         let greenInStock = diamonds.2
-        let playerHasEnoghDiamonds = redInStock >= redNeeded && blueInStock >= blueNeeded && greenInStock >= greenNeeded
-
-        if playerHasEnoghDiamonds
-        {
-            lockedSpinnerView?.userCanUnlockSpinner()
-        }
-        else
-        {
-            lockedSpinnerView?.userCantUnlockSpinner()
-        }
+        
+        let playerHasEnoughRed = redInStock >= redNeeded
+        let playerHasEnoughBlue = blueInStock >= blueNeeded
+        let playerHasEnoughGreen = greenInStock >= greenNeeded
+        
+        lockedSpinnerView?.playerHasEnoughDiamondsOfKind(diamonds: (playerHasEnoughRed,playerHasEnoughBlue,playerHasEnoughGreen))
     }
     
     func purchasedNewSpinner()
@@ -200,7 +185,6 @@ class ManuManager: BaseClass,
         log.debug("")
         lockedSpinnerView?.presentNode(shouldPresent: false)
         animateSpinnerLockFadeOut()
-        removeSuccessV()
         showManuItems()
     }
     
@@ -333,14 +317,6 @@ extension ManuManager
         progressBars?.removeChildren(in: progressBarNodes)
     }
     
-    func removeSuccessV()
-    {
-        log.debug("")
-        animateSuccessV(toFadeIn: false, forNode: redSuccessV)
-        animateSuccessV(toFadeIn: false, forNode: blueSuccessV)
-        animateSuccessV(toFadeIn: false, forNode: greenSuccessV)
-    }
-    
     func saveProgressBarPosition()
     {
         log.debug("")
@@ -396,7 +372,7 @@ extension ManuManager
         log.debug("")
         if diamondsPlayerHas >= diamondsPlayerNeed
         {
-            animateSuccessV(toFadeIn: true, forNode: redSuccessV)
+            
         }
         else
         {
@@ -415,7 +391,7 @@ extension ManuManager
         log.debug("")
         if diamondsPlayerHas >= diamondsPlayerNeed
         {
-            animateSuccessV(toFadeIn: true, forNode: blueSuccessV)
+            
         }
         else
         {
@@ -434,7 +410,7 @@ extension ManuManager
         log.debug("")
         if diamondsPlayerHas >= diamondsPlayerNeed
         {
-            animateSuccessV(toFadeIn: true, forNode: greenSuccessV)
+            
         }
         else
         {

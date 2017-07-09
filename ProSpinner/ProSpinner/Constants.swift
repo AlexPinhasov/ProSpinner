@@ -43,6 +43,7 @@ class Constants
     {
         case rotate = "rotateAction"
         case shakeDiamond = "shakeDiamond"
+        case MoveSuccessV = "MoveSuccessV"
     }
     
     enum DiamondsPlayerNeed: String
@@ -95,13 +96,14 @@ class Constants
     {
         case PlayNode   = "PlayNode"
         case PlayLabel  = "PlayLabel"
-        case PlayShadow = "PlayShadow"
+        case PlayShadow = "PlayLabelShadow"
         case RightEar   = "RightEar"
         case LeftEar    = "LeftEar"
     }
     
     enum NodesInRetryView: String
     {
+        case RetryView       = "RetryView"
         case BlueDiamondLabel = "BlueDiamondLabel"
         case RedDiamondLabel = "RedDiamondLabel"
         case GreenDiamondLabel = "GreenDiamondLabel"
@@ -147,15 +149,15 @@ class Constants
     enum NodesInLockedSpinnerView: String
     {
         case LockedSpinnerNode = "LockedSpinnerNode"
-        case TopLockedView     =  "TopLockedView"
-        case BottomLockedView     =  "BottomLockedView"
         
         case LockedSpinnerBackground = "LockedSpinnerBackground"
         case RedPrice = "RedPriceLabel"
         case BluePrice = "BluePriceLabel"
         case GreenPrice = "GreenPriceLabel"
         case SpinnerLock = "SpinnerLock"
-        case ViewInfoLabel = "ViewInfoLabel"
+        case UnlockSpinnerButton = "UnlockSpinnerButton"
+        case UnlockSpinnerButtonShadow = "UnlockSpinnerButtonShadow"
+        case TopLabel = "TopLabel"
     }
     
 }
