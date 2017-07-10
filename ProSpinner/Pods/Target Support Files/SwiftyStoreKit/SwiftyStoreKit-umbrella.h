@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double PantryVersionNumber;
-FOUNDATION_EXPORT const unsigned char PantryVersionString[];
+FOUNDATION_EXPORT double SwiftyStoreKitVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftyStoreKitVersionString[];
 

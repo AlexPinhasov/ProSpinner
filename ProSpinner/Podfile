@@ -14,11 +14,10 @@ pod 'Firebase/Messaging'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
-pod ‘Pantry'
-pod ‘AwesomeCache’, ‘~> 5.0’
 pod 'JSSAlertView'
 pod 'Google-Mobile-Ads-SDK'
 pod 'XCGLogger', '~> 5.0.1'
+pod 'SwiftyStoreKit'
 
   target 'ProSpinnerTests' do
     inherit! :search_paths
