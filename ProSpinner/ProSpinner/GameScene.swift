@@ -40,7 +40,8 @@ class GameScene: SKScene,
     {
         log.debug("")
        guard let spinnerNode = contact.bodyA.node  as? SKShapeNode else { return } // Spinner
-       guard let diamondNode = contact.bodyB.node  as? Diamond  else { return } // Diamond
+       guard let diamondShapeNode = contact.bodyB.node  as? SKShapeNode  else { return } // Diamond
+       guard let diamondNode = diamondShapeNode.parent  as? Diamond  else { return } // Diamond
        guard let diamondName = diamondNode.name else { return }
        guard let spinnerName = spinnerNode.name else { return }
         

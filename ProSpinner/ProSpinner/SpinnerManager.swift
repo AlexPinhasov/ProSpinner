@@ -232,6 +232,8 @@ class SpinnerManager: BaseClass,
         log.debug("")
         guard let circulNode = circulNode as? SKShapeNode else { return SKNode()}
         
+        let circuleMask = SKShapeNode(circleOfRadius: 40)
+        
         if let name = circulNode.name
         {
             var physicsCategory : UInt32! = 1
@@ -259,16 +261,18 @@ class SpinnerManager: BaseClass,
             }
             
             circulNode.removeFromParent()
-            circulNode.name = colorSelected
-            circulNode.strokeColor = UIColor.clear
+            circuleMask.name = colorSelected
+            circuleMask.strokeColor = UIColor.clear
+            circuleMask.position = circulNode.position
+            circuleMask.zPosition = 4
             
-            circulNode.physicsBody = SKPhysicsBody(rectangleOf: circulNode.frame.size)
-            circulNode.physicsBody?.categoryBitMask = physicsCategory
-            circulNode.physicsBody?.affectedByGravity = false
-            circulNode.physicsBody?.contactTestBitMask = TouchEventFor
-            circulNode.physicsBody?.isDynamic = false
-            
-            return circulNode
+            circuleMask.physicsBody = SKPhysicsBody(circleOfRadius: 40)
+            circuleMask.physicsBody?.categoryBitMask = physicsCategory
+            circuleMask.physicsBody?.affectedByGravity = false
+            circuleMask.physicsBody?.contactTestBitMask = TouchEventFor
+            circuleMask.physicsBody?.isDynamic = false
+
+            return circuleMask
         }
         return SKNode()
     }

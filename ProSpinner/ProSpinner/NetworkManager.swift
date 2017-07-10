@@ -81,8 +81,33 @@ class NetworkManager
                     }
                 }
             }
+            else if let snapshotChildArray = snapshot.value as? NSDictionary
+            {
+                var spinnerArray = [NSDictionary]()
+                
+                if let keys = snapshotChildArray.allKeys as? [String]
+                {
+                    for index in 0..<keys.count
+                    {
+                        let key = keys[index]
+                        spinnerArray.append(snapshotChildArray.value(forKey: key) as! NSDictionary)
+                    }
+                }
+                
+                for spinner in spinnerArray
+                {
+                    spinnersFound.append(Spinner(id:            spinner["id"] as? Int,
+                                                 imageUrlLink:  spinner["imagePath"] as? String,
+                                                 texture:       nil,
+                                                 redNeeded:     spinner["redNeeded"] as? Int,
+                                                 blueNeeded:    spinner["blueNeeded"] as? Int,
+                                                 greenNeeded:   spinner["greenNeeded"] as? Int,
+                                                 mainSpinner:   false,
+                                                 unlocked:      false))
+                }
+            }
 
-
+            
             completion(spinnersFound)
                 
         })

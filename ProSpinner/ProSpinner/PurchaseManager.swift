@@ -1,182 +1,329 @@
 //
-//  PurchaseManager.swift
-//  ProSpinner
+//  ViewController.swift
+//  DollaDollaBillsYall
 //
-//  Created by AlexP on 2.6.2017.
-//  Copyright © 2017 Alex Pinhasov. All rights reserved.
+//  Created by Jared Davidson on 12/27/16.
+//  Copyright © 2016 Archetapp. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import SwiftyStoreKit
 import StoreKit
 
-class PurchaseManager: NSObject,
-                       SKProductsRequestDelegate,
-                       SKPaymentTransactionObserver
-{
-    private var list = [SKProduct]()
-    private var product = SKProduct()
+var sharedSecret = "919a706ee42143df8571a316f14531c8"
+
+enum RegisteredPurchase : String {
+    case Dolla10 = "10Dolla"
+    case RemoveAds = "RemoveAds"
+    case autoRenewable = "autoRenewable"
+}
+
+
+
+class NetworkActivityIndicatorManager : NSObject {
     
-    func restoreSpinners()
-    {
-        if(SKPaymentQueue.canMakePayments())
-        {
-            print("IAP is enabled, loading")
-            let productID:NSSet = NSSet(objects: "finnci.Premium")
-            let request: SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>)
+    private static var loadingCount = 0
+    
+    class func NetworkOperationStarted() {
+        if loadingCount == 0 {
             
-            request.delegate = self
-            request.start()
-        } else {
-            print("please enable IAPS")
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
+        loadingCount += 1
     }
-    
-    func BuySpinner()
-    {
-        if(SKPaymentQueue.canMakePayments())
-        {
-            print("IAP is enabled, loading")
-            let productID:NSSet = NSSet(objects: "finnci.Premium")
-            let request: SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>)
+    class func networkOperationFinished(){
+        if loadingCount > 0 {
+            loadingCount -= 1
             
-            request.delegate = self
-            request.start()
-        } else {
-            print("please enable IAPS")
-        }
-    }
-    
-    func buyProduct()
-    {
-//        print("buy " + product.productIdentifier)
-//        let pay = SKPayment(product: product)
-//        SKPaymentQueue.default().add(self)
-//        SKPaymentQueue.default().add(pay)
-    }
-    
-    
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse)
-    {
-        print("product request")
-        let myProduct = response.products
-        
-        for product in myProduct {
-            print("product added")
-            print(product.productIdentifier)
-            print(product.localizedTitle)
-            print(product.localizedDescription)
-            print(product.price)
-            
-            list.append(product )
         }
         
-        
-        
-       // if shouldBuy == 1
-       // {        // Set IAPS
-            for actualProduct in list
-            {
-                let prodID = product.productIdentifier
-                if(prodID == "finnci.Premium") {
-                    product = actualProduct
-                    buyProduct()
-                    break;
-                }
-            }
-        //}
-       // else if shouldRestore == 2
-       // {  // Set IAPS
-//            for actualProduct in list
-//            {
-//                let prodID = product.productIdentifier
-//                if(prodID == "finnci.Premium") {
-//                    product = actualProduct
-//                    if (SKPaymentQueue.canMakePayments()) {
-//                        SKPaymentQueue.default().restoreCompletedTransactions()
-//                        SKPaymentQueue.default().add(self)
-//                    }
-//                    break;
-//                }
-//            }
-       // }
-       
-    }
-    
-    private func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue)
-    {
-        print("transactions restored")
-        
-        for transaction in queue.transactions {
-            let t: SKPaymentTransaction = transaction
-            
-            let prodID = t.payment.productIdentifier as String
-            
-            switch prodID {
-            case "finnci.Premium":
-                print("is premium")
-                
-                
-            default:
-                print("IAP not setup")
-            }
+        if loadingCount == 0 {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
         }
     }
+}
+
+class ViewController: UIViewController {
     
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        print("add paymnet")
+    @IBOutlet var MoneyLbl: UILabel!
+    
+    var Money = Int()
+    
+    let bundleID = "com.Archetapp.DollaDollaBillsYall"
+    
+    var Dolla10 = RegisteredPurchase.Dolla10
+    var RemoveAds = RegisteredPurchase.RemoveAds
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
         
-        for transaction:AnyObject in transactions {
-            let trans = transaction as! SKPaymentTransaction
-            print(trans.error as Any)
+        self.MoneyLbl.text = "\(self.Money)"
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func Consumable1(_ sender: Any) {
+        purchase(purchase: Dolla10)
+    }
+    
+    @IBAction func Consumable2(_ sender: Any) {
+        purchase(purchase: RemoveAds)
+    }
+    
+    @IBAction func Renewable(_ sender: Any) {
+        
+    }
+    
+    @IBAction func NonRenewable(_ sender: Any) {
+    }
+    
+    
+    
+    func getInfo(purchase : RegisteredPurchase) {
+        NetworkActivityIndicatorManager.NetworkOperationStarted()
+        SwiftyStoreKit.retrieveProductsInfo([bundleID + "." + purchase.rawValue], completion: {
+            result in
+            NetworkActivityIndicatorManager.networkOperationFinished()
             
-            switch trans.transactionState {
+            self.showAlert(alert: self.alertForProductRetrievalInfo(result: result))
+            
+            
+        })
+    }
+    
+    func purchase(purchase : RegisteredPurchase) {
+        NetworkActivityIndicatorManager.NetworkOperationStarted()
+        SwiftyStoreKit.purchaseProduct(bundleID + "." + purchase.rawValue, completion: {
+            result in
+            NetworkActivityIndicatorManager.networkOperationFinished()
+            
+            if case .success(let product) = result {
                 
-            case .purchased ,
-                 .restored:
-                
-                print("buy, ok unlock iap here")
-                print(product.productIdentifier)
-                
-                // Make Export available
-                UserDefaults.standard.set(true, forKey: "Premium")
-                
-                let alert = UIAlertView()
-                alert.title = "משתמש יקר"
-                alert.message = "את/ה כעת משתמש פרימיום !"
-                alert.addButton(withTitle: "המשך")
-                alert.show()
-                
-                
-                let prodID = product.productIdentifier as String
-                
-                switch prodID {
-                case "finnci.Premium":
-                    print("is premium")
+                if product.productId == self.bundleID + "." + "10Dolla"{
                     
-                default:
-                    print("IAP not setup")
+                    self.Money += 10
+                    self.MoneyLbl.text = "\(self.Money)"
+                    
+                }
+                if product.productId == self.bundleID + "." + "RemoveAds" {
+                    
+                    self.Money += 100
+                    self.MoneyLbl.text = "\(self.Money)"
                 }
                 
-                queue.finishTransaction(trans)
-                break;
+                if product.needsFinishTransaction {
+                    SwiftyStoreKit.finishTransaction(product.transaction)
+                }
+                self.showAlert(alert: self.alertForPurchaseResult(result: result))
+            }
+            
+            
+        })
+        
+    }
+    func restorePurchases() {
+        NetworkActivityIndicatorManager.NetworkOperationStarted()
+        SwiftyStoreKit.restorePurchases(atomically: true, completion: {
+            result in
+            NetworkActivityIndicatorManager.networkOperationFinished()
+            
+            for product in result.restoredProducts {
+                if product.needsFinishTransaction {
+                    SwiftyStoreKit.finishTransaction(product.transaction)
+                }
+            }
+            
+            self.showAlert(alert: self.alertForRestorePurchases(result: result))
+            
+        })
+    }
+    func verifyReceipt() {
+        NetworkActivityIndicatorManager.NetworkOperationStarted()
+        SwiftyStoreKit.verifyReceipt(password: sharedSecret, completion: {
+            result in
+            NetworkActivityIndicatorManager.networkOperationFinished()
+            
+            self.showAlert(alert: self.alertForVerifyReceipt(result: result))
+            
+            if case .error(let error) = result {
+                if case .noReceiptData = error {
+                    
+                    self.refreshReceipt()
+                    
+                }
+            }
+            
+        })
+        
+    }
+    func verifyPurcahse(product : RegisteredPurchase) {
+        NetworkActivityIndicatorManager.NetworkOperationStarted()
+        SwiftyStoreKit.verifyReceipt(password: sharedSecret, completion: {
+            result in
+            NetworkActivityIndicatorManager.networkOperationFinished()
+            
+            switch result{
+            case .success(let receipt):
                 
-            case .failed:
+                let productID = self.bundleID + "." + product.rawValue
                 
-                print("buy error")
-                queue.finishTransaction(trans)
-                break;
-            default:
-                print("default")
-                break;
+                if product == .autoRenewable {
+                    let purchaseResult = SwiftyStoreKit.verifySubscription(productId: productID, inReceipt: receipt, validUntil: Date())
+                    self.showAlert(alert: self.alertForVerifySubscription(result: purchaseResult))
+                    
+                }
+                else {
+                    let purchaseResult = SwiftyStoreKit.verifyPurchase(productId: productID, inReceipt: receipt)
+                    self.showAlert(alert: self.alertForVerifyPurchase(result: purchaseResult))
+                    
+                }
+            case .error(let error):
+                self.showAlert(alert: self.alertForVerifyReceipt(result: result))
+                if case .noReceiptData = error {
+                    self.refreshReceipt()
+                    
+                }
+                
+            }
+            
+            
+        })
+        
+    }
+    func refreshReceipt() {
+        SwiftyStoreKit.refreshReceipt(completion: {
+            result in
+            
+            self.showAlert(alert: self.alertForRefreshRecepit(result: result))
+            
+        })
+        
+    }
+    
+}
+
+extension ViewController {
+    
+    func alertWithTitle(title : String, message : String) -> UIAlertController {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        return alert
+        
+    }
+    func showAlert(alert : UIAlertController) {
+        guard let _ = self.presentedViewController else {
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+    }
+    func alertForProductRetrievalInfo(result : RetrieveResults) -> UIAlertController {
+        if let product = result.retrievedProducts.first {
+            let priceString = product.localizedPrice!
+            return alertWithTitle(title: product.localizedTitle, message: "\(product.localizedDescription) - \(priceString)")
+            
+        }
+        else if let invalidProductID = result.invalidProductIDs.first {
+            return alertWithTitle(title: "Could not retreive product info", message: "Invalid product identifier: \(invalidProductID)")
+        }
+        else {
+            let errorString = result.error?.localizedDescription ?? "Unknown Error. Please Contact Support"
+            return alertWithTitle(title: "Could not retreive product info" , message: errorString)
+            
+        }
+        
+    }
+    func alertForPurchaseResult(result : PurchaseResult) -> UIAlertController {
+        switch result {
+        case .success(let product):
+            print("Purchase Succesful: \(product.productId)")
+            
+            return alertWithTitle(title: "Thank You", message: "Purchase completed")
+        case .error(let error):
+            print("Purchase Failed: \(error)")
+            switch error {
+            case .failed(let error):
+                if (error as NSError).domain == SKErrorDomain {
+                    return alertWithTitle(title: "Purchase Failed", message: "Check your internet connection or try again later.")
+                }
+                else {
+                    return alertWithTitle(title: "Purchase Failed", message: "Unknown Error. Please Contact Support")
+                }
+            case.invalidProductId(let productID):
+                return alertWithTitle(title: "Purchase Failed", message: "\(productID) is not a valid product identifier")
+            case .noProductIdentifier:
+                return alertWithTitle(title: "Purchase Failed", message: "Product not found")
+            case .paymentNotAllowed:
+                return alertWithTitle(title: "Purchase Failed", message: "You are not allowed to make payments")
                 
             }
         }
     }
-    
-    func finishTransaction(trans:SKPaymentTransaction)
-    {
-        print("finish trans")
-        SKPaymentQueue.default().finishTransaction(trans)
+    func alertForRestorePurchases(result : RestoreResults) -> UIAlertController {
+        if result.restoreFailedProducts.count > 0 {
+            print("Restore Failed: \(result.restoreFailedProducts)")
+            return alertWithTitle(title: "Restore Failed", message: "Unknown Error. Please Contact Support")
+        }
+        else if result.restoredProducts.count > 0 {
+            return alertWithTitle(title: "Purchases Restored", message: "All purchases have been restored.")
+            
+        }
+        else {
+            return alertWithTitle(title: "Nothing To Restore", message: "No previous purchases were made.")
+        }
+        
     }
+    func alertForVerifyReceipt(result: VerifyReceiptResult) -> UIAlertController {
+        
+        switch result {
+        case.success(let receipt):
+            return alertWithTitle(title: "Receipt Verified", message: "Receipt Verified Remotely")
+        case .error(let error):
+            switch error {
+            case .noReceiptData:
+                return alertWithTitle(title: "Receipt Verification", message: "No receipt data found, application will try to get a new one. Try Again.")
+            default:
+                return alertWithTitle(title: "Receipt verification", message: "Receipt Verification failed")
+            }
+        }
+    }
+    func alertForVerifySubscription(result: VerifySubscriptionResult) -> UIAlertController {
+        switch result {
+        case .purchased(let expiryDate):
+            return alertWithTitle(title: "Product is Purchased", message: "Product is valid until \(expiryDate)")
+        case .notPurchased:
+            return alertWithTitle(title: "Not purchased", message: "This product has never been purchased")
+        case .expired(let expiryDate):
+            
+            return alertWithTitle(title: "Product Expired", message: "Product is expired since \(expiryDate)")
+        }
+    }
+    func alertForVerifyPurchase(result : VerifyPurchaseResult) -> UIAlertController {
+        switch result {
+        case .purchased:
+            return alertWithTitle(title: "Product is Purchased", message: "Product will not expire")
+        case .notPurchased:
+            
+            return alertWithTitle(title: "Product not purchased", message: "Product has never been purchased")
+            
+            
+        }
+        
+    }
+    func alertForRefreshRecepit(result : RefreshReceiptResult) -> UIAlertController {
+        
+        switch result {
+        case .success(let receiptData):
+            return alertWithTitle(title: "Receipt Refreshed", message: "Receipt refreshed successfully")
+        case .error(let error):
+            return alertWithTitle(title: "Receipt refresh failed", message: "Receipt refresh failed")
+        }
+    }
+    
 }

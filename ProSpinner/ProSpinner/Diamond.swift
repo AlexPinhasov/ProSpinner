@@ -19,6 +19,10 @@ class Diamond: SKSpriteNode
         log.debug()
         super.init(texture: nil, color: .clear, size: CGSize(width: 35, height: 27))
   
+        let circuleMask = SKShapeNode(circleOfRadius: 17)
+        circuleMask.strokeColor = .clear
+        circuleMask.zPosition = 5
+
         var physicsCategory : UInt32! = 1
         var TouchEventFor : UInt32! = 1
 
@@ -49,11 +53,14 @@ class Diamond: SKSpriteNode
         self.run(SKAction.repeatForever(rotate))
         
         // Physics Body
-        self.physicsBody = SKPhysicsBody(rectangleOf: self.frame.size)
-        self.physicsBody?.categoryBitMask = physicsCategory
-        self.physicsBody?.contactTestBitMask = TouchEventFor
-        self.physicsBody?.isDynamic = true
+        circuleMask.physicsBody = SKPhysicsBody(circleOfRadius: 15)
+        circuleMask.physicsBody?.categoryBitMask = physicsCategory
+        circuleMask.physicsBody?.contactTestBitMask = TouchEventFor
+        circuleMask.physicsBody?.isDynamic = true
+
         self.zPosition = 5
+        self.addChild(circuleMask)
+
     }
     
     required init?(coder aDecoder: NSCoder)
