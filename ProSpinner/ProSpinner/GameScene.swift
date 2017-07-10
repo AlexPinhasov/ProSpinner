@@ -112,10 +112,11 @@ class GameScene: SKScene,
                     storeView?.hideStoreView()
                     diamondsManager?.addCollectedDiamondsToLabelScene()
                     
-                case Constants.NodesInStoreView.smallPackButton.rawValue,
-                     Constants.NodesInStoreView.bigPackButton.rawValue:
-                    
-                    purchaseManager?.buyProduct()
+                case Constants.NodesInStoreView.smallPackButton.rawValue:
+                    PurchaseManager.purchase(.SmallDiamondPack)
+                
+                case Constants.NodesInStoreView.bigPackButton.rawValue:
+                    PurchaseManager.purchase(.BigDiamondPack)
                     
                 case Constants.NodesInRetryView.RetryButton.rawValue,
                      Constants.NodesInRetryView.RetryButtonArrow.rawValue:

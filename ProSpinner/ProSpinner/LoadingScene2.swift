@@ -124,7 +124,6 @@ class LoadingScene2: SKScene
             scene.tutorialManager   = TutorialManager(withScene: scene)
             scene.storeView         = scene.childNode(withName: Constants.NodesInStoreView.StoreView.rawValue) as? StoreView
             scene.retryView         = scene.childNode(withName: Constants.NodesInRetryView.RetryView.rawValue) as? RetryView
-            scene.purchaseManager   = PurchaseManager()
             scene.physicsWorld.contactDelegate = scene
             
             scene.handleSpinnerConfiguration()

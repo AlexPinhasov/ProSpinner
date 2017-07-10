@@ -12,6 +12,7 @@ import Firebase
 import Fabric
 import Crashlytics
 import XCGLogger
+import SwiftyStoreKit
 
 // Create a logger object with no destinations
 let log = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         Fabric.with([Crashlytics.self])
         configureXCGLogger()
+       // completeIAPTransactions()
         return true
     }
 
@@ -53,6 +55,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    private func completeIAPTransactions()
+    {
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            
+            for purchase in purchases {
+                // swiftlint:disable:next for_where
+                if purchase.transaction.transactionState == .purchased || purchase.transaction.transactionState == .restored {
+                    
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    print("purchased: \(purchase.productId)")
+                }
+            }
+        }
+    }
+    
     private func configureXCGLogger()
     {
         // Create a destination for the system console log (via NSLog)

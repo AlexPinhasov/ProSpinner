@@ -41,6 +41,7 @@ class GameViewController: UIViewController
     func loadingScreenDidFinish()
     {
         log.debug()
+        PurchaseManager.rootViewController = self
         admobManager = AdMobManager(rootViewController: self)
         checkForNewSpinners()
     }
