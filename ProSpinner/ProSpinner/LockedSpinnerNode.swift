@@ -122,46 +122,46 @@ class LockedSpinnerNode: SKNode,
         unlockSpinnerButton?.colorBlendFactor = 0.7
     }
     
+    func rotate(successV node: SKNode?)
+    {
+        node?.removeAction(forKey: Constants.actionKeys.MoveSuccessV.rawValue)
+        node?.run(SKAction.rotate(byAngle: (CGFloat.pi * 2), duration: 0.7, delay: 0.2 , usingSpringWithDamping: 0.8, initialSpringVelocity: 1), withKey: Constants.actionKeys.MoveSuccessV.rawValue)
+    }
+    
     func playerHasEnoughDiamondsOfKind(diamonds: (playerHasRed: Bool, playerHasBlue: Bool,playerHasGreen: Bool))
     {
         log.debug()
         if diamonds.playerHasRed
         {
-            redSuccessV?.removeAction(forKey: Constants.actionKeys.MoveSuccessV.rawValue)
-            redSuccessV?.run(SKAction.rotate(toAngle: (CGFloat.pi * 2), duration: 0.3), withKey: Constants.actionKeys.MoveSuccessV.rawValue)
+            redSuccessV?.alpha = 1
+            rotate(successV: redSuccessV)
             redSuccessV?.texture = SKTexture(imageNamed: "GreenV")
         }
         else
         {
-            redSuccessV?.removeAction(forKey: Constants.actionKeys.MoveSuccessV.rawValue)
-            redSuccessV?.run(SKAction.rotate(toAngle: -(CGFloat.pi * 2), duration: 0.3), withKey: Constants.actionKeys.MoveSuccessV.rawValue)
-            redSuccessV?.texture = SKTexture(imageNamed: "GreyV")
+            redSuccessV?.alpha = 0
         }
         
         if diamonds.playerHasBlue
         {
-            blueSuccessV?.removeAction(forKey: Constants.actionKeys.MoveSuccessV.rawValue)
-            blueSuccessV?.run(SKAction.rotate(toAngle: (CGFloat.pi * 2), duration: 0.3), withKey: Constants.actionKeys.MoveSuccessV.rawValue)
+            blueSuccessV?.alpha = 1
+            rotate(successV: blueSuccessV)
             blueSuccessV?.texture = SKTexture(imageNamed: "GreenV")
         }
         else
         {
-            blueSuccessV?.removeAction(forKey: Constants.actionKeys.MoveSuccessV.rawValue)
-            blueSuccessV?.run(SKAction.rotate(toAngle: -(CGFloat.pi * 2), duration: 0.3), withKey: Constants.actionKeys.MoveSuccessV.rawValue)
-            blueSuccessV?.texture = SKTexture(imageNamed: "GreyV")
+            blueSuccessV?.alpha = 0
         }
         
         if diamonds.playerHasGreen
         {
-            greenSuccessV?.removeAction(forKey: Constants.actionKeys.MoveSuccessV.rawValue)
-            greenSuccessV?.run(SKAction.rotate(toAngle: (CGFloat.pi * 2), duration: 0.3), withKey: Constants.actionKeys.MoveSuccessV.rawValue)
+            greenSuccessV?.alpha = 1
+            rotate(successV: greenSuccessV)
             greenSuccessV?.texture = SKTexture(imageNamed: "GreenV")
         }
         else
         {
-            greenSuccessV?.removeAction(forKey: Constants.actionKeys.MoveSuccessV.rawValue)
-            greenSuccessV?.run(SKAction.rotate(toAngle: -(CGFloat.pi * 2), duration: 0.3), withKey: Constants.actionKeys.MoveSuccessV.rawValue)
-            greenSuccessV?.texture = SKTexture(imageNamed: "GreyV")
+            greenSuccessV?.alpha = 0
         }
         
         let playerHasEnoghDiamonds = diamonds.playerHasRed && diamonds.playerHasBlue && diamonds.playerHasGreen
@@ -176,7 +176,6 @@ class LockedSpinnerNode: SKNode,
             canNotUnlockSpinner()
             userCanUnlockSpinner = false
         }
-        
     }
     
     func userRequestedToUnlockSpinner() -> Bool

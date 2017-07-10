@@ -189,9 +189,9 @@ class DiamondsManager: BaseClass,
     private func positionDiamondsAtLockedLocation()
     {
         log.debug()
-        redDiamondNode?.run(SKAction.moveTo(y: 444 , duration: 0.2))
-        blueDiamondNode?.run(SKAction.moveTo(y: 444, duration: 0.2))
-        greenDiamondNode?.run(SKAction.moveTo(y: 444, duration:0.2))
+        redDiamondNode?.run(SKAction.moveTo(y: 457 , duration: 0.2))
+        blueDiamondNode?.run(SKAction.moveTo(y: 457, duration: 0.2))
+        greenDiamondNode?.run(SKAction.moveTo(y: 457, duration:0.2))
 
     }
     
@@ -225,9 +225,9 @@ class DiamondsManager: BaseClass,
     private func positionDiamondLabelNodeAtLockedLocation(completion block: @escaping () -> Void)
     {
         log.debug()
-        redDiamondLabelNode?.run(SKAction.moveTo(y: 399 , duration: 0.2))
-        blueDiamondLabelNode?.run(SKAction.moveTo(y: 399, duration: 0.2))
-        greenDiamondLabelNode?.run(SKAction.moveTo(y: 399, duration:0.2))
+        redDiamondLabelNode?.run(SKAction.moveTo(y: 397 , duration: 0.2))
+        blueDiamondLabelNode?.run(SKAction.moveTo(y: 397, duration: 0.2))
+        greenDiamondLabelNode?.run(SKAction.moveTo(y: 397, duration:0.2))
         {
             block()
             //self.changeDiamondsPlayerHaveLabelColor(toColor: .white)

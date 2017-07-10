@@ -51,7 +51,7 @@ class CustomSKLabelNode : SKNode,
 
             blackBackground = SKShapeNode(rect: self.diamondsPlayerNeed.frame)
             blackBackground.fillColor = .black
-            //blackBackground.strokeColor = .clear
+            blackBackground.strokeColor = .clear
             diamondsPlayerNeed.addChild(blackBackground)
             blackBackground.zPosition = 0
             diamondsPlayerNeed.position = CGPoint.zero
