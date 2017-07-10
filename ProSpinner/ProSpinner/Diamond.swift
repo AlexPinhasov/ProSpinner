@@ -80,6 +80,7 @@ extension Diamond
         set
         {
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.green.rawValue)
+            UserDefaults.standard.synchronize()
         }
     }
     
@@ -92,6 +93,7 @@ extension Diamond
         set
         {
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.red.rawValue)
+            UserDefaults.standard.synchronize()
         }
     }
     
@@ -104,6 +106,7 @@ extension Diamond
         set
         {
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.blue.rawValue)
+            UserDefaults.standard.synchronize()
         }
     }
 }

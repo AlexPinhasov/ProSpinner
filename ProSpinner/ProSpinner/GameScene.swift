@@ -26,6 +26,7 @@ class GameScene: SKScene,
     var storeView       : StoreView?
     
     var enableSwipe = true
+    var lastNodeTouchedName = ""
     
     var spinnerNode     : SKSpriteNode = SKSpriteNode()
     
@@ -83,6 +84,7 @@ class GameScene: SKScene,
             
             if let name = touchedNode.name, spinnerManager?.currentlySwitchingSpinner == false
             {
+                guard lastNodeTouchedName == name else { return }
                 switch name
                 {
                 case Constants.NodesInPlayNode.PlayLabel.rawValue:
@@ -113,10 +115,23 @@ class GameScene: SKScene,
                     diamondsManager?.addCollectedDiamondsToLabelScene()
                     
                 case Constants.NodesInStoreView.smallPackButton.rawValue:
-                    PurchaseManager.purchase(.SmallDiamondPack)
-                
+                    PurchaseManager.purchase(.SmallDiamondPack, completion: { (success) in
+                        
+                        if success
+                        {
+                            self.storeView?.hideStoreView()
+                            self.diamondsManager?.didSuccessInBuying(purchaseType: .SmallDiamondPack)
+                        }
+                    })
+
                 case Constants.NodesInStoreView.bigPackButton.rawValue:
-                    PurchaseManager.purchase(.BigDiamondPack)
+                    PurchaseManager.purchase(.BigDiamondPack, completion: { (success) in
+                        if success
+                        {
+                            self.storeView?.hideStoreView()
+                            self.diamondsManager?.didSuccessInBuying(purchaseType: .BigDiamondPack)
+                        }
+                    })
                     
                 case Constants.NodesInRetryView.RetryButton.rawValue,
                      Constants.NodesInRetryView.RetryButtonArrow.rawValue:
@@ -140,6 +155,7 @@ class GameScene: SKScene,
             
             if let name = touchedNode.name, spinnerManager?.currentlySwitchingSpinner == false
             {
+                lastNodeTouchedName = name
                 switch name
                 {
                 case Constants.NodesInPlayNode.PlayLabel.rawValue:

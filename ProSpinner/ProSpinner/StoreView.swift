@@ -31,9 +31,29 @@ class StoreView: SKNode
         super.init(coder: aDecoder)
         connectOutletsToScene()
         configureViewBeforePresentation()
+        configureCostFromProducts()
     }
     
     //  MARK: Game Life cycle
+    private func configureCostFromProducts()
+    {
+        PurchaseManager.getInfo() { (result) in
+            
+            for product in result.retrievedProducts
+            {
+                if product.localizedTitle == "Big Diamond Pack", let price = product.localizedPrice
+                {
+                    self.bigDiamondGroupCost?.text = price
+                }
+                
+                if product.localizedTitle == "Diamond Pack",let price = product.localizedPrice
+                {
+                    self.smallDiamondGroupCost?.text = price
+                }
+            }
+        }
+    }
+    
     private func connectOutletsToScene()
     {
         storeBackground        = self.childNode(withName: Constants.NodesInStoreView.StoreBackground.rawValue) as? SKSpriteNode
@@ -41,15 +61,15 @@ class StoreView: SKNode
         exitButton             = storeAlert?.childNode(withName: Constants.NodesInStoreView.exitButton.rawValue) as? SKSpriteNode
         
         smallDiamondGroup      = storeAlert?.childNode(withName: Constants.NodesInStoreView.smallDiamondGroup.rawValue) as? SKSpriteNode
-        smallDiamondGroupCost  = smallDiamondGroup?.childNode(withName: Constants.NodesInStoreView.smallDiamondGroupCost.rawValue) as? SKLabelNode
         
         smallPackButton         = storeAlert?.childNode(withName: Constants.NodesInStoreView.smallPackButton.rawValue) as? SKSpriteButton
         bigPackButton           = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigPackButton.rawValue) as? SKSpriteButton
+        smallDiamondGroupCost   = smallPackButton?.childNode(withName: Constants.NodesInStoreView.smallDiamondGroupCost.rawValue) as? SKLabelNode
         smallPackButton?.moveBy = -6
         bigPackButton?.moveBy   = -6
         
         bigDiamondGroup        = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroup.rawValue) as? SKSpriteNode
-        bigDiamondGroupCost    = bigDiamondGroup?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroupCost.rawValue) as? SKLabelNode
+        bigDiamondGroupCost    = bigPackButton?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroupCost.rawValue) as? SKLabelNode
         
 
     }

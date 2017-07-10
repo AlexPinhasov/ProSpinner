@@ -131,6 +131,22 @@ class DiamondsManager: BaseClass,
         loadGreenDiamondCount()
         fadeInDiamondAndTheirCount()
     }
+    
+    func didSuccessInBuying(purchaseType :RegisteredPurchase)
+    {
+        var amountToAdd = 0
+        switch purchaseType
+        {
+        case .SmallDiamondPack : amountToAdd = 100
+        case .BigDiamondPack   : amountToAdd = 300
+        }
+        
+        Diamond.redCounter += amountToAdd
+        Diamond.blueCounter += amountToAdd
+        Diamond.greenCounter += amountToAdd
+        
+        count(toDiraction: .up, for: amountToAdd, for: amountToAdd, for: amountToAdd)
+    }
 
 //  MARK: Physics mothods
     func contactBegan(for diamondNode: Diamond)

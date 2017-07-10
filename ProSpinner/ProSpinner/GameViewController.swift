@@ -110,16 +110,16 @@ class GameViewController: UIViewController
                                   unlocked: true)
             
             ArchiveManager.write_SpinnerToUserDefault(spinners: [spinner])
+            set10DiamondsOnFirstRun()
         }
-        set10DiamondsOnFirstRun()
     }
     
     private func set10DiamondsOnFirstRun()
     {
         log.debug()
-        UserDefaults.standard.set(300, forKey: UserDefaultKeys.red.rawValue)
-        UserDefaults.standard.set(439, forKey: UserDefaultKeys.blue.rawValue)
-        UserDefaults.standard.set(493, forKey: UserDefaultKeys.green.rawValue)
+        UserDefaults.standard.set(0, forKey: UserDefaultKeys.red.rawValue)
+        UserDefaults.standard.set(0, forKey: UserDefaultKeys.blue.rawValue)
+        UserDefaults.standard.set(0, forKey: UserDefaultKeys.green.rawValue)
     }
     
     func beginDownload()
