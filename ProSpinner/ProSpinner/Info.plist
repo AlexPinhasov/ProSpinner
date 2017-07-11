@@ -41,6 +41,7 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>MyriadPro-Regular.otf</string>
 		<string></string>
 		<string>MyriadPro-Cond.otf</string>
 		<string>MyriadPro-CondIt.otf</string>
@@ -51,6 +52,10 @@
 		<string>OpenSansHebrew-Bold.ttf</string>
 		<string>OpenSansHebrew-Light.ttf</string>
 		<string>OpenSansHebrew-Regular.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -68,6 +73,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

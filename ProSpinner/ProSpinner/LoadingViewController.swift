@@ -20,6 +20,7 @@ class LoadingViewController: UIViewController
     {
         super.viewDidLoad()
         log.debug()
+        setSpinnerInArrayOnFirstRun()
         spinnerImage.image = getMainSpinnerTexture()
         getTexturesToLoad()
     }
@@ -28,11 +29,6 @@ class LoadingViewController: UIViewController
     {
         super.viewDidAppear(animated)
         rotateAnimation(imageView: spinnerImage, duration: 1.5)
-    }
-    
-    deinit
-    {
-        print("deinit loading")
     }
     
     func rotateAnimation(imageView:UIImageView,duration: CFTimeInterval = 2.0)
@@ -55,6 +51,7 @@ class LoadingViewController: UIViewController
     {
         log.debug()
         _ = ArchiveManager.read_SpinnersFromUserDefault()
+                
         let mainSpinner = ArchiveManager.spinnersArrayInDisk[ArchiveManager.mainSpinnerLocation]
         
         if let cgSpinnerImage = mainSpinner.texture?.cgImage()
@@ -167,4 +164,35 @@ class LoadingViewController: UIViewController
         }
     }
 
+    private func setSpinnerInArrayOnFirstRun()
+    {
+        log.debug()
+        if ArchiveManager.firstTimeRun == false
+        {
+            ArchiveManager.firstTimeRun = true
+            UserDefaults.standard.set(nil, forKey: "Spinners")
+            UserDefaults.standard.set(0  , forKey: UserDefaultKeys.highScore.rawValue)
+            
+            let spinner = Spinner(id: 1,
+                                  imageUrlLink: "",
+                                  texture: SKTexture(imageNamed: "blackSpinner") ,
+                                  redNeeded: 10,
+                                  blueNeeded: 10,
+                                  greenNeeded: 10,
+                                  mainSpinner: true,
+                                  unlocked: true)
+            
+            ArchiveManager.write_SpinnerToUserDefault(spinners: [spinner])
+            set10DiamondsOnFirstRun()
+        }
+    }
+    
+    private func set10DiamondsOnFirstRun()
+    {
+        log.debug()
+        UserDefaults.standard.set(50, forKey: UserDefaultKeys.red.rawValue)
+        UserDefaults.standard.set(50, forKey: UserDefaultKeys.blue.rawValue)
+        UserDefaults.standard.set(50, forKey: UserDefaultKeys.green.rawValue)
+    }
+    
 }

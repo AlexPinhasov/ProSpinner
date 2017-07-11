@@ -16,9 +16,11 @@ class NetworkManager
 {
     static private var numberOfImagesInDownload: Int = 0
     static private var database = Database.database().reference().database.reference()
+    static var currentlyCheckingForNewSpinners = false
     
     static func checkForNewSpinners(withCompletion block: @escaping (Bool) -> Void)
     {
+        NetworkManager.currentlyCheckingForNewSpinners = true
         let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
         backgroundQueue.async(execute:
         {
@@ -30,12 +32,16 @@ class NetworkManager
                 {
                     block(newSpinnersAvailable > ArchiveManager.spinnersArrayInDisk.count)
                 }
-                block(false)
+                else
+                {
+                    block(false)
+                }
             })
             { (error) in
                 print(error.localizedDescription)
                 block(false)
             }
+            NetworkManager.currentlyCheckingForNewSpinners = false
         })
     }
     
