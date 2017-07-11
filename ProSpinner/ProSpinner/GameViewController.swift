@@ -16,13 +16,14 @@ enum NotificationName: String
 {
     case removeDownloadView = "removeDownloadView"
     case notifyWithNewTexture = "notifyWithNewTexture"
+    case reloadLockedViewAfterPurchase = "reloadLockedViewAfterPurchase"
 }
 
 class GameViewController: UIViewController
 {
     var downloadView: JSSAlertViewResponder?
     var admobManager : AdMobManager?
-    
+    var nextScene : SKScene?
 //  MARK: View's Life cycle
     override func viewDidLoad()
     {
@@ -73,17 +74,13 @@ class GameViewController: UIViewController
     private func loadScene()
     {
         log.debug()
-        if let loadingSceneNode = LoadingScene2(fileNamed: "LoadingScene2")
+        if let sceneNode = nextScene
         {
-            loadingSceneNode.scaleMode = .aspectFill
-            loadingSceneNode.spinnerInScene = loadingSceneNode.childNode(withName: "spinner") as? SKSpriteNode
-            loadingSceneNode.spinnerInScene?.texture = loadingSceneNode.getMainSpinnerTexture()
-            loadingSceneNode.spinnerInScene?.size = CGSize(width: 261.25, height: 261.25)
-            
+            sceneNode.scaleMode = .aspectFill
             // Present the scene
             if let view = self.view as? SKView
             {
-                view.presentScene(loadingSceneNode)
+                view.presentScene(sceneNode)
                 view.ignoresSiblingOrder = true
                 view.showsFPS = true
                 view.showsNodeCount = true
@@ -117,9 +114,9 @@ class GameViewController: UIViewController
     private func set10DiamondsOnFirstRun()
     {
         log.debug()
-        UserDefaults.standard.set(0, forKey: UserDefaultKeys.red.rawValue)
-        UserDefaults.standard.set(0, forKey: UserDefaultKeys.blue.rawValue)
-        UserDefaults.standard.set(0, forKey: UserDefaultKeys.green.rawValue)
+        UserDefaults.standard.set(50, forKey: UserDefaultKeys.red.rawValue)
+        UserDefaults.standard.set(50, forKey: UserDefaultKeys.blue.rawValue)
+        UserDefaults.standard.set(50, forKey: UserDefaultKeys.green.rawValue)
     }
     
     func beginDownload()

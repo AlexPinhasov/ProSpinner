@@ -35,6 +35,16 @@ class GameScene: SKScene,
     {
         log.debug("")
         handleSwipeConfiguration()
+        addObservers()
+    }
+    
+    private func addObservers()
+    {
+        log.debug()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reloadLockedViewAfterPurchase),
+                                               name: NSNotification.Name(rawValue: NotificationName.reloadLockedViewAfterPurchase.rawValue),
+                                               object: nil)
     }
 //  MARK: Physics Contact Delegate
     func didBegin(_ contact: SKPhysicsContact)
@@ -78,6 +88,12 @@ class GameScene: SKScene,
             
             manuManager?.playNode?.playLabel?.releasedButton()
             manuManager?.storeNode?.storeButton?.releasedButton()
+            manuManager?.lockedSpinnerView?.getMoreDiamondsButton?.releasedButton()
+            
+            if manuManager?.lockedSpinnerView?.userCanUnlockSpinner == true
+            {
+                manuManager?.lockedSpinnerView?.unlockSpinnerButton?.releasedButton()
+            }
             
             manuManager?.RightArrowPressed(isPressed: false)
             manuManager?.LeftArrowPressed(isPressed: false)
@@ -103,6 +119,16 @@ class GameScene: SKScene,
                      Constants.NodesInScene.ActualLeftArrow.rawValue:
                     userTappedPreviousSpinner()
                     
+                case Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue,
+                     Constants.NodesInLockedSpinnerView.UnlockSpinnerButtonGrayout.rawValue:
+                    
+                    if manuManager?.lockedSpinnerView?.userCanUnlockSpinner == true
+                    {
+                        spinnerManager?.purchasedNewSpinner()
+                        diamondsManager?.purchasedNewSpinner()
+                        manuManager?.purchasedNewSpinner()
+                    }
+                    
                 case Constants.NodesInRetryView.ExitButton.rawValue,
                      Constants.NodesInRetryView.MenuLines.rawValue,
                      Constants.NodesInRetryView.AlertViewBackground.rawValue,
@@ -121,6 +147,7 @@ class GameScene: SKScene,
                         {
                             self.storeView?.hideStoreView()
                             self.diamondsManager?.didSuccessInBuying(purchaseType: .SmallDiamondPack)
+                            self.enableSwipe = true
                         }
                     })
 
@@ -130,6 +157,7 @@ class GameScene: SKScene,
                         {
                             self.storeView?.hideStoreView()
                             self.diamondsManager?.didSuccessInBuying(purchaseType: .BigDiamondPack)
+                            self.enableSwipe = true
                         }
                     })
                     
@@ -167,22 +195,21 @@ class GameScene: SKScene,
                 case Constants.NodesInScene.LeftArrow.rawValue:
                     manuManager?.LeftArrowPressed(isPressed: true)
 
-                case Constants.NodesInScene.BuySpinner.rawValue:
-                    handleBuySpinnerCase(for: touchedNode)
-                    
                 case Constants.NodesInStoreView.StoreButton.rawValue:
+                    manuManager?.lockedSpinnerView?.getMoreDiamondsButton?.touchedUpInside()
                     manuManager?.storeNode?.storeButton?.touchedUpInside()
+
+                case Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue,
+                     Constants.NodesInLockedSpinnerView.UnlockSpinnerButtonGrayout.rawValue:
                     
-                case Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue:
-                    
-                    let canUnlockSpinner = manuManager?.lockedSpinnerView?.userRequestedToUnlockSpinner()
-                    if canUnlockSpinner == true
+                    if manuManager?.lockedSpinnerView?.userCanUnlockSpinner == false
                     {
-                        spinnerManager?.purchasedNewSpinner()
-                        diamondsManager?.purchasedNewSpinner()
-                        manuManager?.purchasedNewSpinner()
+                        manuManager?.lockedSpinnerView?.shakeUnlockButton()
                     }
-                    
+                    else
+                    {
+                        manuManager?.lockedSpinnerView?.unlockSpinnerButton?.touchedUpInside()
+                    }
                 case Constants.NodesInStoreView.smallPackButton.rawValue,
                      Constants.NodesInStoreView.smallDiamondGroupCost.rawValue:
                     
@@ -249,6 +276,11 @@ class GameScene: SKScene,
         diamondsManager?.purchasedNewSpinner()
         manuManager?.purchasedNewSpinner()
         spinnerManager?.purchasedNewSpinner()
+    }
+    
+    func reloadLockedViewAfterPurchase()
+    {
+        handleLockViewAppearance()
     }
     
     private func handleLockViewAppearance()

@@ -49,6 +49,7 @@
 		0AF5088F1F08AD770062F8E8 /* LoadingScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5088E1F08AD770062F8E8 /* LoadingScene2.swift */; };
 		0AF508911F08ADAE0062F8E8 /* LoadingScene2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0AF508901F08ADAE0062F8E8 /* LoadingScene2.sks */; };
 		58D8CE085EEC2BF1CF77C9BF /* Pods_ProSpinnerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCB592AC0294D9475632625 /* Pods_ProSpinnerUITests.framework */; };
+		9109F3D51F150F4000853867 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3D41F150F4000853867 /* LoadingViewController.swift */; };
 		918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F11EC9CC8600886039 /* AppDelegate.swift */; };
 		918F18F41EC9CC8600886039 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 918F18F31EC9CC8600886039 /* GameScene.sks */; };
 		918F18F81EC9CC8600886039 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F71EC9CC8600886039 /* GameScene.swift */; };
@@ -133,6 +134,7 @@
 		36BDCBC0E9A2285D9458F24E /* Pods-ProSpinnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinnerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinnerTests/Pods-ProSpinnerTests.release.xcconfig"; sourceTree = "<group>"; };
 		38F968A8CBF8C42E54BABC61 /* Pods-ProSpinner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinner/Pods-ProSpinner.debug.xcconfig"; sourceTree = "<group>"; };
 		5E5A8AFAD1166EED7620A660 /* Pods-ProSpinner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinner.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinner/Pods-ProSpinner.release.xcconfig"; sourceTree = "<group>"; };
+		9109F3D41F150F4000853867 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		918F18EE1EC9CC8600886039 /* ProSpinner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProSpinner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918F18F11EC9CC8600886039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		918F18F31EC9CC8600886039 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				918F18F71EC9CC8600886039 /* GameScene.swift */,
 				0AF508901F08ADAE0062F8E8 /* LoadingScene2.sks */,
 				0AF5088E1F08AD770062F8E8 /* LoadingScene2.swift */,
+				9109F3D41F150F4000853867 /* LoadingViewController.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				0A0D16F81EE6695500C4DD45 /* Constants.swift in Sources */,
 				0A15917E1EE3C142005320A9 /* DownloadingDelegateDataSource.swift in Sources */,
 				9190A2791F03B698005DD47C /* SKSpriteButton.swift in Sources */,
+				9109F3D51F150F4000853867 /* LoadingViewController.swift in Sources */,
 				0ADCF0D41EDD9B2D00CE1C8B /* ArchiveManager.swift in Sources */,
 				0A305A0B1EED9F5600BA3A4B /* Animateable.swift in Sources */,
 				0AE83A7A1EDC91580066E3DD /* ManuManager.swift in Sources */,
@@ -824,6 +828,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
+				"DEBUG_ACTIVITY_MODE[arch=*]" = disable;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -874,6 +880,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

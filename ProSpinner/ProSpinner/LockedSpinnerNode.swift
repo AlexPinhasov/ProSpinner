@@ -14,10 +14,16 @@ class LockedSpinnerNode: SKNode,
 {
     private var lockedBackground            : SKSpriteNode?
     private var unlockSpinnerButtonShadow   : SKSpriteNode?
-    private var unlockSpinnerButton         : SKSpriteButton?
+    var unlockSpinnerButton         : SKSpriteButton?
+    private var unlockSpinnerButtonGrayout  : SKSpriteNode?
+    
+    private var getMoreDiamondsButtonShadow   : SKSpriteNode?
+    var getMoreDiamondsButton         : SKSpriteButton?
+    
     private var unlockSpinnerLabel          : SKLabelNode?
     private var topLabel                    : SKLabelNode?
-    private var userCanUnlockSpinner = false
+    var userCanUnlockSpinner = false
+    var shakingButton = false
     
     fileprivate var redSuccessV      : SKSpriteNode?
     fileprivate var blueSuccessV     : SKSpriteNode?
@@ -44,6 +50,12 @@ class LockedSpinnerNode: SKNode,
         unlockSpinnerButton?.xScale = 0
         unlockSpinnerButton?.yScale = 0
         
+        getMoreDiamondsButton?.xScale = 0
+        getMoreDiamondsButton?.yScale = 0
+        
+        getMoreDiamondsButtonShadow?.xScale = 0
+        getMoreDiamondsButtonShadow?.yScale = 0
+        
         topLabel?.xScale = 0
         topLabel?.yScale = 0
         
@@ -61,11 +73,20 @@ class LockedSpinnerNode: SKNode,
     {
         log.debug()
         lockedBackground            = self.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerBackground.rawValue) as? SKSpriteNode
+        
+        
+        getMoreDiamondsButtonShadow   = self.childNode(withName: Constants.NodesInLockedSpinnerView.GetMoreDiamondsButtonShadow.rawValue) as? SKSpriteNode
+        getMoreDiamondsButton         = self.childNode(withName: Constants.NodesInLockedSpinnerView.GetMoreDiamondsButton.rawValue) as? SKSpriteButton
+        getMoreDiamondsButton?.delegate = self
+        getMoreDiamondsButton?.moveBy = -4
+        
+        
         unlockSpinnerButtonShadow   = self.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButtonShadow.rawValue) as? SKSpriteNode
         unlockSpinnerButton         = self.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue) as? SKSpriteButton
         unlockSpinnerLabel          = unlockSpinnerButton?.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue) as? SKLabelNode
+        unlockSpinnerButtonGrayout  = unlockSpinnerButton?.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButtonGrayout.rawValue) as? SKSpriteNode
         unlockSpinnerButton?.delegate = self
-        unlockSpinnerButton?.moveBy = 4
+        unlockSpinnerButton?.moveBy = -4
         
         topLabel                    = self.childNode(withName: Constants.NodesInLockedSpinnerView.TopLabel.rawValue) as? SKLabelNode
 
@@ -86,8 +107,11 @@ class LockedSpinnerNode: SKNode,
             lockedBackground?.run(SKAction.scaleY(to: 1, duration: 0.4, delay: 0.3, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             
             topLabel?.run(SKAction.scale(to: 1, duration: 0.4, delay: 0.4, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-            unlockSpinnerButton?.run(SKAction.scale(to: 1, duration: 0.4, delay: 0.4, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-            unlockSpinnerButtonShadow?.run(SKAction.scale(to: 1, duration: 0.4, delay: 0.4, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            unlockSpinnerButton?        .run(SKAction.scale(to: 1, duration: 0.4, delay: 0.4, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            unlockSpinnerButtonShadow?  .run(SKAction.scale(to: 1, duration: 0.4, delay: 0.4, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+
+            getMoreDiamondsButton?      .run(SKAction.scale(to: 1, duration: 0.4, delay: 0.4, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            getMoreDiamondsButtonShadow?.run(SKAction.scale(to: 1, duration: 0.4, delay: 0.4, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             
             redSuccessV?.run(SKAction.scale(to: 1, duration: 0.4, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             blueSuccessV?.run(SKAction.scale(to: 1, duration: 0.4, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
@@ -97,8 +121,11 @@ class LockedSpinnerNode: SKNode,
         else if present == false
         {
             topLabel?.run(SKAction.scale(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-            unlockSpinnerButton?.run(SKAction.scale(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-            unlockSpinnerButtonShadow?.run(SKAction.scale(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            unlockSpinnerButton?        .run(SKAction.scale(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            unlockSpinnerButtonShadow?  .run(SKAction.scale(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+
+            getMoreDiamondsButton?      .run(SKAction.scale(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            getMoreDiamondsButtonShadow?.run(SKAction.scale(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             
             lockedBackground?.run(SKAction.scaleY(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             lockedBackground?.run(SKAction.scaleX(to: 0, duration: 0.3, delay: 0.15, usingSpringWithDamping: 0.6, initialSpringVelocity: 1)) { self.isHidden = true }
@@ -112,14 +139,19 @@ class LockedSpinnerNode: SKNode,
 
     func canUnlockSpinner()
     {
-        unlockSpinnerLabel?.run(SKAction.fadeIn(withDuration: 0.3))
-        unlockSpinnerButton?.colorBlendFactor = 0
+        topLabel?.text = "You can unlock this spinner!"
+        unlockSpinnerButtonGrayout?.run(SKAction.fadeOut(withDuration: 0.3))
+        if unlockSpinnerButton?.xScale == 1.0
+        {
+            pulse(node: unlockSpinnerButton, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.3)
+            pulse(node: unlockSpinnerButtonShadow, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.3)
+        }
     }
     
     func canNotUnlockSpinner()
     {
-        unlockSpinnerLabel?.run(SKAction.fadeAlpha(to: 0.5, duration: 0.3))
-        unlockSpinnerButton?.colorBlendFactor = 0.7
+        topLabel?.text = "Collect more diamonds to unlock"
+        unlockSpinnerButtonGrayout?.run(SKAction.fadeAlpha(to: 0.7, duration: 0.3))
     }
     
     func rotate(successV node: SKNode?)
@@ -177,18 +209,14 @@ class LockedSpinnerNode: SKNode,
             userCanUnlockSpinner = false
         }
     }
-    
-    func userRequestedToUnlockSpinner() -> Bool
+
+    func shakeUnlockButton()
     {
-        if userCanUnlockSpinner
+        if shakingButton == false
         {
-            return true
-        }
-        else
-        {
-            shake(node: unlockSpinnerButtonShadow, withDuration: 0.07)
-            shake(node: unlockSpinnerButton, withDuration: 0.07)
-            return false
+            shakingButton = true
+            shake(node: unlockSpinnerButtonShadow, withDuration: 0.05, completion: nil)
+            shake(node: unlockSpinnerButton, withDuration: 0.05, completion: { self.shakingButton = false } )
         }
     }
     

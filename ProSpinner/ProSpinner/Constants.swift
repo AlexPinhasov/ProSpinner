@@ -151,12 +151,15 @@ class Constants
         case LockedSpinnerNode = "LockedSpinnerNode"
         
         case LockedSpinnerBackground = "LockedSpinnerBackground"
+        case UnlockSpinnerButtonGrayout = "UnlockSpinnerButtonGrayout"
         case RedPrice = "RedPriceLabel"
         case BluePrice = "BluePriceLabel"
         case GreenPrice = "GreenPriceLabel"
         case SpinnerLock = "SpinnerLock"
         case UnlockSpinnerButton = "UnlockSpinnerButton"
         case UnlockSpinnerButtonShadow = "UnlockSpinnerButtonShadow"
+        case GetMoreDiamondsButton = "StoreButton"
+        case GetMoreDiamondsButtonShadow = "getMoreDiamondsButtonShadow"
         case TopLabel = "TopLabel"
     }
     

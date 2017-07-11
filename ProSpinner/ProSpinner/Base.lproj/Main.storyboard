@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="f3X-yk-sq4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,10 +26,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Loading Scene2-->
+        <!--Loading View Controller-->
         <scene sceneID="ISg-8O-d1G">
             <objects>
-                <viewController id="f3X-yk-sq4" customClass="LoadingScene2" customModule="ProSpinner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="f3X-yk-sq4" customClass="LoadingViewController" customModule="ProSpinner" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dRB-c4-0PC"/>
                         <viewControllerLayoutGuide type="bottom" id="i4G-ku-L0A"/>
@@ -83,9 +83,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="diamondInView" destination="NVx-ra-sgv" id="bIu-Bd-Y1E"/>
-                        <outlet property="labelInView" destination="Y9P-Au-G8g" id="RqH-Ya-7rz"/>
-                        <outlet property="spinnerInView" destination="0zK-nQ-bBI" id="Opg-Ic-rrc"/>
+                        <outlet property="spinnerImage" destination="0zK-nQ-bBI" id="Zj5-28-DrC"/>
+                        <segue destination="BV1-FR-VrT" kind="show" identifier="showScene" id="cnF-Vk-2sB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbg-Pn-JGq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -276,8 +275,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="RedDiamond" width="586" height="455"/>
-        <image name="blackSpinner" width="1000" height="1000"/>
+        <image name="RedDiamond" width="75" height="58"/>
+        <image name="blackSpinner" width="700" height="700"/>
         <image name="newspinner" width="700" height="700"/>
         <image name="spinner2" width="333" height="333"/>
     </resources>

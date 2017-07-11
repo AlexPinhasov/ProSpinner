@@ -64,6 +64,7 @@ class PurchaseManager
             if case .success(let purchase) = result
             {
                 block(true)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.reloadLockedViewAfterPurchase.rawValue), object: nil)
                 if purchase.needsFinishTransaction
                 {
                     SwiftyStoreKit.finishTransaction(purchase.transaction)

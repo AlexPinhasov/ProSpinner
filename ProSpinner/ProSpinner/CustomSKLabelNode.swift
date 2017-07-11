@@ -21,7 +21,7 @@ class CustomSKLabelNode : SKNode,
         self.diamondsPlayerHave.fontColor = .black
         self.diamondsPlayerHave.fontName = "MyriadPro-Cond"
         self.diamondsPlayerHave.position = CGPoint.zero
-        self.diamondsPlayerHave.fontSize = 26
+        self.diamondsPlayerHave.fontSize = 25
         self.diamondsPlayerHave.zPosition = 4
         
         addChild(self.diamondsPlayerHave)
@@ -30,7 +30,7 @@ class CustomSKLabelNode : SKNode,
         self.diamondsPlayerNeed.fontName = "MyriadPro-Cond"
         self.diamondsPlayerNeed.zPosition = 5
         self.diamondsPlayerNeed.position = CGPoint.zero
-        self.diamondsPlayerNeed.fontSize = 26
+        self.diamondsPlayerNeed.fontSize = 25
         self.diamondsPlayerNeed.horizontalAlignmentMode = .left
     
         addChild(self.diamondsPlayerNeed)

@@ -22,13 +22,7 @@ class LoadingScene2: SKScene
         getTexturesToLoad()
     }
     
-    func getMainSpinnerTexture() -> SKTexture?
-    {
-        log.debug()
-        _ = ArchiveManager.read_SpinnersFromUserDefault()
-        let mainSpinner = ArchiveManager.spinnersArrayInDisk[ArchiveManager.mainSpinnerLocation]
-        return mainSpinner.texture
-    }
+
     
     func rotateSpinner()
     {

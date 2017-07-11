@@ -184,7 +184,7 @@ class DiamondsManager: BaseClass,
         updateHighScore()
     }
     
-//  MARK: Diamonds Animation
+//  MARK: Diamonds Animation    
     func handleDiamondsWhenSpinner(isLocked spinnerIsLocked: Bool)
     {
         log.debug("")
@@ -222,10 +222,13 @@ class DiamondsManager: BaseClass,
                     self.setTextForDiamondLabelNode(forNode: self.redDiamondLabelNode, diamondsPlayerNeed: spinner.redNeeded)
                     self.setTextForDiamondLabelNode(forNode: self.blueDiamondLabelNode, diamondsPlayerNeed: spinner.blueNeeded)
                     self.setTextForDiamondLabelNode(forNode: self.greenDiamondLabelNode, diamondsPlayerNeed: spinner.greenNeeded)
-                    
-                    self.redDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
-                    self.blueDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
-                    self.greenDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
+                
+                    if self.shouldPulseNeededLabel()
+                    {
+                        self.redDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
+                        self.blueDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
+                        self.greenDiamondLabelNode?.pulseNeededDiamonds(withDuration: 0.3,delay: 0.3)
+                    }
             }
         }
         else
@@ -241,9 +244,9 @@ class DiamondsManager: BaseClass,
     private func positionDiamondLabelNodeAtLockedLocation(completion block: @escaping () -> Void)
     {
         log.debug()
-        redDiamondLabelNode?.run(SKAction.moveTo(y: 397 , duration: 0.2))
-        blueDiamondLabelNode?.run(SKAction.moveTo(y: 397, duration: 0.2))
-        greenDiamondLabelNode?.run(SKAction.moveTo(y: 397, duration:0.2))
+        redDiamondLabelNode?.run(SKAction.moveTo(y: 402 , duration: 0.2))
+        blueDiamondLabelNode?.run(SKAction.moveTo(y: 402, duration: 0.2))
+        greenDiamondLabelNode?.run(SKAction.moveTo(y: 402, duration:0.2))
         {
             block()
             //self.changeDiamondsPlayerHaveLabelColor(toColor: .white)
@@ -267,12 +270,20 @@ class DiamondsManager: BaseClass,
         
         switch labelNode
         {
-        case redDiamondLabelNode: originalPosition = redDiamondLabelNodeOriginalLocation
-        case blueDiamondLabelNode: originalPosition = blueDiamondLabelNodeOriginalLocation
-        case greenDiamondLabelNode: originalPosition = greenDiamondLabelNodeOriginalLocation
+        case redDiamondLabelNode:
+            originalPosition = redDiamondLabelNodeOriginalLocation
+            labelNode.diamondsPlayerHave.text? = String(Diamond.redCounter)
+            
+        case blueDiamondLabelNode:
+            originalPosition = blueDiamondLabelNodeOriginalLocation
+            labelNode.diamondsPlayerHave.text? = String(Diamond.blueCounter)
+            
+        case greenDiamondLabelNode:
+            originalPosition = greenDiamondLabelNodeOriginalLocation
+            labelNode.diamondsPlayerHave.text? = String(Diamond.greenCounter)
+            
         default: break
         }
-        
         
         labelNode.setText(diamondNeeded: diamondsPlayerNeed)
         labelNode.run(SKAction.moveTo(x: originalPosition.x - (labelNode.frameTotalWidth() / 2), duration: 0.3))
@@ -310,32 +321,20 @@ class DiamondsManager: BaseClass,
         
     }
     
-    func shouldBounceDiamonds() -> (red: Bool, blue: Bool, green: Bool)?
+    func shouldPulseNeededLabel() -> Bool
     {
         log.debug("")
         let spinner = ArchiveManager.currentSpinner
-        guard let redNeeded = spinner.redNeeded else { return  nil}
-        guard let blueNeeded = spinner.blueNeeded else { return  nil}
-        guard let greenNeeded = spinner.greenNeeded else { return  nil}
+        guard let redNeeded = spinner.redNeeded else { return  false}
+        guard let blueNeeded = spinner.blueNeeded else { return  false}
+        guard let greenNeeded = spinner.greenNeeded else { return  false}
         
-        var enoughRedDiamonds = (red: false,blue: false,green: false)
         if let diamondsInStock = getDiamondsCount()
         {
-            if diamondsInStock.red < redNeeded
-            {
-                enoughRedDiamonds.red = true
-            }
-            if diamondsInStock.blue < blueNeeded
-            {
-                enoughRedDiamonds.blue = true
-            }
-            if diamondsInStock.green < greenNeeded
-            {
-                enoughRedDiamonds.green = true
-            }
+            return diamondsInStock.red < redNeeded && diamondsInStock.blue < blueNeeded && diamondsInStock.green < greenNeeded
+
         }
-        
-        return enoughRedDiamonds
+        return false
     }
     
     func fadeOutDiamondsAndTheirCount()
@@ -579,6 +578,18 @@ extension DiamondsManager
                 Diamond.redCounter -= redNeeded
                 Diamond.blueCounter -= blueNeeded
                 Diamond.greenCounter -= greenNeeded
+            }
+        }
+    }
+    
+    private func cutDiamondPlayerHave(label: SKLabelNode)
+    {
+        if var cleanDiamondHaveLabel = label.text?.replacingOccurrences(of: " ", with: "")
+        {
+            if let i = cleanDiamondHaveLabel.characters.index(of: "/")
+            {
+                let endIndex = cleanDiamondHaveLabel.characters.endIndex
+                cleanDiamondHaveLabel.removeSubrange(i..<endIndex)
             }
         }
     }
