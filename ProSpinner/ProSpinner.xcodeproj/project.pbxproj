@@ -23,8 +23,6 @@
 		0A1591801EE3C193005320A9 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15917F1EE3C193005320A9 /* ImageCollectionCell.swift */; };
 		0A1734261F0679DE00140277 /* PlayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1734251F0679DE00140277 /* PlayNode.swift */; };
 		0A1734291F067F5500140277 /* ButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1734281F067F5500140277 /* ButtonProtocol.swift */; };
-		0A17F1281EE4B377002DE42F /* LoadingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0A17F1271EE4B377002DE42F /* LoadingScene.sks */; };
-		0A17F12A1EE4B6A5002DE42F /* LoadingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A17F1291EE4B6A5002DE42F /* LoadingScene.swift */; };
 		0A1C73EC1EF71EC00094119E /* MyriadPro-BoldCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E31EF71DB00094119E /* MyriadPro-BoldCond.otf */; };
 		0A1D71341ED9826600331753 /* Flea Market Finds.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1D71331ED9824900331753 /* Flea Market Finds.ttf */; };
 		0A1E096C1EEEC21200041C45 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E096B1EEEC21100041C45 /* ProgressBar.swift */; };
@@ -46,8 +44,6 @@
 		0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE7CD801EFCE55200236992 /* StoreView.swift */; };
 		0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE83A771EDC8F380066E3DD /* BaseClass.swift */; };
 		0AE83A7A1EDC91580066E3DD /* ManuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE83A791EDC91580066E3DD /* ManuManager.swift */; };
-		0AF5088F1F08AD770062F8E8 /* LoadingScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5088E1F08AD770062F8E8 /* LoadingScene2.swift */; };
-		0AF508911F08ADAE0062F8E8 /* LoadingScene2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0AF508901F08ADAE0062F8E8 /* LoadingScene2.sks */; };
 		58D8CE085EEC2BF1CF77C9BF /* Pods_ProSpinnerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCB592AC0294D9475632625 /* Pods_ProSpinnerUITests.framework */; };
 		9109F3D51F150F4000853867 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3D41F150F4000853867 /* LoadingViewController.swift */; };
 		918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F11EC9CC8600886039 /* AppDelegate.swift */; };
@@ -96,8 +92,6 @@
 		0A15917F1EE3C193005320A9 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
 		0A1734251F0679DE00140277 /* PlayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayNode.swift; sourceTree = "<group>"; };
 		0A1734281F067F5500140277 /* ButtonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonProtocol.swift; sourceTree = "<group>"; };
-		0A17F1271EE4B377002DE42F /* LoadingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LoadingScene.sks; sourceTree = "<group>"; };
-		0A17F1291EE4B6A5002DE42F /* LoadingScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingScene.swift; sourceTree = "<group>"; };
 		0A1C73E21EF71DB00094119E /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Bold.otf"; sourceTree = "<group>"; };
 		0A1C73E31EF71DB00094119E /* MyriadPro-BoldCond.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-BoldCond.otf"; sourceTree = "<group>"; };
 		0A1C73E41EF71DB00094119E /* MyriadPro-BoldCondIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-BoldCondIt.otf"; sourceTree = "<group>"; };
@@ -127,8 +121,6 @@
 		0AE7CD801EFCE55200236992 /* StoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		0AE83A771EDC8F380066E3DD /* BaseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseClass.swift; sourceTree = "<group>"; };
 		0AE83A791EDC91580066E3DD /* ManuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManuManager.swift; sourceTree = "<group>"; };
-		0AF5088E1F08AD770062F8E8 /* LoadingScene2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingScene2.swift; sourceTree = "<group>"; };
-		0AF508901F08ADAE0062F8E8 /* LoadingScene2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LoadingScene2.sks; sourceTree = "<group>"; };
 		0E4E75FA348AA94CACB4B414 /* Pods_ProSpinnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProSpinnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FCB592AC0294D9475632625 /* Pods_ProSpinnerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProSpinnerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36BDCBC0E9A2285D9458F24E /* Pods-ProSpinnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinnerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinnerTests/Pods-ProSpinnerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -205,6 +197,7 @@
 		0A11F5EB1EE333B30036A00F /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0A87FDDA1F152E7400CF55BB /* LoadingViewController */,
 				0A15917C1EE3C114005320A9 /* Downloading View Controller */,
 				0A15917B1EE3C0FC005320A9 /* Main Game View Controller */,
 			);
@@ -262,6 +255,14 @@
 			name = Font;
 			sourceTree = "<group>";
 		};
+		0A87FDDA1F152E7400CF55BB /* LoadingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9109F3D41F150F4000853867 /* LoadingViewController.swift */,
+			);
+			name = LoadingViewController;
+			sourceTree = "<group>";
+		};
 		0A8B2E9A1ED8C3920025856E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,20 +295,8 @@
 			children = (
 				918F18F31EC9CC8600886039 /* GameScene.sks */,
 				918F18F71EC9CC8600886039 /* GameScene.swift */,
-				0AF508901F08ADAE0062F8E8 /* LoadingScene2.sks */,
-				0AF5088E1F08AD770062F8E8 /* LoadingScene2.swift */,
-				9109F3D41F150F4000853867 /* LoadingViewController.swift */,
 			);
 			name = Scenes;
-			sourceTree = "<group>";
-		};
-		0AD5CF861F0B4FC700E4E9DE /* OldLoadingScreen */ = {
-			isa = PBXGroup;
-			children = (
-				0A17F1271EE4B377002DE42F /* LoadingScene.sks */,
-				0A17F1291EE4B6A5002DE42F /* LoadingScene.swift */,
-			);
-			name = OldLoadingScreen;
 			sourceTree = "<group>";
 		};
 		0AE83A731EDC8E680066E3DD /* Protocols */ = {
@@ -365,7 +354,6 @@
 		918F18F01EC9CC8600886039 /* ProSpinner */ = {
 			isa = PBXGroup;
 			children = (
-				0AD5CF861F0B4FC700E4E9DE /* OldLoadingScreen */,
 				0AE83A761EDC8F260066E3DD /* Base Class */,
 				0AE83A731EDC8E680066E3DD /* Protocols */,
 				0A1734271F0679E300140277 /* Nodes */,
@@ -527,7 +515,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AF508911F08ADAE0062F8E8 /* LoadingScene2.sks in Resources */,
 				0A8385861EF5394B0044D1C7 /* OCRAStd.otf in Resources */,
 				0A1D71341ED9826600331753 /* Flea Market Finds.ttf in Resources */,
 				918F18FD1EC9CC8600886039 /* Main.storyboard in Resources */,
@@ -543,7 +530,6 @@
 				0A305A071EEC33B600BA3A4B /* OpenSansHebrew-Light.ttf in Resources */,
 				918F19021EC9CC8600886039 /* LaunchScreen.storyboard in Resources */,
 				0A3658A71ED20D9900322024 /* Woosh.mp3 in Resources */,
-				0A17F1281EE4B377002DE42F /* LoadingScene.sks in Resources */,
 				0A11F5EA1EE3259C0036A00F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -728,7 +714,6 @@
 				0A8385881EF63A350044D1C7 /* RetryView.swift in Sources */,
 				0A3081A61EEA07CF00892266 /* CustomSKLabelNode.swift in Sources */,
 				0A8B2E9D1ED8C3ED0025856E /* Diamond.swift in Sources */,
-				0A17F12A1EE4B6A5002DE42F /* LoadingScene.swift in Sources */,
 				0A089F461EDF0D7700415EFC /* Spinner.swift in Sources */,
 				0A11F5ED1EE333F20036A00F /* DownloadingViewController.swift in Sources */,
 				0A1E096C1EEEC21200041C45 /* ProgressBar.swift in Sources */,
@@ -738,7 +723,6 @@
 				0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */,
 				0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */,
 				918F18FA1EC9CC8600886039 /* GameViewController.swift in Sources */,
-				0AF5088F1F08AD770062F8E8 /* LoadingScene2.swift in Sources */,
 				918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */,
 				0A04F47E1ED06E7C004F374C /* DaimondsManager.swift in Sources */,
 				0A1734261F0679DE00140277 /* PlayNode.swift in Sources */,

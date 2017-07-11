@@ -24,6 +24,8 @@ class GameViewController: UIViewController
     var downloadView: JSSAlertViewResponder?
     var admobManager : AdMobManager?
     var nextScene : SKScene?
+    weak var loadingViewController : LoadingViewController?
+    
 //  MARK: View's Life cycle
     override func viewDidLoad()
     {
@@ -34,6 +36,13 @@ class GameViewController: UIViewController
         loadingScreenDidFinish()
     }
 
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        loadingViewController?.stopSpinnerRotation()
+        loadingViewController = nil
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }

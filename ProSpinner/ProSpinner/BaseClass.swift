@@ -18,6 +18,8 @@ enum NotifictionKey: String
     case collectionViewSpinner = "collectionViewSpinner"
     case interstitalCount = "interstitalCount"
     case loadingFinish  = "loadingFinish"
+    case purchaseAlert  = "purchaseAlert"
+    case removePurchaseAlert  = "removePurchaseAlert"
 }
 
 extension SKSpriteNode

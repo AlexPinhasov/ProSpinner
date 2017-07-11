@@ -13,7 +13,6 @@ class LoadingViewController: UIViewController
 {
     @IBOutlet weak var spinnerImage: UIImageView!
     private var nextScene      : GameScene?
-    var spinnerInScene : SKSpriteNode?
     private var timer          : Timer?
     private var textures       : [SKTexture]?
     
@@ -22,8 +21,18 @@ class LoadingViewController: UIViewController
         super.viewDidLoad()
         log.debug()
         spinnerImage.image = getMainSpinnerTexture()
-        rotateAnimation(imageView: spinnerImage, duration: 1.5)
         getTexturesToLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        rotateAnimation(imageView: spinnerImage, duration: 1.5)
+    }
+    
+    deinit
+    {
+        print("deinit loading")
     }
     
     func rotateAnimation(imageView:UIImageView,duration: CFTimeInterval = 2.0)
@@ -34,7 +43,12 @@ class LoadingViewController: UIViewController
         rotateAnimation.duration = duration
         rotateAnimation.repeatCount = Float.greatestFiniteMagnitude;
         
-        imageView.layer.add(rotateAnimation, forKey: nil)
+        imageView.layer.add(rotateAnimation, forKey: "rotateSpinner")
+    }
+    
+    func stopSpinnerRotation()
+    {
+        spinnerImage.layer.removeAnimation(forKey: "rotateSpinner")
     }
     
     func getMainSpinnerTexture() -> UIImage?
@@ -42,16 +56,12 @@ class LoadingViewController: UIViewController
         log.debug()
         _ = ArchiveManager.read_SpinnersFromUserDefault()
         let mainSpinner = ArchiveManager.spinnersArrayInDisk[ArchiveManager.mainSpinnerLocation]
-        let data = mainSpinner.texture
-        return mainSpinner.texture
-    }
-    
-    func rotateSpinner()
-    {
-        log.debug()
-        let rotateLeftAngle = -(CGFloat.pi * 2)
-        let rotateAction = SKAction.rotate(byAngle: rotateLeftAngle, duration: 2)
-        spinnerInScene?.run(SKAction.repeatForever(rotateAction))
+        
+        if let cgSpinnerImage = mainSpinner.texture?.cgImage()
+        {
+            return UIImage(cgImage: cgSpinnerImage)
+        }
+        return nil
     }
     
     func getTexturesToLoad()
@@ -122,7 +132,7 @@ class LoadingViewController: UIViewController
         log.debug()
         DispatchQueue.main.async
         {
-                self.performSegue(withIdentifier: "showScene", sender: nil)
+            self.performSegue(withIdentifier: "showScene", sender: nil)
         }
     }
     
@@ -132,7 +142,9 @@ class LoadingViewController: UIViewController
         if let secondViewController = segue.destination as? GameViewController
         {
             secondViewController.nextScene = nextScene
+            secondViewController.loadingViewController = self
         }
+        
     }
     
     @objc func loadNextScene()

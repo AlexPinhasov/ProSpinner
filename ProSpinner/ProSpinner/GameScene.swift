@@ -140,8 +140,11 @@ class GameScene: SKScene,
                     storeView?.hideStoreView()
                     diamondsManager?.addCollectedDiamondsToLabelScene()
                     
-                case Constants.NodesInStoreView.smallPackButton.rawValue:
-                    PurchaseManager.purchase(.SmallDiamondPack, completion: { (success) in
+                case Constants.NodesInStoreView.smallPackButton.rawValue,
+                     Constants.NodesInStoreView.smallDiamondGroupCost.rawValue:
+                    
+                    storeView?.configurePurchaseAlert(registeredPurchase: .SmallDiamondPack)
+                    PurchaseManager.purchase(.SmallDiamondPack, completion: { (registeredPurchase,success) in
                         
                         if success
                         {
@@ -149,16 +152,22 @@ class GameScene: SKScene,
                             self.diamondsManager?.didSuccessInBuying(purchaseType: .SmallDiamondPack)
                             self.enableSwipe = true
                         }
+                        self.storeView?.resetLoadingPurchase()
                     })
 
-                case Constants.NodesInStoreView.bigPackButton.rawValue:
-                    PurchaseManager.purchase(.BigDiamondPack, completion: { (success) in
+                case Constants.NodesInStoreView.bigPackButton.rawValue,
+                     Constants.NodesInStoreView.bigDiamondGroupCost.rawValue:
+                    
+                    storeView?.configurePurchaseAlert(registeredPurchase: .BigDiamondPack)
+                    PurchaseManager.purchase(.BigDiamondPack, completion: { (registeredPurchase,success) in
+                        
                         if success
                         {
                             self.storeView?.hideStoreView()
                             self.diamondsManager?.didSuccessInBuying(purchaseType: .BigDiamondPack)
                             self.enableSwipe = true
                         }
+                        self.storeView?.resetLoadingPurchase()
                     })
                     
                 case Constants.NodesInRetryView.RetryButton.rawValue,

@@ -26,6 +26,15 @@ class StoreView: SKNode
 
     private var finishedPresentingView: Bool = false
     
+//  MARK: Purchase Alert Properties
+    private var storePurchaseAlert      :SKSpriteNode?
+    private var redToGet                :SKLabelNode?
+    private var blueToGet               :SKLabelNode?
+    private var greenToGet              :SKLabelNode?
+    private var packageTexture          :SKSpriteNode?
+    private var loadingSpinner          :SKSpriteNode?
+    
+    
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
@@ -68,10 +77,15 @@ class StoreView: SKNode
         smallPackButton?.moveBy = -6
         bigPackButton?.moveBy   = -6
         
-        bigDiamondGroup        = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroup.rawValue) as? SKSpriteNode
-        bigDiamondGroupCost    = bigPackButton?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroupCost.rawValue) as? SKLabelNode
+        bigDiamondGroup         = storeAlert?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroup.rawValue) as? SKSpriteNode
+        bigDiamondGroupCost     = bigPackButton?.childNode(withName: Constants.NodesInStoreView.bigDiamondGroupCost.rawValue) as? SKLabelNode
         
-
+        storePurchaseAlert      = self.childNode(withName: Constants.NodesInLockedWhenPurchase.StorePurchaseInProgressAlert.rawValue) as? SKSpriteNode
+        redToGet                = storePurchaseAlert?.childNode(withName: Constants.NodesInLockedWhenPurchase.RedToRecive.rawValue) as? SKLabelNode
+        blueToGet               = storePurchaseAlert?.childNode(withName: Constants.NodesInLockedWhenPurchase.BlueToRecive.rawValue) as? SKLabelNode
+        greenToGet              = storePurchaseAlert?.childNode(withName: Constants.NodesInLockedWhenPurchase.GreenToRecive.rawValue) as? SKLabelNode
+        packageTexture          = storePurchaseAlert?.childNode(withName: Constants.NodesInLockedWhenPurchase.PackageRequested.rawValue) as? SKSpriteNode
+        loadingSpinner          = storePurchaseAlert?.childNode(withName: Constants.NodesInLockedWhenPurchase.loadingSpinner.rawValue) as? SKSpriteNode
     }
     
     func configureViewBeforePresentation()
@@ -79,6 +93,32 @@ class StoreView: SKNode
         self.isHidden = true
         storeBackground?.alpha = 0.0
         storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 800), duration: 0))
+    }
+    
+    func configurePurchaseAlert(registeredPurchase: RegisteredPurchase)
+    {
+        var diamondBought = "0"
+        switch registeredPurchase
+        {
+        case .SmallDiamondPack:
+            diamondBought = "+100"
+            packageTexture?.texture = SKTexture(imageNamed: "DiamondGroupSmall")
+            
+        case .BigDiamondPack:
+            diamondBought = "+300"
+            packageTexture?.texture = SKTexture(imageNamed: "DiamondGroupLarge")
+            
+        }
+        
+        redToGet?.text = diamondBought
+        blueToGet?.text = diamondBought
+        greenToGet?.text = diamondBought
+        
+        let rotateAction = SKAction.rotate(byAngle: (CGFloat.pi * 2), duration: 1)
+        loadingSpinner?.run(SKAction.repeatForever(rotateAction),withKey: Constants.actionKeys.rotate.rawValue)
+        
+        storePurchaseAlert?.isHidden = false
+        storePurchaseAlert?.run(SKAction.fadeIn(withDuration: 0.2))
     }
     
     //  MARK: Presentation methods
@@ -92,6 +132,7 @@ class StoreView: SKNode
                 self.finishedPresentingView = true
             }
         }
+        resetLoadingPurchase()
     }
     
     func hideStoreView()
@@ -106,6 +147,17 @@ class StoreView: SKNode
             
             self.storeBackground?.run(SKAction.sequence([ SKAction.wait(forDuration: 0.2) , SKAction.fadeOut(withDuration: 0.1) ]))
         }
+        resetLoadingPurchase()
+    }
+    
+    func resetLoadingPurchase()
+    {
+        loadingSpinner?.removeAction(forKey: Constants.actionKeys.rotate.rawValue)
+        storePurchaseAlert?.run(SKAction.fadeOut(withDuration: 0.2))
+        {
+            self.storePurchaseAlert?.isHidden = true
+        }
+        
     }
     
     func touchedUpSmallPackButton()

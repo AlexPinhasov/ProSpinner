@@ -163,6 +163,16 @@ class Constants
         case TopLabel = "TopLabel"
     }
     
+    enum NodesInLockedWhenPurchase: String
+    {
+        case StorePurchaseInProgressAlert = "StorePurchaseInProgressAlert"
+        case RedToRecive = "redToRecive"
+        case BlueToRecive = "blueToRecive"
+        case GreenToRecive = "greenToRecive"
+        case PackageRequested = "packageRequested"
+        case loadingSpinner = "loadingSpinner"
+    }
+    
 }
 
 typealias DiamondsTuple = (red:Int,blue:Int,green:Int)?

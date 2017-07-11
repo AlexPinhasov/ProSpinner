@@ -37,7 +37,6 @@ enum RegisteredPurchase: String
 
 class PurchaseManager
 {
-    static var loadingView : UIView? = UIView()
     static let appBundleId = "com.APStudios.ProSpinner"
     static var rootViewController: UIViewController!
     
@@ -54,56 +53,33 @@ class PurchaseManager
         }
     }
     
-    static func purchase(_ purchase: RegisteredPurchase,completion block: @escaping (Bool) -> Void)
+    static func purchase(_ registeredPurchase: RegisteredPurchase,completion block: @escaping (RegisteredPurchase, Bool) -> Void)
     {
-        addLoadingView()
+        rootViewController.view.isUserInteractionEnabled = false
+
         NetworkActivityIndicatorManager.networkOperationStarted()
-        SwiftyStoreKit.purchaseProduct(appBundleId + "." + purchase.rawValue, atomically: true) { result in
+        SwiftyStoreKit.purchaseProduct(appBundleId + "." + registeredPurchase.rawValue, atomically: true) { result in
             NetworkActivityIndicatorManager.networkOperationFinished()
             
+            rootViewController.view.isUserInteractionEnabled = true
             if case .success(let purchase) = result
             {
-                block(true)
+                block(registeredPurchase , true)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.reloadLockedViewAfterPurchase.rawValue), object: nil)
                 if purchase.needsFinishTransaction
                 {
                     SwiftyStoreKit.finishTransaction(purchase.transaction)
                 }
             }
-            removeLoadingView()
+            else if case .error = result
+            {
+                block(registeredPurchase , false)
+            }
+            
             if let alert = self.rootViewController.alertForPurchaseResult(result) {
                 PurchaseManager.rootViewController.showAlert(alert)
             }
         }
-    }
-
-    static func addLoadingView()
-    {
-        loadingView = UIView(frame: rootViewController.view.frame)
-        
-        guard loadingView != nil else { return }
-        
-        rootViewController.view.isUserInteractionEnabled = false
-        loadingView!.isUserInteractionEnabled = false
-        loadingView!.backgroundColor = .black
-        loadingView!.alpha = 0.5
-        
-        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
-        activityIndicatorView.center = loadingView!.center
-        activityIndicatorView.hidesWhenStopped = true
-        
-        loadingView!.addSubview(activityIndicatorView)
-        
-        rootViewController.view.addSubview(loadingView!)
-        activityIndicatorView.startAnimating()
-    }
-    
-    static func removeLoadingView()
-    {
-        rootViewController.view.isUserInteractionEnabled = true
-        loadingView!.isUserInteractionEnabled = true
-        loadingView?.removeFromSuperview()
-        loadingView = nil
     }
 }
 
