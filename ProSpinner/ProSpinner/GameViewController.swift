@@ -24,6 +24,7 @@ class GameViewController: UIViewController
     var downloadView: JSSAlertViewResponder?
     var admobManager : AdMobManager?
     var nextScene : SKScene?
+    var didCheckSpinnersInThisSession = false
     weak var loadingViewController : LoadingViewController?
     
 //  MARK: View's Life cycle
@@ -42,7 +43,12 @@ class GameViewController: UIViewController
         super.viewDidAppear(animated)
         loadingViewController?.stopSpinnerRotation()
         loadingViewController = nil
-        checkForNewSpinners()
+        
+        if didCheckSpinnersInThisSession == false
+        {
+            didCheckSpinnersInThisSession = true
+            checkForNewSpinners()
+        }
     }
     
     override var prefersStatusBarHidden: Bool {

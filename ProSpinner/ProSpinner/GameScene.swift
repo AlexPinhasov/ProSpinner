@@ -271,7 +271,7 @@ class GameScene: SKScene,
     {
         log.debug("")
         ArchiveManager.interstitalCount += 1
-        if ArchiveManager.interstitalCount >= 5
+        if ArchiveManager.interstitalCount >= 3
         {
             NotificationCenter.default.post(Notification(name: NSNotification.Name("interstitalCount")))
         }

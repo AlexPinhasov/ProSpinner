@@ -26,9 +26,9 @@ class AdMobManager: NSObject,
         configureGADBanner()
         addObserver()
         
-        if ArchiveManager.interstitalCount > 5
+        if ArchiveManager.interstitalCount >= 3
         {
-            ArchiveManager.interstitalCount = 1
+            ArchiveManager.interstitalCount = 0
         }
     }
     
@@ -102,7 +102,7 @@ class AdMobManager: NSObject,
     /// Called before the interstitial is to be animated off the screen.
     func interstitialWillDismissScreen(_ ad: GADInterstitial)
     {
-        ArchiveManager.interstitalCount = 1
+        ArchiveManager.interstitalCount = 0
         configureGADInterstitial()
     }
     
