@@ -190,9 +190,9 @@ class LoadingViewController: UIViewController
     private func set10DiamondsOnFirstRun()
     {
         log.debug()
-        UserDefaults.standard.set(50, forKey: UserDefaultKeys.red.rawValue)
-        UserDefaults.standard.set(50, forKey: UserDefaultKeys.blue.rawValue)
-        UserDefaults.standard.set(50, forKey: UserDefaultKeys.green.rawValue)
+        UserDefaults.standard.set(0, forKey: UserDefaultKeys.red.rawValue)
+        UserDefaults.standard.set(0, forKey: UserDefaultKeys.blue.rawValue)
+        UserDefaults.standard.set(0, forKey: UserDefaultKeys.green.rawValue)
     }
     
 }

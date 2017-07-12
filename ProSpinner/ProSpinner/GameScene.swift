@@ -51,7 +51,7 @@ class GameScene: SKScene,
     {
         log.debug("")
        guard let spinnerNode = contact.bodyA.node  as? SKShapeNode else { return } // Spinner
-       guard let diamondShapeNode = contact.bodyB.node  as? SKShapeNode  else { return } // Diamond
+       guard let diamondShapeNode = contact.bodyB.node  as? SKShapeNode  else { return } // Physics Body Shape
        guard let diamondNode = diamondShapeNode.parent  as? Diamond  else { return } // Diamond
        guard let diamondName = diamondNode.name else { return }
        guard let spinnerName = spinnerNode.name else { return }
@@ -95,9 +95,6 @@ class GameScene: SKScene,
                 manuManager?.lockedSpinnerView?.unlockSpinnerButton?.releasedButton()
             }
             
-            manuManager?.RightArrowPressed(isPressed: false)
-            manuManager?.LeftArrowPressed(isPressed: false)
-            
             if let name = touchedNode.name, spinnerManager?.currentlySwitchingSpinner == false
             {
                 guard lastNodeTouchedName == name else { return }
@@ -111,12 +108,10 @@ class GameScene: SKScene,
                     storeView?.presentStoreView()
                     enableSwipe = false
                     
-                case Constants.NodesInScene.RightArrow.rawValue,
-                     Constants.NodesInScene.ActualRightArrow.rawValue:
-                        userTappedNextSpinner()
+                case Constants.NodesInScene.RightArrow.rawValue:
+                    userTappedNextSpinner()
                     
-                case Constants.NodesInScene.LeftArrow.rawValue,
-                     Constants.NodesInScene.ActualLeftArrow.rawValue:
+                case Constants.NodesInScene.LeftArrow.rawValue:
                     userTappedPreviousSpinner()
                     
                 case Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue,
@@ -134,7 +129,7 @@ class GameScene: SKScene,
                      Constants.NodesInRetryView.AlertViewBackground.rawValue,
                      Constants.NodesInStoreView.StoreBackground.rawValue:
                     
-                    if storeView?.finishedPresentingView == true && retryView?.finishedPresentingView == true
+                    if storeView?.finishedPresentingView == true || retryView?.finishedPresentingView == true
                     {
                         enableSwipe = true
                         spinnerManager?.scaleUpSpinner()
@@ -178,7 +173,6 @@ class GameScene: SKScene,
                     retryView?.hideRetryView()
                     notifyGameStarted()
                     
-                    
                 case Constants.NodesInRetryView.ShareFacebook.rawValue:
                     retryView?.shareWithFacebook()
                     
@@ -205,12 +199,6 @@ class GameScene: SKScene,
                 case Constants.NodesInPlayNode.PlayLabel.rawValue:
                     manuManager?.playNode?.playLabel?.touchedUpInside()
                     
-                case Constants.NodesInScene.RightArrow.rawValue:
-                    manuManager?.RightArrowPressed(isPressed: true)
-                    
-                case Constants.NodesInScene.LeftArrow.rawValue:
-                    manuManager?.LeftArrowPressed(isPressed: true)
-
                 case Constants.NodesInStoreView.StoreButton.rawValue:
                     manuManager?.lockedSpinnerView?.getMoreDiamondsButton?.touchedUpInside()
                     manuManager?.storeNode?.storeButton?.touchedUpInside()
@@ -226,6 +214,7 @@ class GameScene: SKScene,
                     {
                         manuManager?.lockedSpinnerView?.unlockSpinnerButton?.touchedUpInside()
                     }
+                    
                 case Constants.NodesInStoreView.smallPackButton.rawValue,
                      Constants.NodesInStoreView.smallDiamondGroupCost.rawValue:
                     

@@ -122,38 +122,7 @@ class ManuManager: BaseClass,
         PresentLockedSpinnerView(shouldPresent: false)
         pointDirectionArrowsMoveAction()
     }
-    
-    
-    func RightArrowPressed(isPressed pressed: Bool)
-    {
-        log.debug("")
-        if pressed
-        {
-            //self.rightArrowTriger?.texture = Arrows.rightArrowPressed
-            //self.rightArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
-        }
-        else
-        {
-            //self.rightArrowTriger?.texture = Arrows.rightArrow
-            //self.rightArrowTriger?.run(SKAction.resize(toHeight: 55, duration: 0))
-        }
-    }
-    
-    func LeftArrowPressed(isPressed pressed: Bool)
-    {
-        log.debug("")
-        if pressed
-        {
-            //self.leftArrowTriger?.texture = Arrows.leftArrowPressed
-            //self.leftArrowTriger?.run(SKAction.resize(toHeight: 45, duration: 0))
-        }
-        else
-        {
-            //self.leftArrowTriger?.texture = Arrows.leftArrow
-            //self.leftArrowTriger?.run(SKAction.resize(toHeight: 55, duration: 0))
-        }
-    }
-    
+
     func PresentLockedSpinnerView(shouldPresent present: Bool)
     {
         log.debug("")

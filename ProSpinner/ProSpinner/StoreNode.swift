@@ -29,6 +29,12 @@ class StoreNode : SKNode,
         storeButton?.delegate = self
     }
     
+    func showNode()
+    {
+        self.isHidden = false
+        self.run(SKAction.scale(to: 1, duration: 0.7, delay: 0.30, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+    }
+    
     func hideNode()
     {
         self.run(SKAction.scale(to: 0, duration: 0.7, delay: 0.10, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
@@ -37,11 +43,6 @@ class StoreNode : SKNode,
         }
     }
     
-    func showNode()
-    {
-        self.isHidden = false
-        self.run(SKAction.scale(to: 1, duration: 0.7, delay: 0.30, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
-    }
     
     func buttonIsPressed()
     {
