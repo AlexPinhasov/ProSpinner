@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureXCGLogger()
        // completeIAPTransactions()
         registerForRemoteNotifications(application: application)
+        handleReachability()
+        
         
         print("FCM token: \(Messaging.messaging().fcmToken ?? "")")
         
@@ -121,6 +123,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging.messaging().apnsToken = deviceToken
     }
     
+    private func handleReachability()
+    {
+        do {
+            Network.reachability = try Reachability(hostname: "www.google.com")
+            do {
+                try Network.reachability?.start()
+            } catch let error as Network.Error {
+                print(error)
+            } catch {
+                print(error)
+            }
+        } catch {
+            print(error)
+        }
+    }
     
     private func completeIAPTransactions()
     {

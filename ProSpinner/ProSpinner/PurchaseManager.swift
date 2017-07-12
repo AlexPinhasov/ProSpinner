@@ -1,6 +1,7 @@
 import UIKit
 import StoreKit
 import SwiftyStoreKit
+import Crashlytics
 
 class NetworkActivityIndicatorManager: NSObject
 {
@@ -66,6 +67,8 @@ class PurchaseManager
             {
                 block(registeredPurchase , true)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.reloadLockedViewAfterPurchase.rawValue), object: nil)
+                CrashlyticsLogManager.logPurchase(withProduct : purchase)
+                
                 if purchase.needsFinishTransaction
                 {
                     SwiftyStoreKit.finishTransaction(purchase.transaction)

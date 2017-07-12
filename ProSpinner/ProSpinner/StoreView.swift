@@ -24,7 +24,7 @@ class StoreView: SKNode
     private var smallPackButton        :SKSpriteButton?
     private var bigPackButton          :SKSpriteButton?
 
-    private var finishedPresentingView: Bool = false
+    var finishedPresentingView: Bool = false
     
 //  MARK: Purchase Alert Properties
     private var storePurchaseAlert      :SKSpriteNode?
@@ -124,24 +124,27 @@ class StoreView: SKNode
     //  MARK: Presentation methods
     func presentStoreView()
     {
-        self.isHidden = false
-        storeBackground?.run(SKAction.fadeIn(withDuration: 0.1))
+        if finishedPresentingView == false
         {
-            self.storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 278), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            self.isHidden = false
+            storeBackground?.run(SKAction.fadeIn(withDuration: 0.1))
             {
-                self.finishedPresentingView = true
+                self.storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 278), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+                {
+                    self.finishedPresentingView = true
+                }
             }
+            resetLoadingPurchase()
         }
-        resetLoadingPurchase()
     }
     
     func hideStoreView()
     {
-        if finishedPresentingView == true
+        if finishedPresentingView
         {
-            finishedPresentingView = false
             storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 800), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             {
+                self.finishedPresentingView = false
                 self.isHidden = true
             }
             

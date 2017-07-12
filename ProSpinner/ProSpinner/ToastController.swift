@@ -35,8 +35,8 @@ class ToastController
     static let toastViewHeight     : CGFloat = CGFloat(60)
     static let toastPaddingFromTop : CGFloat = CGFloat(65)
 
-    static private let presentationDuration = 1.2
-    static private let    dismissalDuration = 1.2
+    static private let presentationDuration = 0.7
+    static private let    dismissalDuration = 0.7
     
     //  MARK: Public methods
     func showToast(inViewController viewController : UIViewController)
@@ -88,8 +88,8 @@ class ToastController
         let targetFrame = ToastController.finalPresentationPositionInScreen(from: locationOnScreen)
         UIView.animate( withDuration: ToastController.presentationDuration,
                         delay: 0,
-                        usingSpringWithDamping: 0.6,
-                        initialSpringVelocity: 0.1,
+                        usingSpringWithDamping: 0.9,
+                        initialSpringVelocity: 0.15,
                         options: .curveEaseIn,
                         animations:
             {
@@ -107,8 +107,8 @@ class ToastController
         
         UIView.animate( withDuration: ToastController.dismissalDuration,
                         delay: ToastController.presentationDuration,
-                        usingSpringWithDamping: 0.6,
-                        initialSpringVelocity: 0.1,
+                        usingSpringWithDamping: 0.9,
+                        initialSpringVelocity: 0.15,
                         options: .curveEaseIn,
                         animations:
             {

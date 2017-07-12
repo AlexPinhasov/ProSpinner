@@ -38,6 +38,7 @@ class DiamondsManager: BaseClass,
     fileprivate var highScoreLabel: SKLabelNode?
 
     private var nextXLocation: CGFloat = 160.0
+    private var wooshSound : SKAction
 
     fileprivate enum Count
     {
@@ -48,6 +49,7 @@ class DiamondsManager: BaseClass,
     //  MARK: init
     init(inScene scene: SKScene)
     {
+        wooshSound = SKAction.playSoundFileNamed("Tick.mp3", waitForCompletion: false)
         super.init()
         self.scene = scene
         highScoreLabel = self.scene?.childNode(withName: "HighScore") as? SKLabelNode
@@ -159,7 +161,6 @@ class DiamondsManager: BaseClass,
     
     func playTickSound()
     {
-        let wooshSound = SKAction.playSoundFileNamed("Tick.mp3", waitForCompletion: false)
         scene?.run(wooshSound)
     }
     
@@ -249,7 +250,6 @@ class DiamondsManager: BaseClass,
         greenDiamondLabelNode?.run(SKAction.moveTo(y: 402, duration:0.2))
         {
             block()
-            //self.changeDiamondsPlayerHaveLabelColor(toColor: .white)
         }
     }
     
@@ -467,7 +467,6 @@ class DiamondsManager: BaseClass,
         let leftLocation = Diamond.diamondsXPosition - 60
         return CGFloat(arc4random_uniform(120)+UInt32(leftLocation))
     }
-    
 }
 
 extension DiamondsManager

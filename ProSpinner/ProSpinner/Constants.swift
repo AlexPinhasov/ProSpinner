@@ -115,6 +115,7 @@ class Constants
         case TotalDiamondsCollected = "TotalDiamondsCollected"
         case EndGameAlert = "EndGameAlert"
         case AlertViewBackground = "AlertViewBackground"
+        case ShareFacebook = "ShareFacebook"
     }
     
     enum NodesInStoreView: String

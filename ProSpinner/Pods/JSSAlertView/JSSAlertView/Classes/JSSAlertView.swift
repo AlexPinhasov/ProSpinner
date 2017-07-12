@@ -286,7 +286,7 @@ open class JSSAlertView: UIViewController {
 		titleLabel.textColor = textColor
 		titleLabel.numberOfLines = 0
 		titleLabel.textAlignment = .center
-		titleLabel.font = UIFont(name: self.titleFont, size: 24)
+		titleLabel.font = UIFont(name: self.titleFont, size: 22)
 		titleLabel.text = title
 		containerView.addSubview(titleLabel)
 

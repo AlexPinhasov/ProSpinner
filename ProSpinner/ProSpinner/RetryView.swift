@@ -23,12 +23,13 @@ class RetryView: SKNode
     private var ExitButton              :SKSpriteNode?
     private var EndGameAlert            :SKSpriteNode?
     private var AlertViewBackground     :SKSpriteNode?
+    private var shareFacebook           :SKSpriteNode?
     
     private let rotateRightAngle = -(CGFloat.pi * 2)
     
     private var timer = Timer()
     private var secondsPassed: TimeInterval = 0.0
-    private var finishedPresentingView: Bool = false
+    var finishedPresentingView: Bool = false
     
     required init?(coder aDecoder: NSCoder)
     {
@@ -58,6 +59,7 @@ class RetryView: SKNode
         RetryButtonArrow        = RetryButton?.childNode(withName: Constants.NodesInRetryView.RetryButtonArrow.rawValue) as? SKSpriteNode
         
         ExitButton              = EndGameAlert?.childNode(withName: Constants.NodesInRetryView.ExitButton.rawValue) as? SKSpriteNode
+        shareFacebook           = EndGameAlert?.childNode(withName: Constants.NodesInRetryView.ShareFacebook.rawValue) as? SKSpriteNode
         
         BlueDiamondLabel        = EndGameAlert?.childNode(withName: Constants.NodesInRetryView.BlueDiamondLabel.rawValue) as? SKLabelNode
         RedDiamondLabel         = EndGameAlert?.childNode(withName: Constants.NodesInRetryView.RedDiamondLabel.rawValue) as? SKLabelNode
@@ -68,7 +70,6 @@ class RetryView: SKNode
     
     func configureViewBeforePresentation()
     {
-        
         AlertViewBackground?.alpha = 0.0
         EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 500), duration: 0))
     }
@@ -76,26 +77,29 @@ class RetryView: SKNode
 //  MARK: Presentation methods
     func presentRetryView()
     {
-        self.isHidden = false
-        AlertViewBackground?.run(SKAction.fadeIn(withDuration: 0.2))
+        if finishedPresentingView == false
         {
-            self.EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 37), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+            self.isHidden = false
+            AlertViewBackground?.run(SKAction.fadeIn(withDuration: 0.2))
             {
-                self.finishedPresentingView = true
+                self.EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 0), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
+                {
+                    self.finishedPresentingView = true
+                }
             }
-        }
 
-        rotateRetryButton()
+            rotateRetryButton()
+        }
     }
     
     func hideRetryView()
     {
         if finishedPresentingView
         {
-            finishedPresentingView = false
             secondsPassed = 0.0
             EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 500), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             {
+                self.finishedPresentingView = false
                 self.isHidden = true
             }
             self.AlertViewBackground?.run(SKAction.sequence([ SKAction.wait(forDuration: 0.2) , SKAction.fadeOut(withDuration: 0.1) ]))
@@ -116,6 +120,9 @@ class RetryView: SKNode
         self.TotalDiamondsCollected?.text = String(diamonds.red + diamonds.blue + diamonds.green)
         
         ArchiveManager.highScoreRecord = (diamonds.red + diamonds.blue + diamonds.green)
+        
+        let highScoreNSNumber = NSNumber(value: ArchiveManager.highScoreRecord)
+        CrashlyticsLogManager.gameEnded(withScore: highScoreNSNumber)
     }
  
     private func rotateRetryButton()
@@ -123,7 +130,14 @@ class RetryView: SKNode
         let rotateAction = SKAction.rotate(byAngle: rotateRightAngle, duration: 4)
         RetryButtonArrow?.run(SKAction.repeatForever(rotateAction),withKey: Constants.actionKeys.rotate.rawValue)
     }
-
+    
+    func shareWithFacebook()
+    {
+        let applicationAppStoreUrl = URL(string: "https://appsto.re/il/udtkbb.i")
+        let image = UIImage(named: "blackSpinner")
+        ShareManager.shareToFacebook(withTitle: "Check out my score", shareContent: [applicationAppStoreUrl,image], withCompletionHandler: nil)
+    }
+    
 //  MARK: Private timer methods
     @objc private func counter()
     {

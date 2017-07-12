@@ -134,11 +134,14 @@ class GameScene: SKScene,
                      Constants.NodesInRetryView.AlertViewBackground.rawValue,
                      Constants.NodesInStoreView.StoreBackground.rawValue:
                     
-                    enableSwipe = true
-                    spinnerManager?.scaleUpSpinner()
-                    retryView?.hideRetryView()
-                    storeView?.hideStoreView()
-                    diamondsManager?.addCollectedDiamondsToLabelScene()
+                    if storeView?.finishedPresentingView == true && retryView?.finishedPresentingView == true
+                    {
+                        enableSwipe = true
+                        spinnerManager?.scaleUpSpinner()
+                        retryView?.hideRetryView()
+                        storeView?.hideStoreView()
+                        diamondsManager?.addCollectedDiamondsToLabelScene()
+                    }
                     
                 case Constants.NodesInStoreView.smallPackButton.rawValue,
                      Constants.NodesInStoreView.smallDiamondGroupCost.rawValue:
@@ -174,6 +177,10 @@ class GameScene: SKScene,
                      Constants.NodesInRetryView.RetryButtonArrow.rawValue:
                     retryView?.hideRetryView()
                     notifyGameStarted()
+                    
+                    
+                case Constants.NodesInRetryView.ShareFacebook.rawValue:
+                    retryView?.shareWithFacebook()
                     
                 default: break
                 }
@@ -256,6 +263,7 @@ class GameScene: SKScene,
                 self.spinnerManager?.rotateToOtherDirection()
                 self.diamondsManager?.configureDiamonds()
             })
+            CrashlyticsLogManager.gameStarted()
         }
     }
     

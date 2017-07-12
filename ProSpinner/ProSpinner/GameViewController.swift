@@ -34,6 +34,7 @@ class GameViewController: UIViewController
         loadScene()
         loadingScreenDidFinish()
         addObservers()
+        ShareManager.rootViewController = self
     }
 
     override func viewDidAppear(_ animated: Bool)
@@ -41,6 +42,7 @@ class GameViewController: UIViewController
         super.viewDidAppear(animated)
         loadingViewController?.stopSpinnerRotation()
         loadingViewController = nil
+        checkForNewSpinners()
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -58,33 +60,38 @@ class GameViewController: UIViewController
         log.debug()
         PurchaseManager.rootViewController = self
         admobManager = AdMobManager(rootViewController: self)
-        checkForNewSpinners()
     }
     
     func checkForNewSpinners()
     {
-        if NetworkManager.currentlyCheckingForNewSpinners == false
+        guard let status = Network.reachability?.status else { return }
+        
+        switch status
         {
-            ToastController().showToast(inViewController: self)
-            NetworkManager.checkForNewSpinners()
-                { foundNewSpinners in
-                    
-                    if foundNewSpinners
-                    {
-                        let customIcon = UIImage(named: "downloadAlertLogo")
-                        let alertview = JSSAlertView().show(
-                            self,
-                            title: "New Spinners Available !",
-                            text: "",
-                            buttonText: "Download",
-                            cancelButtonText: "Cancel",
-                            color: UIColor(red: 69/255, green: 175/255, blue: 224/255, alpha: 1.0),
-                            iconImage: customIcon)
+        case .unreachable: break
+        case .wifi,.wwan:
+            
+            if NetworkManager.currentlyCheckingForNewSpinners == false
+            {
+                ToastController().showToast(inViewController: self)
+                NetworkManager.checkForNewSpinners()
+                    { foundNewSpinners in
                         
-                        alertview.setTextTheme(.light)
-                        alertview.addAction(self.beginDownload)
-                        alertview.addCancelAction {}
-                    }
+                        if foundNewSpinners
+                        {
+                            let customIcon = UIImage(named: "downloadAlertLogo")
+                            let alertview = JSSAlertView().show(
+                                self,
+                                title: "New Spinners Available !",
+                                text: "Be the first to unlock them",
+                                buttonText: "Download",
+                                color: UIColor(red: 0/255, green: 149/255, blue: 146/255, alpha: 1.0),
+                                iconImage: customIcon)
+                            
+                            alertview.setTextTheme(.light)
+                            alertview.addAction(self.beginDownload)
+                        }
+                }
             }
         }
     }
@@ -100,8 +107,8 @@ class GameViewController: UIViewController
             {
                 view.presentScene(sceneNode)
                 view.ignoresSiblingOrder = true
-                view.showsFPS = true
-                view.showsNodeCount = true
+                view.showsFPS = false
+                view.showsNodeCount = false
             }
         }
     }

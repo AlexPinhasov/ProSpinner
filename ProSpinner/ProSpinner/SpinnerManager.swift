@@ -9,6 +9,7 @@
 import Foundation
 import SpriteKit
 import SpriteKit_Spring
+import Crashlytics
 
 class SpinnerManager: BaseClass,
                       Animateable
@@ -16,14 +17,14 @@ class SpinnerManager: BaseClass,
     fileprivate var diraction : Diraction = .Right
     fileprivate var spinnerSpeed = 1.2
     fileprivate var spiningToStratingPosition = false
-    fileprivate var rotateAction: SKAction?
     var currentlySwitchingSpinner: Bool = false
     
     fileprivate let rotateRightAngle = (CGFloat.pi * 2)
     fileprivate let rotateLeftAngle = -(CGFloat.pi * 2)
     
     var spinnerNode : SKSpriteNode?
-    
+    fileprivate var wooshSound  : SKAction
+    fileprivate var rotateAction: SKAction
 
 //  MARK: Private enums
     fileprivate enum Diraction
@@ -47,16 +48,12 @@ class SpinnerManager: BaseClass,
 //  MARK: init
     init(inScene scene: SKScene)
     {
+        wooshSound = SKAction.playSoundFileNamed("Woosh.mp3", waitForCompletion: false)
+        rotateAction = SKAction.rotate(byAngle: rotateRightAngle, duration: spinnerSpeed)
         super.init()
         self.scene = scene
-        initNodesFromScene()
     }
-    
-    func initNodesFromScene()
-    {
-        
-    }
-    
+
 //  MARK: Public methods
     func gameStarted()
     {
@@ -135,21 +132,19 @@ class SpinnerManager: BaseClass,
 
             switch diraction
             {
-            case .Left:
-                diraction = .Right
-                rotateAction = SKAction.rotate(byAngle: rotateRightAngle, duration: spinnerSpeed)
-                
-            case .Right:
-                diraction = .Left
-                rotateAction = SKAction.rotate(byAngle: rotateLeftAngle, duration: spinnerSpeed)
+                case .Left:
+                    diraction = .Right
+                    rotateAction = SKAction.rotate(byAngle: rotateRightAngle, duration: spinnerSpeed)
+                    
+                case .Right:
+                    diraction = .Left
+                    rotateAction = SKAction.rotate(byAngle: rotateLeftAngle, duration: spinnerSpeed)
             }
-            let wooshSound = SKAction.playSoundFileNamed("Woosh.mp3", waitForCompletion: false)
-            spinnerNode?.run(wooshSound)
-            if rotateAction != nil
-            {
-                spinnerNode?.run(SKAction.repeatForever(rotateAction!),withKey: Constants.actionKeys.rotate.rawValue)
-            }
+            
+            spinnerNode?.run(SKAction.repeatForever(rotateAction),withKey: Constants.actionKeys.rotate.rawValue)
+            
 
+            spinnerNode?.run(wooshSound)
             
         case false:
             spinnerNode?.removeAction(forKey: Constants.actionKeys.rotate.rawValue)
@@ -217,6 +212,8 @@ class SpinnerManager: BaseClass,
         spinnerNode?.removeAllActions()
         rotateToStartingPosition()
         grayOutSpinnerIfLocked()
+        
+        CrashlyticsLogManager.logSpinnerUnlocked()
     }
     
 
@@ -422,31 +419,5 @@ extension SpinnerManager
         {
             spinnerNode?.removeAction(forKey: "ShakeLockedSpinner")
         }
-    }
-}
-
-extension SpinnerManager
-{
-    func rotateSpinnerTutorial()
-    {
-        log.debug("")
-        guard spiningToStratingPosition == false else { return }
-        
-        switch diraction
-        {
-        case .Left:
-            diraction = .Right
-            rotateAction = SKAction.rotate(byAngle: rotateRightAngle, duration: spinnerSpeed)
-            
-        case .Right:
-            diraction = .Left
-            rotateAction = SKAction.rotate(byAngle: rotateLeftAngle, duration: spinnerSpeed)
-        }
-        
-        if rotateAction != nil
-        {
-            spinnerNode?.run(SKAction.repeatForever(rotateAction!),withKey: Constants.actionKeys.rotate.rawValue)
-        }
-   
     }
 }
