@@ -973,7 +973,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.APStudios.ProSpinner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1c80d756-5569-463f-94ae-a5e92aa4b6be";
+				PROVISIONING_PROFILE = "c617dd23-1f45-4552-a024-681f0f9772ee";
 				PROVISIONING_PROFILE_SPECIFIER = "ProSpinner-AdHoc-Gini";
 				SWIFT_VERSION = 3.0;
 			};
