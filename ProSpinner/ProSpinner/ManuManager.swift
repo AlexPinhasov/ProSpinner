@@ -222,7 +222,7 @@ class ManuManager: BaseClass,
         log.debug("")
 
         let fadeIn = SKAction.fadeIn(withDuration: 0.3)
-        let wait = SKAction.wait(forDuration: 1.4)
+        let wait = SKAction.wait(forDuration: 2)
         let fadeOut = SKAction.fadeOut(withDuration: 0.3)
         
         gameExplanation?.run(SKAction.sequence([ fadeIn,wait,fadeOut ]))

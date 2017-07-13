@@ -15,7 +15,7 @@ class SpinnerManager: BaseClass,
                       Animateable
 {
     fileprivate var diraction : Diraction = .Right
-    fileprivate var spinnerSpeed = 1.2
+    fileprivate var spinnerSpeed = 1.5
     fileprivate var spiningToStratingPosition = false
     var currentlySwitchingSpinner: Bool = false
     
@@ -154,7 +154,7 @@ class SpinnerManager: BaseClass,
     func contactBegan()
     {
         log.debug("")
-        spinnerSpeed -= 0.0010
+        spinnerSpeed -= 0.0020
         pulseSpinner()
     }
 
@@ -191,7 +191,7 @@ class SpinnerManager: BaseClass,
     func resetSpinner()
     {
         log.debug("")
-        spinnerSpeed = 1.2
+        spinnerSpeed = 1.5
         spiningToStratingPosition = true
         spinnerNode?.removeAllActions()
         let rotateAction = SKAction.rotate(toAngle: 0.0, duration: spinnerSpeed)

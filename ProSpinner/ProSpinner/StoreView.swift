@@ -110,9 +110,9 @@ class StoreView: SKNode
             
         }
         
-        redToGet?.text = diamondBought
-        blueToGet?.text = diamondBought
-        greenToGet?.text = diamondBought
+        redToGet?.text = diamondBought + " Red"
+        blueToGet?.text = diamondBought + " Blue"
+        greenToGet?.text = diamondBought + " Green"
         
         let rotateAction = SKAction.rotate(byAngle: (CGFloat.pi * 2), duration: 1)
         loadingSpinner?.run(SKAction.repeatForever(rotateAction),withKey: Constants.actionKeys.rotate.rawValue)

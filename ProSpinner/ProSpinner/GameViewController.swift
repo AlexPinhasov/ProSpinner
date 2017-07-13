@@ -91,7 +91,7 @@ class GameViewController: UIViewController
                                 title: "New Spinners Available !",
                                 text: "Be the first to unlock them",
                                 buttonText: "Download",
-                                color: UIColor(red: 0/255, green: 149/255, blue: 146/255, alpha: 1.0),
+                                color: UIColor(red: 39/255, green: 145/255, blue: 174/255, alpha: 1.0),
                                 iconImage: customIcon)
                             
                             alertview.setTextTheme(.light)

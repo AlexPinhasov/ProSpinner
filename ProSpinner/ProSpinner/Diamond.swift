@@ -11,7 +11,7 @@ import GameplayKit
 
 class Diamond: SKSpriteNode
 {
-    static var diamondSpeed = 4.0
+    static var diamondSpeed = 5.0
     static var diamondsXPosition : CGFloat = 1.0
     
     init()

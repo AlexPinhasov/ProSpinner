@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class LoadingViewController: UIViewController
+class LoadingViewController: UIViewController,Animateable
 {
     @IBOutlet weak var spinnerImage: UIImageView!
     private var nextScene      : GameScene?
@@ -29,17 +29,6 @@ class LoadingViewController: UIViewController
     {
         super.viewDidAppear(animated)
         rotateAnimation(imageView: spinnerImage, duration: 1.5)
-    }
-    
-    func rotateAnimation(imageView:UIImageView,duration: CFTimeInterval = 2.0)
-    {
-        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
-        rotateAnimation.fromValue = 0.0
-        rotateAnimation.toValue = CGFloat(.pi * 2.0)
-        rotateAnimation.duration = duration
-        rotateAnimation.repeatCount = Float.greatestFiniteMagnitude;
-        
-        imageView.layer.add(rotateAnimation, forKey: "rotateSpinner")
     }
     
     func stopSpinnerRotation()
@@ -190,9 +179,9 @@ class LoadingViewController: UIViewController
     private func set10DiamondsOnFirstRun()
     {
         log.debug()
-        UserDefaults.standard.set(0, forKey: UserDefaultKeys.red.rawValue)
-        UserDefaults.standard.set(0, forKey: UserDefaultKeys.blue.rawValue)
-        UserDefaults.standard.set(0, forKey: UserDefaultKeys.green.rawValue)
+        UserDefaults.standard.set(50, forKey: UserDefaultKeys.red.rawValue)
+        UserDefaults.standard.set(50, forKey: UserDefaultKeys.blue.rawValue)
+        UserDefaults.standard.set(50, forKey: UserDefaultKeys.green.rawValue)
     }
     
 }

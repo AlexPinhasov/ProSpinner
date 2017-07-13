@@ -106,7 +106,7 @@ class DiamondsManager: BaseClass,
     func resetDiamondsTimer()
     {
         log.debug("")
-        Diamond.diamondSpeed = 4.0
+        Diamond.diamondSpeed = 5.0
         timer?.invalidate()
         fadeInDiamondAndTheirCount()
     }
@@ -155,7 +155,7 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         playTickSound()
-        Diamond.diamondSpeed -= 0.010
+        Diamond.diamondSpeed -= 0.020
         collectedDiamondOf(kind: diamondNode)
     }
     

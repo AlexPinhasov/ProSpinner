@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="f3X-yk-sq4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="f3X-yk-sq4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="MyriadPro-Cond.otf">
+            <string>MyriadPro-Cond</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -224,9 +229,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="h0d-WX-SNF"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="21"/>
-                                        <state key="normal" title="Close">
-                                            <color key="titleColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Cond" family="Myriad Pro" pointSize="21"/>
+                                        <state key="normal" title="Downloading...">
+                                            <color key="titleColor" red="0.41219744694960214" green="0.38133632769376191" blue="0.29514066770789626" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <connections>
                                             <action selector="dismissViewControllerWithSender:" destination="msT-Hr-yAp" eventType="touchUpInside" id="DWK-f3-FFt"/>
@@ -235,6 +240,13 @@
                                     <activityIndicatorView contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cu3-yp-Wrn">
                                         <rect key="frame" x="178" y="18" width="20" height="20"/>
                                     </activityIndicatorView>
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SuccessV" translatesAutoresizingMaskIntoConstraints="NO" id="98B-dc-MCc">
+                                        <rect key="frame" x="157" y="12" width="62" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="62" id="LgZ-fl-QIt"/>
+                                            <constraint firstAttribute="height" constant="33" id="xtU-ua-kQ3"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -243,6 +255,8 @@
                                     <constraint firstAttribute="trailing" secondItem="cfT-0c-9JI" secondAttribute="trailing" id="MaE-zw-erY"/>
                                     <constraint firstItem="cfT-0c-9JI" firstAttribute="top" secondItem="cu3-yp-Wrn" secondAttribute="bottom" constant="15" id="Q5y-nO-EGf"/>
                                     <constraint firstItem="Xil-v1-Y9W" firstAttribute="leading" secondItem="m0p-Kl-cTL" secondAttribute="leading" id="dYm-S1-O3M"/>
+                                    <constraint firstItem="98B-dc-MCc" firstAttribute="centerX" secondItem="cu3-yp-Wrn" secondAttribute="centerX" id="jaG-Gi-a5E"/>
+                                    <constraint firstItem="98B-dc-MCc" firstAttribute="centerY" secondItem="cu3-yp-Wrn" secondAttribute="centerY" id="oBB-Da-zA1"/>
                                     <constraint firstItem="Xil-v1-Y9W" firstAttribute="top" secondItem="cfT-0c-9JI" secondAttribute="bottom" constant="-38" id="qDe-q1-fzT"/>
                                     <constraint firstAttribute="bottom" secondItem="Xil-v1-Y9W" secondAttribute="bottom" id="u4d-L4-h76"/>
                                     <constraint firstItem="cfT-0c-9JI" firstAttribute="leading" secondItem="m0p-Kl-cTL" secondAttribute="leading" id="yAK-OZ-qyT"/>
@@ -267,6 +281,7 @@
                         <outlet property="closeButton" destination="Xil-v1-Y9W" id="8Ms-Rc-jiO"/>
                         <outlet property="collectionView" destination="cfT-0c-9JI" id="EpN-kS-FZz"/>
                         <outlet property="indicator" destination="cu3-yp-Wrn" id="S8Z-FY-kqR"/>
+                        <outlet property="successV" destination="98B-dc-MCc" id="Xpa-ht-o5G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kS1-KG-if4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -275,7 +290,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="RedDiamond" width="76" height="59"/>
+        <image name="RedDiamond" width="75" height="58"/>
+        <image name="SuccessV" width="85" height="89"/>
         <image name="blackSpinner" width="700" height="700"/>
         <image name="newspinner" width="700" height="700"/>
         <image name="spinner2" width="333" height="333"/>

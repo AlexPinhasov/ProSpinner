@@ -9,12 +9,13 @@
 import UIKit
 import SpriteKit
 
-class DownloadingViewController: UIViewController                                 
+class DownloadingViewController: UIViewController  ,Animateable
 {
 //  MARK: Outlets
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var successV: UIImageView!
     
     private var downloadingDelegateDataSource: DownloadingDelegateDataSource?
     
@@ -66,8 +67,24 @@ class DownloadingViewController: UIViewController
         log.debug()
         indicator.stopAnimating()
         closeButton.isEnabled = true
+        closeButton.setTitle("Close View", for: .normal)
+        
+        fadeInSuccessV()
+        
         downloadingDelegateDataSource?.removeObserver()
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func fadeInSuccessV()
+    {
+        UIView.animate(withDuration: 0.5, animations: {
+          self.successV.alpha = 1
+            
+        }, completion: { (true) in
+          
+            self.rotateAnimation(imageView: self.successV, repeat: 1,duration: 0.2)
+            
+        })
     }
 
     @IBAction func dismissViewController(sender: UIButton)

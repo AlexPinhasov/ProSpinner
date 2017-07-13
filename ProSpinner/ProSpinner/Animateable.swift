@@ -7,11 +7,13 @@
 //
 
 import SpriteKit
+import UIKit
 
 protocol Animateable
 {
     func pulse(node: SKNode?, scaleUpTo: CGFloat, scaleDownTo: CGFloat,duration: TimeInterval,delay: TimeInterval)
     func shake(node: SKNode?, withDuration duration: TimeInterval,completion block: (() -> Void)?)
+    func rotateAnimation(imageView:UIImageView,repeat repeatCount: Float,duration: CFTimeInterval)
 }
 
 extension Animateable
@@ -44,5 +46,16 @@ extension Animateable
         {
             block?()
         }
+    }
+    
+    func rotateAnimation(imageView:UIImageView,repeat repeatCount: Float = Float.greatestFiniteMagnitude ,duration: CFTimeInterval = 2.0)
+    {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotateAnimation.fromValue = 0.0
+        rotateAnimation.toValue = CGFloat(.pi * 2.0)
+        rotateAnimation.duration = duration
+        rotateAnimation.repeatCount = repeatCount
+        
+        imageView.layer.add(rotateAnimation, forKey: "rotateSpinner")
     }
 }
