@@ -23,6 +23,11 @@ enum UserDefaultKeys: String
 
 class ArchiveManager
 {
+    static let comingMoreSpinnerId = 300
+    static let moreSpinnersDemi = 1
+    static var currentlyAtIndex  = ArchiveManager.mainSpinnerLocation
+    static var currentlyDownloadedSpinnersArray : [Spinner] = [Spinner]()
+    
     static var spinnersArrayInDisk : [Spinner] = [Spinner]()
     {
         didSet
@@ -31,7 +36,27 @@ class ArchiveManager
         }
     }
     
-    static var currentlyAtIndex  = ArchiveManager.mainSpinnerLocation
+    static var spinnersArrayInDiskCount: Int
+    {
+        return ArchiveManager.spinnersArrayInDisk.count - moreSpinnersDemi
+    }
+    
+    static func sortArrayInDiskAfterUpdate()
+    {
+        ArchiveManager.spinnersArrayInDisk.sort(by:
+        {
+            let firstSum = $0.redNeeded! + $0.blueNeeded! + $0.greenNeeded!
+            let secondSum = $1.redNeeded! + $1.blueNeeded! + $1.greenNeeded!
+            return firstSum < secondSum
+        })
+    }
+    
+    
+    static func resetDownloadedSpinnersArray()
+    {
+        ArchiveManager.currentlyDownloadedSpinnersArray = [Spinner]()
+    }
+    
     
     static var mainSpinnerLocation : Int
     {

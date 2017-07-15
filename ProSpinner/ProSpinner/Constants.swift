@@ -90,6 +90,10 @@ class Constants
         case BreifTutorial = "BreifTutorial"
         
         case HighScoreRecord = "HighScoreRecord"
+        
+        case DemiSpinnerNode = "DemiSpinnerNode"
+        case ReviewButton = "reviewButton"
+        case ReviewButtonShadow = "reviewButtonShadow"
     }
     
     enum NodesInPlayNode : String
@@ -176,6 +180,9 @@ class Constants
     
 }
 
+let applicationReviewUrl = URL(string: "itms-apps://itunes.apple.com/app/id1257742091") // ProSpinner
+let applicationItunesUrl = URL(string: "https://itunes.apple.com/us/app/ProSpinner---Be-the-first-to-get-them-all/id1257742091&mt=8") 
+
 typealias DiamondsTuple = (red:Int,blue:Int,green:Int)?
 
 struct PhysicsCategory
@@ -187,13 +194,4 @@ struct PhysicsCategory
     static let greenNode : UInt32 = 4
     static let redNode : UInt32 = 5
     static let blueNode : UInt32 = 6
-}
-
-
-extension Double
-{
-    var kFormatted: String
-    {
-        return String(format: self >= 1000 ? "$%.0fK" : "$%.0f", self >= 1000 ? self/1000 : self)
-    }
 }

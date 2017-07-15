@@ -75,7 +75,7 @@ class RetryView: SKNode
     }
     
 //  MARK: Presentation methods
-    func presentRetryView()
+    func presentRetryView(completion block: (() -> Void)?)
     {
         if finishedPresentingView == false
         {
@@ -84,6 +84,7 @@ class RetryView: SKNode
             {
                 self.EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 0), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
                 {
+                    block?()
                     self.finishedPresentingView = true
                 }
             }
@@ -133,9 +134,8 @@ class RetryView: SKNode
     
     func shareWithFacebook()
     {
-        let applicationAppStoreUrl = URL(string: "https://appsto.re/il/udtkbb.i")
-        let image = UIImage(named: "blackSpinner")
-        ShareManager.shareToFacebook(withTitle: "Check out my score", shareContent: [applicationAppStoreUrl,image], withCompletionHandler: nil)
+        let image = UIImage(named: "8")
+        ShareManager.shareToFacebook(withTitle: "Check out my score", shareContent: [applicationItunesUrl,image], withCompletionHandler: nil)
     }
     
 //  MARK: Private timer methods
@@ -143,11 +143,4 @@ class RetryView: SKNode
     {
         secondsPassed += 1
     }
-//    
-//    private func timeString(time: TimeInterval) -> String
-//    {
-//        let minutes = Int(time) / 60 % 60
-//        let seconds = Int(time) % 60
-//        return String(format:"%02i:%02i", minutes, seconds)
-//    }
 }

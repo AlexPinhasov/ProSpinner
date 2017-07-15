@@ -32,6 +32,7 @@ class ManuManager: BaseClass,
     private var leftArrow        : SKSpriteNode?
     private var rightArrow       : SKSpriteNode?
     
+    var demiSpinnerNode          : DemiSpinnerNode?
     private var gameExplanation  : SKNode?
     fileprivate var spinnerLock : SKSpriteNode?
     
@@ -63,6 +64,8 @@ class ManuManager: BaseClass,
         leftArrow               = scene?.childNode(withName: Constants.NodesInScene.LeftArrow.rawValue) as? SKSpriteNode
         rightArrow              = scene?.childNode(withName: Constants.NodesInScene.RightArrow.rawValue) as? SKSpriteNode
 
+        demiSpinnerNode         = scene?.childNode(withName: Constants.NodesInScene.DemiSpinnerNode.rawValue) as? DemiSpinnerNode
+        
         progressBars            = scene?.childNode(withName: Constants.NodesInScene.ProgressBars.rawValue)
         
         gameExplanation         = scene?.childNode(withName: Constants.NodesInScene.BreifTutorial.rawValue)
@@ -107,6 +110,7 @@ class ManuManager: BaseClass,
     func handleSpinnerPresentedIsLocked(with diamondCount: DiamondsTuple)
     {
         log.debug("")
+        hideDemiSpinnerNode()
         PresentLockedSpinnerView(shouldPresent: true)
         displayProgressBars(shouldShow: true,with: diamondCount)
         showProgressBarOrV(withValues: diamondCount)
@@ -117,6 +121,7 @@ class ManuManager: BaseClass,
     func handleSpinnerPresentedIsUnlocked()
     {
         log.debug("")
+        hideDemiSpinnerNode()
         animateSpinnerLockFadeOut()
         displayProgressBars(shouldShow: false, with: nil)
         PresentLockedSpinnerView(shouldPresent: false)
@@ -212,9 +217,37 @@ class ManuManager: BaseClass,
     func showManuItems()
     {
         log.debug("")
-        playNode?.showNode()
-        storeNode?.showNode()
-        highScoreRecord?.run(SKAction.fadeIn(withDuration: 0.4))
+        if ArchiveManager.currentSpinner.id == ArchiveManager.comingMoreSpinnerId
+        {
+            hideManuItems()
+            showDemiSpinnerNode()
+        }
+        else
+        {
+            hideDemiSpinnerNode()
+            playNode?.showNode()
+            storeNode?.showNode()
+            highScoreRecord?.run(SKAction.fadeIn(withDuration: 0.4))
+        }
+    }
+    
+    func showDemiSpinnerNode()
+    {
+        demiSpinnerNode?.removeAllActions()
+        if demiSpinnerNode?.alpha == 0
+        {
+            demiSpinnerNode?.isHidden = false
+            demiSpinnerNode?.run(SKAction.sequence([SKAction.wait(forDuration: 0.3)  ,SKAction.fadeIn(withDuration: 0.2)]))
+        }
+    }
+    
+    func hideDemiSpinnerNode()
+    {
+        demiSpinnerNode?.removeAllActions()
+        demiSpinnerNode?.run(SKAction.fadeOut(withDuration: 0.1))
+        {
+            self.demiSpinnerNode?.isHidden = true
+        }
     }
     
     func showGameExplanation(startSpining: @escaping () -> Void)

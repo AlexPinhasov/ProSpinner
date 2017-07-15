@@ -76,6 +76,7 @@ class DiamondsManager: BaseClass,
         {
             scene?.removeChildren(in: diamondsInScene)
         }
+        addCollectedDiamondsToLabelScene()
     }
     
     func configureDiamonds()
@@ -147,7 +148,6 @@ class DiamondsManager: BaseClass,
         Diamond.blueCounter += amountToAdd
         Diamond.greenCounter += amountToAdd
         
-        count(toDiraction: .up, for: amountToAdd, for: amountToAdd, for: amountToAdd)
     }
 
 //  MARK: Physics mothods
@@ -155,7 +155,7 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         playTickSound()
-        Diamond.diamondSpeed -= 0.020
+        Diamond.diamondSpeed -= 0.040
         collectedDiamondOf(kind: diamondNode)
     }
     
@@ -196,9 +196,6 @@ class DiamondsManager: BaseClass,
         }
         else
         {
-            redDiamondLabelNode?.changeLabelColor(color: .black)
-            blueDiamondLabelNode?.changeLabelColor(color: .black)
-            greenDiamondLabelNode?.changeLabelColor(color: .black)
             returnDiamondsToStartingPosition()
         }
     }
@@ -396,8 +393,10 @@ class DiamondsManager: BaseClass,
         guard let blueNeeded = spinner.blueNeeded else { return }
         guard let greenNeeded = spinner.greenNeeded else { return }
         
-        resetNodesToNormalPlayState()
-  
+        Diamond.redCounter -= redNeeded
+        Diamond.blueCounter -= blueNeeded
+        Diamond.greenCounter -= greenNeeded
+        
         count(toDiraction: .down,for: redNeeded,for: blueNeeded,for: greenNeeded)
     }
     
@@ -549,6 +548,10 @@ extension DiamondsManager
         var blueCounterDecrement = SKAction()
         var greenCounterDecrement = SKAction()
         
+        let redAnimationDuration = redNeeded > 100 ? 0.005 : 0.02
+        let blueAnimationDuration = blueNeeded > 100 ? 0.005 : 0.02
+        let greenAnimationDuration = greenNeeded > 100 ? 0.005 : 0.02
+        
         switch diraction
         {
         case .up:
@@ -557,9 +560,9 @@ extension DiamondsManager
             greenCounterDecrement = SKAction.sequence([SKAction.wait(forDuration: 0.04),SKAction.run(greenCountUpAction)])
             
         case .down:
-            redCounterDecrement = SKAction.sequence([SKAction.wait(forDuration: 0.02),SKAction.run(redCountdownAction)])
-            blueCounterDecrement = SKAction.sequence([SKAction.wait(forDuration: 0.02),SKAction.run(blueCountdownAction)])
-            greenCounterDecrement = SKAction.sequence([SKAction.wait(forDuration: 0.02),SKAction.run(greenCountdownAction)])
+            redCounterDecrement = SKAction.sequence([SKAction.wait(forDuration: redAnimationDuration),SKAction.run(redCountdownAction)])
+            blueCounterDecrement = SKAction.sequence([SKAction.wait(forDuration: blueAnimationDuration),SKAction.run(blueCountdownAction)])
+            greenCounterDecrement = SKAction.sequence([SKAction.wait(forDuration: greenAnimationDuration),SKAction.run(greenCountdownAction)])
         }
 
         redDiamondLabelNode?.run(SKAction.sequence([SKAction.wait(forDuration: 0.8),
@@ -572,12 +575,6 @@ extension DiamondsManager
                                                       SKAction.repeat(greenCounterDecrement, count: greenNeeded)]))
         {
             self.diamondsCollectedDuringGame = (0,0,0)
-            if diraction == .down
-            {
-                Diamond.redCounter -= redNeeded
-                Diamond.blueCounter -= blueNeeded
-                Diamond.greenCounter -= greenNeeded
-            }
         }
     }
     

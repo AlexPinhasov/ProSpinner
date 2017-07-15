@@ -31,6 +31,10 @@ class ProgressBar: SKNode
         self.addChild(cropNode)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func animateProgressBar()
     {
         cropNode.run(SKAction.scaleX(to: 1, duration: 0.3))
@@ -102,9 +106,4 @@ class ProgressBar: SKNode
         }
         return .white
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }

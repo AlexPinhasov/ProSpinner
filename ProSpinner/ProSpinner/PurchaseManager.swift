@@ -124,7 +124,7 @@ extension UIViewController
         {
         case .success(let purchase):
             print("Purchase Success: \(purchase.productId)")
-            return alertWithTitle("Thank You", message: "Purchase completed")
+            return nil
             
         case .error(let error):
             print("Purchase Failed: \(error)")

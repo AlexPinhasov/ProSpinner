@@ -79,7 +79,7 @@ class GameViewController: UIViewController
             
             if NetworkManager.currentlyCheckingForNewSpinners == false
             {
-                ToastController().showToast(inViewController: self)
+                AppDelegate.showToast(withString: nil)
                 NetworkManager.checkForNewSpinners()
                     { foundNewSpinners in
                         

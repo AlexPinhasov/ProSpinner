@@ -14,6 +14,8 @@ struct GameStatus
     static var Playing : Bool = false
 }
 
+var enableSwipe = true
+
 class GameScene: SKScene,
                  SKPhysicsContactDelegate,UIGestureRecognizerDelegate
 {
@@ -25,7 +27,6 @@ class GameScene: SKScene,
     var retryView       : RetryView?
     var storeView       : StoreView?
     
-    var enableSwipe = true
     var lastNodeTouchedName = ""
     
     var spinnerNode     : SKSpriteNode = SKSpriteNode()
@@ -45,6 +46,11 @@ class GameScene: SKScene,
                                                selector: #selector(reloadLockedViewAfterPurchase),
                                                name: NSNotification.Name(rawValue: NotificationName.reloadLockedViewAfterPurchase.rawValue),
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(notifyGameEnded),
+                                               name: NSNotification.Name.UIApplicationDidEnterBackground,
+                                               object: nil)
     }
 //  MARK: Physics Contact Delegate
     func didBegin(_ contact: SKPhysicsContact)
@@ -63,14 +69,7 @@ class GameScene: SKScene,
         }
         else
         {
-            enableSwipe = false
-            GameStatus.Playing = false
-            retryView?.gameOver()
-            retryView?.setDiamondsCollected(diamonds: diamondsManager?.getCollectedDiamondsDuringGame())
-            retryView?.presentRetryView()
-            manuManager?.gameOver()
-            diamondsManager?.gameOver()
-            spinnerManager?.gameOver()
+            notifyGameEnded()
         }
         self.removeChildren(in: [diamondNode])
     }
@@ -89,6 +88,7 @@ class GameScene: SKScene,
             manuManager?.playNode?.playLabel?.releasedButton()
             manuManager?.storeNode?.storeButton?.releasedButton()
             manuManager?.lockedSpinnerView?.getMoreDiamondsButton?.releasedButton()
+            manuManager?.demiSpinnerNode?.reviewButton?.releasedButton()
             
             if manuManager?.lockedSpinnerView?.userCanUnlockSpinner == true
             {
@@ -120,8 +120,7 @@ class GameScene: SKScene,
                     if manuManager?.lockedSpinnerView?.userCanUnlockSpinner == true
                     {
                         spinnerManager?.purchasedNewSpinner()
-                        diamondsManager?.purchasedNewSpinner()
-                        manuManager?.purchasedNewSpinner()
+                        handleUIForUnlockedSpinner()
                     }
                     
                 case Constants.NodesInRetryView.ExitButton.rawValue,
@@ -129,13 +128,13 @@ class GameScene: SKScene,
                      Constants.NodesInRetryView.AlertViewBackground.rawValue,
                      Constants.NodesInStoreView.StoreBackground.rawValue:
                     
-                    if storeView?.finishedPresentingView == true || retryView?.finishedPresentingView == true
+                    if storeView?.isHidden == false
                     {
-                        enableSwipe = true
-                        spinnerManager?.scaleUpSpinner()
-                        retryView?.hideRetryView()
-                        storeView?.hideStoreView()
-                        diamondsManager?.addCollectedDiamondsToLabelScene()
+                        hideStoreView()
+                    }
+                    else if retryView?.isHidden == false
+                    {
+                        hideRetryView()
                     }
                     
                 case Constants.NodesInStoreView.smallPackButton.rawValue,
@@ -148,7 +147,7 @@ class GameScene: SKScene,
                         {
                             self.storeView?.hideStoreView()
                             self.diamondsManager?.didSuccessInBuying(purchaseType: .SmallDiamondPack)
-                            self.enableSwipe = true
+                            enableSwipe = true
                         }
                         self.storeView?.resetLoadingPurchase()
                     })
@@ -163,7 +162,7 @@ class GameScene: SKScene,
                         {
                             self.storeView?.hideStoreView()
                             self.diamondsManager?.didSuccessInBuying(purchaseType: .BigDiamondPack)
-                            self.enableSwipe = true
+                            enableSwipe = true
                         }
                         self.storeView?.resetLoadingPurchase()
                     })
@@ -175,6 +174,11 @@ class GameScene: SKScene,
                     
                 case Constants.NodesInRetryView.ShareFacebook.rawValue:
                     retryView?.shareWithFacebook()
+                    
+                case Constants.NodesInScene.ReviewButton.rawValue:
+                    manuManager?.demiSpinnerNode?.goToItunesForReview(completion: { (success) in
+                        
+                    })
                     
                 default: break
                 }
@@ -225,6 +229,10 @@ class GameScene: SKScene,
                     
                     storeView?.touchedUpBigPackButton()
                     
+                case Constants.NodesInScene.ReviewButton.rawValue:
+                    manuManager?.demiSpinnerNode?.reviewButton?.touchedUpInside()
+                    
+                    
                 default: break
                 }
             }
@@ -256,13 +264,29 @@ class GameScene: SKScene,
         }
     }
     
+    func notifyGameEnded()
+    {
+        if GameStatus.Playing
+        {
+            GameStatus.Playing = false
+            retryView?.gameOver()
+            retryView?.setDiamondsCollected(diamonds: diamondsManager?.getCollectedDiamondsDuringGame())
+            retryView?.presentRetryView()
+            {
+                self.handleInterstitialCount()
+            }
+            manuManager?.gameOver()
+            diamondsManager?.gameOver()
+            spinnerManager?.gameOver()
+        }
+    }
+    
     func finishedReseting()
     {
         log.debug("")
         if GameStatus.Playing == false
         {
             manuManager?.showManuItems()
-            handleInterstitialCount()
         }
     }
 
@@ -276,14 +300,7 @@ class GameScene: SKScene,
             NotificationCenter.default.post(Notification(name: NSNotification.Name("interstitalCount")))
         }
     }
-    private func handleBuySpinnerCase(for touchedNode: SKNode)
-    {
-        log.debug("")
-        diamondsManager?.purchasedNewSpinner()
-        manuManager?.purchasedNewSpinner()
-        spinnerManager?.purchasedNewSpinner()
-    }
-    
+
     func reloadLockedViewAfterPurchase()
     {
         handleLockViewAppearance()
@@ -306,6 +323,34 @@ class GameScene: SKScene,
             diamondsManager?.handleDiamondsPlayerNeedAndHaveLabels(isLocked : false)
             manuManager?.handleSpinnerPresentedIsUnlocked()
             spinnerManager?.shakeSpinnerLocked(shouldShake: false)
+        }
+    }
+    
+    private func handleUIForUnlockedSpinner()
+    {
+        diamondsManager?.purchasedNewSpinner()
+        diamondsManager?.handleDiamondsWhenSpinner(isLocked: false)
+        diamondsManager?.handleDiamondsPlayerNeedAndHaveLabels(isLocked : false)
+        manuManager?.handleSpinnerPresentedIsUnlocked()
+        spinnerManager?.shakeSpinnerLocked(shouldShake: false)
+    }
+    
+    private func hideStoreView()
+    {
+        if storeView?.finishedPresentingView == true
+        {
+            enableSwipe = true
+            storeView?.hideStoreView()
+        }
+    }
+    
+    private func hideRetryView()
+    {
+        if retryView?.finishedPresentingView == true && GameStatus.Playing == false
+        {
+            enableSwipe = true
+            spinnerManager?.scaleUpSpinner()
+            retryView?.hideRetryView()
         }
     }
     

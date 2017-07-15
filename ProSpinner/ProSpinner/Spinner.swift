@@ -32,6 +32,19 @@ class Spinner : NSObject,NSCoding
         self.unlocked = unlocked
     }
     
+    init(id: Int,unlocked: Bool = false, redNeeded: Int, blueNeeded: Int, greenNeeded: Int)
+    {
+        self.id             = id
+        self.imageUrlLink   = "gs://prospinner-a4255.appspot.com/SpinnersTextures/\(id)/spinner.png"
+        self.texture        = SKTexture(imageNamed: "\(id)")
+        self.redNeeded      = redNeeded
+        self.blueNeeded     = blueNeeded
+        self.greenNeeded    = greenNeeded
+        self.mainSpinner    = false
+        self.unlocked       = unlocked
+    }
+    
+    
     required init?(coder decoder: NSCoder)
     {
         self.id             = decoder.decodeObject(forKey: "id"          ) as? Int  ?? 0

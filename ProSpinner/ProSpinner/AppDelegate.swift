@@ -208,6 +208,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [END register_for_notifications]
 
     }
+    
+    static func showToast(withString text: String?)
+    {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        ToastController().showToast(window: appDelegate?.window, withText: text)
+    }
 }
 //  MARK: Push notification
     

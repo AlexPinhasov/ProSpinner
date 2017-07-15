@@ -23,6 +23,13 @@ extension UIView
 
 class ToastController
 {
+    // MARK: Constants
+    static let toastViewHeight     : CGFloat = CGFloat(60)
+    static let toastPaddingFromTop : CGFloat = CGFloat(65)
+    
+    static private let presentationDuration = 0.7
+    static private let    dismissalDuration = 0.7
+    
     //  MARK: Class members
     var toastMessageView : ToastView!
     var locationOnScreen : ToastLocation
@@ -32,21 +39,21 @@ class ToastController
         locationOnScreen = .bottom
     }
     
-    static let toastViewHeight     : CGFloat = CGFloat(60)
-    static let toastPaddingFromTop : CGFloat = CGFloat(65)
-
-    static private let presentationDuration = 0.7
-    static private let    dismissalDuration = 0.7
-    
     //  MARK: Public methods
-    func showToast(inViewController viewController : UIViewController)
+    func showToast(window: UIWindow?, withText message: String?)
     {
+        guard let window = window else { return }
         guard let toastMessageViewNib = UIView.fromNib(String(describing: ToastView.self)) as? ToastView else { return }
         toastMessageView = toastMessageViewNib
         
-        viewController.view.addSubview(toastMessageView)
+        let messageToShow = message ?? "Checking for new spinners"
+        
+        toastMessageView.toastLabel.text = messageToShow
         toastMessageView.frame = ToastController.initialPositionInScreen(from: locationOnScreen)
-        viewController.view.bringSubview(toFront: toastMessageView)
+    
+        window.makeKeyAndVisible()
+        window.addSubview(toastMessageView)
+        window.bringSubview(toFront: toastMessageView)
         
         presentToast(completionBlock:
             {

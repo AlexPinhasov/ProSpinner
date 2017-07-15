@@ -159,19 +159,8 @@ class LoadingViewController: UIViewController,Animateable
         if ArchiveManager.firstTimeRun == false
         {
             ArchiveManager.firstTimeRun = true
-            UserDefaults.standard.set(nil, forKey: "Spinners")
-            UserDefaults.standard.set(0  , forKey: UserDefaultKeys.highScore.rawValue)
-            
-            let spinner = Spinner(id: 1,
-                                  imageUrlLink: "",
-                                  texture: SKTexture(imageNamed: "blackSpinner") ,
-                                  redNeeded: 10,
-                                  blueNeeded: 10,
-                                  greenNeeded: 10,
-                                  mainSpinner: true,
-                                  unlocked: true)
-            
-            ArchiveManager.write_SpinnerToUserDefault(spinners: [spinner])
+            ArchiveManager.mainSpinnerLocation = 1
+            ArchiveManager.write_SpinnerToUserDefault(spinners: FirstInstallSpinners.getSpinnersArray())
             set10DiamondsOnFirstRun()
         }
     }

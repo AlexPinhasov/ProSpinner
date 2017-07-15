@@ -20,6 +20,8 @@
 		0A14F34A1EE175B300C5AA5D /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14F3491EE175B300C5AA5D /* PurchaseManager.swift */; };
 		0A15917E1EE3C142005320A9 /* DownloadingDelegateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15917D1EE3C142005320A9 /* DownloadingDelegateDataSource.swift */; };
 		0A1591801EE3C193005320A9 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15917F1EE3C193005320A9 /* ImageCollectionCell.swift */; };
+		0A1625301F1812CE00E67B24 /* FirstInstallSpinners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16252F1F1812CE00E67B24 /* FirstInstallSpinners.swift */; };
+		0A1625321F19E9D100E67B24 /* DemiSpinnerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1625311F19E9D100E67B24 /* DemiSpinnerNode.swift */; };
 		0A1734261F0679DE00140277 /* PlayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1734251F0679DE00140277 /* PlayNode.swift */; };
 		0A1734291F067F5500140277 /* ButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1734281F067F5500140277 /* ButtonProtocol.swift */; };
 		0A1C73EC1EF71EC00094119E /* MyriadPro-BoldCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E31EF71DB00094119E /* MyriadPro-BoldCond.otf */; };
@@ -96,6 +98,8 @@
 		0A14F3491EE175B300C5AA5D /* PurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		0A15917D1EE3C142005320A9 /* DownloadingDelegateDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadingDelegateDataSource.swift; sourceTree = "<group>"; };
 		0A15917F1EE3C193005320A9 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
+		0A16252F1F1812CE00E67B24 /* FirstInstallSpinners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstInstallSpinners.swift; sourceTree = "<group>"; };
+		0A1625311F19E9D100E67B24 /* DemiSpinnerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemiSpinnerNode.swift; sourceTree = "<group>"; };
 		0A1734251F0679DE00140277 /* PlayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayNode.swift; sourceTree = "<group>"; };
 		0A1734281F067F5500140277 /* ButtonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonProtocol.swift; sourceTree = "<group>"; };
 		0A1C73E21EF71DB00094119E /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Bold.otf"; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 				0AE7CD801EFCE55200236992 /* StoreView.swift */,
 				0A1734251F0679DE00140277 /* PlayNode.swift */,
 				0A75A04A1F07CFDA00A9752F /* StoreNode.swift */,
+				0A1625311F19E9D100E67B24 /* DemiSpinnerNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 			children = (
 				0AE83A771EDC8F380066E3DD /* BaseClass.swift */,
 				0A0D16F71EE6695500C4DD45 /* Constants.swift */,
+				0A16252F1F1812CE00E67B24 /* FirstInstallSpinners.swift */,
 			);
 			name = "Base Class";
 			sourceTree = "<group>";
@@ -618,7 +624,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		17786A8497F92D62F4801D56 /* [CP] Copy Pods Resources */ = {
@@ -648,7 +654,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		45FA6E03B5942EB48709D63D /* [CP] Copy Pods Resources */ = {
@@ -678,7 +684,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B4F7D384F2C47C3622CF8705 /* [CP] Embed Pods Frameworks */ = {
@@ -764,6 +770,7 @@
 				0A14F34A1EE175B300C5AA5D /* PurchaseManager.swift in Sources */,
 				0A04F47C1ED062F2004F374C /* SpinnerManager.swift in Sources */,
 				0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */,
+				0A1625301F1812CE00E67B24 /* FirstInstallSpinners.swift in Sources */,
 				0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */,
 				918F18FA1EC9CC8600886039 /* GameViewController.swift in Sources */,
 				918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */,
@@ -779,6 +786,7 @@
 				0A305A0B1EED9F5600BA3A4B /* Animateable.swift in Sources */,
 				0AE83A7A1EDC91580066E3DD /* ManuManager.swift in Sources */,
 				0A11F5E81EE3175F0036A00F /* AdMobManager.swift in Sources */,
+				0A1625321F19E9D100E67B24 /* DemiSpinnerNode.swift in Sources */,
 				9109F3D91F1615D700853867 /* Reachability.swift in Sources */,
 				0A0A24131EFA2D3E00044F8A /* LockedSpinnerNode.swift in Sources */,
 				916B1FAD1F16443D0083E649 /* ShareManager.swift in Sources */,
@@ -973,8 +981,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.APStudios.ProSpinner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c617dd23-1f45-4552-a024-681f0f9772ee";
-				PROVISIONING_PROFILE_SPECIFIER = "ProSpinner-AdHoc-Gini";
+				PROVISIONING_PROFILE = "2cfd116d-36da-400e-b5c9-edceb0f2a13d";
+				PROVISIONING_PROFILE_SPECIFIER = "ProSpinner-Ad Hoc";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

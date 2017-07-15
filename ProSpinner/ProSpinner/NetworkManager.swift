@@ -30,7 +30,7 @@ class NetworkManager
                         
                         if let newSpinnersAvailable = snapshot.value as? Int
                         {
-                            block(newSpinnersAvailable > ArchiveManager.spinnersArrayInDisk.count)
+                            block(newSpinnersAvailable > ArchiveManager.spinnersArrayInDiskCount)
                         }
                         else
                         {
@@ -60,10 +60,9 @@ class NetworkManager
                 
                 self.numberOfImagesInDownload = spinnerArray.count
                 
-                for newSpinner in spinnerArray
-                {
-                    ArchiveManager.spinnersArrayInDisk.append(newSpinner)
-                }
+                ArchiveManager.resetDownloadedSpinnersArray()
+                ArchiveManager.currentlyDownloadedSpinnersArray.append(contentsOf: spinnerArray)
+
                 self.handleDownloadingImagesForNewSpinners()
             }
         }
@@ -80,7 +79,7 @@ class NetworkManager
         case .wifi,.wwan:
             
             var spinnersFound : [Spinner] = [Spinner]()
-            let startingPosition = String(ArchiveManager.spinnersArrayInDisk.count + 1)
+            let startingPosition = String(ArchiveManager.spinnersArrayInDiskCount + 1)
             database.child("Spinners").queryOrderedByKey().queryStarting(atValue: startingPosition).observeSingleEvent(of: .value, with:
             { (snapshot) in
                 
@@ -111,7 +110,10 @@ class NetworkManager
                         for index in 0..<keys.count
                         {
                             let key = keys[index]
-                            spinnerArray.append(snapshotChildArray.value(forKey: key) as! NSDictionary)
+                            if let spinnerDictionary = snapshotChildArray.value(forKey: key) as? NSDictionary
+                            {
+                                spinnerArray.append(spinnerDictionary)
+                            }
                         }
                     }
                     
@@ -190,7 +192,7 @@ class NetworkManager
         case .unreachable: break
         case .wifi,.wwan:
             
-            for eachSpinner in ArchiveManager.spinnersArrayInDisk
+            for eachSpinner in ArchiveManager.currentlyDownloadedSpinnersArray
             {
                 guard let imageUrl = eachSpinner.imageUrlLink else { continue }
              
@@ -200,6 +202,7 @@ class NetworkManager
                 { (textureAsset) in
                     
                     eachSpinner.texture = textureAsset
+                    ArchiveManager.spinnersArrayInDisk.append(eachSpinner)
                     ArchiveManager.write_SpinnerToUserDefault(spinners: ArchiveManager.spinnersArrayInDisk)
                     
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.notifyWithNewTexture.rawValue),

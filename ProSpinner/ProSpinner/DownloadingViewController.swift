@@ -72,6 +72,9 @@ class DownloadingViewController: UIViewController  ,Animateable
         fadeInSuccessV()
         
         downloadingDelegateDataSource?.removeObserver()
+        
+        ArchiveManager.sortArrayInDiskAfterUpdate()
+        
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -95,6 +98,8 @@ class DownloadingViewController: UIViewController  ,Animateable
 
         }, completion: { (true) in
             self.dismiss(animated: true, completion: nil)
+            self.downloadingDelegateDataSource?.resetDataModel()
+            AppDelegate.showToast(withString: "Unwraping new spinners...")
         })
     }
 }

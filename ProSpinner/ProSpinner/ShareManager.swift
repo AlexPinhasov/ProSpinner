@@ -16,6 +16,12 @@ class ShareManager
     // MARK: - Facebook Share
     static func shareToFacebook(withTitle title: String, shareContent contentArray: [Any?], withCompletionHandler completionHandler: SLComposeViewControllerCompletionHandler?) -> Swift.Void
     {
+        guard SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) else
+        {
+            AppDelegate.showToast(withString: "No Facebook profile found")
+            return
+        }
+        
         if let facebookViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
         {
             if facebookViewController.setInitialText(title)

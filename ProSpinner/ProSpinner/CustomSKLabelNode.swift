@@ -36,6 +36,10 @@ class CustomSKLabelNode : SKNode,
         addChild(self.diamondsPlayerNeed)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     func setText(diamondNeeded : Int?)
     {
         log.debug()
@@ -44,7 +48,6 @@ class CustomSKLabelNode : SKNode,
         if let diamondInt = diamondNeeded
         {
             diamondsPlayerNeed.text = String(describing: diamondInt)
-            //changeFontToAllLabels(fontSize: 24)
             
             diamondsPlayerHave.horizontalAlignmentMode = .left
             diamondsPlayerHave.text?.append(" / " + (diamondsPlayerNeed.text ?? ""))
@@ -99,9 +102,5 @@ class CustomSKLabelNode : SKNode,
     {
         log.debug()
         pulse(node: diamondsPlayerNeed, scaleUpTo: 1.3, scaleDownTo: 1.0, duration: duration,delay: delay)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
 }

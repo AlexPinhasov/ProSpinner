@@ -22,23 +22,19 @@ class AdMobManager: NSObject,
         super.init()
         self.rootViewController = rootViewController
         configureGADInterstitial()
-        interstitial.delegate = self
         configureGADBanner()
         addObserver()
         
-        if ArchiveManager.interstitalCount >= 3
-        {
-            ArchiveManager.interstitalCount = 0
-        }
+        resetInterstitialCountIfNeeded()
     }
     
     func addObserver()
     {
-        NotificationCenter.default.addObserver(self, selector: #selector(shouldShowInterstitial), name: NSNotification.Name(NotifictionKey.interstitalCount.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showInterstitial), name: NSNotification.Name(NotifictionKey.interstitalCount.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addBannerToView), name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
     
-    func shouldShowInterstitial()
+    func showInterstitial()
     {
         guard let rootViewController = rootViewController else { return }
         
@@ -48,6 +44,13 @@ class AdMobManager: NSObject,
         }
     }
     
+    func resetInterstitialCountIfNeeded()
+    {
+        if ArchiveManager.interstitalCount >= 3
+        {
+            ArchiveManager.interstitalCount = 0
+        }
+    }
     
     func configureGADBanner()
     {
@@ -64,10 +67,13 @@ class AdMobManager: NSObject,
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
     
-    func configureGADInterstitial()
+    func configureGADInterstitial() -> GADInterstitial
     {
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-9437548574063413/9116200689")
+        //interstitial = GADInterstitial(adUnitID: "ca-app-pub-9437548574063413/9116200689")
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/1033173712")
+        interstitial.delegate = self
         interstitial.load(GADRequest())
+        return interstitial
     }
 
     /// Called when an interstitial ad request succeeded. Show it at the next transition point in your
@@ -81,7 +87,7 @@ class AdMobManager: NSObject,
     /// show. This is common since interstitials are shown sparingly to users.
     func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError)
     {
-        
+        interstitial = configureGADInterstitial()
     }
     
     /// Called just before presenting an interstitial. After this method finishes the interstitial will
@@ -102,14 +108,14 @@ class AdMobManager: NSObject,
     /// Called before the interstitial is to be animated off the screen.
     func interstitialWillDismissScreen(_ ad: GADInterstitial)
     {
-        ArchiveManager.interstitalCount = 0
-        configureGADInterstitial()
+
     }
     
     /// Called just after dismissing an interstitial and it has animated off the screen.
     func interstitialDidDismissScreen(_ ad: GADInterstitial)
     {
-
+        ArchiveManager.interstitalCount = 0
+        interstitial = configureGADInterstitial()
     }
     
     /// Called just before the application will background or terminate because the user clicked on an

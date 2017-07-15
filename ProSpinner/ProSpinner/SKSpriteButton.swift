@@ -24,6 +24,7 @@ class SKSpriteButton: SKSpriteNode
     {
         if self.position == originalPosition
         {
+            enableSwipe = false
             self.run(SKAction.move(by: CGVector(dx: 0, dy: moveBy), duration: 0.05))
             self.delegate?.buttonIsPressed()
         }
@@ -33,6 +34,7 @@ class SKSpriteButton: SKSpriteNode
     {
         if self.position != originalPosition
         {
+            enableSwipe = true
             self.run(SKAction.move(to: originalPosition, duration: 0.05))
             self.delegate?.buttonReleased()
         }

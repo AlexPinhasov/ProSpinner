@@ -31,6 +31,11 @@ class DownloadingDelegateDataSource: NSObject,
                                                   object: nil)
     }
     
+    func resetDataModel()
+    {
+        dataModel = [SKTexture]()
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int
     {
         return 1

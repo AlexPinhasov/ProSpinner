@@ -1,25 +1,26 @@
 PODS:
   - Crashlytics (3.8.5):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.11)
-  - Firebase/Core (4.0.0):
-    - FirebaseAnalytics (= 4.0.0)
-    - FirebaseCore (= 4.0.0)
-  - Firebase/Database (4.0.0):
+  - Fabric (1.6.12)
+  - Firebase/Core (4.0.4):
+    - FirebaseAnalytics (= 4.0.2)
+    - FirebaseCore (= 4.0.4)
+  - Firebase/Database (4.0.4):
     - Firebase/Core
     - FirebaseDatabase (= 4.0.0)
-  - Firebase/Messaging (4.0.0):
+  - Firebase/Messaging (4.0.4):
     - Firebase/Core
     - FirebaseMessaging (= 2.0.0)
-  - Firebase/Storage (4.0.0):
+  - Firebase/Storage (4.0.4):
     - Firebase/Core
     - FirebaseStorage (= 2.0.0)
-  - FirebaseAnalytics (4.0.0):
+  - FirebaseAnalytics (4.0.2):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (4.0.0):
+  - FirebaseCore (4.0.4):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - nanopb (~> 0.3)
   - FirebaseDatabase (4.0.0):
     - FirebaseAnalytics (~> 4.0)
   - FirebaseInstanceID (2.0.0):
@@ -34,14 +35,19 @@ PODS:
     - FirebaseAnalytics (~> 4.0)
     - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - Google-Mobile-Ads-SDK (7.20.0)
+  - Google-Mobile-Ads-SDK (7.21.0)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/Logger (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GTMSessionFetcher/Core (1.1.10)
+  - GTMSessionFetcher/Core (1.1.11)
   - JSSAlertView (3.0.4)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
@@ -77,18 +83,19 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
-  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  Firebase: 284eea779b73fdff309791817da7c68bff8dd572
-  FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
-  FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
+  Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
+  Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
+  FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
+  FirebaseCore: cfc042628ef9f20debe09c0eb683135fcd404cb4
   FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
-  Google-Mobile-Ads-SDK: 168312cdc167fa22746d4ea8e839fc4825dd2966
+  Google-Mobile-Ads-SDK: 4a6f1b43c8cc0e1e95a3b59d9f52a01671c6f9f3
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   JSSAlertView: 7d8345c88e6fd8b515bc49f0fc8d8c69f6776b9c
+  nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   SpriteKit-Spring: 3586bde2cf5d41f5a6af023c4b5bb240eaa3d7b0
@@ -97,4 +104,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 3188c566ab7d4a1f20174828c08f1ecc691ac8e3
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1
