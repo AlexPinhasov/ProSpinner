@@ -214,6 +214,7 @@ class LockedSpinnerNode: SKNode,
     {
         if shakingButton == false
         {
+            self.run(SoundLibrary.Error)
             shakingButton = true
             shake(node: unlockSpinnerButtonShadow, withDuration: 0.05, completion: nil)
             shake(node: unlockSpinnerButton, withDuration: 0.05, completion: { self.shakingButton = false } )

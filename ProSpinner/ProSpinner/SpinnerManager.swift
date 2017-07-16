@@ -23,7 +23,6 @@ class SpinnerManager: BaseClass,
     fileprivate let rotateLeftAngle = -(CGFloat.pi * 2)
     
     var spinnerNode : SKSpriteNode?
-    fileprivate var wooshSound  : SKAction
     fileprivate var rotateAction: SKAction
 
 //  MARK: Private enums
@@ -48,7 +47,6 @@ class SpinnerManager: BaseClass,
 //  MARK: init
     init(inScene scene: SKScene)
     {
-        wooshSound = SKAction.playSoundFileNamed("Woosh.mp3", waitForCompletion: false)
         rotateAction = SKAction.rotate(byAngle: rotateRightAngle, duration: spinnerSpeed)
         super.init()
         self.scene = scene
@@ -144,7 +142,7 @@ class SpinnerManager: BaseClass,
             spinnerNode?.run(SKAction.repeatForever(rotateAction),withKey: Constants.actionKeys.rotate.rawValue)
             
 
-            spinnerNode?.run(wooshSound)
+            spinnerNode?.run(SoundLibrary.spinnerChangedDirection)
             
         case false:
             spinnerNode?.removeAction(forKey: Constants.actionKeys.rotate.rawValue)
@@ -205,12 +203,15 @@ class SpinnerManager: BaseClass,
         }
     }
     
-    func purchasedNewSpinner()
+    func purchasedNewSpinner(completion block: (() -> Void)?)
     {
         log.debug("")
         ArchiveManager.currentSpinnerHasBeenUnlocked()
         spinnerNode?.removeAllActions()
-        rotateToStartingPosition()
+        spinNewlyUnlockedSpinner()
+        {
+            block?()
+        }
         grayOutSpinnerIfLocked()
         
         CrashlyticsLogManager.logSpinnerUnlocked()
@@ -218,7 +219,7 @@ class SpinnerManager: BaseClass,
     
 
 //  MARK: Private methods
-    private func rotateToStartingPosition()
+    fileprivate func rotateToStartingPosition()
     {
         log.debug("")
         spinnerNode?.run(SKAction.rotate(toAngle: 0.0, duration: 0.1))
@@ -412,12 +413,21 @@ extension SpinnerManager
                                               rotateLeftAction,
                                               rotateCenterAction])
             
-            let leftSequence = rightSequence.reversed()
             spinnerNode?.run(SKAction.sequence([rightSequence]), withKey: "ShakeLockedSpinner")
         }
         else
         {
             spinnerNode?.removeAction(forKey: "ShakeLockedSpinner")
         }
+    }
+    
+    func spinNewlyUnlockedSpinner(completion block: (() -> Void)?)
+    {
+        let rotate = SKAction.rotate(toAngle: rotateRightAngle, duration: 1.5)
+        spinnerNode?.run(SKAction.repeat(rotate, count: 1))
+        {
+            block?()
+        }
+  
     }
 }

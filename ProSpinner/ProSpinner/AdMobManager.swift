@@ -67,13 +67,12 @@ class AdMobManager: NSObject,
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
     
-    func configureGADInterstitial() -> GADInterstitial
+    func configureGADInterstitial()
     {
         //interstitial = GADInterstitial(adUnitID: "ca-app-pub-9437548574063413/9116200689")
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/1033173712")
         interstitial.delegate = self
         interstitial.load(GADRequest())
-        return interstitial
     }
 
     /// Called when an interstitial ad request succeeded. Show it at the next transition point in your
@@ -87,7 +86,7 @@ class AdMobManager: NSObject,
     /// show. This is common since interstitials are shown sparingly to users.
     func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError)
     {
-        interstitial = configureGADInterstitial()
+        configureGADInterstitial()
     }
     
     /// Called just before presenting an interstitial. After this method finishes the interstitial will
@@ -115,7 +114,7 @@ class AdMobManager: NSObject,
     func interstitialDidDismissScreen(_ ad: GADInterstitial)
     {
         ArchiveManager.interstitalCount = 0
-        interstitial = configureGADInterstitial()
+        configureGADInterstitial()
     }
     
     /// Called just before the application will background or terminate because the user clicked on an

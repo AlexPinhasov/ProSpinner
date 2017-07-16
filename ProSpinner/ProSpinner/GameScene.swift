@@ -31,12 +31,15 @@ class GameScene: SKScene,
     
     var spinnerNode     : SKSpriteNode = SKSpriteNode()
     
+    var backgroundMusic: SKAudioNode!
+    
 //  MARK: Scene life cycle
     override func didMove(to view: SKView)
     {
         log.debug("")
         handleSwipeConfiguration()
         addObservers()
+        configureSound()
     }
     
     private func addObservers()
@@ -119,7 +122,12 @@ class GameScene: SKScene,
                     
                     if manuManager?.lockedSpinnerView?.userCanUnlockSpinner == true
                     {
+                        changeVolumeTo(value: 0.1, duration: 1.0)
+                        scene?.run(SoundLibrary.spinnerUnlocked)
                         spinnerManager?.purchasedNewSpinner()
+                        {
+                            self.changeVolumeTo(value: 0.5, duration: 1)
+                        }
                         handleUIForUnlockedSpinner()
                     }
                     
@@ -179,6 +187,10 @@ class GameScene: SKScene,
                     manuManager?.demiSpinnerNode?.goToItunesForReview(completion: { (success) in
                         
                     })
+                    
+                case Constants.NodesInScene.muteSound.rawValue:
+                    ArchiveManager.shouldPlaySound = !ArchiveManager.shouldPlaySound
+                    playSoundIfNeeded()
                     
                 default: break
                 }
@@ -251,6 +263,7 @@ class GameScene: SKScene,
         }
         else 
         {
+            changeVolumeTo(value: 0.05, duration: 1.5)
             GameStatus.Playing = true
             retryView?.gameStarted()
             manuManager?.gameStarted()
@@ -268,6 +281,7 @@ class GameScene: SKScene,
     {
         if GameStatus.Playing
         {
+            playSoundIfNeeded()
             GameStatus.Playing = false
             retryView?.gameOver()
             retryView?.setDiamondsCollected(diamonds: diamondsManager?.getCollectedDiamondsDuringGame())
@@ -291,6 +305,39 @@ class GameScene: SKScene,
     }
 
 //  MARK: Private methods
+    private func configureSound()
+    {
+        if let musicURL = Bundle.main.url(forResource: "BackgroundMusic", withExtension: "wav")
+        {
+            backgroundMusic = SKAudioNode(url: musicURL)
+            addChild(backgroundMusic)
+            backgroundMusic?.run(SKAction.stop())
+            backgroundMusic?.run(SKAction.changeVolume(to: 0, duration: 0))
+            playSoundIfNeeded()
+        }
+    }
+    
+    private func playSoundIfNeeded()
+    {
+        if ArchiveManager.shouldPlaySound
+        {
+            backgroundMusic?.run(SKAction.play())
+            backgroundMusic?.run(SKAction.changeVolume(to: 0.4, duration: 5))
+        }
+        else
+        {
+            backgroundMusic?.run(SKAction.stop())
+        }
+    }
+    
+    func changeVolumeTo(value: Float ,duration: TimeInterval)
+    {
+        if ArchiveManager.shouldPlaySound
+        {
+            backgroundMusic?.run(SKAction.changeVolume(to: value, duration: duration))
+        }
+    }
+    
     private func handleInterstitialCount()
     {
         log.debug("")
@@ -381,6 +428,7 @@ class GameScene: SKScene,
     
     func userTappedNextSpinner()
     {
+        self.run(SoundLibrary.spinnerChangedDirection)
         spinnerManager?.userTappedNextSpinner()
             {
                 self.handleLockViewAppearance()
@@ -389,6 +437,7 @@ class GameScene: SKScene,
     
     func userTappedPreviousSpinner()
     {
+        self.run(SoundLibrary.spinnerChangedDirection)
         spinnerManager?.userTappedPreviousSpinner()
             {
                 self.handleLockViewAppearance()

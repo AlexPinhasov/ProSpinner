@@ -82,6 +82,7 @@ class RetryView: SKNode
             self.isHidden = false
             AlertViewBackground?.run(SKAction.fadeIn(withDuration: 0.2))
             {
+                self.run(SoundLibrary.AlertSound)
                 self.EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 0), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
                 {
                     block?()

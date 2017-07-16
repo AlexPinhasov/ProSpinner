@@ -38,7 +38,6 @@ class DiamondsManager: BaseClass,
     fileprivate var highScoreLabel: SKLabelNode?
 
     private var nextXLocation: CGFloat = 160.0
-    private var wooshSound : SKAction
 
     fileprivate enum Count
     {
@@ -49,7 +48,6 @@ class DiamondsManager: BaseClass,
     //  MARK: init
     init(inScene scene: SKScene)
     {
-        wooshSound = SKAction.playSoundFileNamed("Tick.mp3", waitForCompletion: false)
         super.init()
         self.scene = scene
         highScoreLabel = self.scene?.childNode(withName: "HighScore") as? SKLabelNode
@@ -161,7 +159,7 @@ class DiamondsManager: BaseClass,
     
     func playTickSound()
     {
-        scene?.run(wooshSound)
+        scene?.run(SoundLibrary.CollectedDiamond)
     }
     
     func collectedDiamondOf(kind diamond: Diamond?)

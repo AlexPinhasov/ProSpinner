@@ -34,8 +34,9 @@ class ManuManager: BaseClass,
     
     var demiSpinnerNode          : DemiSpinnerNode?
     private var gameExplanation  : SKNode?
-    fileprivate var spinnerLock : SKSpriteNode?
+    fileprivate var spinnerLock  : SKSpriteNode?
     
+    var soundNode                : SKSpriteNode?
     fileprivate var highScoreRecord  : SKLabelNode?
     
     // Unlock Spinner Master Node
@@ -70,9 +71,12 @@ class ManuManager: BaseClass,
         
         gameExplanation         = scene?.childNode(withName: Constants.NodesInScene.BreifTutorial.rawValue)
         
-        lockedSpinnerView = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNode
+        lockedSpinnerView       = scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNode
         
-        spinnerLock = self.scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
+        spinnerLock             = scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
+        
+        soundNode               = scene?.childNode(withName: Constants.NodesInScene.muteSound.rawValue) as? SKSpriteNode
+
     }
 
 //  MARK: Public methods
@@ -211,6 +215,7 @@ class ManuManager: BaseClass,
         log.debug("")
         playNode?.hideNode()
         storeNode?.hideNode()
+        soundNode?.run(SKAction.fadeOut(withDuration: 0.5))
         highScoreRecord?.run(SKAction.fadeOut(withDuration: 0.3))
     }
     
@@ -227,6 +232,7 @@ class ManuManager: BaseClass,
             hideDemiSpinnerNode()
             playNode?.showNode()
             storeNode?.showNode()
+            soundNode?.run(SKAction.fadeIn(withDuration: 0.5))
             highScoreRecord?.run(SKAction.fadeIn(withDuration: 0.4))
         }
     }

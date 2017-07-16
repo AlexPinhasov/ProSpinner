@@ -19,6 +19,7 @@ enum UserDefaultKeys: String
     case spinnersInDisk             = "Spinners"
     case firstTimeRun               = "firstTimeRun"
     case highScore                  = "highScore"
+    case muteSound                  = "muteSound"
 }
 
 class ArchiveManager
@@ -167,6 +168,19 @@ class ArchiveManager
         set
         {
             UserDefaults.standard.set(true, forKey: UserDefaultKeys.firstTimeRun.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var shouldPlaySound: Bool
+    {
+        get
+        {
+            return UserDefaults.standard.bool(forKey: UserDefaultKeys.muteSound.rawValue)
+        }
+        set
+        {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.muteSound.rawValue)
             UserDefaults.standard.synchronize()
         }
     }

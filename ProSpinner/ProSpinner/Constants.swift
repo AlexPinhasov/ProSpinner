@@ -75,6 +75,7 @@ class Constants
     
     enum NodesInScene : String
     {
+        case muteSound       = "muteSound"
         case LeftArrow = "previousSpinner"
         case RightArrow = "nextSpinner"
         case ActualLeftArrow = "LeftArrow"

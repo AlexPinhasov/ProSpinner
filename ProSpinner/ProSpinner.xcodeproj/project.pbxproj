@@ -55,6 +55,14 @@
 		9109F3D91F1615D700853867 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3D81F1615D700853867 /* Reachability.swift */; };
 		9109F3DB1F162ED300853867 /* CrashlyticsLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3DA1F162ED300853867 /* CrashlyticsLogManager.swift */; };
 		916B1FAD1F16443D0083E649 /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916B1FAC1F16443D0083E649 /* ShareManager.swift */; };
+		917640781F1B434E006DD6CD /* Blop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 917640771F1B434E006DD6CD /* Blop.mp3 */; };
+		9176407D1F1B525E006DD6CD /* ButtonTap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9176407C1F1B525E006DD6CD /* ButtonTap.wav */; };
+		9176407F1F1B52A3006DD6CD /* BackgroundMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9176407E1F1B52A3006DD6CD /* BackgroundMusic.wav */; };
+		917640831F1B58C8006DD6CD /* SoundLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917640821F1B58C8006DD6CD /* SoundLibrary.swift */; };
+		917640851F1B5BD7006DD6CD /* SpinnerUnlocked.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917640841F1B5BD7006DD6CD /* SpinnerUnlocked.wav */; };
+		917640891F1B5CDE006DD6CD /* AlertSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917640881F1B5CDE006DD6CD /* AlertSound.wav */; };
+		9176408B1F1B5D22006DD6CD /* Error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9176408A1F1B5D22006DD6CD /* Error.wav */; };
+		917640951F1B7D12006DD6CD /* CollectedDiamond.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917640941F1B7D12006DD6CD /* CollectedDiamond.wav */; };
 		918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F11EC9CC8600886039 /* AppDelegate.swift */; };
 		918F18F41EC9CC8600886039 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 918F18F31EC9CC8600886039 /* GameScene.sks */; };
 		918F18F81EC9CC8600886039 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F71EC9CC8600886039 /* GameScene.swift */; };
@@ -145,6 +153,14 @@
 		9109F3D81F1615D700853867 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		9109F3DA1F162ED300853867 /* CrashlyticsLogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashlyticsLogManager.swift; sourceTree = "<group>"; };
 		916B1FAC1F16443D0083E649 /* ShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
+		917640771F1B434E006DD6CD /* Blop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Blop.mp3; sourceTree = "<group>"; };
+		9176407C1F1B525E006DD6CD /* ButtonTap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTap.wav; sourceTree = "<group>"; };
+		9176407E1F1B52A3006DD6CD /* BackgroundMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BackgroundMusic.wav; sourceTree = "<group>"; };
+		917640821F1B58C8006DD6CD /* SoundLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundLibrary.swift; sourceTree = "<group>"; };
+		917640841F1B5BD7006DD6CD /* SpinnerUnlocked.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SpinnerUnlocked.wav; sourceTree = "<group>"; };
+		917640881F1B5CDE006DD6CD /* AlertSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AlertSound.wav; sourceTree = "<group>"; };
+		9176408A1F1B5D22006DD6CD /* Error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Error.wav; sourceTree = "<group>"; };
+		917640941F1B7D12006DD6CD /* CollectedDiamond.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CollectedDiamond.wav; sourceTree = "<group>"; };
 		918F18EE1EC9CC8600886039 /* ProSpinner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProSpinner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918F18F11EC9CC8600886039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		918F18F31EC9CC8600886039 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -203,8 +219,6 @@
 				918F18F11EC9CC8600886039 /* AppDelegate.swift */,
 				918F18FB1EC9CC8600886039 /* Main.storyboard */,
 				918F18FE1EC9CC8600886039 /* Assets.xcassets */,
-				0A3658A61ED20D9900322024 /* Woosh.mp3 */,
-				0A8B2E981ED8811D0025856E /* Tick.mp3 */,
 				918F19001EC9CC8600886039 /* LaunchScreen.storyboard */,
 				0A87FDDC1F155E0B00CF55BB /* GoogleService-Info.plist */,
 				918F19031EC9CC8600886039 /* Info.plist */,
@@ -361,6 +375,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		917640791F1B5204006DD6CD /* SoundEffects */ = {
+			isa = PBXGroup;
+			children = (
+				9176407C1F1B525E006DD6CD /* ButtonTap.wav */,
+				917640881F1B5CDE006DD6CD /* AlertSound.wav */,
+				917640841F1B5BD7006DD6CD /* SpinnerUnlocked.wav */,
+				917640941F1B7D12006DD6CD /* CollectedDiamond.wav */,
+				0A3658A61ED20D9900322024 /* Woosh.mp3 */,
+				0A8B2E981ED8811D0025856E /* Tick.mp3 */,
+				917640771F1B434E006DD6CD /* Blop.mp3 */,
+				9176407E1F1B52A3006DD6CD /* BackgroundMusic.wav */,
+				9176408A1F1B5D22006DD6CD /* Error.wav */,
+				917640821F1B58C8006DD6CD /* SoundLibrary.swift */,
+			);
+			name = SoundEffects;
+			sourceTree = "<group>";
+		};
 		918F18E51EC9CC8600886039 = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +418,7 @@
 		918F18F01EC9CC8600886039 /* ProSpinner */ = {
 			isa = PBXGroup;
 			children = (
+				917640791F1B5204006DD6CD /* SoundEffects */,
 				0A87FDE01F1569DF00CF55BB /* ToastView */,
 				0A87FDDB1F154DC800CF55BB /* ProSpinner.entitlements */,
 				0AE83A761EDC8F260066E3DD /* Base Class */,
@@ -563,7 +595,9 @@
 			files = (
 				0A8385861EF5394B0044D1C7 /* OCRAStd.otf in Resources */,
 				0A1D71341ED9826600331753 /* Flea Market Finds.ttf in Resources */,
+				9176407F1F1B52A3006DD6CD /* BackgroundMusic.wav in Resources */,
 				918F18FD1EC9CC8600886039 /* Main.storyboard in Resources */,
+				9176408B1F1B5D22006DD6CD /* Error.wav in Resources */,
 				918F18F41EC9CC8600886039 /* GameScene.sks in Resources */,
 				918F18FF1EC9CC8600886039 /* Assets.xcassets in Resources */,
 				0A8B2E991ED8811E0025856E /* Tick.mp3 in Resources */,
@@ -573,10 +607,15 @@
 				0A0A24101EF9355500044F8A /* MyriadPro-BoldCondIt.otf in Resources */,
 				0A87FDED1F156F8600CF55BB /* MyriadPro-Regular.otf in Resources */,
 				0A2168631F00C614003B9701 /* MyriadPro-Cond.otf in Resources */,
+				9176407D1F1B525E006DD6CD /* ButtonTap.wav in Resources */,
+				917640891F1B5CDE006DD6CD /* AlertSound.wav in Resources */,
+				917640781F1B434E006DD6CD /* Blop.mp3 in Resources */,
 				0A0A24111EF935A100044F8A /* MyriadPro-CondIt.otf in Resources */,
 				0A305A091EEC496800BA3A4B /* OpenSansHebrew-Bold.ttf in Resources */,
 				0A87FDDD1F155E0B00CF55BB /* GoogleService-Info.plist in Resources */,
 				0A305A071EEC33B600BA3A4B /* OpenSansHebrew-Light.ttf in Resources */,
+				917640951F1B7D12006DD6CD /* CollectedDiamond.wav in Resources */,
+				917640851F1B5BD7006DD6CD /* SpinnerUnlocked.wav in Resources */,
 				918F19021EC9CC8600886039 /* LaunchScreen.storyboard in Resources */,
 				0A3658A71ED20D9900322024 /* Woosh.mp3 in Resources */,
 			);
@@ -770,6 +809,7 @@
 				0A14F34A1EE175B300C5AA5D /* PurchaseManager.swift in Sources */,
 				0A04F47C1ED062F2004F374C /* SpinnerManager.swift in Sources */,
 				0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */,
+				917640831F1B58C8006DD6CD /* SoundLibrary.swift in Sources */,
 				0A1625301F1812CE00E67B24 /* FirstInstallSpinners.swift in Sources */,
 				0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */,
 				918F18FA1EC9CC8600886039 /* GameViewController.swift in Sources */,

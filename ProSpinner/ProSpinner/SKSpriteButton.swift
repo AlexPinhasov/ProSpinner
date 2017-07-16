@@ -24,6 +24,7 @@ class SKSpriteButton: SKSpriteNode
     {
         if self.position == originalPosition
         {
+            self.run(SoundLibrary.blopSound)
             enableSwipe = false
             self.run(SKAction.move(by: CGVector(dx: 0, dy: moveBy), duration: 0.05))
             self.delegate?.buttonIsPressed()
