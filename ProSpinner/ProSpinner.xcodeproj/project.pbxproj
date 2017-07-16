@@ -63,6 +63,7 @@
 		917640891F1B5CDE006DD6CD /* AlertSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917640881F1B5CDE006DD6CD /* AlertSound.wav */; };
 		9176408B1F1B5D22006DD6CD /* Error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9176408A1F1B5D22006DD6CD /* Error.wav */; };
 		917640951F1B7D12006DD6CD /* CollectedDiamond.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917640941F1B7D12006DD6CD /* CollectedDiamond.wav */; };
+		917640971F1BA49A006DD6CD /* ButtonTap1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917640961F1BA49A006DD6CD /* ButtonTap1.wav */; };
 		918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F11EC9CC8600886039 /* AppDelegate.swift */; };
 		918F18F41EC9CC8600886039 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 918F18F31EC9CC8600886039 /* GameScene.sks */; };
 		918F18F81EC9CC8600886039 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F71EC9CC8600886039 /* GameScene.swift */; };
@@ -161,6 +162,7 @@
 		917640881F1B5CDE006DD6CD /* AlertSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AlertSound.wav; sourceTree = "<group>"; };
 		9176408A1F1B5D22006DD6CD /* Error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Error.wav; sourceTree = "<group>"; };
 		917640941F1B7D12006DD6CD /* CollectedDiamond.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CollectedDiamond.wav; sourceTree = "<group>"; };
+		917640961F1BA49A006DD6CD /* ButtonTap1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTap1.wav; sourceTree = "<group>"; };
 		918F18EE1EC9CC8600886039 /* ProSpinner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProSpinner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918F18F11EC9CC8600886039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		918F18F31EC9CC8600886039 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				917640941F1B7D12006DD6CD /* CollectedDiamond.wav */,
 				0A3658A61ED20D9900322024 /* Woosh.mp3 */,
 				0A8B2E981ED8811D0025856E /* Tick.mp3 */,
+				917640961F1BA49A006DD6CD /* ButtonTap1.wav */,
 				917640771F1B434E006DD6CD /* Blop.mp3 */,
 				9176407E1F1B52A3006DD6CD /* BackgroundMusic.wav */,
 				9176408A1F1B5D22006DD6CD /* Error.wav */,
@@ -611,6 +614,7 @@
 				917640891F1B5CDE006DD6CD /* AlertSound.wav in Resources */,
 				917640781F1B434E006DD6CD /* Blop.mp3 in Resources */,
 				0A0A24111EF935A100044F8A /* MyriadPro-CondIt.otf in Resources */,
+				917640971F1BA49A006DD6CD /* ButtonTap1.wav in Resources */,
 				0A305A091EEC496800BA3A4B /* OpenSansHebrew-Bold.ttf in Resources */,
 				0A87FDDD1F155E0B00CF55BB /* GoogleService-Info.plist in Resources */,
 				0A305A071EEC33B600BA3A4B /* OpenSansHebrew-Light.ttf in Resources */,

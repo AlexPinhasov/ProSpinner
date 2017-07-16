@@ -129,7 +129,7 @@ class StoreView: SKNode
             self.isHidden = false
             storeBackground?.run(SKAction.fadeIn(withDuration: 0.1))
             {
-                self.run(SoundLibrary.AlertSound)
+                //self.run(SoundLibrary.AlertSound)
                 self.storeAlert?.run(SKAction.move(to: CGPoint(x: 160, y: 278), duration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
                 {
                     self.finishedPresentingView = true

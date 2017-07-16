@@ -126,7 +126,7 @@ class GameScene: SKScene,
                         scene?.run(SoundLibrary.spinnerUnlocked)
                         spinnerManager?.purchasedNewSpinner()
                         {
-                            self.changeVolumeTo(value: 0.5, duration: 1)
+                            self.changeVolumeTo(value: 0.7, duration: 1)
                         }
                         handleUIForUnlockedSpinner()
                     }
@@ -281,8 +281,8 @@ class GameScene: SKScene,
     {
         if GameStatus.Playing
         {
-            playSoundIfNeeded()
             GameStatus.Playing = false
+            changeVolumeTo(value: 0.7, duration: 1.5)
             retryView?.gameOver()
             retryView?.setDiamondsCollected(diamonds: diamondsManager?.getCollectedDiamondsDuringGame())
             retryView?.presentRetryView()
@@ -322,7 +322,7 @@ class GameScene: SKScene,
         if ArchiveManager.shouldPlaySound
         {
             backgroundMusic?.run(SKAction.play())
-            backgroundMusic?.run(SKAction.changeVolume(to: 0.4, duration: 5))
+            backgroundMusic?.run(SKAction.changeVolume(to: 0.7, duration: 5))
         }
         else
         {
