@@ -81,7 +81,7 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.2, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
     }
 
     @objc func spawnDiamonds()
@@ -153,7 +153,7 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         playTickSound()
-        Diamond.diamondSpeed -= 0.040
+        Diamond.diamondSpeed -= 0.05
         collectedDiamondOf(kind: diamondNode)
     }
     
