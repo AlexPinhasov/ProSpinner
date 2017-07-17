@@ -145,6 +145,7 @@ class LoadingViewController: UIViewController,Animateable
             scene.tutorialManager   = TutorialManager(withScene: scene)
             scene.storeView         = scene.childNode(withName: Constants.NodesInStoreView.StoreView.rawValue) as? StoreView
             scene.retryView         = scene.childNode(withName: Constants.NodesInRetryView.RetryView.rawValue) as? RetryView
+            scene.sideMenuView      = scene.childNode(withName: Constants.NodesInSideMenu.SideMenu.rawValue) as? SideMenuView
             scene.physicsWorld.contactDelegate = scene
             
             scene.handleSpinnerConfiguration()
@@ -162,16 +163,16 @@ class LoadingViewController: UIViewController,Animateable
             ArchiveManager.shouldPlaySound = true
             ArchiveManager.mainSpinnerLocation = 1
             ArchiveManager.write_SpinnerToUserDefault(spinners: FirstInstallSpinners.getSpinnersArray())
-            set10DiamondsOnFirstRun()
         }
+        set10DiamondsOnFirstRun()
     }
     
     private func set10DiamondsOnFirstRun()
     {
         log.debug()
-        UserDefaults.standard.set(0, forKey: UserDefaultKeys.red.rawValue)
-        UserDefaults.standard.set(0, forKey: UserDefaultKeys.blue.rawValue)
-        UserDefaults.standard.set(0, forKey: UserDefaultKeys.green.rawValue)
+        UserDefaults.standard.set(1000, forKey: UserDefaultKeys.red.rawValue)
+        UserDefaults.standard.set(1000, forKey: UserDefaultKeys.blue.rawValue)
+        UserDefaults.standard.set(1000, forKey: UserDefaultKeys.green.rawValue)
     }
     
 }

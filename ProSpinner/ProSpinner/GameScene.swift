@@ -26,12 +26,11 @@ class GameScene: SKScene,
     var tutorialManager : TutorialManager?
     var retryView       : RetryView?
     var storeView       : StoreView?
+    var sideMenuView    : SideMenuView?
     
     var lastNodeTouchedName = ""
     
     var spinnerNode     : SKSpriteNode = SKSpriteNode()
-    
-    var backgroundMusic: SKAudioNode!
     
 //  MARK: Scene life cycle
     override func didMove(to view: SKView)
@@ -39,7 +38,7 @@ class GameScene: SKScene,
         log.debug("")
         handleSwipeConfiguration()
         addObservers()
-        configureSound()
+        sideMenuView?.showSideView()
     }
     
     private func addObservers()
@@ -106,6 +105,7 @@ class GameScene: SKScene,
                 case Constants.NodesInPlayNode.PlayLabel.rawValue:
                     notifyGameStarted()
                     enableSwipe = false
+                    sideMenuView?.hideSideMenu()
                     
                 case Constants.NodesInStoreView.StoreButton.rawValue:
                     storeView?.presentStoreView()
@@ -122,11 +122,11 @@ class GameScene: SKScene,
                     
                     if manuManager?.lockedSpinnerView?.userCanUnlockSpinner == true
                     {
-                        changeVolumeTo(value: 0.1, duration: 1.0)
+                        sideMenuView?.changeVolumeTo(value: 0.1, duration: 1.0)
                         scene?.run(SoundLibrary.spinnerUnlocked)
                         spinnerManager?.purchasedNewSpinner()
                         {
-                            self.changeVolumeTo(value: 0.6, duration: 1)
+                            self.sideMenuView?.changeVolumeTo(value: 0.8, duration: 1)
                         }
                         handleUIForUnlockedSpinner()
                     }
@@ -188,9 +188,9 @@ class GameScene: SKScene,
                         
                     })
                     
-                case Constants.NodesInScene.muteSound.rawValue:
-                    ArchiveManager.shouldPlaySound = !ArchiveManager.shouldPlaySound
-                    playSoundIfNeeded()
+                case Constants.NodesInSideMenu.muteSound.rawValue:
+                    sideMenuView?.didTapSound()
+                    sideMenuView?.playSoundIfNeeded()
                     
                 default: break
                 }
@@ -263,7 +263,8 @@ class GameScene: SKScene,
         }
         else 
         {
-            changeVolumeTo(value: 0.05, duration: 1.5)
+            sideMenuView?.changeVolumeTo(value: 0.15, duration: 7)
+            sideMenuView?.hideSideMenu()
             GameStatus.Playing = true
             retryView?.gameStarted()
             manuManager?.gameStarted()
@@ -282,7 +283,7 @@ class GameScene: SKScene,
         if GameStatus.Playing
         {
             GameStatus.Playing = false
-            changeVolumeTo(value: 0.6, duration: 1.5)
+            sideMenuView?.changeVolumeTo(value: 0.8, duration: 1.5)
             retryView?.gameOver()
             retryView?.setDiamondsCollected(diamonds: diamondsManager?.getCollectedDiamondsDuringGame())
             retryView?.presentRetryView()
@@ -292,6 +293,7 @@ class GameScene: SKScene,
             manuManager?.gameOver()
             diamondsManager?.gameOver()
             spinnerManager?.gameOver()
+            sideMenuView?.showSideView()
         }
     }
     
@@ -305,39 +307,6 @@ class GameScene: SKScene,
     }
 
 //  MARK: Private methods
-    private func configureSound()
-    {
-        if let musicURL = Bundle.main.url(forResource: "BackgroundMusic", withExtension: "wav")
-        {
-            backgroundMusic = SKAudioNode(url: musicURL)
-            addChild(backgroundMusic)
-            backgroundMusic?.run(SKAction.stop())
-            backgroundMusic?.run(SKAction.changeVolume(to: 0, duration: 0))
-            playSoundIfNeeded()
-        }
-    }
-    
-    private func playSoundIfNeeded()
-    {
-        if ArchiveManager.shouldPlaySound
-        {
-            backgroundMusic?.run(SKAction.play())
-            backgroundMusic?.run(SKAction.changeVolume(to: 0.6, duration: 5))
-        }
-        else
-        {
-            backgroundMusic?.run(SKAction.stop())
-        }
-    }
-    
-    func changeVolumeTo(value: Float ,duration: TimeInterval)
-    {
-        if ArchiveManager.shouldPlaySound
-        {
-            backgroundMusic?.run(SKAction.changeVolume(to: value, duration: duration))
-        }
-    }
-    
     private func handleInterstitialCount()
     {
         log.debug("")

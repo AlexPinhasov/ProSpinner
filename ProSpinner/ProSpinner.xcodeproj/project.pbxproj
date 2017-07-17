@@ -46,6 +46,7 @@
 		0A87FDED1F156F8600CF55BB /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E91EF71DB00094119E /* MyriadPro-Regular.otf */; };
 		0A8B2E991ED8811E0025856E /* Tick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B2E981ED8811D0025856E /* Tick.mp3 */; };
 		0A8B2E9D1ED8C3ED0025856E /* Diamond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B2E9C1ED8C3EC0025856E /* Diamond.swift */; };
+		0ACD33071F1BD80200F7DD0E /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD33061F1BD80200F7DD0E /* SideMenuView.swift */; };
 		0ADCF0D41EDD9B2D00CE1C8B /* ArchiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCF0D31EDD9B2D00CE1C8B /* ArchiveManager.swift */; };
 		0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE7CD801EFCE55200236992 /* StoreView.swift */; };
 		0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE83A771EDC8F380066E3DD /* BaseClass.swift */; };
@@ -141,6 +142,7 @@
 		0A87FDE91F156A2A00CF55BB /* ToastView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
 		0A8B2E981ED8811D0025856E /* Tick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tick.mp3; sourceTree = "<group>"; };
 		0A8B2E9C1ED8C3EC0025856E /* Diamond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diamond.swift; sourceTree = "<group>"; };
+		0ACD33061F1BD80200F7DD0E /* SideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		0ADCF0D31EDD9B2D00CE1C8B /* ArchiveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveManager.swift; sourceTree = "<group>"; };
 		0AE7CD801EFCE55200236992 /* StoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		0AE83A771EDC8F380066E3DD /* BaseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseClass.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				0A1734251F0679DE00140277 /* PlayNode.swift */,
 				0A75A04A1F07CFDA00A9752F /* StoreNode.swift */,
 				0A1625311F19E9D100E67B24 /* DemiSpinnerNode.swift */,
+				0ACD33061F1BD80200F7DD0E /* SideMenuView.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -801,6 +804,7 @@
 				0A1734291F067F5500140277 /* ButtonProtocol.swift in Sources */,
 				0A289C0C1EEE5C21000AED6B /* TutorialManager.swift in Sources */,
 				0A75A04B1F07CFDA00A9752F /* StoreNode.swift in Sources */,
+				0ACD33071F1BD80200F7DD0E /* SideMenuView.swift in Sources */,
 				0A1591801EE3C193005320A9 /* ImageCollectionCell.swift in Sources */,
 				0A8385881EF63A350044D1C7 /* RetryView.swift in Sources */,
 				0A3081A61EEA07CF00892266 /* CustomSKLabelNode.swift in Sources */,

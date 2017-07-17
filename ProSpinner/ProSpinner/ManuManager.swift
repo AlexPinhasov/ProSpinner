@@ -74,9 +74,6 @@ class ManuManager: BaseClass,
         lockedSpinnerView       = scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNode
         
         spinnerLock             = scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
-        
-        soundNode               = scene?.childNode(withName: Constants.NodesInScene.muteSound.rawValue) as? SKSpriteNode
-
     }
 
 //  MARK: Public methods

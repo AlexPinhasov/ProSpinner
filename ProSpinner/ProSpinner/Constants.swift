@@ -75,7 +75,6 @@ class Constants
     
     enum NodesInScene : String
     {
-        case muteSound       = "muteSound"
         case LeftArrow = "previousSpinner"
         case RightArrow = "nextSpinner"
         case ActualLeftArrow = "LeftArrow"
@@ -138,6 +137,13 @@ class Constants
         case smallDiamondGroup = "SmallDiamondGroup"
         case smallPackButton = "smallPackButton"
         case bigPackButton = "bigPackButton"
+    }
+    
+    enum NodesInSideMenu: String
+    {
+        case SideMenu              = "SideMenu"
+        case muteSound             = "muteSound"
+        case sideMenuBackground    = "sideMenuBackground"
     }
     
     enum NodesInPriceTags: String
