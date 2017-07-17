@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class SKSpriteButton: SKSpriteNode
+class SKSpriteButton: SKSpriteNode,Animateable
 {
     var originalPosition   : CGPoint = CGPoint.zero
     var moveBy             : CGFloat = 0
@@ -35,6 +35,7 @@ class SKSpriteButton: SKSpriteNode
         if self.position != originalPosition
         {
             self.run(SoundLibrary.blopSound)
+            pulse(node: self, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.2)
             enableSwipe = true
             self.run(SKAction.move(to: originalPosition, duration: 0.05))
             self.delegate?.buttonReleased()

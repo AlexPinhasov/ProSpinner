@@ -34,36 +34,30 @@ class Constants
     
     enum DiamondsName : String
     {
-        case red = "redDiamond"
-        case blue = "blueDiamond"
-        case green = "greenDiamond"
+        case red    = "redDiamond"
+        case blue   = "blueDiamond"
+        case green  = "greenDiamond"
     }
 
     enum actionKeys: String
     {
-        case rotate = "rotateAction"
-        case shakeDiamond = "shakeDiamond"
-        case MoveSuccessV = "MoveSuccessV"
+        case rotate         = "rotateAction"
+        case shakeDiamond   = "shakeDiamond"
+        case MoveSuccessV   = "MoveSuccessV"
     }
     
     enum DiamondsPlayerNeed: String
     {
-        case red = "redNeeded"
-        case blue = "blueNeeded"
-        case green = "greenNeeded"
+        case red    = "redNeeded"
+        case blue   = "blueNeeded"
+        case green  = "greenNeeded"
     }
     
     enum ProgressBars: String
     {
-        case red = "redProgressBar"
-        case blue = "blueProgressBar"
-        case green = "greenProgressBar"
-    }
-    
-    enum LockedScreenStrings: String
-    {
-        case DiamondsNeeded = "Diamonds Needed To Unlock"
-        case UnlockSpinner = "UNLOCK SPINNER !"
+        case red    = "redProgressBar"
+        case blue   = "blueProgressBar"
+        case green  = "greenProgressBar"
     }
     
     struct DiamondProgressBarColor
@@ -75,24 +69,21 @@ class Constants
     
     enum NodesInScene : String
     {
-        case LeftArrow = "previousSpinner"
-        case RightArrow = "nextSpinner"
-        case ActualLeftArrow = "LeftArrow"
-        case ActualRightArrow = "RightArrow"
-        case Spinner   = "spinner"
-        case ProgressBars  = "ProgressBars"
-        case BuySpinner = "unlock now"
+        case LeftArrow          = "previousSpinner"
+        case RightArrow         = "nextSpinner"
+        case Spinner            = "spinner"
+        case ProgressBars       = "ProgressBars"
         
-        case RedSuccess = "RedSuccess"
-        case BlueSuccess = "BlueSuccess"
-        case GreenSuccess = "GreenSuccess"
+        case RedSuccess         = "RedSuccess"
+        case BlueSuccess        = "BlueSuccess"
+        case GreenSuccess       = "GreenSuccess"
         
-        case BreifTutorial = "BreifTutorial"
+        case BreifTutorial      = "BreifTutorial"
         
-        case HighScoreRecord = "HighScoreRecord"
+        case HighScoreRecord    = "HighScoreRecord"
         
-        case DemiSpinnerNode = "DemiSpinnerNode"
-        case ReviewButton = "reviewButton"
+        case DemiSpinnerNode    = "DemiSpinnerNode"
+        case ReviewButton       = "reviewButton"
         case ReviewButtonShadow = "reviewButtonShadow"
     }
     
@@ -107,36 +98,36 @@ class Constants
     
     enum NodesInRetryView: String
     {
-        case RetryView       = "RetryView"
-        case BlueDiamondLabel = "BlueDiamondLabel"
-        case RedDiamondLabel = "RedDiamondLabel"
-        case GreenDiamondLabel = "GreenDiamondLabel"
-        case RetryButton = "RetryButton"
-        case RetryButtonArrow = "RetryButtonArrow"
-        case ExitButton = "ExitButton"
-        case MenuLines = "MenuLines"
-        case TimePassed = "TimePassed"
+        case RetryView          = "RetryView"
+        case BlueDiamondLabel   = "BlueDiamondLabel"
+        case RedDiamondLabel    = "RedDiamondLabel"
+        case GreenDiamondLabel  = "GreenDiamondLabel"
+        case RetryButton        = "RetryButton"
+        case RetryButtonArrow   = "RetryButtonArrow"
+        case ExitButton         = "ExitButton"
+        case MenuLines          = "MenuLines"
+        case TimePassed         = "TimePassed"
         case TotalDiamondsCollected = "TotalDiamondsCollected"
-        case EndGameAlert = "EndGameAlert"
-        case AlertViewBackground = "AlertViewBackground"
-        case ShareFacebook = "ShareFacebook"
+        case EndGameAlert           = "EndGameAlert"
+        case AlertViewBackground    = "AlertViewBackground"
+        case ShareFacebook          = "ShareFacebook"
     }
     
     enum NodesInStoreView: String
     {
-        case StoreNode       = "StoreNode"
-        case StoreView       = "StoreView"
-        case StoreButton     = "StoreButton"
-        case StoreButtonShadow       = "StoreButtonShadow"
-        case StoreBackground = "StoreBackground"
-        case storeAlert = "StoreAlert"
-        case exitButton = "ExitButton"
-        case bigDiamondGroupCost = "BigDiamondGroupCost"
-        case smallDiamondGroupCost = "SmallDiamondGroupCost"
-        case bigDiamondGroup = "BigDiamondGroup"
-        case smallDiamondGroup = "SmallDiamondGroup"
-        case smallPackButton = "smallPackButton"
-        case bigPackButton = "bigPackButton"
+        case StoreNode              = "StoreNode"
+        case StoreView              = "StoreView"
+        case StoreButton            = "StoreButton"
+        case StoreButtonShadow      = "StoreButtonShadow"
+        case StoreBackground        = "StoreBackground"
+        case storeAlert             = "StoreAlert"
+        case exitButton             = "ExitButton"
+        case bigDiamondGroupCost    = "BigDiamondGroupCost"
+        case smallDiamondGroupCost  = "SmallDiamondGroupCost"
+        case bigDiamondGroup        = "BigDiamondGroup"
+        case smallDiamondGroup      = "SmallDiamondGroup"
+        case smallPackButton        = "smallPackButton"
+        case bigPackButton          = "bigPackButton"
     }
     
     enum NodesInSideMenu: String
@@ -146,49 +137,37 @@ class Constants
         case sideMenuBackground    = "sideMenuBackground"
     }
     
-    enum NodesInPriceTags: String
-    {
-        case PriceTags = "PriceTags"
-        case RedPriceTag = "RedPriceTag"
-        case BluePriceTag = "BluePriceTag"
-        case GreenPriceTag = "GreenPriceTag"
-        
-        case RedPin = "RedPin"
-        case BluePin = "BluePin"
-        case GreenPin = "GreenPin"
-    }
-    
     enum NodesInLockedSpinnerView: String
     {
-        case LockedSpinnerNode = "LockedSpinnerNode"
+        case LockedSpinnerNode          = "LockedSpinnerNode"
         
-        case LockedSpinnerBackground = "LockedSpinnerBackground"
+        case LockedSpinnerBackground    = "LockedSpinnerBackground"
         case UnlockSpinnerButtonGrayout = "UnlockSpinnerButtonGrayout"
-        case RedPrice = "RedPriceLabel"
-        case BluePrice = "BluePriceLabel"
-        case GreenPrice = "GreenPriceLabel"
-        case SpinnerLock = "SpinnerLock"
-        case UnlockSpinnerButton = "UnlockSpinnerButton"
-        case UnlockSpinnerButtonShadow = "UnlockSpinnerButtonShadow"
-        case GetMoreDiamondsButton = "StoreButton"
+        case RedPrice                   = "RedPriceLabel"
+        case BluePrice                  = "BluePriceLabel"
+        case GreenPrice                 = "GreenPriceLabel"
+        case SpinnerLock                = "SpinnerLock"
+        case UnlockSpinnerButton        = "UnlockSpinnerButton"
+        case UnlockSpinnerButtonShadow  = "UnlockSpinnerButtonShadow"
+        case GetMoreDiamondsButton      = "StoreButton"
         case GetMoreDiamondsButtonShadow = "getMoreDiamondsButtonShadow"
-        case TopLabel = "TopLabel"
+        case TopLabel                   = "TopLabel"
     }
     
     enum NodesInLockedWhenPurchase: String
     {
-        case StorePurchaseInProgressAlert = "StorePurchaseInProgressAlert"
-        case RedToRecive = "redToRecive"
-        case BlueToRecive = "blueToRecive"
-        case GreenToRecive = "greenToRecive"
-        case PackageRequested = "packageRequested"
-        case loadingSpinner = "loadingSpinner"
+        case StorePurchaseInProgressAlert   = "StorePurchaseInProgressAlert"
+        case RedToRecive                    = "redToRecive"
+        case BlueToRecive                   = "blueToRecive"
+        case GreenToRecive                  = "greenToRecive"
+        case PackageRequested               = "packageRequested"
+        case loadingSpinner                 = "loadingSpinner"
     }
     
 }
 
 let applicationReviewUrl = URL(string: "itms-apps://itunes.apple.com/app/id1257742091") // ProSpinner
-let applicationItunesUrl = URL(string: "https://itunes.apple.com/us/app/ProSpinner---Be-the-first-to-get-them-all/id1257742091&mt=8") 
+let applicationItunesUrl = URL(string: "https://itunes.apple.com/us/app/ProSpinner---The-Best-Fidget-Spinner-Game/id1257742091&mt=8")
 
 typealias DiamondsTuple = (red:Int,blue:Int,green:Int)?
 

@@ -6,6 +6,7 @@
 //  Copyright © 2017 Alex Pinhasov. All rights reserved.
 //
 
+import AVFoundation
 import SpriteKit
 import GameplayKit
 
@@ -39,6 +40,7 @@ class GameScene: SKScene,
         handleSwipeConfiguration()
         addObservers()
         sideMenuView?.showSideView()
+        sideMenuView?.playSoundIfNeeded()
     }
     
     private func addObservers()
@@ -263,7 +265,7 @@ class GameScene: SKScene,
         }
         else 
         {
-            sideMenuView?.changeVolumeTo(value: 0.15, duration: 7)
+            sideMenuView?.changeVolumeTo(value: 0.15, duration: 1)
             sideMenuView?.hideSideMenu()
             GameStatus.Playing = true
             retryView?.gameStarted()
@@ -283,7 +285,7 @@ class GameScene: SKScene,
         if GameStatus.Playing
         {
             GameStatus.Playing = false
-            sideMenuView?.changeVolumeTo(value: 0.8, duration: 1.5)
+            sideMenuView?.changeVolumeTo(value: 0.8, duration: 1)
             retryView?.gameOver()
             retryView?.setDiamondsCollected(diamonds: diamondsManager?.getCollectedDiamondsDuringGame())
             retryView?.presentRetryView()

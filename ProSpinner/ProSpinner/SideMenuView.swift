@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class SideMenuView: SKNode,Animateable
 {
@@ -14,9 +15,16 @@ class SideMenuView: SKNode,Animateable
     private var muteSound         : SKSpriteNode?
     private var backgroundMusic   : SKAudioNode!
     
+    
+    var engine = AVAudioEngine()
+    var audioFile = AVAudioFile()
+    var audioPlayerNode = AVAudioPlayerNode()
+    var changeAudioUnitTime = AVAudioUnitTimePitch()
+    
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
+        setUpEngine()
         configureSound()
         connectOutletsToScene()
         configureViewBeforePresentation()
@@ -53,7 +61,8 @@ class SideMenuView: SKNode,Animateable
     
     func didTapSound()
     {
-        pulse(node: muteSound, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.4)
+        self.run(SoundLibrary.blopSound)
+        pulse(node: muteSound, scaleUpTo: 1.2, scaleDownTo: 1.0, duration: 0.2)
         ArchiveManager.shouldPlaySound = !ArchiveManager.shouldPlaySound
         changeSoundUI()
     }
@@ -72,13 +81,30 @@ class SideMenuView: SKNode,Animateable
     
     func configureSound()
     {
-        if let musicURL = Bundle.main.url(forResource: "BackgroundMusic", withExtension: "wav")
+        audioPlayerNode.stop()
+        engine.stop()
+        engine.reset()
+        engine.attach(audioPlayerNode)
+        changeAudioUnitTime.pitch = 0
+        engine.attach(changeAudioUnitTime)
+        engine.connect(audioPlayerNode, to: changeAudioUnitTime, format: nil)
+        engine.connect(changeAudioUnitTime, to: engine.outputNode, format: nil)
+        try? engine.start()
+        audioPlayerNode.scheduleFile(audioFile, at: nil, completionHandler: nil)
+    }
+    
+    func setUpEngine()
+    {
+        if let fileString = Bundle.main.path(forResource: "BackgroundMusic", ofType: "wav")
         {
-            backgroundMusic = SKAudioNode(url: musicURL)
-            addChild(backgroundMusic)
-            backgroundMusic?.run(SKAction.stop())
-            backgroundMusic?.run(SKAction.changeVolume(to: 0, duration: 0))
-            playSoundIfNeeded()
+            let url = URL(fileURLWithPath: fileString)
+            do {
+                try audioFile = AVAudioFile(forReading: url)
+                print("done")
+            }
+            catch{
+                
+            }
         }
     }
     
@@ -86,12 +112,13 @@ class SideMenuView: SKNode,Animateable
     {
         if ArchiveManager.shouldPlaySound
         {
-            backgroundMusic?.run(SKAction.play())
-            backgroundMusic?.run(SKAction.changeVolume(to: 0.8, duration: 5))
+            audioPlayerNode.play()
+            self.scene?.audioEngine.mainMixerNode.outputVolume = 0.8
         }
         else
         {
-            backgroundMusic?.run(SKAction.stop())
+            audioPlayerNode.pause()
+            self.scene?.audioEngine.mainMixerNode.outputVolume = 0.0
         }
     }
     
@@ -99,7 +126,7 @@ class SideMenuView: SKNode,Animateable
     {
         if ArchiveManager.shouldPlaySound
         {
-            backgroundMusic?.run(SKAction.changeVolume(to: value, duration: duration))
+            self.scene?.audioEngine.mainMixerNode.outputVolume = value
         }
     }
 }

@@ -163,16 +163,16 @@ class LoadingViewController: UIViewController,Animateable
             ArchiveManager.shouldPlaySound = true
             ArchiveManager.mainSpinnerLocation = 1
             ArchiveManager.write_SpinnerToUserDefault(spinners: FirstInstallSpinners.getSpinnersArray())
+            set10DiamondsOnFirstRun()
         }
-        set10DiamondsOnFirstRun()
     }
     
     private func set10DiamondsOnFirstRun()
     {
         log.debug()
-        UserDefaults.standard.set(1000, forKey: UserDefaultKeys.red.rawValue)
-        UserDefaults.standard.set(1000, forKey: UserDefaultKeys.blue.rawValue)
-        UserDefaults.standard.set(1000, forKey: UserDefaultKeys.green.rawValue)
+        UserDefaults.standard.set(0, forKey: UserDefaultKeys.red.rawValue)
+        UserDefaults.standard.set(0, forKey: UserDefaultKeys.blue.rawValue)
+        UserDefaults.standard.set(0, forKey: UserDefaultKeys.green.rawValue)
     }
     
 }
