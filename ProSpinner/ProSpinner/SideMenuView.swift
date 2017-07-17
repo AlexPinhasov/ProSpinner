@@ -24,8 +24,6 @@ class SideMenuView: SKNode,Animateable
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        setUpEngine()
-        configureSound()
         connectOutletsToScene()
         configureViewBeforePresentation()
         changeSoundUI()
@@ -89,11 +87,24 @@ class SideMenuView: SKNode,Animateable
         engine.attach(changeAudioUnitTime)
         engine.connect(audioPlayerNode, to: changeAudioUnitTime, format: nil)
         engine.connect(changeAudioUnitTime, to: engine.outputNode, format: nil)
-        try? engine.start()
         audioPlayerNode.scheduleFile(audioFile, at: nil, completionHandler: nil)
+
+        let audioFileBuffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat, frameCapacity: UInt32(audioFile.length))
+        try? audioFile.read(into: audioFileBuffer, frameCount: UInt32(audioFile.length))
+        audioPlayerNode.scheduleBuffer(audioFileBuffer, at: nil, options: .loops, completionHandler: nil)
+       
+        engine.connect(audioPlayerNode, to: engine.mainMixerNode, format: audioFileBuffer.format)
+        do
+        {
+            try engine.start()
+        }
+        catch(let error)
+        {
+            log.debug(error)
+        }
     }
     
-    func setUpEngine()
+    func setUpSoundEngine()
     {
         if let fileString = Bundle.main.path(forResource: "BackgroundMusic", ofType: "wav")
         {
@@ -106,19 +117,23 @@ class SideMenuView: SKNode,Animateable
                 
             }
         }
+        configureSound()
+        playSoundIfNeeded()
     }
     
     func playSoundIfNeeded()
     {
         if ArchiveManager.shouldPlaySound
         {
-            audioPlayerNode.play()
             self.scene?.audioEngine.mainMixerNode.outputVolume = 0.8
+
+            audioPlayerNode.play()
+           
         }
-        else
+        else if audioPlayerNode.isPlaying
         {
-            audioPlayerNode.pause()
             self.scene?.audioEngine.mainMixerNode.outputVolume = 0.0
+            audioPlayerNode.pause()
         }
     }
     

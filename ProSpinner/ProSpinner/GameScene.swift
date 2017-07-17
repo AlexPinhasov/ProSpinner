@@ -40,7 +40,7 @@ class GameScene: SKScene,
         handleSwipeConfiguration()
         addObservers()
         sideMenuView?.showSideView()
-        sideMenuView?.playSoundIfNeeded()
+        sideMenuView?.setUpSoundEngine()
     }
     
     private func addObservers()
@@ -186,9 +186,7 @@ class GameScene: SKScene,
                     retryView?.shareWithFacebook()
                     
                 case Constants.NodesInScene.ReviewButton.rawValue:
-                    manuManager?.demiSpinnerNode?.goToItunesForReview(completion: { (success) in
-                        
-                    })
+                    manuManager?.demiSpinnerNode?.goToItunesForReview()
                     
                 case Constants.NodesInSideMenu.muteSound.rawValue:
                     sideMenuView?.didTapSound()
