@@ -152,7 +152,15 @@ class SpinnerManager: BaseClass,
     func contactBegan()
     {
         log.debug("")
-        spinnerSpeed -= 0.01
+        
+        if spinnerSpeed <= 1
+        {
+            spinnerSpeed = 1
+        }
+        else
+        {
+            spinnerSpeed -= 0.05
+        }
         pulseSpinner()
     }
 

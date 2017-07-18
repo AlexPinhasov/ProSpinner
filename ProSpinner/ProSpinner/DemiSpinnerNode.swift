@@ -16,7 +16,7 @@ class DemiSpinnerNode: SKNode,ButtonProtocol
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        connectOutletsFromScene()
+        //connectOutletsFromScene()
     }
     
     func connectOutletsFromScene()

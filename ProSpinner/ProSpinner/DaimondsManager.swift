@@ -14,6 +14,7 @@ class DiamondsManager: BaseClass,
 {
 //  MARK: Properties
     fileprivate var timer : Timer?
+    fileprivate var timeInterval = 1.5
     
     fileprivate var originalDiamondNodeSize: CGSize = CGSize(width: 45, height: 35)
     
@@ -81,7 +82,7 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 1.4, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
+        reSchdeuleTimer()
     }
 
     @objc func spawnDiamonds()
@@ -100,15 +101,44 @@ class DiamondsManager: BaseClass,
         
         case false: nextDiamond.removeAllActions()
         }
+        
+        let diamondSpeed = Diamond.diamondSpeed
+        
+        if diamondSpeed > 6.0 && diamondSpeed < 6.005
+        {
+            timeInterval = 1.2
+            timer?.invalidate()
+            reSchdeuleTimer()
+        }
+        else  if diamondSpeed > 5.0 && diamondSpeed < 5.05
+        {
+            timeInterval = 1.0
+            timer?.invalidate()
+            reSchdeuleTimer()
+        }
+        else  if diamondSpeed > 2.0 && diamondSpeed < 2.05
+        {
+            timeInterval = 0.7
+            timer?.invalidate()
+            reSchdeuleTimer()
+        }
     }
 
     func resetDiamondsTimer()
     {
         log.debug("")
-        Diamond.diamondSpeed = 5.0
+        Diamond.diamondSpeed = 7.0
+        timeInterval = 1.5
         timer?.invalidate()
+        
         fadeInDiamondAndTheirCount()
     }
+    
+    func reSchdeuleTimer()
+    {
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
+    }
+    
     
     func getDiamondsCount() -> DiamondsTuple
     {
@@ -153,7 +183,16 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         playTickSound()
-        Diamond.diamondSpeed -= 0.05
+        
+        if Diamond.diamondSpeed <= 1
+        {
+            Diamond.diamondSpeed = 1
+        }
+        else
+        {
+            Diamond.diamondSpeed -= 0.05
+        }
+        
         collectedDiamondOf(kind: diamondNode)
     }
     
