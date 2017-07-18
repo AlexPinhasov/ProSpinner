@@ -51,6 +51,7 @@
 		0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE7CD801EFCE55200236992 /* StoreView.swift */; };
 		0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE83A771EDC8F380066E3DD /* BaseClass.swift */; };
 		0AE83A7A1EDC91580066E3DD /* ManuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE83A791EDC91580066E3DD /* ManuManager.swift */; };
+		0AF10D671F1DBE1A005B94FF /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF10D661F1DBE1A005B94FF /* SoundController.swift */; };
 		58D8CE085EEC2BF1CF77C9BF /* Pods_ProSpinnerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCB592AC0294D9475632625 /* Pods_ProSpinnerUITests.framework */; };
 		9109F3D51F150F4000853867 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3D41F150F4000853867 /* LoadingViewController.swift */; };
 		9109F3D91F1615D700853867 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3D81F1615D700853867 /* Reachability.swift */; };
@@ -147,6 +148,7 @@
 		0AE7CD801EFCE55200236992 /* StoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		0AE83A771EDC8F380066E3DD /* BaseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseClass.swift; sourceTree = "<group>"; };
 		0AE83A791EDC91580066E3DD /* ManuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManuManager.swift; sourceTree = "<group>"; };
+		0AF10D661F1DBE1A005B94FF /* SoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		0E4E75FA348AA94CACB4B414 /* Pods_ProSpinnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProSpinnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FCB592AC0294D9475632625 /* Pods_ProSpinnerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProSpinnerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36BDCBC0E9A2285D9458F24E /* Pods-ProSpinnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinnerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinnerTests/Pods-ProSpinnerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				0A3081A51EEA07CF00892266 /* CustomSKLabelNode.swift */,
 				0A1E096B1EEEC21100041C45 /* ProgressBar.swift */,
 				9190A2781F03B698005DD47C /* SKSpriteButton.swift */,
+				0AF10D661F1DBE1A005B94FF /* SoundController.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 				0A3081A61EEA07CF00892266 /* CustomSKLabelNode.swift in Sources */,
 				0A8B2E9D1ED8C3ED0025856E /* Diamond.swift in Sources */,
 				0A089F461EDF0D7700415EFC /* Spinner.swift in Sources */,
+				0AF10D671F1DBE1A005B94FF /* SoundController.swift in Sources */,
 				0A11F5ED1EE333F20036A00F /* DownloadingViewController.swift in Sources */,
 				0A87FDEA1F156A2A00CF55BB /* ToastController.swift in Sources */,
 				0A1E096C1EEEC21200041C45 /* ProgressBar.swift in Sources */,

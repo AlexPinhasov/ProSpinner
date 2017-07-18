@@ -81,7 +81,7 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 1.2, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.4, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
     }
 
     @objc func spawnDiamonds()

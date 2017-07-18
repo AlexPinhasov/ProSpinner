@@ -40,7 +40,7 @@ class GameScene: SKScene,
         handleSwipeConfiguration()
         addObservers()
         sideMenuView?.showSideView()
-        sideMenuView?.setUpSoundEngine()
+        SoundController.setUpSoundEngine()
     }
     
     private func addObservers()
@@ -52,8 +52,13 @@ class GameScene: SKScene,
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(notifyGameEnded),
-                                               name: NSNotification.Name.UIApplicationDidEnterBackground,
+                                               selector: #selector(notificationsHandler),
+                                               name: NSNotification.Name.UIApplicationWillResignActive,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(notificationsHandler),
+                                               name: NSNotification.Name.UIApplicationDidBecomeActive,
                                                object: nil)
     }
 //  MARK: Physics Contact Delegate
@@ -124,11 +129,11 @@ class GameScene: SKScene,
                     
                     if manuManager?.lockedSpinnerView?.userCanUnlockSpinner == true
                     {
-                        sideMenuView?.changeVolumeTo(value: 0.1, duration: 1.0)
+                        changeVolumeTo(value: 0.1)
                         scene?.run(SoundLibrary.spinnerUnlocked)
                         spinnerManager?.purchasedNewSpinner()
                         {
-                            self.sideMenuView?.changeVolumeTo(value: 0.8, duration: 1)
+                            self.changeVolumeTo(value: 0.8)
                         }
                         handleUIForUnlockedSpinner()
                     }
@@ -186,11 +191,13 @@ class GameScene: SKScene,
                     retryView?.shareWithFacebook()
                     
                 case Constants.NodesInScene.ReviewButton.rawValue:
-                    manuManager?.demiSpinnerNode?.goToItunesForReview()
+                    DemiSpinnerNode.goToItunesForReview(completion: { (success) in
+                        
+                    })
                     
                 case Constants.NodesInSideMenu.muteSound.rawValue:
                     sideMenuView?.didTapSound()
-                    sideMenuView?.playSoundIfNeeded()
+                    SoundController.playSoundIfNeeded()
                     
                 default: break
                 }
@@ -252,6 +259,24 @@ class GameScene: SKScene,
         spinnerManager?.rotateToOtherDirection()
     }
     
+    func notificationsHandler(notification: NSNotification)
+    {
+        log.debug("")
+        switch notification.name
+        {
+        case NSNotification.Name.UIApplicationWillResignActive:
+            notifyGameEnded()
+            self.isPaused = true
+            SoundController.stopMusic()
+        
+        case NSNotification.Name.UIApplicationDidBecomeActive:
+            self.isPaused = false
+            SoundController.playSoundIfNeeded()
+            
+        default: break
+        }
+    }
+    
     func notifyGameStarted()
     {
         log.debug("")
@@ -263,7 +288,6 @@ class GameScene: SKScene,
         }
         else 
         {
-            sideMenuView?.changeVolumeTo(value: 0.15, duration: 1)
             sideMenuView?.hideSideMenu()
             GameStatus.Playing = true
             retryView?.gameStarted()
@@ -280,10 +304,10 @@ class GameScene: SKScene,
     
     func notifyGameEnded()
     {
+        log.debug("")
         if GameStatus.Playing
         {
             GameStatus.Playing = false
-            sideMenuView?.changeVolumeTo(value: 0.8, duration: 1)
             retryView?.gameOver()
             retryView?.setDiamondsCollected(diamonds: diamondsManager?.getCollectedDiamondsDuringGame())
             retryView?.presentRetryView()
@@ -319,6 +343,7 @@ class GameScene: SKScene,
 
     func reloadLockedViewAfterPurchase()
     {
+        log.debug("")
         handleLockViewAppearance()
     }
     
@@ -344,6 +369,7 @@ class GameScene: SKScene,
     
     private func handleUIForUnlockedSpinner()
     {
+        log.debug("")
         diamondsManager?.purchasedNewSpinner()
         diamondsManager?.handleDiamondsWhenSpinner(isLocked: false)
         diamondsManager?.handleDiamondsPlayerNeedAndHaveLabels(isLocked : false)
@@ -353,6 +379,7 @@ class GameScene: SKScene,
     
     private func hideStoreView()
     {
+        log.debug("")
         if storeView?.finishedPresentingView == true
         {
             enableSwipe = true
@@ -362,6 +389,7 @@ class GameScene: SKScene,
     
     private func hideRetryView()
     {
+        log.debug("")
         if retryView?.finishedPresentingView == true && GameStatus.Playing == false
         {
             enableSwipe = true
@@ -397,6 +425,7 @@ class GameScene: SKScene,
     
     func userTappedNextSpinner()
     {
+        log.debug("")
         self.run(SoundLibrary.spinnerChangedDirection)
         spinnerManager?.userTappedNextSpinner()
             {
@@ -406,6 +435,7 @@ class GameScene: SKScene,
     
     func userTappedPreviousSpinner()
     {
+        log.debug("")
         self.run(SoundLibrary.spinnerChangedDirection)
         spinnerManager?.userTappedPreviousSpinner()
             {
@@ -428,6 +458,15 @@ class GameScene: SKScene,
             }
         }
         return enableSwipe
+    }
+    
+    func changeVolumeTo(value: Float)
+    {
+        log.debug("")
+        if ArchiveManager.shouldPlaySound
+        {
+            self.scene?.audioEngine.mainMixerNode.outputVolume = value
+        }
     }
     
     func handleSwipeConfiguration()

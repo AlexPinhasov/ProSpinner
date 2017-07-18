@@ -120,6 +120,10 @@ class LoadingViewController: UIViewController,Animateable
         {
             self.performSegue(withIdentifier: "showScene", sender: nil)
         }
+        timer?.invalidate()
+        textures?.removeAll()
+        timer = nil
+        textures = nil
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

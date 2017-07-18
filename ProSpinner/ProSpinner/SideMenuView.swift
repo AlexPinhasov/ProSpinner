@@ -13,13 +13,6 @@ class SideMenuView: SKNode,Animateable
 {
     private var sideMenuBackground: SKSpriteNode?
     private var muteSound         : SKSpriteNode?
-    private var backgroundMusic   : SKAudioNode!
-    
-    
-    var engine = AVAudioEngine()
-    var audioFile = AVAudioFile()
-    var audioPlayerNode = AVAudioPlayerNode()
-    var changeAudioUnitTime = AVAudioUnitTimePitch()
     
     required init?(coder aDecoder: NSCoder)
     {
@@ -74,74 +67,6 @@ class SideMenuView: SKNode,Animateable
         else
         {
             muteSound?.texture = SKTexture(imageNamed: "SoundOff2")
-        }
-    }
-    
-    func configureSound()
-    {
-        audioPlayerNode.stop()
-        engine.stop()
-        engine.reset()
-        engine.attach(audioPlayerNode)
-        changeAudioUnitTime.pitch = 0
-        engine.attach(changeAudioUnitTime)
-        engine.connect(audioPlayerNode, to: changeAudioUnitTime, format: nil)
-        engine.connect(changeAudioUnitTime, to: engine.outputNode, format: nil)
-        audioPlayerNode.scheduleFile(audioFile, at: nil, completionHandler: nil)
-
-        let audioFileBuffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat, frameCapacity: UInt32(audioFile.length))
-        try? audioFile.read(into: audioFileBuffer, frameCount: UInt32(audioFile.length))
-        audioPlayerNode.scheduleBuffer(audioFileBuffer, at: nil, options: .loops, completionHandler: nil)
-       
-        engine.connect(audioPlayerNode, to: engine.mainMixerNode, format: audioFileBuffer.format)
-        do
-        {
-            try engine.start()
-        }
-        catch(let error)
-        {
-            log.debug(error)
-        }
-    }
-    
-    func setUpSoundEngine()
-    {
-        if let fileString = Bundle.main.path(forResource: "BackgroundMusic", ofType: "wav")
-        {
-            let url = URL(fileURLWithPath: fileString)
-            do {
-                try audioFile = AVAudioFile(forReading: url)
-                print("done")
-            }
-            catch{
-                
-            }
-        }
-        configureSound()
-        playSoundIfNeeded()
-    }
-    
-    func playSoundIfNeeded()
-    {
-        if ArchiveManager.shouldPlaySound
-        {
-            self.scene?.audioEngine.mainMixerNode.outputVolume = 0.8
-
-            audioPlayerNode.play()
-           
-        }
-        else if audioPlayerNode.isPlaying
-        {
-            self.scene?.audioEngine.mainMixerNode.outputVolume = 0.0
-            audioPlayerNode.pause()
-        }
-    }
-    
-    func changeVolumeTo(value: Float ,duration: TimeInterval)
-    {
-        if ArchiveManager.shouldPlaySound
-        {
-            self.scene?.audioEngine.mainMixerNode.outputVolume = value
         }
     }
 }

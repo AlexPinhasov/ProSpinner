@@ -28,7 +28,7 @@ class DemiSpinnerNode: SKNode,ButtonProtocol
         reviewButton?.delegate = self
     }
     
-    func goToItunesForReview(completion: @escaping ((_ success: Bool)->()))
+    static func goToItunesForReview(completion: @escaping ((_ success: Bool)->()))
     {
         guard let url = applicationReviewUrl
         else
@@ -39,7 +39,7 @@ class DemiSpinnerNode: SKNode,ButtonProtocol
         
         guard #available(iOS 10, *) else
         {
-            completion(UIApplication.shared.openURL(url))
+            UIApplication.shared.openURL(url)
             return
         }
         
