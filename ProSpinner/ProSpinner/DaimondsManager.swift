@@ -59,6 +59,7 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         fadeOutDiamondsAndTheirCount()
+        showHighScoreLabel()
     }
     
     func tutorialStarted()
@@ -71,6 +72,7 @@ class DiamondsManager: BaseClass,
     {
         log.debug("")
         resetDiamondsTimer()
+        hideHighScoreLabel()
         if let diamondsInScene = scene?.children.filter({  if $0 is Diamond { return true } ; return false })
         {
             scene?.removeChildren(in: diamondsInScene)
@@ -384,18 +386,26 @@ class DiamondsManager: BaseClass,
         blueDiamondLabelNode.run(SKAction.fadeAlpha(to: 0, duration: 0.4))
         greenDiamondLabelNode.run(SKAction.fadeAlpha(to: 0, duration: 0.4))
         
+    }
+    
+    func showHighScoreLabel()
+    {
         highScoreLabel?.text = "0"
         highScoreLabel?.isHidden = false
         highScoreLabel?.run(SKAction.fadeAlpha(to: 0.7, duration: 0.5))
+    }
+
+    func hideHighScoreLabel()
+    {
+        highScoreLabel?.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
+        highScoreLabel?.text = "0"
+        highScoreLabel?.isHidden = true
     }
     
     func fadeInDiamondAndTheirCount()
     {
         log.debug("")
         
-        highScoreLabel?.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
-        highScoreLabel?.text = "0"
-        highScoreLabel?.isHidden = true
         
         // Red Diamond
         redDiamondNode.size = originalDiamondNodeSize

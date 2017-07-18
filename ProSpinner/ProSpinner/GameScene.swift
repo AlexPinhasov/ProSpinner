@@ -92,12 +92,15 @@ class GameScene: SKScene,
             let positionInScene = touch.location(in: self)
             let touchedNode = self.atPoint(positionInScene)
             
-            storeView?.releasedButton(button: touchedNode)
-            
-            manuManager?.playNode?.playLabel?.releasedButton()
-            manuManager?.storeNode?.storeButton?.releasedButton()
-            manuManager?.lockedSpinnerView?.getMoreDiamondsButton?.releasedButton()
-            manuManager?.demiSpinnerNode?.reviewButton?.releasedButton()
+            if GameStatus.Playing == false
+            {
+                storeView?.releasedButton(button: touchedNode)
+                manuManager?.playNode?.playLabel?.releasedButton()
+                manuManager?.storeNode?.storeButton?.releasedButton()
+                manuManager?.lockedSpinnerView?.getMoreDiamondsButton?.releasedButton()
+                manuManager?.demiSpinnerNode?.reviewButton?.releasedButton()
+                manuManager?.gameTutorialNode?.gotItButton?.releasedButton()
+            }
             
             if manuManager?.lockedSpinnerView?.userCanUnlockSpinner == true
             {
@@ -199,6 +202,11 @@ class GameScene: SKScene,
                     sideMenuView?.didTapSound()
                     SoundController.playSoundIfNeeded()
                     
+                case Constants.NodeInExplainGameNode.Gotit.rawValue:
+                    manuManager?.hideTutorial()
+                    spinnerManager?.hideTutorial()
+                    notifyGameStarted()
+                    
                 default: break
                 }
             }
@@ -251,6 +259,8 @@ class GameScene: SKScene,
                 case Constants.NodesInScene.ReviewButton.rawValue:
                     manuManager?.demiSpinnerNode?.reviewButton?.touchedUpInside()
                     
+                case Constants.NodeInExplainGameNode.Gotit.rawValue:
+                    manuManager?.gameTutorialNode?.gotItButton?.touchedUpInside()
                     
                 default: break
                 }
@@ -282,13 +292,7 @@ class GameScene: SKScene,
     func notifyGameStarted()
     {
         log.debug("")
-        if TutorialManager.tutorialIsInProgress
-        {
-            manuManager?.tutorialStarted()
-            diamondsManager?.tutorialStarted()
-            spinnerManager?.tutorialStarted()
-        }
-        else 
+        if  ArchiveManager.gameExplantionDidShow
         {
             sideMenuView?.hideSideMenu()
             GameStatus.Playing = true
@@ -301,6 +305,12 @@ class GameScene: SKScene,
                 self.diamondsManager?.configureDiamonds()
             })
             CrashlyticsLogManager.gameStarted()
+        }
+        else
+        {
+            diamondsManager?.fadeOutDiamondsAndTheirCount()
+            spinnerManager?.tutorialStarted()
+            manuManager?.tutorialStarted()
         }
     }
     

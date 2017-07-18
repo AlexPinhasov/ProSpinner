@@ -165,6 +165,7 @@ class LoadingViewController: UIViewController,Animateable
         {
             ArchiveManager.firstTimeRun = true
             ArchiveManager.shouldPlaySound = true
+            ArchiveManager.gameExplantionDidShow = false
             ArchiveManager.mainSpinnerLocation = 1
             ArchiveManager.write_SpinnerToUserDefault(spinners: FirstInstallSpinners.getSpinnersArray())
             set10DiamondsOnFirstRun()

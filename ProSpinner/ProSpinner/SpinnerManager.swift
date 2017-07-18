@@ -56,7 +56,7 @@ class SpinnerManager: BaseClass,
     func gameStarted()
     {
         log.debug("")
-        _ = scaleDownSpinner()
+        scaleDownSpinner()
         
         if ArchiveManager.mainSpinnerLocation != ArchiveManager.currentlyAtIndex
         {
@@ -67,9 +67,12 @@ class SpinnerManager: BaseClass,
     func tutorialStarted()
     {
         log.debug("")
-        _ = scaleDownSpinner()
-        TutorialManager.changeZposition(to: 0)
-        TutorialManager.fadeInScreen()
+        spinnerNode?.run(SKAction.fadeOut(withDuration: 0.2))
+    }
+    
+    func hideTutorial()
+    {
+        spinnerNode?.run(SKAction.fadeIn(withDuration: 0.2))
     }
     
     func gameOver()

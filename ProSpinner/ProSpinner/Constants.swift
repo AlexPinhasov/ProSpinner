@@ -85,6 +85,15 @@ class Constants
         case DemiSpinnerNode    = "DemiSpinnerNode"
         case ReviewButton       = "reviewButton"
         case ReviewButtonShadow = "reviewButtonShadow"
+        
+    }
+    
+    enum NodeInExplainGameNode : String
+    {
+        case TutorialNode = "TutorialNode"
+        case ExplainGameImage = "ExplainGameImage"
+        case Gotit = "Gotit"
+        case GotitShadow = "GotitShadow"
     }
     
     enum NodesInPlayNode : String

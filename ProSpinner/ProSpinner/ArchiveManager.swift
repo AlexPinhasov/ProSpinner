@@ -20,6 +20,7 @@ enum UserDefaultKeys: String
     case firstTimeRun               = "firstTimeRun"
     case highScore                  = "highScore"
     case muteSound                  = "muteSound"
+    case tutorial                  = "tutorial"
 }
 
 class ArchiveManager
@@ -171,6 +172,19 @@ class ArchiveManager
         set
         {
             UserDefaults.standard.set(true, forKey: UserDefaultKeys.firstTimeRun.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var gameExplantionDidShow : Bool
+    {
+        get
+        {
+            return UserDefaults.standard.bool(forKey: UserDefaultKeys.tutorial.rawValue)
+        }
+        set
+        {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.tutorial.rawValue)
             UserDefaults.standard.synchronize()
         }
     }

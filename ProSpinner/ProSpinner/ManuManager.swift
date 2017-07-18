@@ -34,6 +34,7 @@ class ManuManager: BaseClass,
     
     var demiSpinnerNode          : DemiSpinnerNode?
     private var gameExplanation  : SKNode?
+    var gameTutorialNode         : TutorialNode?
     fileprivate var spinnerLock  : SKSpriteNode?
     
     var soundNode                : SKSpriteNode?
@@ -98,6 +99,8 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         hideArrows()
+        hideManuItems()
+        showTutorial()
     }
     
     func gameOver()
@@ -256,14 +259,42 @@ class ManuManager: BaseClass,
     func showGameExplanation(startSpining: @escaping () -> Void)
     {
         log.debug("")
-
-        let fadeIn = SKAction.fadeIn(withDuration: 0.3)
-        let wait = SKAction.wait(forDuration: 2)
-        let fadeOut = SKAction.fadeOut(withDuration: 0.3)
         
-        gameExplanation?.run(SKAction.sequence([ fadeIn,wait,fadeOut ]))
+        if gameExplanation?.position.y != 0
         {
-            startSpining()
+            gameExplanation?.run(SKAction.fadeOut(withDuration: 0.2))
+            {
+                self.gameExplanation?.position.y = 0
+                startSpining()
+            }
+        }
+        else
+        {
+            let fadeIn = SKAction.fadeIn(withDuration: 0.3)
+            let wait = SKAction.wait(forDuration: 1.4)
+            let fadeOut = SKAction.fadeOut(withDuration: 0.3)
+            
+            gameExplanation?.run(SKAction.sequence([ fadeIn,wait,fadeOut ]))
+            {
+                startSpining()
+            }
+        }
+}
+
+    func showTutorial()
+    {
+        ArchiveManager.gameExplantionDidShow = true
+        gameExplanation?.position.y = 95
+        gameTutorialNode = self.scene?.childNode(withName: Constants.NodeInExplainGameNode.TutorialNode.rawValue) as? TutorialNode
+        gameExplanation?.run(SKAction.fadeIn(withDuration: 0.5))
+        gameTutorialNode?.showNode()
+    }
+    
+    func hideTutorial()
+    {
+        gameTutorialNode?.hideNode()
+        {
+            self.gameTutorialNode = nil
         }
     }
     

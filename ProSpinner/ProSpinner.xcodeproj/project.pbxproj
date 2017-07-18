@@ -20,6 +20,7 @@
 		0A14F34A1EE175B300C5AA5D /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14F3491EE175B300C5AA5D /* PurchaseManager.swift */; };
 		0A15917E1EE3C142005320A9 /* DownloadingDelegateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15917D1EE3C142005320A9 /* DownloadingDelegateDataSource.swift */; };
 		0A1591801EE3C193005320A9 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15917F1EE3C193005320A9 /* ImageCollectionCell.swift */; };
+		0A15F6B61F1E6C4D00083B35 /* TutorialNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15F6B51F1E6C4D00083B35 /* TutorialNode.swift */; };
 		0A1625301F1812CE00E67B24 /* FirstInstallSpinners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16252F1F1812CE00E67B24 /* FirstInstallSpinners.swift */; };
 		0A1625321F19E9D100E67B24 /* DemiSpinnerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1625311F19E9D100E67B24 /* DemiSpinnerNode.swift */; };
 		0A1734261F0679DE00140277 /* PlayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1734251F0679DE00140277 /* PlayNode.swift */; };
@@ -109,6 +110,7 @@
 		0A14F3491EE175B300C5AA5D /* PurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		0A15917D1EE3C142005320A9 /* DownloadingDelegateDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadingDelegateDataSource.swift; sourceTree = "<group>"; };
 		0A15917F1EE3C193005320A9 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
+		0A15F6B51F1E6C4D00083B35 /* TutorialNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialNode.swift; sourceTree = "<group>"; };
 		0A16252F1F1812CE00E67B24 /* FirstInstallSpinners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstInstallSpinners.swift; sourceTree = "<group>"; };
 		0A1625311F19E9D100E67B24 /* DemiSpinnerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemiSpinnerNode.swift; sourceTree = "<group>"; };
 		0A1734251F0679DE00140277 /* PlayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayNode.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				0A75A04A1F07CFDA00A9752F /* StoreNode.swift */,
 				0A1625311F19E9D100E67B24 /* DemiSpinnerNode.swift */,
 				0ACD33061F1BD80200F7DD0E /* SideMenuView.swift */,
+				0A15F6B51F1E6C4D00083B35 /* TutorialNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -836,6 +839,7 @@
 				9109F3DB1F162ED300853867 /* CrashlyticsLogManager.swift in Sources */,
 				0ADCF0D41EDD9B2D00CE1C8B /* ArchiveManager.swift in Sources */,
 				0A305A0B1EED9F5600BA3A4B /* Animateable.swift in Sources */,
+				0A15F6B61F1E6C4D00083B35 /* TutorialNode.swift in Sources */,
 				0AE83A7A1EDC91580066E3DD /* ManuManager.swift in Sources */,
 				0A11F5E81EE3175F0036A00F /* AdMobManager.swift in Sources */,
 				0A1625321F19E9D100E67B24 /* DemiSpinnerNode.swift in Sources */,
