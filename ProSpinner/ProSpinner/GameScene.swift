@@ -266,12 +266,14 @@ class GameScene: SKScene,
         {
         case NSNotification.Name.UIApplicationWillResignActive:
             notifyGameEnded()
-            self.isPaused = true
             SoundController.stopMusic()
+            ArchiveManager.spinnersArrayInDisk.removeAll()
+            self.isPaused = true
         
         case NSNotification.Name.UIApplicationDidBecomeActive:
-            self.isPaused = false
             SoundController.playSoundIfNeeded()
+            _ = ArchiveManager.read_SpinnersFromUserDefault()
+            self.isPaused = false
             
         default: break
         }

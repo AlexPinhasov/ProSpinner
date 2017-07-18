@@ -33,7 +33,10 @@ class ArchiveManager
     {
         didSet
         {
-            ArchiveManager.write_SpinnerToUserDefault(spinners: spinnersArrayInDisk)
+            if spinnersArrayInDisk.count > 0
+            {
+                ArchiveManager.write_SpinnerToUserDefault(spinners: spinnersArrayInDisk)
+            }
         }
     }
     
