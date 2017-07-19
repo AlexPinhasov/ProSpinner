@@ -34,6 +34,7 @@ class ArchiveManager
     {
         didSet
         {
+            log.debug("")
             if spinnersArrayInDisk.count > 0
             {
                 ArchiveManager.write_SpinnerToUserDefault(spinners: spinnersArrayInDisk)
@@ -43,11 +44,13 @@ class ArchiveManager
     
     static var spinnersArrayInDiskCount: Int
     {
+        log.debug("")
         return ArchiveManager.spinnersArrayInDisk.count - moreSpinnersDemi
     }
     
     static func sortArrayInDiskAfterUpdate()
     {
+        log.debug("")
         ArchiveManager.spinnersArrayInDisk.sort(by:
         {
             let firstSum = $0.redNeeded! + $0.blueNeeded! + $0.greenNeeded!
@@ -59,6 +62,7 @@ class ArchiveManager
     
     static func resetDownloadedSpinnersArray()
     {
+        log.debug("")
         ArchiveManager.currentlyDownloadedSpinnersArray = [Spinner]()
     }
     
@@ -67,10 +71,12 @@ class ArchiveManager
     {
         get
         {
+            log.debug("")
             return UserDefaults.standard.integer(forKey: UserDefaultKeys.mainSpinnerIndex.rawValue)
         }
         set
         {
+            log.debug("")
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.mainSpinnerIndex.rawValue)
             UserDefaults.standard.synchronize()
                 
@@ -81,10 +87,12 @@ class ArchiveManager
     {
         get
         {
+            log.debug("")
             return UserDefaults.standard.integer(forKey: UserDefaultKeys.interstitialCount.rawValue)
         }
         set
         {
+            log.debug("")
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.interstitialCount.rawValue)
             UserDefaults.standard.synchronize()
         }
@@ -94,12 +102,14 @@ class ArchiveManager
     {
         get
         {
+            log.debug("")
             return ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex]
         }
     }
     
     static func write_SpinnerToUserDefault(spinners : [Spinner])
     {
+        log.debug("")
         let encodedData = NSKeyedArchiver.archivedData(withRootObject: spinners)
         
         UserDefaults.standard.set(encodedData, forKey: UserDefaultKeys.spinnersInDisk.rawValue)
@@ -108,6 +118,7 @@ class ArchiveManager
     
     static func currentSpinnerHasBeenUnlocked()
     {
+        log.debug("")
         resetMainSpinners()
         ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].unlocked = true
         ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].mainSpinner = true
@@ -118,6 +129,7 @@ class ArchiveManager
     
     static func changeMainSpinner()
     {
+        log.debug("")
         resetMainSpinners()
         ArchiveManager.spinnersArrayInDisk[ArchiveManager.currentlyAtIndex].mainSpinner = true
         mainSpinnerLocation = ArchiveManager.currentlyAtIndex
@@ -127,11 +139,13 @@ class ArchiveManager
     
     static func resetMainSpinners()
     {
+        log.debug("")
         for spinner in spinnersArrayInDisk { spinner.mainSpinner = false }
     }
     
     static func read_SpinnersFromUserDefault() -> [Spinner]
     {
+        log.debug("")
         if let data = UserDefaults.standard.data(forKey: UserDefaultKeys.spinnersInDisk.rawValue)
         {
             if let spinnerArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Spinner]
@@ -151,10 +165,12 @@ class ArchiveManager
     {
         get
         {
+            log.debug("")
             return UserDefaults.standard.integer(forKey: UserDefaultKeys.highScore.rawValue)
         }
         set
         {
+            log.debug("")
             if newValue > highScoreRecord
             {
                 UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.highScore.rawValue)
@@ -167,10 +183,12 @@ class ArchiveManager
     {
         get
         {
+            log.debug("")
             return UserDefaults.standard.bool(forKey: UserDefaultKeys.firstTimeRun.rawValue)
         }
         set
         {
+            log.debug("")
             UserDefaults.standard.set(true, forKey: UserDefaultKeys.firstTimeRun.rawValue)
             UserDefaults.standard.synchronize()
         }
@@ -180,10 +198,12 @@ class ArchiveManager
     {
         get
         {
+            log.debug("")
             return UserDefaults.standard.bool(forKey: UserDefaultKeys.tutorial.rawValue)
         }
         set
         {
+            log.debug("")
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.tutorial.rawValue)
             UserDefaults.standard.synchronize()
         }
@@ -193,10 +213,12 @@ class ArchiveManager
     {
         get
         {
+            log.debug("")
             return UserDefaults.standard.bool(forKey: UserDefaultKeys.muteSound.rawValue)
         }
         set
         {
+            log.debug("")
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.muteSound.rawValue)
             UserDefaults.standard.synchronize()
         }

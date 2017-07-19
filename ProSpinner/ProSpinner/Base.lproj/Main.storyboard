@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="f3X-yk-sq4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="f3X-yk-sq4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,8 +46,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZp-Ua-syh">
                                 <rect key="frame" x="37" y="199" width="301" height="315"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="newspinner" translatesAutoresizingMaskIntoConstraints="NO" id="0zK-nQ-bBI">
-                                        <rect key="frame" x="20" y="54.5" width="261" height="241"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="blackSpinner" translatesAutoresizingMaskIntoConstraints="NO" id="0zK-nQ-bBI">
+                                        <rect key="frame" x="20" y="64.5" width="261" height="241"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="241" id="DsZ-f5-tY7"/>
                                             <constraint firstAttribute="width" constant="261" id="nIn-JN-7Mq"/>
@@ -60,7 +60,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="RedDiamond" translatesAutoresizingMaskIntoConstraints="NO" id="NVx-ra-sgv">
-                                        <rect key="frame" x="106" y="24" width="87" height="60"/>
+                                        <rect key="frame" x="107" y="24" width="87" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="NVx-ra-sgv" secondAttribute="height" multiplier="24:17" constant="2.3529411764705799" id="6v2-F0-u1C"/>
                                             <constraint firstAttribute="width" constant="87" id="v6v-Ny-VkB"/>
@@ -70,14 +70,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="301" id="1Gl-mP-jLB"/>
-                                    <constraint firstItem="Y9P-Au-G8g" firstAttribute="centerX" secondItem="0zK-nQ-bBI" secondAttribute="centerX" id="3yb-OX-CZ6"/>
                                     <constraint firstItem="0zK-nQ-bBI" firstAttribute="centerX" secondItem="gZp-Ua-syh" secondAttribute="centerX" id="Hxg-aI-d9T"/>
                                     <constraint firstItem="NVx-ra-sgv" firstAttribute="top" secondItem="gZp-Ua-syh" secondAttribute="top" constant="24" id="JAz-i5-Dce"/>
                                     <constraint firstAttribute="bottom" secondItem="Y9P-Au-G8g" secondAttribute="bottom" id="N50-hE-2IU"/>
-                                    <constraint firstItem="Y9P-Au-G8g" firstAttribute="centerX" secondItem="gZp-Ua-syh" secondAttribute="centerX" constant="0.5" id="Ny6-JA-7nZ"/>
-                                    <constraint firstItem="0zK-nQ-bBI" firstAttribute="top" secondItem="NVx-ra-sgv" secondAttribute="bottom" constant="-29.5" id="V6w-qC-dIb"/>
+                                    <constraint firstItem="Y9P-Au-G8g" firstAttribute="centerX" secondItem="gZp-Ua-syh" secondAttribute="centerX" id="Ny6-JA-7nZ"/>
+                                    <constraint firstItem="0zK-nQ-bBI" firstAttribute="top" secondItem="NVx-ra-sgv" secondAttribute="bottom" constant="-19.5" id="V6w-qC-dIb"/>
                                     <constraint firstAttribute="height" constant="315" id="Z8E-iw-BrN"/>
-                                    <constraint firstItem="NVx-ra-sgv" firstAttribute="centerX" secondItem="0zK-nQ-bBI" secondAttribute="centerX" constant="-1" id="pHB-ZX-Sbk"/>
+                                    <constraint firstItem="NVx-ra-sgv" firstAttribute="centerX" secondItem="gZp-Ua-syh" secondAttribute="centerX" id="d5k-1X-4IH"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -293,7 +292,6 @@
         <image name="RedDiamond" width="75" height="58"/>
         <image name="SuccessV" width="85" height="89"/>
         <image name="blackSpinner" width="700" height="700"/>
-        <image name="newspinner" width="700" height="700"/>
         <image name="spinner2" width="333" height="333"/>
     </resources>
 </document>

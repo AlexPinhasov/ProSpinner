@@ -16,9 +16,17 @@ class AdMobManager: NSObject,
     var bannerView: GADBannerView!
     weak var rootViewController: UIViewController?
     
+    static let bannerPath = "ca-app-pub-9437548574063413/3716115489"
+    static let interstitialPath = "ca-app-pub-9437548574063413/9116200689"
+
+    // Development Path
+    static let dev_bannerPath = "ca-app-pub-3940256099942544/6300978111"
+    static let dev_interstitialPath = "ca-app-pub-3940256099942544/1033173712"
+    
     
     init(rootViewController: UIViewController)
     {
+        log.debug("")
         super.init()
         self.rootViewController = rootViewController
         configureGADInterstitial()
@@ -30,12 +38,32 @@ class AdMobManager: NSObject,
     
     func addObserver()
     {
+        log.debug("")
         NotificationCenter.default.addObserver(self, selector: #selector(showInterstitial), name: NSNotification.Name(NotifictionKey.interstitalCount.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addBannerToView), name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: NSNotification.Name.flagsChanged, object: nil)
+    }
+    
+    func reachabilityChanged()
+    {
+        log.debug("")
+        guard let status = Network.reachability?.status else { return }
+        
+        switch status
+        {
+        case .unreachable: break
+        case .wifi,.wwan:
+            
+            configureGADInterstitial()
+            bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+            bannerView.adUnitID = AdMobManager.bannerPath
+            bannerView.load(GADRequest())
+        }
     }
     
     func showInterstitial()
     {
+        log.debug("")
         guard let rootViewController = rootViewController else { return }
         
         if interstitial.isReady
@@ -46,6 +74,7 @@ class AdMobManager: NSObject,
     
     func resetInterstitialCountIfNeeded()
     {
+        log.debug("")
         if ArchiveManager.interstitalCount >= 3
         {
             ArchiveManager.interstitalCount = 0
@@ -54,23 +83,24 @@ class AdMobManager: NSObject,
     
     func configureGADBanner()
     {
+        log.debug("")
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-        //bannerView.adUnitID = "ca-app-pub-9437548574063413/3716115489"
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/6300978111"
+        bannerView.adUnitID = AdMobManager.bannerPath
         bannerView.rootViewController = rootViewController
         rootViewController?.view.addSubview(bannerView)
         bannerView.load(GADRequest())
     }
-    
+
     func addBannerToView()
     {
+        log.debug("")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(NotifictionKey.loadingFinish.rawValue), object: nil)
     }
     
     func configureGADInterstitial()
     {
-        //interstitial = GADInterstitial(adUnitID: "ca-app-pub-9437548574063413/9116200689")
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/1033173712")
+        log.debug("")
+        interstitial = GADInterstitial(adUnitID: AdMobManager.interstitialPath)
         interstitial.delegate = self
         interstitial.load(GADRequest())
     }
@@ -79,6 +109,7 @@ class AdMobManager: NSObject,
     /// application such as when transitioning between view controllers.
     func interstitialDidReceiveAd(_ ad: GADInterstitial)
     {
+        log.debug("")
         interstitial = ad
     }
     
@@ -86,7 +117,16 @@ class AdMobManager: NSObject,
     /// show. This is common since interstitials are shown sparingly to users.
     func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError)
     {
-        configureGADInterstitial()
+        log.debug("")
+        guard let status = Network.reachability?.status else { return }
+        
+        switch status
+        {
+        case .unreachable: break
+        case .wifi,.wwan:
+            
+            configureGADInterstitial()
+        }
     }
     
     /// Called just before presenting an interstitial. After this method finishes the interstitial will
@@ -113,6 +153,7 @@ class AdMobManager: NSObject,
     /// Called just after dismissing an interstitial and it has animated off the screen.
     func interstitialDidDismissScreen(_ ad: GADInterstitial)
     {
+        log.debug("")
         ArchiveManager.interstitalCount = 0
         configureGADInterstitial()
     }

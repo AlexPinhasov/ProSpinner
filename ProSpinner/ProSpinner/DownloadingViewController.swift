@@ -72,9 +72,6 @@ class DownloadingViewController: UIViewController  ,Animateable
         fadeInSuccessV()
         
         downloadingDelegateDataSource?.removeObserver()
-        
-        ArchiveManager.sortArrayInDiskAfterUpdate()
-        
         NotificationCenter.default.removeObserver(self)
     }
     

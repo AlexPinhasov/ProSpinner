@@ -11,7 +11,7 @@ import SwiftyStoreKit
 
 class CrashlyticsLogManager
 {
-    static var AllowEvents = false
+    static var AllowEvents = true
     
     static func gameStarted()
     {

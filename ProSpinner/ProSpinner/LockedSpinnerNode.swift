@@ -14,20 +14,19 @@ class LockedSpinnerNode: SKNode,
 {
     private var lockedBackground            : SKSpriteNode?
     private var unlockSpinnerButtonShadow   : SKSpriteNode?
-    var unlockSpinnerButton         : SKSpriteButton?
     private var unlockSpinnerButtonGrayout  : SKSpriteNode?
-    
-    private var getMoreDiamondsButtonShadow   : SKSpriteNode?
-    var getMoreDiamondsButton         : SKSpriteButton?
-    
+    private var getMoreDiamondsButtonShadow : SKSpriteNode?
     private var unlockSpinnerLabel          : SKLabelNode?
     private var topLabel                    : SKLabelNode?
-    var userCanUnlockSpinner = false
-    var shakingButton = false
     
-    fileprivate var redSuccessV      : SKSpriteNode?
-    fileprivate var blueSuccessV     : SKSpriteNode?
-    fileprivate var greenSuccessV    : SKSpriteNode?
+    var userCanUnlockSpinner                = false
+    var shakingButton                       = false
+    var getMoreDiamondsButton               : SKSpriteButton?
+    var unlockSpinnerButton                 : SKSpriteButton?
+    
+    fileprivate var redSuccessV             : SKSpriteNode?
+    fileprivate var blueSuccessV            : SKSpriteNode?
+    fileprivate var greenSuccessV           : SKSpriteNode?
     
     private var lockedBackgroundIsAtStartingPosition = true
     
@@ -72,27 +71,26 @@ class LockedSpinnerNode: SKNode,
     func connectOutletsToScene()
     {
         log.debug()
-        lockedBackground            = self.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerBackground.rawValue) as? SKSpriteNode
+        lockedBackground                = self.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerBackground.rawValue) as? SKSpriteNode
         
-        
-        getMoreDiamondsButtonShadow   = self.childNode(withName: Constants.NodesInLockedSpinnerView.GetMoreDiamondsButtonShadow.rawValue) as? SKSpriteNode
-        getMoreDiamondsButton         = self.childNode(withName: Constants.NodesInLockedSpinnerView.GetMoreDiamondsButton.rawValue) as? SKSpriteButton
+        getMoreDiamondsButtonShadow     = self.childNode(withName: Constants.NodesInLockedSpinnerView.GetMoreDiamondsButtonShadow.rawValue) as? SKSpriteNode
+        getMoreDiamondsButton           = self.childNode(withName: Constants.NodesInLockedSpinnerView.GetMoreDiamondsButton.rawValue) as? SKSpriteButton
         getMoreDiamondsButton?.delegate = self
-        getMoreDiamondsButton?.moveBy = -4
+        getMoreDiamondsButton?.moveBy   = -4
         
         
-        unlockSpinnerButtonShadow   = self.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButtonShadow.rawValue) as? SKSpriteNode
-        unlockSpinnerButton         = self.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue) as? SKSpriteButton
-        unlockSpinnerLabel          = unlockSpinnerButton?.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue) as? SKLabelNode
-        unlockSpinnerButtonGrayout  = unlockSpinnerButton?.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButtonGrayout.rawValue) as? SKSpriteNode
-        unlockSpinnerButton?.delegate = self
-        unlockSpinnerButton?.moveBy = -4
+        unlockSpinnerButtonShadow       = self.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButtonShadow.rawValue) as? SKSpriteNode
+        unlockSpinnerButton             = self.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue) as? SKSpriteButton
+        unlockSpinnerLabel              = unlockSpinnerButton?.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButton.rawValue) as? SKLabelNode
+        unlockSpinnerButtonGrayout      = unlockSpinnerButton?.childNode(withName: Constants.NodesInLockedSpinnerView.UnlockSpinnerButtonGrayout.rawValue) as? SKSpriteNode
+        unlockSpinnerButton?.delegate   = self
+        unlockSpinnerButton?.moveBy     = -4
         
-        topLabel                    = self.childNode(withName: Constants.NodesInLockedSpinnerView.TopLabel.rawValue) as? SKLabelNode
+        topLabel                        = self.childNode(withName: Constants.NodesInLockedSpinnerView.TopLabel.rawValue) as? SKLabelNode
 
-        redSuccessV                 = self.childNode(withName: Constants.NodesInScene.RedSuccess.rawValue) as? SKSpriteNode
-        greenSuccessV               = self.childNode(withName: Constants.NodesInScene.GreenSuccess.rawValue) as? SKSpriteNode
-        blueSuccessV                = self.childNode(withName: Constants.NodesInScene.BlueSuccess.rawValue) as? SKSpriteNode
+        redSuccessV                     = self.childNode(withName: Constants.NodesInScene.RedSuccess.rawValue) as? SKSpriteNode
+        greenSuccessV                   = self.childNode(withName: Constants.NodesInScene.GreenSuccess.rawValue) as? SKSpriteNode
+        blueSuccessV                    = self.childNode(withName: Constants.NodesInScene.BlueSuccess.rawValue) as? SKSpriteNode
     }
     
     func presentNode(shouldPresent present: Bool)

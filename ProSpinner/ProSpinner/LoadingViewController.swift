@@ -18,6 +18,7 @@ class LoadingViewController: UIViewController,Animateable
     
     override func viewDidLoad()
     {
+        log.debug("")
         super.viewDidLoad()
         log.debug()
         setSpinnerInArrayOnFirstRun()
@@ -27,12 +28,14 @@ class LoadingViewController: UIViewController,Animateable
     
     override func viewDidAppear(_ animated: Bool)
     {
+        log.debug("")
         super.viewDidAppear(animated)
         rotateAnimation(imageView: spinnerImage, duration: 1.5)
     }
     
     func stopSpinnerRotation()
     {
+        log.debug("")
         spinnerImage.layer.removeAnimation(forKey: "rotateSpinner")
     }
     
@@ -52,6 +55,7 @@ class LoadingViewController: UIViewController,Animateable
     
     func getTexturesToLoad()
     {
+        log.debug("")
         let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
         backgroundQueue.async(execute:
             {
@@ -75,14 +79,12 @@ class LoadingViewController: UIViewController,Animateable
                 self.textures?.append(Constants.DiamondsCleanTexture.blue)
                 self.textures?.append(Constants.DiamondsCleanTexture.green)
                 
-                self.textures?.append(SKTexture(imageNamed: "RightEar"))
-                self.textures?.append(SKTexture(imageNamed: "LeftEar"))
                 self.textures?.append(SKTexture(imageNamed: "PlayPath"))
                 self.textures?.append(SKTexture(imageNamed: "NewPlayButton"))
                 self.textures?.append(SKTexture(imageNamed: "NewStoreButton"))
                 self.textures?.append(SKTexture(imageNamed: "LockMech"))
                 self.textures?.append(SKTexture(imageNamed: "RightHez"))
-                self.textures?.append(SKTexture(imageNamed: "LeftRHez"))
+                self.textures?.append(SKTexture(imageNamed: "LeftHez"))
                 
                 DispatchQueue.main.async
                     {
@@ -128,6 +130,7 @@ class LoadingViewController: UIViewController,Animateable
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
+        log.debug("")
         // get a reference to the second view controller
         if let secondViewController = segue.destination as? GameViewController
         {
@@ -168,11 +171,11 @@ class LoadingViewController: UIViewController,Animateable
             ArchiveManager.gameExplantionDidShow = false
             ArchiveManager.mainSpinnerLocation = 1
             ArchiveManager.write_SpinnerToUserDefault(spinners: FirstInstallSpinners.getSpinnersArray())
-            set10DiamondsOnFirstRun()
+            setDiamondsOnFirstRun()
         }
     }
     
-    private func set10DiamondsOnFirstRun()
+    private func setDiamondsOnFirstRun()
     {
         log.debug()
         UserDefaults.standard.set(0, forKey: UserDefaultKeys.red.rawValue)

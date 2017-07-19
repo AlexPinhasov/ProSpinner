@@ -47,6 +47,7 @@ class SpinnerManager: BaseClass,
 //  MARK: init
     init(inScene scene: SKScene)
     {
+        log.debug("")
         rotateAction = SKAction.rotate(byAngle: rotateRightAngle, duration: spinnerSpeed)
         super.init()
         self.scene = scene
@@ -156,13 +157,13 @@ class SpinnerManager: BaseClass,
     {
         log.debug("")
         
-        if spinnerSpeed <= 1
+        if spinnerSpeed <= 1.3
         {
-            spinnerSpeed = 1
+            spinnerSpeed = 1.3
         }
         else
         {
-            spinnerSpeed -= 0.05
+            spinnerSpeed -= 0.01
         }
         pulseSpinner()
     }

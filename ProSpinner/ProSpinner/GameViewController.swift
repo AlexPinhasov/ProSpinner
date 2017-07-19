@@ -40,6 +40,7 @@ class GameViewController: UIViewController
 
     override func viewDidAppear(_ animated: Bool)
     {
+        log.debug("")
         super.viewDidAppear(animated)
         loadingViewController?.stopSpinnerRotation()
         loadingViewController = nil
@@ -58,6 +59,7 @@ class GameViewController: UIViewController
 //  MARK: Private methods
     private func addObservers()
     {
+        log.debug("")
         NotificationCenter.default.addObserver(self, selector: #selector(checkForNewSpinners), name: NSNotification.Name(NotifictionKey.checkForNewSpinners.rawValue), object: nil)
     }
     
@@ -70,6 +72,7 @@ class GameViewController: UIViewController
     
     func checkForNewSpinners()
     {
+        log.debug("")
         guard let status = Network.reachability?.status else { return }
         
         switch status

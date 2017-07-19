@@ -202,8 +202,6 @@ class NetworkManager
                 { (textureAsset) in
                     
                     eachSpinner.texture = textureAsset
-                    ArchiveManager.spinnersArrayInDisk.append(eachSpinner)
-                    ArchiveManager.write_SpinnerToUserDefault(spinners: ArchiveManager.spinnersArrayInDisk)
                     
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.notifyWithNewTexture.rawValue),
                                                     object: nil,
@@ -213,6 +211,9 @@ class NetworkManager
                     
                     if numberOfImagesInDownload <=  0
                     {
+                        ArchiveManager.spinnersArrayInDisk.append(contentsOf: ArchiveManager.currentlyDownloadedSpinnersArray)
+                        ArchiveManager.sortArrayInDiskAfterUpdate()
+                        ArchiveManager.write_SpinnerToUserDefault(spinners: ArchiveManager.spinnersArrayInDisk)
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.removeDownloadView.rawValue), object: nil)
                     }
                 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,7 +25,7 @@
                                 <rect key="frame" x="9.5" y="149.5" width="301" height="315"/>
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="blackSpinner" translatesAutoresizingMaskIntoConstraints="NO" id="4ET-dT-B0b">
-                                        <rect key="frame" x="20" y="54.5" width="261" height="241"/>
+                                        <rect key="frame" x="20" y="64.5" width="261" height="241"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="261" id="6pR-C7-gxJ"/>
                                             <constraint firstAttribute="height" constant="241" id="zeQ-0r-htF"/>
@@ -50,7 +50,7 @@
                                     <constraint firstItem="4ET-dT-B0b" firstAttribute="centerX" secondItem="NCv-RO-ANR" secondAttribute="centerX" id="1a0-0t-UPo"/>
                                     <constraint firstItem="jwe-ws-6UC" firstAttribute="centerX" secondItem="4ET-dT-B0b" secondAttribute="centerX" constant="-1" id="CQY-kj-TIj"/>
                                     <constraint firstAttribute="height" constant="315" id="Uw3-Bf-n0a"/>
-                                    <constraint firstItem="4ET-dT-B0b" firstAttribute="top" secondItem="jwe-ws-6UC" secondAttribute="bottom" constant="-29.5" id="alx-9t-zlr"/>
+                                    <constraint firstItem="4ET-dT-B0b" firstAttribute="top" secondItem="jwe-ws-6UC" secondAttribute="bottom" constant="-19.5" id="alx-9t-zlr"/>
                                     <constraint firstAttribute="bottom" secondItem="7WW-XI-XSz" secondAttribute="bottom" id="cd8-P6-tcl"/>
                                     <constraint firstAttribute="width" constant="301" id="e09-79-8lJ"/>
                                     <constraint firstItem="7WW-XI-XSz" firstAttribute="centerX" secondItem="4ET-dT-B0b" secondAttribute="centerX" id="mle-Bz-01h"/>

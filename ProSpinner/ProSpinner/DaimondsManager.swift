@@ -118,12 +118,6 @@ class DiamondsManager: BaseClass,
             timer?.invalidate()
             reSchdeuleTimer()
         }
-        else  if diamondSpeed > 2.0 && diamondSpeed < 2.05
-        {
-            timeInterval = 0.7
-            timer?.invalidate()
-            reSchdeuleTimer()
-        }
     }
 
     func resetDiamondsTimer()
@@ -186,13 +180,13 @@ class DiamondsManager: BaseClass,
         log.debug("")
         playTickSound()
         
-        if Diamond.diamondSpeed <= 1
+        if Diamond.diamondSpeed <= 1.85
         {
-            Diamond.diamondSpeed = 1
+            Diamond.diamondSpeed = 1.85
         }
         else
         {
-            Diamond.diamondSpeed -= 0.05
+            Diamond.diamondSpeed -= 0.02
         }
         
         collectedDiamondOf(kind: diamondNode)

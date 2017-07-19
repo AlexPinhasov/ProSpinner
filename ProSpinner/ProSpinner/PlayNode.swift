@@ -31,12 +31,14 @@ class PlayNode: SKNode,
     
     func showNode()
     {
+        self.removeAllActions()
         self.isHidden = false
         self.run(SKAction.scale(to: 1, duration: 0.7, delay: 0.20, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
     }
     
     func hideNode()
     {
+        self.removeAllActions()
         self.run(SKAction.scale(to: 0, duration: 0.7, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
         {
             self.isHidden = true

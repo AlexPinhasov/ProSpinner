@@ -45,7 +45,6 @@
 		0A87FDEB1F156A2A00CF55BB /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87FDE81F156A2A00CF55BB /* ToastView.swift */; };
 		0A87FDEC1F156A2A00CF55BB /* ToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A87FDE91F156A2A00CF55BB /* ToastView.xib */; };
 		0A87FDED1F156F8600CF55BB /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E91EF71DB00094119E /* MyriadPro-Regular.otf */; };
-		0A8B2E991ED8811E0025856E /* Tick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B2E981ED8811D0025856E /* Tick.mp3 */; };
 		0A8B2E9D1ED8C3ED0025856E /* Diamond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B2E9C1ED8C3EC0025856E /* Diamond.swift */; };
 		0ACD33071F1BD80200F7DD0E /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD33061F1BD80200F7DD0E /* SideMenuView.swift */; };
 		0ADCF0D41EDD9B2D00CE1C8B /* ArchiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCF0D31EDD9B2D00CE1C8B /* ArchiveManager.swift */; };
@@ -58,7 +57,6 @@
 		9109F3D91F1615D700853867 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3D81F1615D700853867 /* Reachability.swift */; };
 		9109F3DB1F162ED300853867 /* CrashlyticsLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3DA1F162ED300853867 /* CrashlyticsLogManager.swift */; };
 		916B1FAD1F16443D0083E649 /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916B1FAC1F16443D0083E649 /* ShareManager.swift */; };
-		917640781F1B434E006DD6CD /* Blop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 917640771F1B434E006DD6CD /* Blop.mp3 */; };
 		9176407D1F1B525E006DD6CD /* ButtonTap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9176407C1F1B525E006DD6CD /* ButtonTap.wav */; };
 		9176407F1F1B52A3006DD6CD /* BackgroundMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9176407E1F1B52A3006DD6CD /* BackgroundMusic.wav */; };
 		917640831F1B58C8006DD6CD /* SoundLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917640821F1B58C8006DD6CD /* SoundLibrary.swift */; };
@@ -66,7 +64,6 @@
 		917640891F1B5CDE006DD6CD /* AlertSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917640881F1B5CDE006DD6CD /* AlertSound.wav */; };
 		9176408B1F1B5D22006DD6CD /* Error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9176408A1F1B5D22006DD6CD /* Error.wav */; };
 		917640951F1B7D12006DD6CD /* CollectedDiamond.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917640941F1B7D12006DD6CD /* CollectedDiamond.wav */; };
-		917640971F1BA49A006DD6CD /* ButtonTap1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917640961F1BA49A006DD6CD /* ButtonTap1.wav */; };
 		918F18F21EC9CC8600886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F11EC9CC8600886039 /* AppDelegate.swift */; };
 		918F18F41EC9CC8600886039 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 918F18F31EC9CC8600886039 /* GameScene.sks */; };
 		918F18F81EC9CC8600886039 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F18F71EC9CC8600886039 /* GameScene.swift */; };
@@ -127,7 +124,7 @@
 		0A1C73EB1EF71DB00094119E /* MyriadPro-SemiboldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-SemiboldIt.otf"; sourceTree = "<group>"; };
 		0A1D71331ED9824900331753 /* Flea Market Finds.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Flea Market Finds.ttf"; sourceTree = "<group>"; };
 		0A1E096B1EEEC21100041C45 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
-		0A1E096D1EF0142600041C45 /* OpenSansHebrew-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSansHebrew-Regular.ttf"; sourceTree = "<group>"; };
+		0A1E096D1EF0142600041C45 /* OpenSansHebrew-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSansHebrew-Regular.ttf"; path = "../OpenSansHebrew-Regular.ttf"; sourceTree = "<group>"; };
 		0A289C0B1EEE5C21000AED6B /* TutorialManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialManager.swift; sourceTree = "<group>"; };
 		0A2E86461EDD6B9600380D41 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0A305A061EEC33B600BA3A4B /* OpenSansHebrew-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSansHebrew-Light.ttf"; path = "../OpenSansHebrew-Light.ttf"; sourceTree = "<group>"; };
@@ -143,7 +140,6 @@
 		0A87FDE71F156A2A00CF55BB /* ToastController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastController.swift; sourceTree = "<group>"; };
 		0A87FDE81F156A2A00CF55BB /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		0A87FDE91F156A2A00CF55BB /* ToastView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
-		0A8B2E981ED8811D0025856E /* Tick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tick.mp3; sourceTree = "<group>"; };
 		0A8B2E9C1ED8C3EC0025856E /* Diamond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diamond.swift; sourceTree = "<group>"; };
 		0ACD33061F1BD80200F7DD0E /* SideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		0ADCF0D31EDD9B2D00CE1C8B /* ArchiveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveManager.swift; sourceTree = "<group>"; };
@@ -160,7 +156,6 @@
 		9109F3D81F1615D700853867 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		9109F3DA1F162ED300853867 /* CrashlyticsLogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashlyticsLogManager.swift; sourceTree = "<group>"; };
 		916B1FAC1F16443D0083E649 /* ShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
-		917640771F1B434E006DD6CD /* Blop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Blop.mp3; sourceTree = "<group>"; };
 		9176407C1F1B525E006DD6CD /* ButtonTap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTap.wav; sourceTree = "<group>"; };
 		9176407E1F1B52A3006DD6CD /* BackgroundMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BackgroundMusic.wav; sourceTree = "<group>"; };
 		917640821F1B58C8006DD6CD /* SoundLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundLibrary.swift; sourceTree = "<group>"; };
@@ -168,7 +163,6 @@
 		917640881F1B5CDE006DD6CD /* AlertSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AlertSound.wav; sourceTree = "<group>"; };
 		9176408A1F1B5D22006DD6CD /* Error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Error.wav; sourceTree = "<group>"; };
 		917640941F1B7D12006DD6CD /* CollectedDiamond.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CollectedDiamond.wav; sourceTree = "<group>"; };
-		917640961F1BA49A006DD6CD /* ButtonTap1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTap1.wav; sourceTree = "<group>"; };
 		918F18EE1EC9CC8600886039 /* ProSpinner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProSpinner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918F18F11EC9CC8600886039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		918F18F31EC9CC8600886039 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -230,6 +224,7 @@
 				918F19001EC9CC8600886039 /* LaunchScreen.storyboard */,
 				0A87FDDC1F155E0B00CF55BB /* GoogleService-Info.plist */,
 				918F19031EC9CC8600886039 /* Info.plist */,
+				0A87FDDB1F154DC800CF55BB /* ProSpinner.entitlements */,
 				9109F3D81F1615D700853867 /* Reachability.swift */,
 			);
 			name = "Associated Files";
@@ -281,6 +276,7 @@
 		0A1D71321ED9822D00331753 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				0A1E096D1EF0142600041C45 /* OpenSansHebrew-Regular.ttf */,
 				0A1C73E21EF71DB00094119E /* MyriadPro-Bold.otf */,
 				0A1C73E31EF71DB00094119E /* MyriadPro-BoldCond.otf */,
 				0A1C73E41EF71DB00094119E /* MyriadPro-BoldCondIt.otf */,
@@ -394,9 +390,6 @@
 				917640841F1B5BD7006DD6CD /* SpinnerUnlocked.wav */,
 				917640941F1B7D12006DD6CD /* CollectedDiamond.wav */,
 				0A3658A61ED20D9900322024 /* Woosh.mp3 */,
-				0A8B2E981ED8811D0025856E /* Tick.mp3 */,
-				917640961F1BA49A006DD6CD /* ButtonTap1.wav */,
-				917640771F1B434E006DD6CD /* Blop.mp3 */,
 				9176407E1F1B52A3006DD6CD /* BackgroundMusic.wav */,
 				9176408A1F1B5D22006DD6CD /* Error.wav */,
 				917640821F1B58C8006DD6CD /* SoundLibrary.swift */,
@@ -407,7 +400,6 @@
 		918F18E51EC9CC8600886039 = {
 			isa = PBXGroup;
 			children = (
-				0A1E096D1EF0142600041C45 /* OpenSansHebrew-Regular.ttf */,
 				918F18F01EC9CC8600886039 /* ProSpinner */,
 				918F190B1EC9CC8700886039 /* ProSpinnerTests */,
 				918F19161EC9CC8700886039 /* ProSpinnerUITests */,
@@ -432,7 +424,6 @@
 			children = (
 				917640791F1B5204006DD6CD /* SoundEffects */,
 				0A87FDE01F1569DF00CF55BB /* ToastView */,
-				0A87FDDB1F154DC800CF55BB /* ProSpinner.entitlements */,
 				0AE83A761EDC8F260066E3DD /* Base Class */,
 				0AE83A731EDC8E680066E3DD /* Protocols */,
 				0A1734271F0679E300140277 /* Nodes */,
@@ -612,7 +603,6 @@
 				9176408B1F1B5D22006DD6CD /* Error.wav in Resources */,
 				918F18F41EC9CC8600886039 /* GameScene.sks in Resources */,
 				918F18FF1EC9CC8600886039 /* Assets.xcassets in Resources */,
-				0A8B2E991ED8811E0025856E /* Tick.mp3 in Resources */,
 				0A87FDEC1F156A2A00CF55BB /* ToastView.xib in Resources */,
 				0A1E096E1EF0142600041C45 /* OpenSansHebrew-Regular.ttf in Resources */,
 				0A1C73EC1EF71EC00094119E /* MyriadPro-BoldCond.otf in Resources */,
@@ -621,9 +611,7 @@
 				0A2168631F00C614003B9701 /* MyriadPro-Cond.otf in Resources */,
 				9176407D1F1B525E006DD6CD /* ButtonTap.wav in Resources */,
 				917640891F1B5CDE006DD6CD /* AlertSound.wav in Resources */,
-				917640781F1B434E006DD6CD /* Blop.mp3 in Resources */,
 				0A0A24111EF935A100044F8A /* MyriadPro-CondIt.otf in Resources */,
-				917640971F1BA49A006DD6CD /* ButtonTap1.wav in Resources */,
 				0A305A091EEC496800BA3A4B /* OpenSansHebrew-Bold.ttf in Resources */,
 				0A87FDDD1F155E0B00CF55BB /* GoogleService-Info.plist in Resources */,
 				0A305A071EEC33B600BA3A4B /* OpenSansHebrew-Light.ttf in Resources */,
