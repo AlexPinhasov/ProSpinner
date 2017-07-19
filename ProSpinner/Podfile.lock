@@ -53,7 +53,7 @@ PODS:
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - Protobuf (3.3.0)
   - SpriteKit-Spring (1.0.1)
-  - SwiftyStoreKit (0.10.3)
+  - SwiftyStoreKit (0.10.4)
   - XCGLogger (5.0.1):
     - XCGLogger/Core (= 5.0.1)
   - XCGLogger/Core (5.0.1):
@@ -99,7 +99,7 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   SpriteKit-Spring: 3586bde2cf5d41f5a6af023c4b5bb240eaa3d7b0
-  SwiftyStoreKit: 91c41fb7c09b2937078936054db7b4eb908ed02a
+  SwiftyStoreKit: f38427d347c8ad0a0d250ae2b64f9f2fcde0569c
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
 
 PODFILE CHECKSUM: 3188c566ab7d4a1f20174828c08f1ecc691ac8e3
