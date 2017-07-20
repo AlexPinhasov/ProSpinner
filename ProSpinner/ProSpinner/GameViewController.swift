@@ -110,7 +110,12 @@ class GameViewController: UIViewController
         log.debug()
         if let sceneNode = nextScene
         {
-            sceneNode.scaleMode = .aspectFill
+            switch UIDevice.current.userInterfaceIdiom
+            {
+                case .pad: sceneNode.scaleMode = .aspectFit
+                default: sceneNode.scaleMode = .aspectFill
+            }
+            
             // Present the scene
             if let view = self.view as? SKView
             {
