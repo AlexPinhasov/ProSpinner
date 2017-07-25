@@ -18,7 +18,6 @@ pod 'JSSAlertView'
 pod 'Google-Mobile-Ads-SDK'
 pod 'XCGLogger', '~> 5.0.1'
 pod 'SwiftyStoreKit'
-pod 'SwiftGifOrigin', '~> 1.6.1'
 
   target 'ProSpinnerTests' do
     inherit! :search_paths

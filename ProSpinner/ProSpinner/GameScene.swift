@@ -9,6 +9,7 @@
 import AVFoundation
 import SpriteKit
 import GameplayKit
+import UIKit
 
 struct GameStatus
 {
@@ -41,6 +42,8 @@ class GameScene: SKScene,
         addObservers()
         sideMenuView?.showSideView()
         SoundController.setUpSoundEngine()
+        let jeremyGif = UIImage.gif(name: "puf.gif")
+        
     }
     
     private func addObservers()
