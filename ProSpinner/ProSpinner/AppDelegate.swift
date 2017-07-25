@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         Fabric.with([Crashlytics.self])
         configureXCGLogger()
-       // completeIAPTransactions()
+        completeIAPTransactions()
         registerForRemoteNotifications(application: application)
         handleReachability()
         
