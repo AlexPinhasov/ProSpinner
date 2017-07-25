@@ -37,6 +37,7 @@
 		0A305A0B1EED9F5600BA3A4B /* Animateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A305A0A1EED9F5600BA3A4B /* Animateable.swift */; };
 		0A3081A61EEA07CF00892266 /* CustomSKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3081A51EEA07CF00892266 /* CustomSKLabelNode.swift */; };
 		0A3658A71ED20D9900322024 /* Woosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A3658A61ED20D9900322024 /* Woosh.mp3 */; };
+		0A4FD8331F2113C4006B3F85 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4FD8321F2113C4006B3F85 /* Default-568h@2x.png */; };
 		0A75A04B1F07CFDA00A9752F /* StoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75A04A1F07CFDA00A9752F /* StoreNode.swift */; };
 		0A8385861EF5394B0044D1C7 /* OCRAStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A8385851EF5393C0044D1C7 /* OCRAStd.otf */; };
 		0A8385881EF63A350044D1C7 /* RetryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8385871EF63A350044D1C7 /* RetryView.swift */; };
@@ -132,6 +133,7 @@
 		0A305A0A1EED9F5600BA3A4B /* Animateable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animateable.swift; sourceTree = "<group>"; };
 		0A3081A51EEA07CF00892266 /* CustomSKLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSKLabelNode.swift; sourceTree = "<group>"; };
 		0A3658A61ED20D9900322024 /* Woosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Woosh.mp3; sourceTree = "<group>"; };
+		0A4FD8321F2113C4006B3F85 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0A75A04A1F07CFDA00A9752F /* StoreNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreNode.swift; sourceTree = "<group>"; };
 		0A8385851EF5393C0044D1C7 /* OCRAStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OCRAStd.otf; sourceTree = "<group>"; };
 		0A8385871EF63A350044D1C7 /* RetryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryView.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 		918F18E51EC9CC8600886039 = {
 			isa = PBXGroup;
 			children = (
+				0A4FD8321F2113C4006B3F85 /* Default-568h@2x.png */,
 				918F18F01EC9CC8600886039 /* ProSpinner */,
 				918F190B1EC9CC8700886039 /* ProSpinnerTests */,
 				918F19161EC9CC8700886039 /* ProSpinnerUITests */,
@@ -601,6 +604,7 @@
 				9176407F1F1B52A3006DD6CD /* BackgroundMusic.wav in Resources */,
 				918F18FD1EC9CC8600886039 /* Main.storyboard in Resources */,
 				9176408B1F1B5D22006DD6CD /* Error.wav in Resources */,
+				0A4FD8331F2113C4006B3F85 /* Default-568h@2x.png in Resources */,
 				918F18F41EC9CC8600886039 /* GameScene.sks in Resources */,
 				918F18FF1EC9CC8600886039 /* Assets.xcassets in Resources */,
 				0A87FDEC1F156A2A00CF55BB /* ToastView.xib in Resources */,
