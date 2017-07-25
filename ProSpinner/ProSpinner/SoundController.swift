@@ -15,6 +15,16 @@ class SoundController
     static var audioPlayerNode      = AVAudioPlayerNode()
     static var changeAudioUnitTime  = AVAudioUnitTimePitch()
     
+    static var canPlayAudio: Bool
+    {
+        return ArchiveManager.shouldPlaySound && audioPlayerNode.isPlaying == false && engine.isRunning
+    }
+    
+    static var playingSound: Bool
+    {
+        return audioPlayerNode.isPlaying && engine.isRunning
+    }
+
     static func configureSound()
     {
         audioPlayerNode.stop()
@@ -34,6 +44,7 @@ class SoundController
         engine.connect(audioPlayerNode, to: engine.mainMixerNode, format: audioFileBuffer.format)
         do
         {
+            engine.prepare()
             try engine.start()
         }
         catch(let error)
@@ -47,26 +58,40 @@ class SoundController
         if let fileString = Bundle.main.path(forResource: "BackgroundMusic", ofType: "wav")
         {
             let url = URL(fileURLWithPath: fileString)
-            do {
+            do
+            {
                 try audioFile = AVAudioFile(forReading: url)
-                print("done")
             }
-            catch{
-                
-            }
+            catch{ }
         }
         configureSound()
         playSoundIfNeeded()
     }
     
+    static func startEngineIfNeeded()
+    {
+        if self.engine.isRunning == false && ArchiveManager.shouldPlaySound
+        {
+            do
+            {
+                engine.prepare()
+                try engine.start()
+            }
+            catch(let error)
+            {
+                log.debug(error)
+            }
+        }
+    }
+    
     static func playSoundIfNeeded()
     {
-        if ArchiveManager.shouldPlaySound
+        if canPlayAudio
         {
+            startEngineIfNeeded()
             audioPlayerNode.play()
-            
         }
-        else if audioPlayerNode.isPlaying
+        else if playingSound
         {
             audioPlayerNode.pause()
         }
@@ -75,5 +100,6 @@ class SoundController
     static func stopMusic()
     {
         audioPlayerNode.pause()
+        engine.pause()
     }
 }
