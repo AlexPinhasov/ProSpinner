@@ -132,6 +132,7 @@ class DiamondsManager: BaseClass,
     
     func reSchdeuleTimer()
     {
+        log.debug("")
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
     }
     
@@ -161,6 +162,7 @@ class DiamondsManager: BaseClass,
     
     func didSuccessInBuying(purchaseType :RegisteredPurchase)
     {
+        log.debug("")
         var amountToAdd = 0
         switch purchaseType
         {
@@ -285,6 +287,7 @@ class DiamondsManager: BaseClass,
     
     private func changeDiamondsPlayerHaveLabelColor(toColor color: UIColor)
     {
+        log.debug("")
         self.redDiamondLabelNode?.changeLabelColor(color: color)
         self.blueDiamondLabelNode?.changeLabelColor(color: color)
         self.greenDiamondLabelNode?.changeLabelColor(color: color)
@@ -337,6 +340,7 @@ class DiamondsManager: BaseClass,
     
     func returnDiamondsLabelNodeToStartingPosition()
     {
+        log.debug("")
         redDiamondLabelNode?.run(SKAction.move(to: redDiamondLabelNodeOriginalLocation , duration: 0.4))
         blueDiamondLabelNode?.run(SKAction.move(to: blueDiamondLabelNodeOriginalLocation, duration: 0.4))
         greenDiamondLabelNode?.run(SKAction.move(to: greenDiamondLabelNodeOriginalLocation, duration:0.4))
@@ -384,6 +388,7 @@ class DiamondsManager: BaseClass,
     
     func showHighScoreLabel()
     {
+        log.debug("")
         highScoreLabel?.text = "0"
         highScoreLabel?.isHidden = false
         highScoreLabel?.run(SKAction.fadeAlpha(to: 0.7, duration: 0.5))
@@ -391,6 +396,7 @@ class DiamondsManager: BaseClass,
 
     func hideHighScoreLabel()
     {
+        log.debug("")
         highScoreLabel?.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
         highScoreLabel?.text = "0"
         highScoreLabel?.isHidden = true
@@ -480,6 +486,7 @@ class DiamondsManager: BaseClass,
 
     private func updateHighScore()
     {
+        log.debug("")
         guard let highScoreLabel = highScoreLabel else { return }
         
         var highScore = Int(highScoreLabel.text ?? "0") ?? 0
@@ -616,18 +623,6 @@ extension DiamondsManager
                                                       SKAction.repeat(greenCounterDecrement, count: greenNeeded)]))
         {
             self.diamondsCollectedDuringGame = (0,0,0)
-        }
-    }
-    
-    private func cutDiamondPlayerHave(label: SKLabelNode)
-    {
-        if var cleanDiamondHaveLabel = label.text?.replacingOccurrences(of: " ", with: "")
-        {
-            if let i = cleanDiamondHaveLabel.characters.index(of: "/")
-            {
-                let endIndex = cleanDiamondHaveLabel.characters.endIndex
-                cleanDiamondHaveLabel.removeSubrange(i..<endIndex)
-            }
         }
     }
     

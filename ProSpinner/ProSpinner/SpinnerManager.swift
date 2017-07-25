@@ -435,6 +435,7 @@ extension SpinnerManager
     
     func spinNewlyUnlockedSpinner(completion block: (() -> Void)?)
     {
+        log.debug("")
         let rotate = SKAction.rotate(toAngle: rotateRightAngle, duration: 1.5)
         spinnerNode?.run(SKAction.repeat(rotate, count: 1))
         {
