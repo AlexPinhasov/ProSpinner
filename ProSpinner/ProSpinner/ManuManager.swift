@@ -94,7 +94,7 @@ class ManuManager: BaseClass,
         log.debug("")
         hideArrows()
         hideManuItems()
-        showSpeedProgressBar(withInitialValue: 0)
+        showSpeedProgressBar(withInitialValue: 6)
     }
     
     func tutorialStarted()
@@ -326,7 +326,7 @@ extension ManuManager
                                                 alignment: .vertical,
                                                 progressBarWidth: 15,
                                                 progressBarHeight: 250,
-                                                color: Constants.DiamondProgressBarColor.redColor,
+                                                color: Constants.DiamondProgressBarColor.manuGreenBlue,
                                                 anchorPointX: -7,
                                                 anchorPointY: 125,
                                                 cornerRadius: 7.5)
@@ -349,7 +349,7 @@ extension ManuManager
     func resetSpeedProgressBar()
     {
         removeSpeedProgressBar()
-        showSpeedProgressBar(withInitialValue: 0)
+        showSpeedProgressBar(withInitialValue: 6)
     }
     
     func removeSpeedProgressBar()
@@ -362,7 +362,7 @@ extension ManuManager
     {
         guard let value = value else { return }
         
-        changeSpeedHeight(toValue: value.red + value.blue + value.green)
+        changeSpeedHeight(toValue: value.red + value.blue + value.green + 6)
     }
 }
 

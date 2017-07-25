@@ -114,7 +114,13 @@ class DiamondsManager: BaseClass,
         }
         else  if diamondSpeed > 5.0 && diamondSpeed < 5.05
         {
-            timeInterval = 1.0
+            timeInterval = 0.9
+            timer?.invalidate()
+            reSchdeuleTimer()
+        }
+        else  if diamondSpeed < 2.0 && diamondSpeed < 2.05
+        {
+            timeInterval = 0.8
             timer?.invalidate()
             reSchdeuleTimer()
         }
@@ -188,7 +194,7 @@ class DiamondsManager: BaseClass,
         }
         else
         {
-            Diamond.diamondSpeed -= 0.02
+            Diamond.diamondSpeed -= 0.03
         }
         
         collectedDiamondOf(kind: diamondNode)

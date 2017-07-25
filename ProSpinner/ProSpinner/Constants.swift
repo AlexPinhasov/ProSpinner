@@ -65,6 +65,7 @@ class Constants
         static let redColor   = UIColor(red: 196/255,green: 43/255,blue: 40/255,alpha: 1.0)
         static let blueColor  = UIColor(red: 67/255,green: 188/255,blue: 212/255,alpha: 1.0)
         static let greenColor = UIColor(red: 103/255,green: 198/255,blue: 49/255,alpha: 1.0)
+        static let manuGreenBlue = UIColor(red: 0/255,green: 68/255,blue: 65/255,alpha: 1.0)
     }
     
     enum NodesInScene : String
