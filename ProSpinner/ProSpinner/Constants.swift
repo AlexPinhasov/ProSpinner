@@ -190,3 +190,34 @@ struct PhysicsCategory
     static let redNode : UInt32 = 5
     static let blueNode : UInt32 = 6
 }
+
+public extension DispatchQueue {
+    
+    static var `default`: DispatchQueue {
+        return DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
+    }
+    
+    static var initiated: DispatchQueue {
+        return DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+    }
+    
+    static var interactive: DispatchQueue {
+        return DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
+    }
+    
+    static var utility: DispatchQueue {
+        return DispatchQueue.global(qos: DispatchQoS.QoSClass.utility)
+    }
+    
+    static var background: DispatchQueue {
+        return DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
+    }
+    
+    static func concurrent(label: String, qos: DispatchQoS = .default, autoreleaseFrequency: DispatchQueue.AutoreleaseFrequency = .inherit, target: DispatchQueue? = nil) -> DispatchQueue {
+        return DispatchQueue(label: label, qos: qos, attributes: [.concurrent], autoreleaseFrequency: autoreleaseFrequency, target: target)
+    }
+    
+    static var currentQoSClass: DispatchQoS.QoSClass {
+        return DispatchQoS.QoSClass(rawValue: qos_class_self()) ?? .unspecified
+    }
+}

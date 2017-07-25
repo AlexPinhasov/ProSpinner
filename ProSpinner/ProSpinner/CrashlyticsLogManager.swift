@@ -17,8 +17,12 @@ class CrashlyticsLogManager
     {
         if AllowEvents
         {
-            Answers.logLevelStart("Game Started",
-                                  customAttributes: [:])
+            DispatchQueue.background.async
+            {
+                Answers.logLevelStart("Game Started",
+                                      customAttributes: [:])
+            }
+           
         }
     }
     
@@ -26,7 +30,10 @@ class CrashlyticsLogManager
     {
         if AllowEvents
         {
-            Answers.logLevelEnd("GameEnded", score: score, success: nil, customAttributes: nil)
+            DispatchQueue.background.async
+            {
+                Answers.logLevelEnd("GameEnded", score: score, success: nil, customAttributes: nil)
+            }
         }
     }
     
@@ -34,16 +41,19 @@ class CrashlyticsLogManager
     {
         if AllowEvents
         {
-            let locale = Locale.current
-            let currencyCode = locale.currencyCode!
-            
-            Answers.logPurchase(withPrice: product.product.price,
-                                currency: currencyCode,
-                                success: true,
-                                itemName: product.product.localizedTitle,
-                                itemType: nil,
-                                itemId: product.productId,
-                                customAttributes: [:])
+            DispatchQueue.background.async
+            {
+                let locale = Locale.current
+                let currencyCode = locale.currencyCode!
+                
+                Answers.logPurchase(withPrice: product.product.price,
+                                    currency: currencyCode,
+                                    success: true,
+                                    itemName: product.product.localizedTitle,
+                                    itemType: nil,
+                                    itemId: product.productId,
+                                    customAttributes: [:])
+            }
         }
     }
     
@@ -51,10 +61,13 @@ class CrashlyticsLogManager
     {
         if AllowEvents
         {
-            let unlockSpinnerNumber = ArchiveManager.currentSpinner.id ?? -1
-            
-            Answers.logCustomEvent(withName: "Spinner Unlock #No:",
-                                   customAttributes: ["SpinnerID": unlockSpinnerNumber ])
+            DispatchQueue.background.async
+            {
+                let unlockSpinnerNumber = ArchiveManager.currentSpinner.id ?? -1
+                
+                Answers.logCustomEvent(withName: "Spinner Unlock #No:",
+                                       customAttributes: ["SpinnerID": unlockSpinnerNumber ])
+            }
         }
     }
 }
