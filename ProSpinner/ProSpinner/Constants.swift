@@ -106,6 +106,13 @@ class Constants
         case LeftEar    = "LeftEar"
     }
     
+    enum NodesInSpeedbarNode : String
+    {
+        case SpeedBarNode = "SpeedBarNode"
+        case SpeedProgressBar = "SpeedProgressBar"
+        case CurrentSpeed = "CurrentSpeed"
+    }
+    
     enum NodesInRetryView: String
     {
         case RetryView          = "RetryView"

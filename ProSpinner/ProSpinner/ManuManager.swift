@@ -30,6 +30,7 @@ class ManuManager: BaseClass,
     var lockedSpinnerView        : LockedSpinnerNode?
     var demiSpinnerNode          : DemiSpinnerNode?
     var gameTutorialNode         : TutorialNode?
+    var speedBarNode             : SpeedBarNode?
     
     private var leftArrow        : SKSpriteNode?
     private var rightArrow       : SKSpriteNode?
@@ -42,7 +43,6 @@ class ManuManager: BaseClass,
     
     // Unlock Spinner Master Node
     internal var progressBars: SKNode?
-    internal var speedProgressBar: ProgressBar?
     
     internal var redProgressBarPosition = CGPoint.zero
     internal var blueProgressBarPosition = CGPoint.zero
@@ -70,6 +70,7 @@ class ManuManager: BaseClass,
         demiSpinnerNode         = scene?.childNode(withName: Constants.NodesInScene.DemiSpinnerNode.rawValue) as? DemiSpinnerNode
         
         progressBars            = scene?.childNode(withName: Constants.NodesInScene.ProgressBars.rawValue)
+        speedBarNode            = scene?.childNode(withName: Constants.NodesInSpeedbarNode.SpeedBarNode.rawValue) as? SpeedBarNode
         
         gameExplanation         = scene?.childNode(withName: Constants.NodesInScene.BreifTutorial.rawValue)
         
@@ -94,7 +95,7 @@ class ManuManager: BaseClass,
         log.debug("")
         hideArrows()
         hideManuItems()
-        showSpeedProgressBar(withInitialValue: 6)
+        speedBarNode?.showSpeedProgressBar(withInitialValue: 7)
     }
     
     func tutorialStarted()
@@ -110,7 +111,7 @@ class ManuManager: BaseClass,
         log.debug("")
         showArrows()
         updateHighScore()
-        removeSpeedProgressBar()
+        speedBarNode?.removeSpeedProgressBar()
     }
     
 //  MARK: Spinner Locked/Unlocked master methods
@@ -314,55 +315,6 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         self.spinnerLock?.run(SKAction.fadeOut(withDuration: 0.2))
-    }
-}
-
-extension ManuManager
-{
-//  MARK: Speed Progress bar logic
-    func showSpeedProgressBar(withInitialValue value: Int)
-    {
-        let progressBarShape = ProgressBarShape(progressBarName: Constants.ProgressBars.green.rawValue,
-                                                alignment: .vertical,
-                                                progressBarWidth: 15,
-                                                progressBarHeight: 250,
-                                                color: Constants.DiamondProgressBarColor.manuGreenBlue,
-                                                anchorPointX: -7,
-                                                anchorPointY: 125,
-                                                cornerRadius: 7.5)
-        
-        speedProgressBar = ProgressBar(progressBarShape: progressBarShape,
-                                       incramentValue: value,
-                                       totalValue: 250)
-        guard let speedProgressBar = speedProgressBar else { return }
-        
-        speedProgressBar.position = CGPoint(x: 285, y: 170)
-        scene?.addChild(speedProgressBar)
-        speedProgressBar.animateProgressBar()
-    }
-    
-    func changeSpeedHeight(toValue value: Int)
-    {
-        speedProgressBar?.addActualProgressBarOverlay(with: value, and: 250)
-    }
-    
-    func resetSpeedProgressBar()
-    {
-        removeSpeedProgressBar()
-        showSpeedProgressBar(withInitialValue: 6)
-    }
-    
-    func removeSpeedProgressBar()
-    {
-        speedProgressBar?.removeFromParent()
-        speedProgressBar = nil
-    }
-    
-    func updateSpeedProgressBar(withValue value: DiamondsTuple)
-    {
-        guard let value = value else { return }
-        
-        changeSpeedHeight(toValue: value.red + value.blue + value.green + 6)
     }
 }
 
