@@ -28,13 +28,13 @@ class ManuManager: BaseClass,
     var playNode                 : PlayNode?
     var storeNode                : StoreNode?
     var lockedSpinnerView        : LockedSpinnerNode?
+    var demiSpinnerNode          : DemiSpinnerNode?
+    var gameTutorialNode         : TutorialNode?
     
     private var leftArrow        : SKSpriteNode?
     private var rightArrow       : SKSpriteNode?
     
-    var demiSpinnerNode          : DemiSpinnerNode?
-    private var gameExplanation  : SKNode?
-    var gameTutorialNode         : TutorialNode?
+    fileprivate var gameExplanation  : SKNode?
     fileprivate var spinnerLock  : SKSpriteNode?
     
     var soundNode                : SKSpriteNode?
@@ -42,6 +42,7 @@ class ManuManager: BaseClass,
     
     // Unlock Spinner Master Node
     internal var progressBars: SKNode?
+    internal var speedProgressBar: ProgressBar?
     
     internal var redProgressBarPosition = CGPoint.zero
     internal var blueProgressBarPosition = CGPoint.zero
@@ -93,6 +94,7 @@ class ManuManager: BaseClass,
         log.debug("")
         hideArrows()
         hideManuItems()
+        showSpeedProgressBar(withInitialValue: 0)
     }
     
     func tutorialStarted()
@@ -108,6 +110,7 @@ class ManuManager: BaseClass,
         log.debug("")
         showArrows()
         updateHighScore()
+        removeSpeedProgressBar()
     }
     
 //  MARK: Spinner Locked/Unlocked master methods
@@ -316,6 +319,55 @@ class ManuManager: BaseClass,
 
 extension ManuManager
 {
+//  MARK: Speed Progress bar logic
+    func showSpeedProgressBar(withInitialValue value: Int)
+    {
+        let progressBarShape = ProgressBarShape(progressBarName: Constants.ProgressBars.green.rawValue,
+                                                alignment: .vertical,
+                                                progressBarWidth: 15,
+                                                progressBarHeight: 250,
+                                                color: Constants.DiamondProgressBarColor.redColor,
+                                                anchorPointX: -7,
+                                                anchorPointY: 125,
+                                                cornerRadius: 7.5)
+        
+        speedProgressBar = ProgressBar(progressBarShape: progressBarShape,
+                                       incramentValue: value,
+                                       totalValue: 250)
+        guard let speedProgressBar = speedProgressBar else { return }
+        
+        speedProgressBar.position = CGPoint(x: 285, y: 170)
+        scene?.addChild(speedProgressBar)
+        speedProgressBar.animateProgressBar()
+    }
+    
+    func changeSpeedHeight(toValue value: Int)
+    {
+        speedProgressBar?.addActualProgressBarOverlay(with: value, and: 250)
+    }
+    
+    func resetSpeedProgressBar()
+    {
+        removeSpeedProgressBar()
+        showSpeedProgressBar(withInitialValue: 0)
+    }
+    
+    func removeSpeedProgressBar()
+    {
+        speedProgressBar?.removeFromParent()
+        speedProgressBar = nil
+    }
+    
+    func updateSpeedProgressBar(withValue value: DiamondsTuple)
+    {
+        guard let value = value else { return }
+        
+        changeSpeedHeight(toValue: value.red + value.blue + value.green)
+    }
+}
+
+extension ManuManager
+{
 //  MARK: Progress Bar Logic
     func displayProgressBars(shouldShow bool: Bool,with diamonds: (Int,Int,Int)?)
     {
@@ -412,9 +464,18 @@ extension ManuManager
         }
         else
         {
-            let redProgressBar = ProgressBar(newName: Constants.ProgressBars.red.rawValue,
-                                             diamondsNeeded: diamondsPlayerNeed,
-                                             diamondPossesed: diamondsPlayerHas)
+            let redProgressBarShape = ProgressBarShape(progressBarName: Constants.ProgressBars.red.rawValue,
+                                                       alignment: .horizontal,
+                                                       progressBarWidth: 60,
+                                                       progressBarHeight: 4,
+                                                       color: Constants.DiamondProgressBarColor.redColor,
+                                                       anchorPointX: -38,
+                                                       anchorPointY: 2,
+                                                       cornerRadius: 2)
+            
+            let redProgressBar = ProgressBar(progressBarShape: redProgressBarShape,
+                                             incramentValue: diamondsPlayerHas,
+                                             totalValue: diamondsPlayerNeed)
             redProgressBar.name = Constants.ProgressBars.red.rawValue
             redProgressBar.position = redProgressBarPosition
             progressBars?.addChild(redProgressBar)
@@ -431,9 +492,18 @@ extension ManuManager
         }
         else
         {
-            let blueProgressBar = ProgressBar(newName: Constants.ProgressBars.blue.rawValue,
-                                              diamondsNeeded: diamondsPlayerNeed,
-                                              diamondPossesed: diamondsPlayerHas)
+            let blueProgressBarShape = ProgressBarShape(progressBarName: Constants.ProgressBars.blue.rawValue,
+                                                       alignment: .horizontal,
+                                                       progressBarWidth: 60,
+                                                       progressBarHeight: 4,
+                                                       color: Constants.DiamondProgressBarColor.blueColor,
+                                                       anchorPointX: -38,
+                                                       anchorPointY: 2,
+                                                       cornerRadius: 2)
+            
+            let blueProgressBar = ProgressBar(progressBarShape: blueProgressBarShape,
+                                              incramentValue: diamondsPlayerHas,
+                                              totalValue: diamondsPlayerNeed)
             blueProgressBar.name = Constants.ProgressBars.blue.rawValue
             blueProgressBar.position = blueProgressBarPosition
             progressBars?.addChild(blueProgressBar)
@@ -450,9 +520,18 @@ extension ManuManager
         }
         else
         {
-            let greenProgressBar = ProgressBar(newName: Constants.ProgressBars.green.rawValue,
-                                               diamondsNeeded: diamondsPlayerNeed,
-                                               diamondPossesed: diamondsPlayerHas)
+            let greenProgressBarShape = ProgressBarShape(progressBarName: Constants.ProgressBars.green.rawValue,
+                                                       alignment: .horizontal,
+                                                       progressBarWidth: 60,
+                                                       progressBarHeight: 4,
+                                                       color: Constants.DiamondProgressBarColor.greenColor,
+                                                       anchorPointX: -38,
+                                                       anchorPointY: 2,
+                                                       cornerRadius: 2)
+            
+            let greenProgressBar = ProgressBar(progressBarShape: greenProgressBarShape,
+                                               incramentValue: diamondsPlayerHas,
+                                               totalValue: diamondsPlayerNeed)
             greenProgressBar.name = Constants.ProgressBars.green.rawValue
             greenProgressBar.position = greenProgressBarPosition
             progressBars?.addChild(greenProgressBar)

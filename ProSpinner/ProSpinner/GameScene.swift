@@ -41,9 +41,7 @@ class GameScene: SKScene,
         handleSwipeConfiguration()
         addObservers()
         sideMenuView?.showSideView()
-        SoundController.setUpSoundEngine()
-        let jeremyGif = UIImage.gif(name: "puf.gif")
-        
+        SoundController.setUpSoundEngine()        
     }
     
     private func addObservers()
@@ -78,6 +76,10 @@ class GameScene: SKScene,
         {
             diamondsManager?.contactBegan(for: diamondNode)
             spinnerManager?.contactBegan()
+            if diamondsManager != nil
+            {
+                manuManager?.updateSpeedProgressBar(withValue: diamondsManager!.getCollectedDiamondsDuringGame())
+            }
         }
         else
         {

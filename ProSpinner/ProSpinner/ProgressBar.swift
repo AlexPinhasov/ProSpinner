@@ -8,25 +8,66 @@
 
 import SpriteKit
 
+struct ProgressBarShape
+{
+    let progressBarName   : String
+    let alignment         : ProgressBarAlignment
+    let progressBarWidth  : Int
+    let progressBarHeight : Int
+    let color             : UIColor
+    let anchorPointX      : Int
+    let anchorPointY      : Int
+    let cornerRadius      : CGFloat
+}
+
+enum ProgressBarAlignment
+{
+    case horizontal
+    case vertical
+}
+
 class ProgressBar: SKNode
 {
-    private var cropNode = SKCropNode()
-    private var progressBarWidth = 60
-    private var progressBarHeight = 4
+    private var cropNode                = SKCropNode()
+    private var progressBarWidth        = 60
+    private var progressBarHeight       = 4
+    private var progtessBarColor        = UIColor()
     
-    private let anchorPointX = -38
-    private let anchorPointY = -2
+    private var alignment : ProgressBarAlignment = .horizontal
     
-    init(newName: String,diamondsNeeded: Int, diamondPossesed: Int)
+    private var anchorPointX            = -38
+    private var anchorPointY            = -2
+    
+    private var cornerRadius : CGFloat  = 2
+    
+    init(progressBarShape: ProgressBarShape,incramentValue: Int, totalValue: Int)
     {
         super.init()
         cropNode.zPosition = 4
-        cropNode.name = newName
         cropNode.position =  CGPoint.zero
         cropNode.xScale = 0
         
-        addFadeBackgroundToProgressBar(withColor: getMaskColor(for: newName))
-        addActualProgressBarOverlay(name: newName,with: diamondPossesed, and: diamondsNeeded)
+        cropNode.name = progressBarShape.progressBarName
+        progressBarWidth = progressBarShape.progressBarWidth
+        progressBarHeight = progressBarShape.progressBarHeight
+        progtessBarColor = progressBarShape.color
+        alignment = progressBarShape.alignment
+        anchorPointX = progressBarShape.anchorPointX
+        anchorPointY = progressBarShape.anchorPointY
+        cornerRadius = progressBarShape.cornerRadius
+        
+        switch alignment
+        {
+        case .horizontal:
+            cropNode.xScale = 0.0
+            cropNode.yScale = 1.0
+        case .vertical:
+            cropNode.xScale = 1.0
+            cropNode.yScale = 0.0
+        }
+
+        addFadeBackgroundToProgressBar(withColor: progtessBarColor)
+        addActualProgressBarOverlay(with: incramentValue, and: totalValue)
         addSecondMaskToHideTheLeftSideOfProgressBar()
         self.addChild(cropNode)
     }
@@ -37,7 +78,13 @@ class ProgressBar: SKNode
     
     func animateProgressBar()
     {
-        cropNode.run(SKAction.scaleX(to: 1, duration: 0.3))
+        switch alignment
+        {
+        case .horizontal:
+            cropNode.run(SKAction.scaleX(to: 1, duration: 0.3))
+        case .vertical:
+            cropNode.run(SKAction.scaleY(to: 1, duration: 0.3))
+        }
     }
 
     private func addFadeBackgroundToProgressBar(withColor color: UIColor)
@@ -45,7 +92,7 @@ class ProgressBar: SKNode
         let cropBackgroundNode = SKCropNode()
         cropBackgroundNode.zPosition = 2
         
-        let backgroundMask = SKShapeNode(rect: CGRect(x: 0, y: 0, width: progressBarWidth, height: progressBarHeight))
+        let backgroundMask = SKShapeNode(rect: CGRect(x: 0, y: 0, width: progressBarWidth, height: progressBarHeight),cornerRadius: cornerRadius)
         backgroundMask.fillColor = color
         backgroundMask.strokeColor = .clear
         backgroundMask.zPosition = 2
@@ -55,17 +102,35 @@ class ProgressBar: SKNode
         self.addChild(cropBackgroundNode)
     }
     
-    private func addActualProgressBarOverlay(name newName: String,with diamondPossesed: Int, and diamondsNeeded: Int)
+    func addActualProgressBarOverlay(with incramentValue: Int, and totalValue: Int)
     {
-        let barWidth = calculatePorportionalWidthToBar(with: diamondPossesed, and: diamondsNeeded)
+        if cropNode.maskNode != nil
+        {
+            cropNode.maskNode = nil
+        }
         
-        let mask = SKShapeNode(rect: CGRect(x: 0,
+        let incrementBy = calculatePorportionalWidthToBar(with: incramentValue, and: totalValue)
+        
+        var mask = SKShapeNode()
+        
+        switch alignment
+        {
+        case .horizontal:
+            mask = SKShapeNode(rect: CGRect(x: 0,
                                             y: 0,
-                                            width: Int(barWidth),
-                                            height: progressBarHeight))
+                                            width: Int(incrementBy),
+                                            height: progressBarHeight),
+                                            cornerRadius: cornerRadius)
+        case .vertical:
+            mask = SKShapeNode(rect: CGRect(x: 0,
+                                            y: 0,
+                                            width: progressBarWidth,
+                                            height: Int(incrementBy)),
+                                            cornerRadius: cornerRadius)
+        }
         
         mask.strokeColor    = .clear
-        mask.fillColor      = getMaskColor(for: newName)
+        mask.fillColor      = progtessBarColor
         mask.zPosition      = 3
         cropNode.maskNode = mask
     }
@@ -75,7 +140,7 @@ class ProgressBar: SKNode
         let cropBackgroundNode = SKCropNode()
         cropBackgroundNode.zPosition = 2
         
-        let backgroundMask = SKShapeNode(rect: CGRect(x: anchorPointX, y: anchorPointY, width: progressBarWidth, height: progressBarHeight))
+        let backgroundMask = SKShapeNode(rect: CGRect(x: anchorPointX, y: anchorPointY, width: progressBarWidth, height: progressBarHeight),cornerRadius: cornerRadius)
         backgroundMask.fillColor = .clear
         backgroundMask.strokeColor = .clear
         backgroundMask.zPosition = 2
@@ -83,27 +148,16 @@ class ProgressBar: SKNode
         self.addChild(cropBackgroundNode)
     }
 
-    private func calculatePorportionalWidthToBar(with diamondPossesed: Int,and diamondsNeeded: Int) -> Double
+    private func calculatePorportionalWidthToBar(with incramentValue: Int,and totalValue: Int) -> Double
     {
-        let percentFromNeededDiamonds: CGFloat = CGFloat(diamondPossesed) / CGFloat(diamondsNeeded)
-        return Double(percentFromNeededDiamonds * CGFloat(progressBarWidth) > CGFloat(progressBarWidth) ? CGFloat(progressBarWidth) : percentFromNeededDiamonds * CGFloat(progressBarWidth))
-    }
-    
-    private func getMaskColor(for newName: String) -> UIColor
-    {
-        switch newName
+        let percentFromTotalValue: CGFloat = CGFloat(incramentValue) / CGFloat(totalValue)
+        
+        switch alignment
         {
-        case Constants.ProgressBars.red.rawValue:
-            return Constants.DiamondProgressBarColor.redColor
-            
-        case Constants.ProgressBars.blue.rawValue:
-            return Constants.DiamondProgressBarColor.blueColor
-            
-        case Constants.ProgressBars.green.rawValue:
-            return Constants.DiamondProgressBarColor.greenColor
-            
-        default: break
+        case .horizontal:
+            return Double(percentFromTotalValue * CGFloat(progressBarWidth) > CGFloat(progressBarWidth) ? CGFloat(progressBarWidth) : percentFromTotalValue * CGFloat(progressBarWidth))
+        case .vertical:
+            return Double(percentFromTotalValue * CGFloat(progressBarHeight) > CGFloat(progressBarHeight) ? CGFloat(progressBarHeight) : percentFromTotalValue * CGFloat(progressBarHeight))
         }
-        return .white
     }
 }
