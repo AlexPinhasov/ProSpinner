@@ -23,12 +23,14 @@ class SpeedBarNode: SKNode,
     
     func connectOutletsFromScene()
     {
+        log.debug()
         currentSpeedLabel    = self.childNode(withName: Constants.NodesInSpeedbarNode.CurrentSpeed.rawValue)  as? SKLabelNode
     }
 
     //  MARK: Speed Progress bar logic
     func showSpeedProgressBar()
     {
+        log.debug()
         self.removeAllActions()
         self.isHidden = false
         self.currentSpeedLabel?.text = "x1"
@@ -46,6 +48,7 @@ class SpeedBarNode: SKNode,
 
     func removeSpeedProgressBar()
     {
+        log.debug()
         self.removeAllActions()
         speedProgressBar?.run(SKAction.fadeOut(withDuration: 0.4))
         currentSpeedLabel?.run(SKAction.scale(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
@@ -58,12 +61,13 @@ class SpeedBarNode: SKNode,
     
     func updateSpeedProgressBar()
     {
+        log.debug()
         speedProgressBar?.updateProgressBar()
-        
     }
     
     func didUpdateProgressBar(inPosition: ProgressInProgressBar)
     {
+        log.debug()
         switch inPosition
         {
         case ProgressInProgressBar.start     : currentSpeedLabel?.text = "x1"

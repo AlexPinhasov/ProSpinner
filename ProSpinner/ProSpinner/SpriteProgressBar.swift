@@ -39,6 +39,7 @@ class SpriteProgressBar: SKNode
     
     private func addFadeBackgroundToProgressBar()
     {
+        log.debug()
         backgroundMask = SKSpriteNode(imageNamed: "SpeedProgressBarBack")
         backgroundMask.size = CGSize(width: 20, height: 250)
         backgroundMask.color = .white
@@ -48,6 +49,7 @@ class SpriteProgressBar: SKNode
     
     func addActualProgressBarOverlay()
     {
+        log.debug()
         let progressBar = SKSpriteNode(imageNamed: "SpeedProgressBar")
         progressBar.size = CGSize(width: 20, height: 250)
         progressBar.color = .white
@@ -69,6 +71,7 @@ class SpriteProgressBar: SKNode
     
     func updateProgressBar()
     {
+        log.debug()
         progressBarYPosition += 1
         sendDelegateOfPosition()
         
@@ -78,6 +81,7 @@ class SpriteProgressBar: SKNode
     
     func sendDelegateOfPosition()
     {
+        log.debug()
         switch progressBarYPosition
         {
         case ProgressInProgressBar.start.rawValue     : delegate?.didUpdateProgressBar(inPosition: .start)
