@@ -39,6 +39,7 @@
 		0A3658A71ED20D9900322024 /* Woosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A3658A61ED20D9900322024 /* Woosh.mp3 */; };
 		0A4FD8331F2113C4006B3F85 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4FD8321F2113C4006B3F85 /* Default-568h@2x.png */; };
 		0A6A80381F27A46500BC6A48 /* SpeedBarNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6A80371F27A46500BC6A48 /* SpeedBarNode.swift */; };
+		0A6A803A1F27D86E00BC6A48 /* SpriteProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6A80391F27D86E00BC6A48 /* SpriteProgressBar.swift */; };
 		0A75A04B1F07CFDA00A9752F /* StoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75A04A1F07CFDA00A9752F /* StoreNode.swift */; };
 		0A8385861EF5394B0044D1C7 /* OCRAStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A8385851EF5393C0044D1C7 /* OCRAStd.otf */; };
 		0A8385881EF63A350044D1C7 /* RetryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8385871EF63A350044D1C7 /* RetryView.swift */; };
@@ -48,6 +49,7 @@
 		0A87FDEC1F156A2A00CF55BB /* ToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A87FDE91F156A2A00CF55BB /* ToastView.xib */; };
 		0A87FDED1F156F8600CF55BB /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E91EF71DB00094119E /* MyriadPro-Regular.otf */; };
 		0A8B2E9D1ED8C3ED0025856E /* Diamond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B2E9C1ED8C3EC0025856E /* Diamond.swift */; };
+		0AB2462F1F28546B00BB24A5 /* ProgressBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB2462E1F28546A00BB24A5 /* ProgressBarProtocol.swift */; };
 		0ACD33071F1BD80200F7DD0E /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD33061F1BD80200F7DD0E /* SideMenuView.swift */; };
 		0ADCF0D41EDD9B2D00CE1C8B /* ArchiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCF0D31EDD9B2D00CE1C8B /* ArchiveManager.swift */; };
 		0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE7CD801EFCE55200236992 /* StoreView.swift */; };
@@ -136,6 +138,7 @@
 		0A3658A61ED20D9900322024 /* Woosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Woosh.mp3; sourceTree = "<group>"; };
 		0A4FD8321F2113C4006B3F85 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0A6A80371F27A46500BC6A48 /* SpeedBarNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedBarNode.swift; sourceTree = "<group>"; };
+		0A6A80391F27D86E00BC6A48 /* SpriteProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteProgressBar.swift; sourceTree = "<group>"; };
 		0A75A04A1F07CFDA00A9752F /* StoreNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreNode.swift; sourceTree = "<group>"; };
 		0A8385851EF5393C0044D1C7 /* OCRAStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OCRAStd.otf; sourceTree = "<group>"; };
 		0A8385871EF63A350044D1C7 /* RetryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryView.swift; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 		0A87FDE81F156A2A00CF55BB /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		0A87FDE91F156A2A00CF55BB /* ToastView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
 		0A8B2E9C1ED8C3EC0025856E /* Diamond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diamond.swift; sourceTree = "<group>"; };
+		0AB2462E1F28546A00BB24A5 /* ProgressBarProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBarProtocol.swift; sourceTree = "<group>"; };
 		0ACD33061F1BD80200F7DD0E /* SideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		0ADCF0D31EDD9B2D00CE1C8B /* ArchiveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveManager.swift; sourceTree = "<group>"; };
 		0AE7CD801EFCE55200236992 /* StoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
@@ -344,6 +348,7 @@
 				0A1E096B1EEEC21100041C45 /* ProgressBar.swift */,
 				9190A2781F03B698005DD47C /* SKSpriteButton.swift */,
 				0AF10D661F1DBE1A005B94FF /* SoundController.swift */,
+				0A6A80391F27D86E00BC6A48 /* SpriteProgressBar.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 			children = (
 				0A305A0A1EED9F5600BA3A4B /* Animateable.swift */,
 				0A1734281F067F5500140277 /* ButtonProtocol.swift */,
+				0AB2462E1F28546A00BB24A5 /* ProgressBarProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -808,12 +814,14 @@
 				0ACD33071F1BD80200F7DD0E /* SideMenuView.swift in Sources */,
 				0A1591801EE3C193005320A9 /* ImageCollectionCell.swift in Sources */,
 				0A8385881EF63A350044D1C7 /* RetryView.swift in Sources */,
+				0AB2462F1F28546B00BB24A5 /* ProgressBarProtocol.swift in Sources */,
 				0A3081A61EEA07CF00892266 /* CustomSKLabelNode.swift in Sources */,
 				0A8B2E9D1ED8C3ED0025856E /* Diamond.swift in Sources */,
 				0A089F461EDF0D7700415EFC /* Spinner.swift in Sources */,
 				0AF10D671F1DBE1A005B94FF /* SoundController.swift in Sources */,
 				0A11F5ED1EE333F20036A00F /* DownloadingViewController.swift in Sources */,
 				0A87FDEA1F156A2A00CF55BB /* ToastController.swift in Sources */,
+				0A6A803A1F27D86E00BC6A48 /* SpriteProgressBar.swift in Sources */,
 				0A1E096C1EEEC21200041C45 /* ProgressBar.swift in Sources */,
 				918F18F81EC9CC8600886039 /* GameScene.swift in Sources */,
 				0A14F34A1EE175B300C5AA5D /* PurchaseManager.swift in Sources */,

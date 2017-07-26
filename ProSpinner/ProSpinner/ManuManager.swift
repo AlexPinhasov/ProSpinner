@@ -95,7 +95,7 @@ class ManuManager: BaseClass,
         log.debug("")
         hideArrows()
         hideManuItems()
-        speedBarNode?.showSpeedProgressBar(withInitialValue: 7)
+        speedBarNode?.showSpeedProgressBar()
     }
     
     func tutorialStarted()
@@ -112,6 +112,11 @@ class ManuManager: BaseClass,
         showArrows()
         updateHighScore()
         speedBarNode?.removeSpeedProgressBar()
+    }
+    
+    func contactBegan()
+    {
+        speedBarNode?.updateSpeedProgressBar()
     }
     
 //  MARK: Spinner Locked/Unlocked master methods

@@ -76,10 +76,7 @@ class GameScene: SKScene,
         {
             diamondsManager?.contactBegan(for: diamondNode)
             spinnerManager?.contactBegan()
-            if diamondsManager != nil
-            {
-                manuManager?.speedBarNode?.updateSpeedProgressBar(withValue: diamondsManager!.getCollectedDiamondsDuringGame())
-            }
+            manuManager?.contactBegan()
         }
         else
         {

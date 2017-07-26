@@ -8,10 +8,12 @@
 
 import SpriteKit
 
-class SpeedBarNode: SKNode
+class SpeedBarNode: SKNode,
+                    ProgressBarProtocol,
+                    Animateable
 {
     var currentSpeedLabel  : SKLabelNode?
-    var speedProgressBar   : ProgressBar?
+    var speedProgressBar   : SpriteProgressBar?
     
     required init?(coder aDecoder: NSCoder)
     {
@@ -22,64 +24,54 @@ class SpeedBarNode: SKNode
     func connectOutletsFromScene()
     {
         currentSpeedLabel    = self.childNode(withName: Constants.NodesInSpeedbarNode.CurrentSpeed.rawValue)  as? SKLabelNode
-        //speedProgressBar   = self.childNode(withName: Constants.NodesInSpeedbarNode.SpeedProgressBar.rawValue) as? SKSpriteNode
     }
 
     //  MARK: Speed Progress bar logic
-    func showSpeedProgressBar(withInitialValue value: Int)
+    func showSpeedProgressBar()
     {
         self.removeAllActions()
         self.isHidden = false
-        speedProgressBar?.run(SKAction.fadeIn(withDuration: 0.7))
+        self.currentSpeedLabel?.text = "x1"
         currentSpeedLabel?.run(SKAction.scale(to: 1, duration: 0.4, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
         
-        let progressBarShape = ProgressBarShape(progressBarName: Constants.ProgressBars.green.rawValue,
-                                                alignment: .vertical,
-                                                progressBarWidth: 15,
-                                                progressBarHeight: 250,
-                                                color: Constants.DiamondProgressBarColor.manuGreenBlue,
-                                                anchorPointX: -7,
-                                                anchorPointY: 125,
-                                                cornerRadius: 7.5)
-        
-        speedProgressBar = ProgressBar(progressBarShape: progressBarShape,
-                                       incramentValue: value,
-                                       totalValue: 250)
+        speedProgressBar = SpriteProgressBar()
+        speedProgressBar?.delegate = self
         guard let speedProgressBar = speedProgressBar else { return }
         
-        speedProgressBar.position = CGPoint(x: 285, y: 170)
-        scene?.addChild(speedProgressBar)
-        speedProgressBar.animateProgressBar()
+        speedProgressBar.position = CGPoint(x: 290, y: 300)
+        speedProgressBar.xScale = 0.0
+        self.addChild(speedProgressBar)
+        speedProgressBar.run(SKAction.scaleX(to: 1.0, duration: 2, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
     }
-    
-    func changeSpeedHeight(toValue value: Int)
-    {
-        speedProgressBar?.addActualProgressBarOverlay(with: value, and: 250)
-    }
-    
-    func resetSpeedProgressBar()
-    {
-        removeSpeedProgressBar()
-        showSpeedProgressBar(withInitialValue: 7)
-    }
-    
+
     func removeSpeedProgressBar()
     {
         self.removeAllActions()
-        speedProgressBar?.run(SKAction.fadeOut(withDuration: 0.7))
+        speedProgressBar?.run(SKAction.fadeOut(withDuration: 0.4))
         currentSpeedLabel?.run(SKAction.scale(to: 0, duration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
         {
             self.isHidden = true
             self.speedProgressBar?.removeFromParent()
             self.speedProgressBar = nil
         }
-
     }
     
-    func updateSpeedProgressBar(withValue value: DiamondsTuple)
+    func updateSpeedProgressBar()
     {
-        guard let value = value else { return }
+        speedProgressBar?.addActualProgressBarOverlay()
         
-        changeSpeedHeight(toValue: value.red + value.blue + value.green + 6)
+    }
+    
+    func didUpdateProgressBar(inPosition: ProgressInProgressBar)
+    {
+        switch inPosition
+        {
+        case ProgressInProgressBar.start     : currentSpeedLabel?.text = "x1"
+        case ProgressInProgressBar.qurter    : currentSpeedLabel?.text = "x2"
+        case ProgressInProgressBar.midPoint  : currentSpeedLabel?.text = "x3"
+        case ProgressInProgressBar.topQurter : currentSpeedLabel?.text = "x4"
+        case ProgressInProgressBar.king      : currentSpeedLabel?.text = "x5"
+        }
+        pulse(node: currentSpeedLabel, scaleUpTo: 1.3, scaleDownTo: 1.0, duration: 0.7)
     }
 }
