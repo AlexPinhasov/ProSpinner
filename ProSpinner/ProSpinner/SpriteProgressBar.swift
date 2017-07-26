@@ -11,7 +11,7 @@ import SpriteKit
 enum ProgressInProgressBar: Int
 {
     case start     = -250
-    case qurter    = -220
+    case qurter    = -230
     case midPoint  = -180
     case topQurter = -120
     case king      = 0
@@ -59,6 +59,11 @@ class SpriteProgressBar: SKNode
         progressBar.color = .white
         progressBar.zPosition = 2
         
+        let spark = SKEmitterNode(fileNamed: "SparkEmitter")
+        spark?.zPosition = 5
+        spark?.position = CGPoint(x: 0, y: progressBarYPosition)
+        self.addChild(spark!)
+        
         let mask = SKSpriteNode(color: .black, size: CGSize(width: 20, height: 250))
         mask.color = .white
         mask.zPosition      = 3
@@ -66,6 +71,7 @@ class SpriteProgressBar: SKNode
         cropNode.addChild(progressBar)
         cropNode.maskNode = mask
         cropNode.zPosition = 2
+
     }
     
     func sendDelegateOfPosition()

@@ -12,7 +12,7 @@ import UIKit
 protocol Animateable
 {
     func pulse(node: SKNode?, scaleUpTo: CGFloat, scaleDownTo: CGFloat,duration: TimeInterval,delay: TimeInterval)
-    func shake(node: SKNode?, withDuration duration: TimeInterval,completion block: (() -> Void)?)
+    func shake(node: SKNode?, byX: Int ,withDuration duration: TimeInterval,completion block: (() -> Void)?)
     func rotateAnimation(imageView:UIImageView,repeat repeatCount: Float,duration: CFTimeInterval)
 }
 
@@ -36,10 +36,10 @@ extension Animateable
         }
     }
     
-    func shake(node: SKNode?, withDuration duration: TimeInterval,completion block: (() -> Void)?)
+    func shake(node: SKNode?, byX: Int = 10,withDuration duration: TimeInterval,completion block: (() -> Void)?)
     {
-        let shakeRight = SKAction.move(by: CGVector(dx: 10, dy: 0), duration: duration)
-        let shakeLeft = SKAction.move(by: CGVector(dx: -10, dy: 0), duration: duration)
+        let shakeRight = SKAction.move(by: CGVector(dx: byX, dy: 0), duration: duration)
+        let shakeLeft = SKAction.move(by: CGVector(dx: -byX, dy: 0), duration: duration)
         let shakeSequene = SKAction.sequence([ shakeRight,shakeLeft,shakeLeft,shakeRight,shakeRight,shakeLeft ])
         
         node?.run(shakeSequene)

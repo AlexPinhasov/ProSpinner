@@ -60,6 +60,7 @@
 		9109F3D51F150F4000853867 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3D41F150F4000853867 /* LoadingViewController.swift */; };
 		9109F3D91F1615D700853867 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3D81F1615D700853867 /* Reachability.swift */; };
 		9109F3DB1F162ED300853867 /* CrashlyticsLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109F3DA1F162ED300853867 /* CrashlyticsLogManager.swift */; };
+		91357B361F2899FC00990CA1 /* SparkEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 91357B351F2899FC00990CA1 /* SparkEmitter.sks */; };
 		916B1FAD1F16443D0083E649 /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916B1FAC1F16443D0083E649 /* ShareManager.swift */; };
 		9176407D1F1B525E006DD6CD /* ButtonTap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9176407C1F1B525E006DD6CD /* ButtonTap.wav */; };
 		9176407F1F1B52A3006DD6CD /* BackgroundMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9176407E1F1B52A3006DD6CD /* BackgroundMusic.wav */; };
@@ -163,6 +164,7 @@
 		9109F3D41F150F4000853867 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		9109F3D81F1615D700853867 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		9109F3DA1F162ED300853867 /* CrashlyticsLogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashlyticsLogManager.swift; sourceTree = "<group>"; };
+		91357B351F2899FC00990CA1 /* SparkEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SparkEmitter.sks; sourceTree = "<group>"; };
 		916B1FAC1F16443D0083E649 /* ShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		9176407C1F1B525E006DD6CD /* ButtonTap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTap.wav; sourceTree = "<group>"; };
 		9176407E1F1B52A3006DD6CD /* BackgroundMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BackgroundMusic.wav; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 			children = (
 				918F18F31EC9CC8600886039 /* GameScene.sks */,
 				918F18F71EC9CC8600886039 /* GameScene.swift */,
+				91357B351F2899FC00990CA1 /* SparkEmitter.sks */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				0A0A24111EF935A100044F8A /* MyriadPro-CondIt.otf in Resources */,
 				0A305A091EEC496800BA3A4B /* OpenSansHebrew-Bold.ttf in Resources */,
 				0A87FDDD1F155E0B00CF55BB /* GoogleService-Info.plist in Resources */,
+				91357B361F2899FC00990CA1 /* SparkEmitter.sks in Resources */,
 				0A305A071EEC33B600BA3A4B /* OpenSansHebrew-Light.ttf in Resources */,
 				917640951F1B7D12006DD6CD /* CollectedDiamond.wav in Resources */,
 				917640851F1B5BD7006DD6CD /* SpinnerUnlocked.wav in Resources */,
