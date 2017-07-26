@@ -44,7 +44,11 @@ struct FirstInstallSpinners
         //Cosmos
         spinnerArray.append(Spinner(id: 7, redNeeded: 200, blueNeeded: 300, greenNeeded: 255))
         //Dragons
-        //spinnerArray.append(Spinner(id: 8, redNeeded: 1500, blueNeeded: 1500, greenNeeded: 1500))
+        //spinnerArray.append(Spinner(id: 8, redNeeded: 750, blueNeeded: 750, greenNeeded: 750))
+        //Feather
+//        spinnerArray.append(Spinner(id: 9, redNeeded: 500, blueNeeded: 500, greenNeeded: 500))
+//        //Blade
+//        spinnerArray.append(Spinner(id: 10, redNeeded: 450, blueNeeded: 600, greenNeeded: 250))
         
         return spinnerArray
     }

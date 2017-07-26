@@ -38,7 +38,7 @@ class SpeedBarNode: SKNode,
         speedProgressBar?.delegate = self
         guard let speedProgressBar = speedProgressBar else { return }
         
-        speedProgressBar.position = CGPoint(x: 290, y: 300)
+        speedProgressBar.position = CGPoint(x: 30, y: 300)
         speedProgressBar.xScale = 0.0
         self.addChild(speedProgressBar)
         speedProgressBar.run(SKAction.scaleX(to: 1.0, duration: 2, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
@@ -58,7 +58,7 @@ class SpeedBarNode: SKNode,
     
     func updateSpeedProgressBar()
     {
-        speedProgressBar?.addActualProgressBarOverlay()
+        speedProgressBar?.updateProgressBar()
         
     }
     

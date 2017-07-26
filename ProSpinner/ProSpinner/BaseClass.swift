@@ -19,4 +19,5 @@ enum NotifictionKey: String
     case interstitalCount       = "interstitalCount"
     case loadingFinish          = "loadingFinish"
     case checkForNewSpinners    = "checkForNewSpinners"
+    case userUnlockedKingHat    = "userUnlockedKingHat"
 }

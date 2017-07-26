@@ -118,7 +118,7 @@ class DiamondsManager: BaseClass,
             timer?.invalidate()
             reSchdeuleTimer()
         }
-        else  if diamondSpeed < 2.0 && diamondSpeed < 2.05
+        else  if diamondSpeed > 2.0 && diamondSpeed < 2.05
         {
             timeInterval = 0.8
             timer?.invalidate()

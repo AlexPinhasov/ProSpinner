@@ -104,6 +104,7 @@ class Constants
         case PlayShadow = "PlayLabelShadow"
         case RightEar   = "RightEar"
         case LeftEar    = "LeftEar"
+        case kingHat    = "kingHat"
     }
     
     enum NodesInSpeedbarNode : String

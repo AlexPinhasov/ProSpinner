@@ -12,9 +12,9 @@ enum ProgressInProgressBar: Int
 {
     case start     = -250
     case qurter    = -230
-    case midPoint  = -180
+    case midPoint  = -185
     case topQurter = -120
-    case king      = 0
+    case king      = -10
 }
 
 class SpriteProgressBar: SKNode
@@ -22,6 +22,7 @@ class SpriteProgressBar: SKNode
     private var cropNode              = SKCropNode()
     private var progressBarYPosition  = -250
     private var backgroundMask        : SKSpriteNode!
+    private var spark                 : SKEmitterNode = SKEmitterNode(fileNamed: "SparkEmitter")!
     var delegate                      : ProgressBarProtocol?
     
     override init()
@@ -47,22 +48,14 @@ class SpriteProgressBar: SKNode
     
     func addActualProgressBarOverlay()
     {
-        if cropNode.maskNode != nil
-        {
-            cropNode.maskNode = nil
-            progressBarYPosition += 1
-            sendDelegateOfPosition()
-        }
-
         let progressBar = SKSpriteNode(imageNamed: "SpeedProgressBar")
         progressBar.size = CGSize(width: 20, height: 250)
         progressBar.color = .white
         progressBar.zPosition = 2
         
-        let spark = SKEmitterNode(fileNamed: "SparkEmitter")
-        spark?.zPosition = 5
-        spark?.position = CGPoint(x: 0, y: progressBarYPosition)
-        self.addChild(spark!)
+        spark.zPosition = 5
+        spark.position = CGPoint(x: 0, y: progressBarYPosition + 125)
+        self.addChild(spark)
         
         let mask = SKSpriteNode(color: .black, size: CGSize(width: 20, height: 250))
         mask.color = .white
@@ -74,6 +67,15 @@ class SpriteProgressBar: SKNode
 
     }
     
+    func updateProgressBar()
+    {
+        progressBarYPosition += 1
+        sendDelegateOfPosition()
+        
+        spark.position = CGPoint(x: 0, y: progressBarYPosition + 125)
+        cropNode.maskNode?.position = CGPoint(x: 0, y: progressBarYPosition)
+    }
+    
     func sendDelegateOfPosition()
     {
         switch progressBarYPosition
@@ -82,7 +84,9 @@ class SpriteProgressBar: SKNode
         case ProgressInProgressBar.qurter.rawValue    : delegate?.didUpdateProgressBar(inPosition: .qurter)
         case ProgressInProgressBar.midPoint.rawValue  : delegate?.didUpdateProgressBar(inPosition: .midPoint)
         case ProgressInProgressBar.topQurter.rawValue : delegate?.didUpdateProgressBar(inPosition: .topQurter)
-        case ProgressInProgressBar.king.rawValue      : delegate?.didUpdateProgressBar(inPosition: .king)
+        case ProgressInProgressBar.king.rawValue      :
+            delegate?.didUpdateProgressBar(inPosition: .king)
+            UserDefaults.standard.set(true, forKey: NotifictionKey.userUnlockedKingHat.rawValue)
         default: break
         }
     }
