@@ -195,6 +195,7 @@ class ManuManager: BaseClass,
     
     private func updateHighScore()
     {
+        log.debug("")
         let highScorePrefix = "High Score: "
         let actualHighScore = String(ArchiveManager.highScoreRecord)
         
@@ -203,6 +204,7 @@ class ManuManager: BaseClass,
     
     private func pointDirectionArrowsMoveAction()
     {
+        log.debug("")
         let moveRightArrow_Right = SKAction.moveTo(x: 282, duration: 0.2)
         let moveRightArrow_Left = SKAction.moveTo(x: 272, duration: 0.2)
         
@@ -248,6 +250,7 @@ class ManuManager: BaseClass,
     
     func showDemiSpinnerNode()
     {
+        log.debug("")
         demiSpinnerNode?.removeAllActions()
         if demiSpinnerNode?.alpha == 0
         {
@@ -258,6 +261,7 @@ class ManuManager: BaseClass,
     
     func hideDemiSpinnerNode()
     {
+        log.debug("")
         demiSpinnerNode?.removeAllActions()
         demiSpinnerNode?.run(SKAction.fadeOut(withDuration: 0.1))
         {
@@ -292,6 +296,7 @@ class ManuManager: BaseClass,
 
     func showTutorial()
     {
+        log.debug("")
         ArchiveManager.gameExplantionDidShow = true
         gameExplanation?.position.y = 95
         gameTutorialNode = self.scene?.childNode(withName: Constants.NodeInExplainGameNode.TutorialNode.rawValue) as? TutorialNode
@@ -301,6 +306,7 @@ class ManuManager: BaseClass,
     
     func hideTutorial()
     {
+        log.debug("")
         gameTutorialNode?.hideNode()
         {
             self.gameTutorialNode = nil

@@ -73,6 +73,7 @@ class SpinnerManager: BaseClass,
     
     func hideTutorial()
     {
+        log.debug("")
         spinnerNode?.run(SKAction.fadeIn(withDuration: 0.2))
     }
     

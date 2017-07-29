@@ -43,6 +43,7 @@ class PurchaseManager
     
     static func getInfo(completion block: @escaping (RetrieveResults) -> Void)
     {
+        log.debug("")
         let productSet : Set<String> = [appBundleId + "." + RegisteredPurchase.SmallDiamondPack.rawValue,
                                         appBundleId + "." + RegisteredPurchase.BigDiamondPack.rawValue]
 
@@ -56,6 +57,7 @@ class PurchaseManager
     
     static func purchase(_ registeredPurchase: RegisteredPurchase,completion block: @escaping (RegisteredPurchase, Bool) -> Void)
     {
+        log.debug("")
         rootViewController.view.isUserInteractionEnabled = false
 
         NetworkActivityIndicatorManager.networkOperationStarted()
@@ -91,7 +93,7 @@ extension UIViewController
 {
     
     func alertWithTitle(_ title: String, message: String) -> UIAlertController {
-        
+        log.debug("")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         return alert
@@ -105,7 +107,7 @@ extension UIViewController
     }
     
     func alertForProductRetrievalInfo(_ result: RetrieveResults) -> UIAlertController {
-        
+        log.debug("")
         if let product = result.retrievedProducts.first {
             let priceString = product.localizedPrice!
             return alertWithTitle(product.localizedTitle, message: "\(product.localizedDescription) - \(priceString)")
@@ -120,6 +122,7 @@ extension UIViewController
     // swiftlint:disable cyclomatic_complexity
     func alertForPurchaseResult(_ result: PurchaseResult) -> UIAlertController?
     {
+        log.debug("")
         switch result
         {
         case .success(let purchase):
@@ -152,6 +155,7 @@ extension UIViewController
     
     func alertForRestorePurchases(_ results: RestoreResults) -> UIAlertController {
         
+        log.debug("")
         if results.restoreFailedPurchases.count > 0 {
             print("Restore Failed: \(results.restoreFailedPurchases)")
             return alertWithTitle("Restore failed", message: "Unknown error. Please contact support")
@@ -166,6 +170,7 @@ extension UIViewController
     
     func alertForVerifyReceipt(_ result: VerifyReceiptResult) -> UIAlertController {
         
+        log.debug("")
         switch result {
         case .success(let receipt):
             print("Verify receipt Success: \(receipt)")
@@ -185,6 +190,7 @@ extension UIViewController
     
     func alertForVerifySubscription(_ result: VerifySubscriptionResult) -> UIAlertController {
         
+        log.debug("")
         switch result {
         case .purchased(let expiryDate):
             print("Product is valid until \(expiryDate)")
@@ -200,6 +206,7 @@ extension UIViewController
     
     func alertForVerifyPurchase(_ result: VerifyPurchaseResult) -> UIAlertController {
         
+        log.debug("")
         switch result {
         case .purchased:
             print("Product is purchased")

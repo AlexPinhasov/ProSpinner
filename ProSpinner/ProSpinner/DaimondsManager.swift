@@ -461,6 +461,7 @@ class DiamondsManager: BaseClass,
     
     private func resetNodesToNormalPlayState()
     {
+        log.debug("")
         redDiamondLabelNode.hideSeparatorAndNeeded()
         blueDiamondLabelNode.hideSeparatorAndNeeded()
         greenDiamondLabelNode.hideSeparatorAndNeeded()

@@ -15,6 +15,7 @@ class CrashlyticsLogManager
     
     static func gameStarted()
     {
+        log.debug("")
         if AllowEvents
         {
             DispatchQueue.background.async
@@ -28,6 +29,7 @@ class CrashlyticsLogManager
     
     static func gameEnded(withScore score: NSNumber?)
     {
+        log.debug("")
         if AllowEvents
         {
             DispatchQueue.background.async
@@ -39,6 +41,7 @@ class CrashlyticsLogManager
     
     static func logPurchase(withProduct product: PurchaseDetails)
     {
+        log.debug("")
         if AllowEvents
         {
             DispatchQueue.background.async
@@ -59,6 +62,7 @@ class CrashlyticsLogManager
     
     static func logSpinnerUnlocked()
     {
+        log.debug("")
         if AllowEvents
         {
             DispatchQueue.background.async
