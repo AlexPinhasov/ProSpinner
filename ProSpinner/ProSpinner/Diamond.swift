@@ -48,7 +48,7 @@ class Diamond: SKSpriteNode
         
         // Actions
         let fallAction : SKAction = SKAction.moveTo(y: -1, duration: Diamond.diamondSpeed)
-        let rotate     : SKAction = SKAction.rotate(byAngle: 30, duration: 13)
+        let rotate     : SKAction = SKAction.rotate(byAngle: 30, duration: 11.5)
         self.run(SKAction.repeatForever(fallAction))
         self.run(SKAction.repeatForever(rotate))
         

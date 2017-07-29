@@ -14,6 +14,7 @@ class SpeedBarNode: SKNode,
 {
     var currentSpeedLabel  : SKLabelNode?
     var speedProgressBar   : SpriteProgressBar?
+    var crownGlow          : SKSpriteNode?
     
     required init?(coder aDecoder: NSCoder)
     {
@@ -25,6 +26,8 @@ class SpeedBarNode: SKNode,
     {
         log.debug()
         currentSpeedLabel    = self.childNode(withName: Constants.NodesInSpeedbarNode.CurrentSpeed.rawValue)  as? SKLabelNode
+        crownGlow            = self.childNode(withName: Constants.NodesInSpeedbarNode.crownGlow.rawValue)  as? SKSpriteNode
+        crownGlow?.isHidden  = true
     }
 
     //  MARK: Speed Progress bar logic
@@ -70,11 +73,19 @@ class SpeedBarNode: SKNode,
         log.debug()
         switch inPosition
         {
-        case ProgressInProgressBar.start     : currentSpeedLabel?.text = "x1"
-        case ProgressInProgressBar.qurter    : currentSpeedLabel?.text = "x2"
-        case ProgressInProgressBar.midPoint  : currentSpeedLabel?.text = "x3"
-        case ProgressInProgressBar.topQurter : currentSpeedLabel?.text = "x4"
-        case ProgressInProgressBar.king      : currentSpeedLabel?.text = "x5"
+        case ProgressInProgressBar.start         : currentSpeedLabel?.text = "x1"
+        case ProgressInProgressBar.qurter        : currentSpeedLabel?.text = "x2"
+        case ProgressInProgressBar.midPoint      : currentSpeedLabel?.text = "x3"
+        case ProgressInProgressBar.topQurter     : currentSpeedLabel?.text = "x4"
+        case ProgressInProgressBar.topKingQurter : currentSpeedLabel?.text = "x5"
+        case ProgressInProgressBar.king          :
+            currentSpeedLabel?.text = "King!"
+            crownGlow?.isHidden = false
+            speedProgressBar?.removeSpark()
+            
+            let rotateAction = SKAction.rotate(byAngle: (CGFloat.pi * 2), duration: 5)
+            crownGlow?.run(SKAction.repeatForever(rotateAction))
+        
         }
         pulse(node: currentSpeedLabel, scaleUpTo: 1.3, scaleDownTo: 1.0, duration: 0.7)
     }

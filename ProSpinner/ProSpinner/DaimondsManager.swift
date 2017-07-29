@@ -106,19 +106,25 @@ class DiamondsManager: BaseClass,
         
         let diamondSpeed = Diamond.diamondSpeed
         
-        if diamondSpeed > 6.0 && diamondSpeed < 6.005
+        if diamondSpeed > 6.5 && diamondSpeed < 6.505 // collected 15 diamonds
         {
-            timeInterval = 1.2
+            timeInterval = 1.25
             timer?.invalidate()
             reSchdeuleTimer()
         }
-        else  if diamondSpeed > 5.0 && diamondSpeed < 5.05
+        else  if diamondSpeed > 5.5 && diamondSpeed < 5.55 // collected 50 diamonds
+        {
+            timeInterval = 1.1
+            timer?.invalidate()
+            reSchdeuleTimer()
+        }
+        else  if diamondSpeed > 4.0 && diamondSpeed < 4.05 // collected 100 diamonds
         {
             timeInterval = 0.9
             timer?.invalidate()
             reSchdeuleTimer()
         }
-        else  if diamondSpeed > 2.0 && diamondSpeed < 2.05
+        else  if diamondSpeed > 1.5 && diamondSpeed < 1.55 // collected 200+ diamonds
         {
             timeInterval = 0.8
             timer?.invalidate()

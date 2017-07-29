@@ -112,6 +112,7 @@ class Constants
         case SpeedBarNode = "SpeedBarNode"
         case SpeedProgressBar = "SpeedProgressBar"
         case CurrentSpeed = "CurrentSpeed"
+        case crownGlow = "crownGlow"
     }
     
     enum NodesInRetryView: String

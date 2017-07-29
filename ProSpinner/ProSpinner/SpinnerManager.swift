@@ -163,7 +163,7 @@ class SpinnerManager: BaseClass,
         }
         else
         {
-            spinnerSpeed -= 0.01
+            spinnerSpeed -= 0.009
         }
         pulseSpinner()
     }

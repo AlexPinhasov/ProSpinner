@@ -10,11 +10,13 @@ import SpriteKit
 
 enum ProgressInProgressBar: Int
 {
-    case start     = -250
-    case qurter    = -230
-    case midPoint  = -185
-    case topQurter = -120
-    case king      = -10
+    case start          = -250 // start 0 x1
+    
+    case qurter         = -235 // 15 x2
+    case midPoint       = -200 // 50 x3
+    case topQurter      = -150 // 100 x4
+    case topKingQurter  = -80 // 170 x5
+    case king           = -10  // 240 king
 }
 
 class SpriteProgressBar: SKNode
@@ -31,6 +33,7 @@ class SpriteProgressBar: SKNode
         addFadeBackgroundToProgressBar()
         addActualProgressBarOverlay()
         self.addChild(cropNode)
+        spark.isHidden = false
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -71,12 +74,20 @@ class SpriteProgressBar: SKNode
     
     func updateProgressBar()
     {
-        log.debug()
-        progressBarYPosition += 1
-        sendDelegateOfPosition()
-        
-        spark.position = CGPoint(x: 0, y: progressBarYPosition + 125)
-        cropNode.maskNode?.position = CGPoint(x: 0, y: progressBarYPosition)
+        if progressBarYPosition < 0
+        {
+            log.debug()
+            progressBarYPosition += 1
+            sendDelegateOfPosition()
+            
+            spark.position = CGPoint(x: 0, y: progressBarYPosition + 125)
+            cropNode.maskNode?.position = CGPoint(x: 0, y: progressBarYPosition)
+        }
+    }
+    
+    func removeSpark()
+    {
+        spark.isHidden = true
     }
     
     func sendDelegateOfPosition()
@@ -88,6 +99,7 @@ class SpriteProgressBar: SKNode
         case ProgressInProgressBar.qurter.rawValue    : delegate?.didUpdateProgressBar(inPosition: .qurter)
         case ProgressInProgressBar.midPoint.rawValue  : delegate?.didUpdateProgressBar(inPosition: .midPoint)
         case ProgressInProgressBar.topQurter.rawValue : delegate?.didUpdateProgressBar(inPosition: .topQurter)
+        case ProgressInProgressBar.topKingQurter.rawValue : delegate?.didUpdateProgressBar(inPosition: .topKingQurter)
         case ProgressInProgressBar.king.rawValue      :
             delegate?.didUpdateProgressBar(inPosition: .king)
             UserDefaults.standard.set(true, forKey: NotifictionKey.userUnlockedKingHat.rawValue)
