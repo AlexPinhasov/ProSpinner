@@ -63,6 +63,7 @@ class LoadingViewController: UIViewController,Animateable
                 let spinnerArray = ArchiveManager.spinnersArrayInDisk
                 self.checkForCorruptedSpinnersObjects(inArray : spinnerArray)
                 self.loadNextScene()
+                self.loadSounds()
                 self.textures = spinnerArray.map({ (spinner) -> SKTexture in
                     
                     if let texture = spinner.texture
@@ -138,6 +139,16 @@ class LoadingViewController: UIViewController,Animateable
             secondViewController.loadingViewController = self
         }
         
+    }
+    
+    func loadSounds()
+    {
+        _ = SoundLibrary.CollectedDiamond
+        _ = SoundLibrary.blopSound
+        _ = SoundLibrary.spinnerChangedDirection
+        _ = SoundLibrary.spinnerUnlocked
+        _ = SoundLibrary.AlertSound
+        _ = SoundLibrary.Error
     }
     
     @objc func loadNextScene()
