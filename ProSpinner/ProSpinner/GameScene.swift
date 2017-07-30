@@ -29,10 +29,13 @@ class GameScene: SKScene,
     var retryView       : RetryView?
     var storeView       : StoreView?
     var sideMenuView    : SideMenuView?
+    var gameModeView    : GameModeView?
     
     var lastNodeTouchedName = ""
     
     var spinnerNode     : SKSpriteNode = SKSpriteNode()
+    
+    var selectedGameMode: GameMode?
     
 //  MARK: Scene life cycle
     override func didMove(to view: SKView)
@@ -115,9 +118,9 @@ class GameScene: SKScene,
                 switch name
                 {
                 case Constants.NodesInPlayNode.PlayLabel.rawValue:
-                    notifyGameStarted()
+                    gameModeView?.presentGameModeView(completion: nil)
                     enableSwipe = false
-                    sideMenuView?.hideSideMenu()
+                    
                     
                 case Constants.NodesInStoreView.StoreButton.rawValue:
                     storeView?.presentStoreView()
@@ -146,7 +149,8 @@ class GameScene: SKScene,
                 case Constants.NodesInRetryView.ExitButton.rawValue,
                      Constants.NodesInRetryView.MenuLines.rawValue,
                      Constants.NodesInRetryView.AlertViewBackground.rawValue,
-                     Constants.NodesInStoreView.StoreBackground.rawValue:
+                     Constants.NodesInStoreView.StoreBackground.rawValue,
+                     Constants.NodesInGameModeNode.GameModeBackground.rawValue:
                     
                     if storeView?.isHidden == false
                     {
@@ -154,7 +158,12 @@ class GameScene: SKScene,
                     }
                     else if retryView?.isHidden == false
                     {
+                        selectedGameMode = nil
                         hideRetryView()
+                    }
+                    else if gameModeView?.isHidden == false
+                    {
+                        hideGameModeView()
                     }
                     
                 case Constants.NodesInStoreView.smallPackButton.rawValue,
@@ -208,6 +217,23 @@ class GameScene: SKScene,
                     manuManager?.hideTutorial()
                     spinnerManager?.hideTutorial()
                     notifyGameStarted()
+                    
+                    
+                case Constants.NodesInGameModeNode.FreeSpinGameMode.rawValue,
+                     Constants.NodesInGameModeNode.GameModeAlert.rawValue,
+                    Constants.NodesInGameModeNode.KingHat.rawValue:
+                    gameModeView?.hideGameModeView()
+                    selectedGameMode = FreeSpinnerColorDropController(scene: self.scene)
+                    notifyGameStarted()
+                    sideMenuView?.hideSideMenu()
+                    
+                case Constants.NodesInGameModeNode.FixedSpinGameMode.rawValue,
+                     Constants.NodesInGameModeNode.GameModeAlert.rawValue,
+                     Constants.NodesInGameModeNode.CometDiamond.rawValue:
+                    gameModeView?.hideGameModeView()
+                    selectedGameMode = FixedSpinnerColorDropController(scene: self.scene)
+                    notifyGameStarted()
+                    sideMenuView?.hideSideMenu()
                     
                 default: break
                 }
@@ -267,8 +293,8 @@ class GameScene: SKScene,
                 default: break
                 }
             }
+            spinnerManager?.userTappedToSwitchSpinnerRotation(inPosition: positionInScene)
         }
-        spinnerManager?.rotateToOtherDirection()
     }
     
     func notificationsHandler(notification: NSNotification)
@@ -298,11 +324,11 @@ class GameScene: SKScene,
             sideMenuView?.hideSideMenu()
             GameStatus.Playing = true
             retryView?.gameStarted()
-            manuManager?.gameStarted()
-            diamondsManager?.gameStarted()
-            spinnerManager?.gameStarted()
+            manuManager?.gameStarted(withGameMode: selectedGameMode)
+            diamondsManager?.gameStarted(withGameMode: selectedGameMode)
+            spinnerManager?.gameStarted(withGameMode: selectedGameMode)
             manuManager?.showGameExplanation(startSpining: {
-                self.spinnerManager?.rotateToOtherDirection()
+                //self.spinnerManager?.userTappedToSwitchSpinnerRotation()
                 self.diamondsManager?.configureDiamonds()
             })
             CrashlyticsLogManager.gameStarted()
@@ -397,6 +423,16 @@ class GameScene: SKScene,
         {
             enableSwipe = true
             storeView?.hideStoreView()
+        }
+    }
+
+    private func hideGameModeView()
+    {
+        log.debug("")
+        if gameModeView?.finishedPresentingView == true
+        {
+            enableSwipe = true
+            gameModeView?.hideGameModeView()
         }
     }
     

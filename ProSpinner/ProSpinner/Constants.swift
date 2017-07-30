@@ -183,6 +183,19 @@ class Constants
         case loadingSpinner                 = "loadingSpinner"
     }
     
+    enum NodesInGameModeNode: String
+    {
+        case GameModeNode = "GameModeNode"
+        case GameModeBackground = "GameModeBackground"
+        case GameModeAlert = "GameModeAlert"
+        case FreeSpinNode = "FreeSpinNode"
+        case FixedSpinNode = "FixedSpinNode"
+        case FreeSpinGameMode = "FreeSpinGameMode"
+        case FixedSpinGameMode = "FixedSpinGameMode"
+        case selectGame = "selectGame"
+        case CometDiamond = "CometDiamond"
+        case KingHat = "KingHat"
+    }
 }
 
 let applicationReviewUrl = URL(string: "itms-apps://itunes.apple.com/app/id1257742091") // ProSpinner

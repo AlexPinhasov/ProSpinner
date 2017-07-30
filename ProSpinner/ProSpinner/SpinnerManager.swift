@@ -21,9 +21,14 @@ class SpinnerManager: BaseClass,
     
     fileprivate let rotateRightAngle = (CGFloat.pi * 2)
     fileprivate let rotateLeftAngle = -(CGFloat.pi * 2)
+
+    fileprivate let rotateRight = 120
+    fileprivate let rotateLeft  = -120
     
     var spinnerNode : SKSpriteNode?
     fileprivate var rotateAction: SKAction
+    
+    var selectedGameMode: GameMode?
 
 //  MARK: Private enums
     fileprivate enum Diraction
@@ -54,9 +59,10 @@ class SpinnerManager: BaseClass,
     }
 
 //  MARK: Public methods
-    func gameStarted()
+    func gameStarted(withGameMode selectedGameMode : GameMode?)
     {
         log.debug("")
+        self.selectedGameMode = selectedGameMode
         scaleDownSpinner()
         
         if ArchiveManager.mainSpinnerLocation != ArchiveManager.currentlyAtIndex
@@ -81,6 +87,7 @@ class SpinnerManager: BaseClass,
     {
         log.debug("")
         resetSpinner()
+        self.selectedGameMode = nil
     }
     
     func configureSpinner(withPlaceHolder spinner: SKSpriteNode) -> SKSpriteNode
@@ -123,37 +130,63 @@ class SpinnerManager: BaseClass,
         }
     }
     
-    func rotateToOtherDirection()
+    func userTappedToSwitchSpinnerRotation(inPosition position: CGPoint?)
+    {
+        guard let position = position else { return }
+        rotateToOtherDirection(inPosition: position)
+    }
+    
+    func rotateToOtherDirection(inPosition position: CGPoint)
     {
         log.debug("")
+        guard let selectedGameMode = selectedGameMode else { return }
         guard spiningToStratingPosition == false else { return }
         
         switch GameStatus.Playing
         {
         case true:
             spinnerNode?.removeAction(forKey: Constants.actionKeys.rotate.rawValue)
-
-            switch diraction
+            
+            switch selectedGameMode
             {
-                case .Left:
-                    diraction = .Right
-                    rotateAction = SKAction.rotate(byAngle: rotateRightAngle, duration: spinnerSpeed)
-                    
-                case .Right:
-                    diraction = .Left
-                    rotateAction = SKAction.rotate(byAngle: rotateLeftAngle, duration: spinnerSpeed)
+            case is FreeSpinnerColorDropController  : rotateFree()
+            case is FixedSpinnerColorDropController : position.x > 160 ? rotateFixed(toDirection: .Right) : rotateFixed(toDirection: .Left)
+            default: break
             }
             
-            spinnerNode?.run(SKAction.repeatForever(rotateAction),withKey: Constants.actionKeys.rotate.rawValue)
-            
-
             spinnerNode?.run(SoundLibrary.spinnerChangedDirection)
-            
+    
         case false:
             spinnerNode?.removeAction(forKey: Constants.actionKeys.rotate.rawValue)
         }
-        
     }
+    
+    func rotateFree()
+    {
+        switch diraction
+        {
+        case .Left:
+            diraction = .Right
+            rotateAction = SKAction.rotate(byAngle: rotateRightAngle, duration: spinnerSpeed)
+            
+        case .Right:
+            diraction = .Left
+            rotateAction = SKAction.rotate(byAngle: rotateLeftAngle, duration: spinnerSpeed)
+        }
+        
+        spinnerNode?.run(SKAction.repeatForever(rotateAction),withKey: Constants.actionKeys.rotate.rawValue)
+    }
+    
+    fileprivate func rotateFixed(toDirection directionToMove: Diraction)
+    {
+        switch directionToMove
+        {
+        case .Left: rotateAction = SKAction.rotate(byAngle: rotateRight.degreesToRadians, duration: 0.25)
+        case .Right: rotateAction = SKAction.rotate(byAngle: rotateLeft.degreesToRadians, duration: 0.25)
+        }
+        spinnerNode?.run(rotateAction)
+    }
+    
     func contactBegan()
     {
         log.debug("")

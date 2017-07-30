@@ -164,6 +164,7 @@ class LoadingViewController: UIViewController,Animateable
             scene.storeView         = scene.childNode(withName: Constants.NodesInStoreView.StoreView.rawValue) as? StoreView
             scene.retryView         = scene.childNode(withName: Constants.NodesInRetryView.RetryView.rawValue) as? RetryView
             scene.sideMenuView      = scene.childNode(withName: Constants.NodesInSideMenu.SideMenu.rawValue) as? SideMenuView
+            scene.gameModeView      = scene.childNode(withName: Constants.NodesInGameModeNode.GameModeNode.rawValue) as? GameModeView
             scene.physicsWorld.contactDelegate = scene
             
             scene.handleSpinnerConfiguration()

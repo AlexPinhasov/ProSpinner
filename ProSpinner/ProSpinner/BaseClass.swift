@@ -21,3 +21,8 @@ enum NotifictionKey: String
     case checkForNewSpinners    = "checkForNewSpinners"
     case userUnlockedKingHat    = "userUnlockedKingHat"
 }
+
+extension Int
+{
+    var degreesToRadians: CGFloat { return CGFloat(self) * .pi / 180 }
+}

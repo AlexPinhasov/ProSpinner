@@ -48,6 +48,8 @@ class ManuManager: BaseClass,
     internal var blueProgressBarPosition = CGPoint.zero
     internal var greenProgressBarPosition = CGPoint.zero
     
+    var selectedGameMode: GameMode?
+    
 //  MARK: Init methods
     init(inScene scene: SKScene?)
     {
@@ -90,12 +92,13 @@ class ManuManager: BaseClass,
     }
     
 //  MARK: Game life cycle
-    func gameStarted()
+    func gameStarted(withGameMode selectedGameMode: GameMode?)
     {
         log.debug("")
+        self.selectedGameMode = selectedGameMode
         hideArrows()
         hideManuItems()
-        speedBarNode?.showSpeedProgressBar()
+        showUIForGameMode()
     }
     
     func tutorialStarted()
@@ -111,12 +114,39 @@ class ManuManager: BaseClass,
         log.debug("")
         showArrows()
         updateHighScore()
-        speedBarNode?.removeSpeedProgressBar()
+        hideUIForGameMode()
+        self.selectedGameMode = nil
     }
     
     func contactBegan()
     {
         speedBarNode?.updateSpeedProgressBar()
+    }
+    
+    func showUIForGameMode()
+    {
+        guard let selectedGameMode = selectedGameMode else { return }
+        
+        switch selectedGameMode
+        {
+        case is FreeSpinnerColorDropController  : speedBarNode?.showSpeedProgressBar()
+        case is FixedSpinnerColorDropController : break
+        default: break
+        }
+
+    }
+
+    func hideUIForGameMode()
+    {
+        guard let selectedGameMode = selectedGameMode else { return }
+        
+        switch selectedGameMode
+        {
+        case is FreeSpinnerColorDropController  : speedBarNode?.removeSpeedProgressBar()
+        case is FixedSpinnerColorDropController : break
+        default: break
+        }
+
     }
     
 //  MARK: Spinner Locked/Unlocked master methods

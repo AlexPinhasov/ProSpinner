@@ -12,10 +12,7 @@ import GameplayKit
 class DiamondsManager: BaseClass,
                        Animateable
 {
-//  MARK: Properties
-    fileprivate var timer : Timer?
-    fileprivate var timeInterval = 1.5
-    
+//  MARK: Properties    
     fileprivate var originalDiamondNodeSize: CGSize = CGSize(width: 45, height: 35)
     
     fileprivate var redDiamondLocation: CGPoint!
@@ -38,8 +35,8 @@ class DiamondsManager: BaseClass,
     fileprivate var diamondsIsAtStartingPosition: Bool = true
     fileprivate var highScoreLabel: SKLabelNode?
 
-    private var nextXLocation: CGFloat = 160.0
-
+    var selectedGameMode: GameMode?
+    
     fileprivate enum Count
     {
         case down
@@ -55,9 +52,10 @@ class DiamondsManager: BaseClass,
     }
     
 //  MARK: Public Game methods
-    func gameStarted()
+    func gameStarted(withGameMode selectedGameMode: GameMode?)
     {
         log.debug("")
+        self.selectedGameMode = selectedGameMode
         fadeOutDiamondsAndTheirCount()
         showHighScoreLabel()
     }
@@ -78,77 +76,37 @@ class DiamondsManager: BaseClass,
             scene?.removeChildren(in: diamondsInScene)
         }
         addCollectedDiamondsToLabelScene()
+        self.selectedGameMode = nil
     }
     
+//  GameMode Protocol methods
     func configureDiamonds()
     {
         log.debug("")
-        timer?.invalidate()
-        reSchdeuleTimer()
-    }
-
-    @objc func spawnDiamonds()
-    {
-        log.debug("")
-        guard let scene = scene else { return }
-        let nextDiamond = randomizeDiamondType()
-        
-        switch GameStatus.Playing
-        {
-        case true:
-            nextDiamond.position = CGPoint(x: nextXLocation, y: scene.frame.height)
-            nextDiamond.zPosition = 5
-            scene.addChild(nextDiamond)
-            nextXLocation = calculateXLocation()
-        
-        case false: nextDiamond.removeAllActions()
-        }
-        
-        let diamondSpeed = Diamond.diamondSpeed
-        
-        if diamondSpeed > 6.5 && diamondSpeed < 6.505 // collected 15 diamonds
-        {
-            timeInterval = 1.25
-            timer?.invalidate()
-            reSchdeuleTimer()
-        }
-        else  if diamondSpeed > 5.5 && diamondSpeed < 5.55 // collected 50 diamonds
-        {
-            timeInterval = 1.1
-            timer?.invalidate()
-            reSchdeuleTimer()
-        }
-        else  if diamondSpeed > 4.0 && diamondSpeed < 4.05 // collected 100 diamonds
-        {
-            timeInterval = 0.9
-            timer?.invalidate()
-            reSchdeuleTimer()
-        }
-        else  if diamondSpeed > 1.5 && diamondSpeed < 1.55 // collected 200+ diamonds
-        {
-            timeInterval = 0.8
-            timer?.invalidate()
-            reSchdeuleTimer()
-        }
-    }
-
-    func resetDiamondsTimer()
-    {
-        log.debug("")
-        Diamond.diamondSpeed = 7.0
-        timeInterval = 1.5
-        timer?.invalidate()
-        
-        fadeInDiamondAndTheirCount()
+        selectedGameMode?.configureDiamonds()
     }
     
     func reSchdeuleTimer()
     {
         log.debug("")
-        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(spawnDiamonds), userInfo: nil, repeats: true)
+        selectedGameMode?.reSchdeuleTimer()
     }
     
+    @objc func spawnDiamonds()
+    {
+        log.debug("")
+        selectedGameMode?.spawnDiamonds()
+    }
     
+    func resetDiamondsTimer()
+    {
+        log.debug("")
+        selectedGameMode?.resetDiamondsTimer()
+        fadeInDiamondAndTheirCount()
+    }
+
+    
+    //End
     func getDiamondsCount() -> DiamondsTuple
     {
         log.debug("")
@@ -194,14 +152,7 @@ class DiamondsManager: BaseClass,
         log.debug("")
         playTickSound()
         
-        if Diamond.diamondSpeed <= 1.85
-        {
-            Diamond.diamondSpeed = 1.85
-        }
-        else
-        {
-            Diamond.diamondSpeed -= 0.03
-        }
+        selectedGameMode?.updateDiamondSpeed()
         
         collectedDiamondOf(kind: diamondNode)
     }
@@ -505,27 +456,6 @@ class DiamondsManager: BaseClass,
         var highScore = Int(highScoreLabel.text ?? "0") ?? 0
         highScore += 1
         highScoreLabel.text = String(highScore)
-    }
-    
-    private func randomizeDiamondType() -> Diamond
-    {
-        log.debug("")
-        let random = arc4random_uniform(3)+1
-        switch random
-        {
-        case Constants.DiamondIntColor.Blue.rawValue     : return blueDiamond()
-        case Constants.DiamondIntColor.Red.rawValue      : return redDiamond()
-        case Constants.DiamondIntColor.Green.rawValue    : return greenDiamond()
-        default                             : break
-        }
-        return blueDiamond()
-    }
-
-    private func calculateXLocation() -> CGFloat
-    {
-        log.debug("")
-        let leftLocation = Diamond.diamondsXPosition - 60
-        return CGFloat(arc4random_uniform(120)+UInt32(leftLocation))
     }
 }
 

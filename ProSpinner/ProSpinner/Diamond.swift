@@ -12,6 +12,8 @@ import GameplayKit
 class Diamond: SKSpriteNode
 {
     static var diamondSpeed = 7.0
+    static var diamondRotationSpeed = 11.5
+    static var diamondRotationAngle : CGFloat = 30
     static var diamondsXPosition : CGFloat = 1.0
     
     init()
@@ -48,7 +50,7 @@ class Diamond: SKSpriteNode
         
         // Actions
         let fallAction : SKAction = SKAction.moveTo(y: -1, duration: Diamond.diamondSpeed)
-        let rotate     : SKAction = SKAction.rotate(byAngle: 30, duration: 11.5)
+        let rotate     : SKAction = SKAction.rotate(byAngle: (Diamond.diamondRotationAngle * -1.0), duration: Diamond.diamondRotationSpeed)
         self.run(SKAction.repeatForever(fallAction))
         self.run(SKAction.repeatForever(rotate))
         

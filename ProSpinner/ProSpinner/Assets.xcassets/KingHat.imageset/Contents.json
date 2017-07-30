@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Crown.png",
+      "filename" : "KingCrown.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Crown@2x.png",
+      "filename" : "KingCrown@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Crown@3x.png",
+      "filename" : "KingCrown@3x.png",
       "scale" : "3x"
     }
   ],
