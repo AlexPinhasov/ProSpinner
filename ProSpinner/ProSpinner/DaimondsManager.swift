@@ -71,10 +71,11 @@ class DiamondsManager: BaseClass,
         log.debug("")
         resetDiamondsTimer()
         hideHighScoreLabel()
-        if let diamondsInScene = scene?.children.filter({  if $0 is Diamond { return true } ; return false })
+        if let diamondsInScene = scene?.children.filter({  if ($0 is Diamond)||($0 is SKEmitterNode) { return true } ; return false })
         {
             scene?.removeChildren(in: diamondsInScene)
         }
+        
         addCollectedDiamondsToLabelScene()
         self.selectedGameMode = nil
     }

@@ -31,6 +31,12 @@ class FixedSpinnerColorDropController: BaseGameMode,
         case true:
             nextDiamond.position = CGPoint(x: nextXLocation, y: scene.frame.height)
             nextDiamond.zPosition = 5
+            let emitter = SKEmitterNode(fileNamed: "Comet")!
+            emitter.name = "comet"
+            emitter.position = CGPoint(x: nextXLocation, y: scene.frame.height)
+            emitter.zPosition = 4
+            emitter.run(SKAction.moveTo(y: -1, duration: Diamond.diamondSpeed))
+            scene.addChild(emitter)
             scene.addChild(nextDiamond)
             nextXLocation = calculateXLocation()
             
@@ -74,8 +80,8 @@ class FixedSpinnerColorDropController: BaseGameMode,
             {
                 random += 1
             }
-            lastRandomDiamond = random
         }
+        lastRandomDiamond = random
         
         switch random
         {
@@ -97,6 +103,13 @@ class FixedSpinnerColorDropController: BaseGameMode,
     
     override func updateDiamondSpeed()
     {
+        guard let scene = scene else { return }
+        
+        if let comet = scene.childNode(withName: "comet")
+        {
+            scene.removeChildren(in: [comet])
+        }
+        
         if Diamond.diamondSpeed <= 1.85
         {
             Diamond.diamondSpeed = 1.85

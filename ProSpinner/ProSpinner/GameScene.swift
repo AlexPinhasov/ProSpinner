@@ -328,7 +328,7 @@ class GameScene: SKScene,
             diamondsManager?.gameStarted(withGameMode: selectedGameMode)
             spinnerManager?.gameStarted(withGameMode: selectedGameMode)
             manuManager?.showGameExplanation(startSpining: {
-                //self.spinnerManager?.userTappedToSwitchSpinnerRotation()
+                self.spinnerManager?.userTappedToSwitchSpinnerRotation(inPosition: CGPoint.zero)
                 self.diamondsManager?.configureDiamonds()
             })
             CrashlyticsLogManager.gameStarted()

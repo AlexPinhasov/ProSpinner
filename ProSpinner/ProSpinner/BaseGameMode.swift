@@ -36,6 +36,7 @@ class BaseGameMode
     {
         log.debug("")
         timer?.invalidate()
+        resetDiamondsTimer()
         reSchdeuleTimer()
     }
     
