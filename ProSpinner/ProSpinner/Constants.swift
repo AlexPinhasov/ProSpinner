@@ -195,6 +195,7 @@ class Constants
         case selectGame = "selectGame"
         case CometDiamond = "CometDiamond"
         case KingHat = "KingHat"
+        case FixedGameModeBackground = "FixedGameModeBackground"
     }
 }
 

@@ -35,6 +35,7 @@ class ManuManager: BaseClass,
     private var leftArrow        : SKSpriteNode?
     private var rightArrow       : SKSpriteNode?
     
+    private var fixedGameModeBackground : SKNode?
     fileprivate var gameExplanation  : SKNode?
     fileprivate var spinnerLock  : SKSpriteNode?
     
@@ -79,6 +80,8 @@ class ManuManager: BaseClass,
         lockedSpinnerView       = scene?.childNode(withName: Constants.NodesInLockedSpinnerView.LockedSpinnerNode.rawValue) as? LockedSpinnerNode
         
         spinnerLock             = scene?.childNode(withName: Constants.NodesInLockedSpinnerView.SpinnerLock.rawValue) as? SKSpriteNode
+        
+        fixedGameModeBackground = scene?.childNode(withName: Constants.NodesInGameModeNode.FixedGameModeBackground.rawValue)
     }
 
 //  MARK: Public methods
@@ -130,10 +133,9 @@ class ManuManager: BaseClass,
         switch selectedGameMode
         {
         case is FreeSpinnerColorDropController  : speedBarNode?.showSpeedProgressBar()
-        case is FixedSpinnerColorDropController : break
+        case is FixedSpinnerColorDropController : fixedGameModeBackground?.isHidden = false
         default: break
         }
-
     }
 
     func hideUIForGameMode()
@@ -143,10 +145,9 @@ class ManuManager: BaseClass,
         switch selectedGameMode
         {
         case is FreeSpinnerColorDropController  : speedBarNode?.removeSpeedProgressBar()
-        case is FixedSpinnerColorDropController : break
+        case is FixedSpinnerColorDropController : fixedGameModeBackground?.isHidden = true
         default: break
         }
-
     }
     
 //  MARK: Spinner Locked/Unlocked master methods

@@ -77,8 +77,8 @@ class RetryView: SKNode
 //  MARK: Presentation methods
     func presentRetryView(completion block: (() -> Void)?)
     {
-        if finishedPresentingView == false
-        {
+        //if finishedPresentingView == false
+        //{
             self.isHidden = false
             AlertViewBackground?.run(SKAction.fadeIn(withDuration: 0.2))
             {
@@ -91,13 +91,13 @@ class RetryView: SKNode
             }
 
             rotateRetryButton()
-        }
+        //}
     }
     
     func hideRetryView()
     {
-        if finishedPresentingView
-        {
+       // if finishedPresentingView
+        //{
             secondsPassed = 0.0
             EndGameAlert?.run(SKAction.move(to: CGPoint(x: 0, y: 500), duration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1))
             {
@@ -105,7 +105,7 @@ class RetryView: SKNode
                 self.isHidden = true
             }
             self.AlertViewBackground?.run(SKAction.sequence([ SKAction.wait(forDuration: 0.2) , SKAction.fadeOut(withDuration: 0.1) ]))
-        }
+        //}
     }
     
     func setDiamondsCollected(diamonds: DiamondsTuple)

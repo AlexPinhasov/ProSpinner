@@ -31,7 +31,7 @@ class GameModeView: SKNode
     private func connectOutletsToScene()
     {
         gameModeBackground    = self.childNode(withName: Constants.NodesInGameModeNode.GameModeBackground.rawValue) as? SKSpriteNode
-
+        
         freeSpinNode         = gameModeBackground?.childNode(withName: Constants.NodesInGameModeNode.FreeSpinNode.rawValue)
         fixedSpinNode         = gameModeBackground?.childNode(withName: Constants.NodesInGameModeNode.FixedSpinNode.rawValue)
         
