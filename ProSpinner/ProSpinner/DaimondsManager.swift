@@ -81,7 +81,6 @@ class DiamondsManager: BaseClass,
         }
         
         addCollectedDiamondsToLabelScene()
-        self.selectedGameMode = nil
     }
     
 //  GameMode Protocol methods

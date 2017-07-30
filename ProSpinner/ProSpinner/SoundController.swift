@@ -42,6 +42,9 @@ class SoundController
         audioPlayerNode.scheduleBuffer(audioFileBuffer, at: nil, options: .loops, completionHandler: nil)
         
         engine.connect(audioPlayerNode, to: engine.mainMixerNode, format: audioFileBuffer.format)
+        
+        guard AppDelegate.applicationIsActive else { return }
+    
         do
         {
             engine.prepare()
@@ -55,6 +58,8 @@ class SoundController
     
     static func setUpSoundEngine()
     {
+        guard AppDelegate.applicationIsActive else { return }
+        
         if let fileString = Bundle.main.path(forResource: "BackgroundMusic", ofType: "wav")
         {
             let url = URL(fileURLWithPath: fileString)
@@ -70,6 +75,8 @@ class SoundController
     
     static func startEngineIfNeeded()
     {
+        guard AppDelegate.applicationIsActive else { return }
+        
         if self.engine.isRunning == false && ArchiveManager.shouldPlaySound
         {
             do
@@ -86,6 +93,8 @@ class SoundController
     
     static func playSoundIfNeeded()
     {
+        guard AppDelegate.applicationIsActive else { return }
+        
         if canPlayAudio
         {
             startEngineIfNeeded()

@@ -87,7 +87,6 @@ class SpinnerManager: BaseClass,
     {
         log.debug("")
         resetSpinner()
-        self.selectedGameMode = nil
     }
     
     func configureSpinner(withPlaceHolder spinner: SKSpriteNode) -> SKSpriteNode

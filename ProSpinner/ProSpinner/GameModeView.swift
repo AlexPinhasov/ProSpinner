@@ -18,6 +18,9 @@ class GameModeView: SKNode
     private var freeSpinButton: SKSpriteNode?
     private var fixedSpinButton: SKSpriteNode?
     private var selectGame: SKSpriteNode?
+
+    private var freeHighScoreLabel: SKLabelNode?
+    private var fixedHighScoreLabel: SKLabelNode?
     
     var finishedPresentingView: Bool = false
     
@@ -36,7 +39,10 @@ class GameModeView: SKNode
         fixedSpinNode         = gameModeBackground?.childNode(withName: Constants.NodesInGameModeNode.FixedSpinNode.rawValue)
         
         freeSpinButton         = freeSpinNode?.childNode(withName: Constants.NodesInGameModeNode.FreeSpinGameMode.rawValue) as? SKSpriteNode
+        freeHighScoreLabel         = freeSpinButton?.childNode(withName: Constants.NodesInGameModeNode.FreeHighScoreLabel.rawValue) as? SKLabelNode
+        
         fixedSpinButton         = fixedSpinNode?.childNode(withName: Constants.NodesInGameModeNode.FixedSpinGameMode.rawValue) as? SKSpriteNode
+        fixedHighScoreLabel     = fixedSpinButton?.childNode(withName: Constants.NodesInGameModeNode.FixedHighScoreLabel.rawValue) as? SKLabelNode
         
         selectGame         = freeSpinNode?.childNode(withName: Constants.NodesInGameModeNode.selectGame.rawValue) as? SKSpriteNode
         
@@ -51,13 +57,16 @@ class GameModeView: SKNode
 
         fixedSpinButton?.xScale = 0.0
         fixedSpinButton?.yScale = 0.0
-        
     }
     
     func presentGameModeView(completion block: (() -> Void)?)
     {
         if finishedPresentingView == false
         {
+            let scorePrefix = "score: "
+            fixedHighScoreLabel?.text = scorePrefix + String(ArchiveManager.highScoreRecordFixed)
+            freeHighScoreLabel?.text = scorePrefix + String(ArchiveManager.highScoreRecordFreeSpin)
+            
             self.isHidden = false
             gameModeBackground?.run(SKAction.fadeIn(withDuration: 0.2))
             {

@@ -108,9 +108,10 @@ class RetryView: SKNode
         //}
     }
     
-    func setDiamondsCollected(diamonds: DiamondsTuple)
+    func setDiamondsCollected(diamonds: DiamondsTuple, selectedGameMode: GameMode?)
     {
         guard let diamonds = diamonds else { return }
+        guard let selectedGameMode = selectedGameMode else { return }
         
         let redPlusSign = diamonds.red > 0 ? "+" : ""
         let bluePlusSign = diamonds.blue > 0 ? "+" : ""
@@ -121,9 +122,21 @@ class RetryView: SKNode
         self.GreenDiamondLabel?.text = greenPlusSign + String(diamonds.green)
         self.TotalDiamondsCollected?.text = String(diamonds.red + diamonds.blue + diamonds.green)
         
-        ArchiveManager.highScoreRecord = (diamonds.red + diamonds.blue + diamonds.green)
+        var highScoreNSNumber: NSNumber = 0
         
-        let highScoreNSNumber = NSNumber(value: ArchiveManager.highScoreRecord)
+        switch selectedGameMode
+        {
+        case is FreeSpinnerColorDropController:
+            ArchiveManager.highScoreRecordFreeSpin = (diamonds.red + diamonds.blue + diamonds.green)
+            highScoreNSNumber = NSNumber(value: ArchiveManager.highScoreRecordFreeSpin)
+            
+        case is FixedSpinnerColorDropController:
+            ArchiveManager.highScoreRecordFixed = (diamonds.red + diamonds.blue + diamonds.green)
+            highScoreNSNumber = NSNumber(value: ArchiveManager.highScoreRecordFixed)
+            
+        default: break
+        }
+        
         CrashlyticsLogManager.gameEnded(withScore: highScoreNSNumber)
     }
  

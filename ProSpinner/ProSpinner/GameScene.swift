@@ -158,7 +158,6 @@ class GameScene: SKScene,
                     }
                     else if retryView?.isHidden == false
                     {
-                        selectedGameMode = nil
                         hideRetryView()
                     }
                     else if gameModeView?.isHidden == false
@@ -221,7 +220,10 @@ class GameScene: SKScene,
                     
                 case Constants.NodesInGameModeNode.FreeSpinGameMode.rawValue,
                      Constants.NodesInGameModeNode.GameModeAlert.rawValue,
-                    Constants.NodesInGameModeNode.KingHat.rawValue:
+                     Constants.NodesInGameModeNode.KingHat.rawValue,
+                     Constants.NodesInGameModeNode.FreeHighScoreLabel.rawValue,
+                     Constants.NodesInGameModeNode.freeText.rawValue:
+                    
                     gameModeView?.hideGameModeView()
                     selectedGameMode = FreeSpinnerColorDropController(scene: self.scene)
                     notifyGameStarted()
@@ -229,7 +231,10 @@ class GameScene: SKScene,
                     
                 case Constants.NodesInGameModeNode.FixedSpinGameMode.rawValue,
                      Constants.NodesInGameModeNode.GameModeAlert.rawValue,
-                     Constants.NodesInGameModeNode.CometDiamond.rawValue:
+                     Constants.NodesInGameModeNode.CometDiamond.rawValue,
+                     Constants.NodesInGameModeNode.FixedHighScoreLabel.rawValue,
+                     Constants.NodesInGameModeNode.fixedText.rawValue:
+                    
                     gameModeView?.hideGameModeView()
                     selectedGameMode = FixedSpinnerColorDropController(scene: self.scene)
                     notifyGameStarted()
@@ -319,7 +324,7 @@ class GameScene: SKScene,
     func notifyGameStarted()
     {
         log.debug("")
-        if  ArchiveManager.gameExplantionDidShow
+        if  ArchiveManager.gameExplantionDidShow && GameStatus.Playing == false
         {
             sideMenuView?.hideSideMenu()
             GameStatus.Playing = true
@@ -348,7 +353,7 @@ class GameScene: SKScene,
         {
             GameStatus.Playing = false
             retryView?.gameOver()
-            retryView?.setDiamondsCollected(diamonds: diamondsManager?.getCollectedDiamondsDuringGame())
+            retryView?.setDiamondsCollected(diamonds: diamondsManager?.getCollectedDiamondsDuringGame(), selectedGameMode: selectedGameMode)
             retryView?.presentRetryView()
             {
                 self.handleInterstitialCount()

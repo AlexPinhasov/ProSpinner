@@ -91,7 +91,7 @@ class ManuManager: BaseClass,
         initSpriteFromScene()
         showArrows()
         saveProgressBarPosition()
-        updateHighScore()
+        updateBestScore()
     }
     
 //  MARK: Game life cycle
@@ -116,9 +116,8 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         showArrows()
-        updateHighScore()
+        updateBestScore()
         hideUIForGameMode()
-        self.selectedGameMode = nil
     }
     
     func contactBegan()
@@ -224,13 +223,21 @@ class ManuManager: BaseClass,
         }
     }
     
-    private func updateHighScore()
+    private func updateBestScore()
     {
         log.debug("")
-        let highScorePrefix = "High Score: "
-        let actualHighScore = String(ArchiveManager.highScoreRecord)
+        let bestScorePrefix = "Best: "
+        let actualFreeSpinHighScore = ArchiveManager.highScoreRecordFreeSpin
+        let actualFixedSpinHighScore = ArchiveManager.highScoreRecordFixed
         
-        self.highScoreRecord?.text = highScorePrefix + actualHighScore
+        if actualFreeSpinHighScore > actualFixedSpinHighScore
+        {
+            self.highScoreRecord?.text = bestScorePrefix + String(actualFreeSpinHighScore)
+        }
+        else
+        {
+            self.highScoreRecord?.text = bestScorePrefix + String(actualFixedSpinHighScore)
+        }
     }
     
     private func pointDirectionArrowsMoveAction()
@@ -328,11 +335,14 @@ class ManuManager: BaseClass,
     func showTutorial()
     {
         log.debug("")
-        ArchiveManager.gameExplantionDidShow = true
-        gameExplanation?.position.y = 95
-        gameTutorialNode = self.scene?.childNode(withName: Constants.NodeInExplainGameNode.TutorialNode.rawValue) as? TutorialNode
-        gameExplanation?.run(SKAction.fadeIn(withDuration: 0.5))
-        gameTutorialNode?.showNode()
+        if ArchiveManager.gameExplantionDidShow == false
+        {
+            ArchiveManager.gameExplantionDidShow = true
+            gameExplanation?.position.y = 76
+            gameTutorialNode = self.scene?.childNode(withName: Constants.NodeInExplainGameNode.TutorialNode.rawValue) as? TutorialNode
+            gameExplanation?.run(SKAction.fadeIn(withDuration: 0.5))
+            gameTutorialNode?.showNode()
+        }
     }
     
     func hideTutorial()

@@ -196,6 +196,10 @@ class Constants
         case CometDiamond = "CometDiamond"
         case KingHat = "KingHat"
         case FixedGameModeBackground = "FixedGameModeBackground"
+        case FixedHighScoreLabel = "FixedHighScoreLabel"
+        case FreeHighScoreLabel = "FreeHighScoreLabel"
+        case freeText = "freeText"
+        case fixedText = "fixedText"
     }
 }
 
