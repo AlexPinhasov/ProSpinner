@@ -47,11 +47,14 @@ class PurchaseManager
         let productSet : Set<String> = [appBundleId + "." + RegisteredPurchase.SmallDiamondPack.rawValue,
                                         appBundleId + "." + RegisteredPurchase.BigDiamondPack.rawValue]
 
-        NetworkActivityIndicatorManager.networkOperationStarted()
-        SwiftyStoreKit.retrieveProductsInfo(productSet) { result in
-            NetworkActivityIndicatorManager.networkOperationFinished()
-            
-            block(result)
+        DispatchQueue.background.async
+        {
+            NetworkActivityIndicatorManager.networkOperationStarted()
+            SwiftyStoreKit.retrieveProductsInfo(productSet) { result in
+                NetworkActivityIndicatorManager.networkOperationFinished()
+                
+                block(result)
+            }
         }
     }
     
@@ -61,28 +64,31 @@ class PurchaseManager
         rootViewController.view.isUserInteractionEnabled = false
 
         NetworkActivityIndicatorManager.networkOperationStarted()
-        SwiftyStoreKit.purchaseProduct(appBundleId + "." + registeredPurchase.rawValue, atomically: true) { result in
-            NetworkActivityIndicatorManager.networkOperationFinished()
-            
-            rootViewController.view.isUserInteractionEnabled = true
-            if case .success(let purchase) = result
-            {
-                block(registeredPurchase , true)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.reloadLockedViewAfterPurchase.rawValue), object: nil)
-                CrashlyticsLogManager.logPurchase(withProduct : purchase)
+        DispatchQueue.background.async
+        {
+            SwiftyStoreKit.purchaseProduct(appBundleId + "." + registeredPurchase.rawValue, atomically: true) { result in
+                NetworkActivityIndicatorManager.networkOperationFinished()
                 
-                if purchase.needsFinishTransaction
+                rootViewController.view.isUserInteractionEnabled = true
+                if case .success(let purchase) = result
                 {
-                    SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    block(registeredPurchase , true)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.reloadLockedViewAfterPurchase.rawValue), object: nil)
+                    CrashlyticsLogManager.logPurchase(withProduct : purchase)
+                    
+                    if purchase.needsFinishTransaction
+                    {
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
                 }
-            }
-            else if case .error = result
-            {
-                block(registeredPurchase , false)
-            }
-            
-            if let alert = self.rootViewController.alertForPurchaseResult(result) {
-                PurchaseManager.rootViewController.showAlert(alert)
+                else if case .error = result
+                {
+                    block(registeredPurchase , false)
+                }
+                
+                if let alert = self.rootViewController.alertForPurchaseResult(result) {
+                    PurchaseManager.rootViewController.showAlert(alert)
+                }
             }
         }
     }

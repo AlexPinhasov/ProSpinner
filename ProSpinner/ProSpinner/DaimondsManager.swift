@@ -49,6 +49,10 @@ class DiamondsManager: BaseClass,
         super.init()
         self.scene = scene
         highScoreLabel = self.scene?.childNode(withName: "HighScore") as? SKLabelNode
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateDiamondLabel),
+                                               name: NSNotification.Name(rawValue: NotificationName.reloadLockedViewAfterPurchase.rawValue),
+                                               object: nil)
     }
     
 //  MARK: Public Game methods
@@ -137,8 +141,8 @@ class DiamondsManager: BaseClass,
         var amountToAdd = 0
         switch purchaseType
         {
-        case .SmallDiamondPack : amountToAdd = 100
-        case .BigDiamondPack   : amountToAdd = 300
+        case .SmallDiamondPack : amountToAdd = 300
+        case .BigDiamondPack   : amountToAdd = 500
         }
         
         Diamond.redCounter += amountToAdd
@@ -447,6 +451,15 @@ class DiamondsManager: BaseClass,
             
         default: break
         }
+    }
+    
+    @objc fileprivate func updateDiamondLabel()
+    {
+        log.debug("")
+
+        redDiamondLabelNode.diamondsPlayerHave.text = String(Diamond.redCounter)
+        blueDiamondLabelNode.diamondsPlayerHave.text = String(Diamond.blueCounter)
+        greenDiamondLabelNode.diamondsPlayerHave.text = String(Diamond.greenCounter)
     }
 
     private func updateHighScore()

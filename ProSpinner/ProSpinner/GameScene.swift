@@ -383,7 +383,10 @@ class GameScene: SKScene,
     func reloadLockedViewAfterPurchase()
     {
         log.debug("")
-        handleLockViewAppearance()
+        DispatchQueue.main.async
+        {
+            self.handleLockViewAppearance()
+        }
     }
     
     private func handleLockViewAppearance()

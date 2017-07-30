@@ -101,11 +101,11 @@ class StoreView: SKNode
         switch registeredPurchase
         {
         case .SmallDiamondPack:
-            diamondBought = "+100"
+            diamondBought = "+300"
             packageTexture?.texture = SKTexture(imageNamed: "DiamondGroupSmall")
             
         case .BigDiamondPack:
-            diamondBought = "+300"
+            diamondBought = "+500"
             packageTexture?.texture = SKTexture(imageNamed: "DiamondGroupLarge")
             
         }
