@@ -13,7 +13,7 @@ struct FirstInstallSpinners
     static func getSpinnersArray() -> [Spinner]
     {
         UserDefaults.standard.set(nil, forKey: "Spinners")
-        UserDefaults.standard.set(0  , forKey: UserDefaultKeys.highScoreFree.rawValue)
+        UserDefaults.standard.set(0  , forKey: UserDefaultKeys.highScore.rawValue)
         UserDefaults.standard.set(0  , forKey: UserDefaultKeys.highScoreFixed.rawValue)
         
         var spinnerArray = [Spinner]()

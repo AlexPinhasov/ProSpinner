@@ -227,7 +227,7 @@ class ManuManager: BaseClass,
     {
         log.debug("")
         let bestScorePrefix = "Best: "
-        let actualFreeSpinHighScore = ArchiveManager.highScoreRecordFreeSpin
+        let actualFreeSpinHighScore = ArchiveManager.highScoreRecord
         let actualFixedSpinHighScore = ArchiveManager.highScoreRecordFixed
         
         if actualFreeSpinHighScore > actualFixedSpinHighScore

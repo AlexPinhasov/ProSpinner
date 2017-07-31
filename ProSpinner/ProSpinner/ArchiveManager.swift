@@ -18,7 +18,7 @@ enum UserDefaultKeys: String
     case interstitialCount          = "interstitalCount"
     case spinnersInDisk             = "Spinners"
     case firstTimeRun               = "firstTimeRun"
-    case highScoreFree              = "highScoreFree"
+    case highScore                  = "highScore"
     case highScoreFixed             = "highScoreFixed"
     case muteSound                  = "muteSound"
     case tutorial                   = "tutorial"
@@ -162,19 +162,19 @@ class ArchiveManager
         return [Spinner]()
     }
     
-    static var highScoreRecordFreeSpin : Int
+    static var highScoreRecord : Int
     {
         get
         {
             log.debug("")
-            return UserDefaults.standard.integer(forKey: UserDefaultKeys.highScoreFree.rawValue)
+            return UserDefaults.standard.integer(forKey: UserDefaultKeys.highScore.rawValue)
         }
         set
         {
             log.debug("")
-            if newValue > highScoreRecordFreeSpin
+            if newValue > highScoreRecord
             {
-                UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.highScoreFree.rawValue)
+                UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.highScore.rawValue)
                 UserDefaults.standard.synchronize()
             }
         }

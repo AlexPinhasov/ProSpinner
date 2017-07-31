@@ -127,8 +127,8 @@ class RetryView: SKNode
         switch selectedGameMode
         {
         case is FreeSpinnerColorDropController:
-            ArchiveManager.highScoreRecordFreeSpin = (diamonds.red + diamonds.blue + diamonds.green)
-            highScoreNSNumber = NSNumber(value: ArchiveManager.highScoreRecordFreeSpin)
+            ArchiveManager.highScoreRecord = (diamonds.red + diamonds.blue + diamonds.green)
+            highScoreNSNumber = NSNumber(value: ArchiveManager.highScoreRecord)
             
         case is FixedSpinnerColorDropController:
             ArchiveManager.highScoreRecordFixed = (diamonds.red + diamonds.blue + diamonds.green)

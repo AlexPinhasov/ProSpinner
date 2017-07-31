@@ -50,7 +50,8 @@ class PlayNode: SKNode,
     
     func showKingHatIfNeeded()
     {
-        if UserDefaults.standard.bool(forKey: NotifictionKey.userUnlockedKingHat.rawValue) == true
+        if UserDefaults.standard.bool(forKey: NotifictionKey.userUnlockedKingHat.rawValue) == true ||
+           ArchiveManager.highScoreRecord >= 250
         {
             kingHat?.isHidden = false
         }

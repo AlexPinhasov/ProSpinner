@@ -65,7 +65,7 @@ class GameModeView: SKNode
         {
             let scorePrefix = "score: "
             fixedHighScoreLabel?.text = scorePrefix + String(ArchiveManager.highScoreRecordFixed)
-            freeHighScoreLabel?.text = scorePrefix + String(ArchiveManager.highScoreRecordFreeSpin)
+            freeHighScoreLabel?.text = scorePrefix + String(ArchiveManager.highScoreRecord)
             
             self.isHidden = false
             gameModeBackground?.run(SKAction.fadeIn(withDuration: 0.2))
