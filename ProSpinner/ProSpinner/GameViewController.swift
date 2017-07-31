@@ -17,6 +17,7 @@ enum NotificationName: String
     case removeDownloadView = "removeDownloadView"
     case notifyWithNewTexture = "notifyWithNewTexture"
     case reloadLockedViewAfterPurchase = "reloadLockedViewAfterPurchase"
+    case presentScoreboard  = "presentScoreboard"
 }
 
 class GameViewController: UIViewController
@@ -61,6 +62,10 @@ class GameViewController: UIViewController
     {
         log.debug("")
         NotificationCenter.default.addObserver(self, selector: #selector(checkForNewSpinners), name: NSNotification.Name(NotifictionKey.checkForNewSpinners.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(presentScoreboard),
+                                               name: NSNotification.Name(rawValue: NotificationName.presentScoreboard.rawValue),
+                                               object: nil)
     }
     
     func loadingScreenDidFinish()
@@ -136,5 +141,10 @@ class GameViewController: UIViewController
         {
             self.present(downloadViewController, animated: true, completion: nil)
         }
+    }
+    
+    func presentScoreboard()
+    {
+        self.performSegue(withIdentifier: "showScoreboard", sender: nil)
     }
 }

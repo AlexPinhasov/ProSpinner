@@ -87,6 +87,7 @@ class Constants
         case ReviewButton       = "reviewButton"
         case ReviewButtonShadow = "reviewButtonShadow"
         
+        case scoreboard = "scoreboard"
     }
     
     enum NodeInExplainGameNode : String

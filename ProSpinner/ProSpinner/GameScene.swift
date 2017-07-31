@@ -240,6 +240,10 @@ class GameScene: SKScene,
                     notifyGameStarted()
                     sideMenuView?.hideSideMenu()
                     
+                    
+                case Constants.NodesInScene.scoreboard.rawValue:
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.presentScoreboard.rawValue), object: nil)
+                    
                 default: break
                 }
             }

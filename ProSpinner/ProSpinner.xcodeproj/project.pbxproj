@@ -85,6 +85,11 @@
 		918F190D1EC9CC8700886039 /* ProSpinnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F190C1EC9CC8700886039 /* ProSpinnerTests.swift */; };
 		918F19181EC9CC8700886039 /* ProSpinnerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F19171EC9CC8700886039 /* ProSpinnerUITests.swift */; };
 		9190A2791F03B698005DD47C /* SKSpriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9190A2781F03B698005DD47C /* SKSpriteButton.swift */; };
+		91ABEEA61F2F52FF008D3522 /* ScoreboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABEEA51F2F52FF008D3522 /* ScoreboardViewController.swift */; };
+		91ABEEA81F2F5326008D3522 /* ScoreboardDelegateDataSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABEEA71F2F5326008D3522 /* ScoreboardDelegateDataSourceController.swift */; };
+		91ABEEAA1F2F5745008D3522 /* ScoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABEEA91F2F5745008D3522 /* ScoreData.swift */; };
+		91ABEEAC1F2F5897008D3522 /* ScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABEEAB1F2F5897008D3522 /* ScoreCell.swift */; };
+		91ABEEAE1F2F59C6008D3522 /* ScoreboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABEEAD1F2F59C6008D3522 /* ScoreboardController.swift */; };
 		C2CA48EAF48DA5B02959DF81 /* Pods_ProSpinnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4E75FA348AA94CACB4B414 /* Pods_ProSpinnerTests.framework */; };
 		DF8F4E427A0F79FC450494A0 /* Pods_ProSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C975129446750B0FD8E9718 /* Pods_ProSpinner.framework */; };
 /* End PBXBuildFile section */
@@ -201,6 +206,11 @@
 		918F19171EC9CC8700886039 /* ProSpinnerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProSpinnerUITests.swift; sourceTree = "<group>"; };
 		918F19191EC9CC8700886039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9190A2781F03B698005DD47C /* SKSpriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKSpriteButton.swift; sourceTree = "<group>"; };
+		91ABEEA51F2F52FF008D3522 /* ScoreboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardViewController.swift; sourceTree = "<group>"; };
+		91ABEEA71F2F5326008D3522 /* ScoreboardDelegateDataSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardDelegateDataSourceController.swift; sourceTree = "<group>"; };
+		91ABEEA91F2F5745008D3522 /* ScoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreData.swift; sourceTree = "<group>"; };
+		91ABEEAB1F2F5897008D3522 /* ScoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreCell.swift; sourceTree = "<group>"; };
+		91ABEEAD1F2F59C6008D3522 /* ScoreboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardController.swift; sourceTree = "<group>"; };
 		9C975129446750B0FD8E9718 /* Pods_ProSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A587CEF11A1F771654946F81 /* Pods-ProSpinnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinnerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinnerTests/Pods-ProSpinnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2B0A04A5A52208058D9F105 /* Pods-ProSpinnerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProSpinnerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProSpinnerUITests/Pods-ProSpinnerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -255,6 +265,7 @@
 		0A11F5EB1EE333B30036A00F /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				91ABEEA41F2F52D3008D3522 /* ScoreboardViewController */,
 				0A87FDDA1F152E7400CF55BB /* LoadingViewController */,
 				0A15917C1EE3C114005320A9 /* Downloading View Controller */,
 				0A15917B1EE3C0FC005320A9 /* Main Game View Controller */,
@@ -493,6 +504,18 @@
 				918F19191EC9CC8700886039 /* Info.plist */,
 			);
 			path = ProSpinnerUITests;
+			sourceTree = "<group>";
+		};
+		91ABEEA41F2F52D3008D3522 /* ScoreboardViewController */ = {
+			isa = PBXGroup;
+			children = (
+				91ABEEA51F2F52FF008D3522 /* ScoreboardViewController.swift */,
+				91ABEEA71F2F5326008D3522 /* ScoreboardDelegateDataSourceController.swift */,
+				91ABEEA91F2F5745008D3522 /* ScoreData.swift */,
+				91ABEEAB1F2F5897008D3522 /* ScoreCell.swift */,
+				91ABEEAD1F2F59C6008D3522 /* ScoreboardController.swift */,
+			);
+			name = ScoreboardViewController;
 			sourceTree = "<group>";
 		};
 		BB49D657DEBC3DF5E8E870A6 /* Pods */ = {
@@ -844,14 +867,17 @@
 				0A75A04B1F07CFDA00A9752F /* StoreNode.swift in Sources */,
 				0ACD33071F1BD80200F7DD0E /* SideMenuView.swift in Sources */,
 				0A1591801EE3C193005320A9 /* ImageCollectionCell.swift in Sources */,
+				91ABEEAC1F2F5897008D3522 /* ScoreCell.swift in Sources */,
 				0A8385881EF63A350044D1C7 /* RetryView.swift in Sources */,
 				0AB2462F1F28546B00BB24A5 /* ProgressBarProtocol.swift in Sources */,
 				0A3081A61EEA07CF00892266 /* CustomSKLabelNode.swift in Sources */,
+				91ABEEAE1F2F59C6008D3522 /* ScoreboardController.swift in Sources */,
 				0A8B2E9D1ED8C3ED0025856E /* Diamond.swift in Sources */,
 				0A8E3F8A1F2CA1BA00A01786 /* FreeSpinnerColorDropController.swift in Sources */,
 				0A089F461EDF0D7700415EFC /* Spinner.swift in Sources */,
 				0AF10D671F1DBE1A005B94FF /* SoundController.swift in Sources */,
 				0A11F5ED1EE333F20036A00F /* DownloadingViewController.swift in Sources */,
+				91ABEEA61F2F52FF008D3522 /* ScoreboardViewController.swift in Sources */,
 				0A87FDEA1F156A2A00CF55BB /* ToastController.swift in Sources */,
 				0A6A803A1F27D86E00BC6A48 /* SpriteProgressBar.swift in Sources */,
 				0A1E096C1EEEC21200041C45 /* ProgressBar.swift in Sources */,
@@ -860,6 +886,7 @@
 				0A14F34A1EE175B300C5AA5D /* PurchaseManager.swift in Sources */,
 				0A04F47C1ED062F2004F374C /* SpinnerManager.swift in Sources */,
 				0A8E3F921F2CD1EE00A01786 /* GameModeView.swift in Sources */,
+				91ABEEA81F2F5326008D3522 /* ScoreboardDelegateDataSourceController.swift in Sources */,
 				0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */,
 				917640831F1B58C8006DD6CD /* SoundLibrary.swift in Sources */,
 				0A1625301F1812CE00E67B24 /* FirstInstallSpinners.swift in Sources */,
@@ -882,6 +909,7 @@
 				0A15F6B61F1E6C4D00083B35 /* TutorialNode.swift in Sources */,
 				0AE83A7A1EDC91580066E3DD /* ManuManager.swift in Sources */,
 				0A11F5E81EE3175F0036A00F /* AdMobManager.swift in Sources */,
+				91ABEEAA1F2F5745008D3522 /* ScoreData.swift in Sources */,
 				0A1625321F19E9D100E67B24 /* DemiSpinnerNode.swift in Sources */,
 				9109F3D91F1615D700853867 /* Reachability.swift in Sources */,
 				0A0A24131EFA2D3E00044F8A /* LockedSpinnerNode.swift in Sources */,

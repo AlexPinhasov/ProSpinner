@@ -20,6 +20,11 @@ class DownloadingViewController: UIViewController  ,Animateable
     private var downloadingDelegateDataSource: DownloadingDelegateDataSource?
     
 //  MARK: View lifecycle
+    override var prefersStatusBarHidden : Bool
+    {
+        return true
+    }
+    
     override func viewDidLoad()
     {
         log.debug()

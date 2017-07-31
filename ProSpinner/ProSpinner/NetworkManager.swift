@@ -253,4 +253,17 @@ class NetworkManager
             }
         }
     }
+    
+    static func getPlayersScoreboard() -> [ScoreData]
+    {
+        var scores = [ScoreData]()
+        
+        scores.append(ScoreData(name: "alexop", score: 123, imageID: "2"))
+        scores.append(ScoreData(name: "ido", score: 89, imageID: "4"))
+        scores.append(ScoreData(name: "Liron123", score: 333, imageID: "7"))
+        scores.append(ScoreData(name: "alexop", score: 1, imageID: "8"))
+        
+        return scores
+    }
+    
 }
