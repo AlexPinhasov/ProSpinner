@@ -204,7 +204,7 @@ class Constants
 }
 
 let applicationReviewUrl = URL(string: "itms-apps://itunes.apple.com/app/id1257742091") // ProSpinner
-let applicationItunesUrl = URL(string: "https://itunes.apple.com/us/app/ProSpinner---The-Best-Fidget-Spinner-Game/id1257742091&mt=8")
+let applicationItunesUrl = URL(string: "https://itunes.apple.com/us/app/ProSpinner---A-Fidget-Spinner-Game/id1257742091&mt=8")
 
 typealias DiamondsTuple = (red:Int,blue:Int,green:Int)?
 
