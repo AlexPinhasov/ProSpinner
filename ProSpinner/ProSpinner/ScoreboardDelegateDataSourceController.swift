@@ -30,16 +30,28 @@ class ScoreboardDelegateDataSourceController: NSObject,
         {
             if let scoreData = scoreboardController.data(atIndex: indexPath.row)
             {
+                guard let score = scoreData.score       else { return cell }
+                guard let image = scoreData.spinnerID   else { return cell }
+                guard let userID = scoreData.userID     else { return cell }
+                
                 cell.playerName.text = scoreData.name
-                cell.playerScore.text = String(scoreData.score)
+                cell.playerScore.text = String(describing: score)
                 cell.rankLabel.text = String(indexPath.row + 1) + "."
                 
-                if scoreData.score >= 250
+                if let currentUser = currentUser
+                {
+                    if userID == currentUser.uid
+                    {
+                        cell.backgroundColor = UIColor(colorLiteralRed: 242/255, green: 244/255, blue: 244/255, alpha: 1.0)
+                    }
+                }
+                
+                if score >= 250
                 {
                     cell.kingCrown.alpha = 1.0
                 }
                 
-                if let image = UIImage(named: scoreData.imageID)
+                if let image = UIImage(named: image)
                 {
                     cell.imageView?.image = image
                 }

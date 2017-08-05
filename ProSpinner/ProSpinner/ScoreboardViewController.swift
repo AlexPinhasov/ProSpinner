@@ -15,6 +15,10 @@ class ScoreboardViewController: UIViewController,BaseAsyncProtocol
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var scoreTableView: UITableView!
     
+    @IBOutlet weak var facebookView: UIView!
+    
+    
+    
     override var prefersStatusBarHidden : Bool {
         return true
     }
@@ -27,7 +31,17 @@ class ScoreboardViewController: UIViewController,BaseAsyncProtocol
         scoreTableView.delegate = scoreboardDelegateDataSourceController
         scoreTableView.dataSource = scoreboardDelegateDataSourceController
         fetchData()
-    
+        facebookView.isHidden = true
+        
+        guard currentUser == nil else { return }
+        
+        facebookView.isHidden = false
+        let fb = FacebookManager(frame: facebookView.frame)
+        fb.frame.origin.x = -12
+        fb.frame.origin.y = 5
+       
+        facebookView.addSubview(fb)
+
     }
     
     func fetchData()

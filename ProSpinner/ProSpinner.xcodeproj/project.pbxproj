@@ -26,6 +26,7 @@
 		0A1734261F0679DE00140277 /* PlayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1734251F0679DE00140277 /* PlayNode.swift */; };
 		0A1734291F067F5500140277 /* ButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1734281F067F5500140277 /* ButtonProtocol.swift */; };
 		0A1C73EC1EF71EC00094119E /* MyriadPro-BoldCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1C73E31EF71DB00094119E /* MyriadPro-BoldCond.otf */; };
+		0A1D3B421F2F8945008EFF49 /* FacebookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D3B411F2F8945008EFF49 /* FacebookManager.swift */; };
 		0A1D71341ED9826600331753 /* Flea Market Finds.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1D71331ED9824900331753 /* Flea Market Finds.ttf */; };
 		0A1E096C1EEEC21200041C45 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E096B1EEEC21100041C45 /* ProgressBar.swift */; };
 		0A1E096E1EF0142600041C45 /* OpenSansHebrew-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1E096D1EF0142600041C45 /* OpenSansHebrew-Regular.ttf */; };
@@ -38,6 +39,10 @@
 		0A3081A61EEA07CF00892266 /* CustomSKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3081A51EEA07CF00892266 /* CustomSKLabelNode.swift */; };
 		0A3658A71ED20D9900322024 /* Woosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A3658A61ED20D9900322024 /* Woosh.mp3 */; };
 		0A4FD8331F2113C4006B3F85 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4FD8321F2113C4006B3F85 /* Default-568h@2x.png */; };
+		0A5F99631F338F1900BEABE8 /* SideMenuScoreboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F99621F338F1900BEABE8 /* SideMenuScoreboardView.swift */; };
+		0A681BB71F30F7E800FA4856 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A681BB41F30F7E800FA4856 /* FBSDKCoreKit.framework */; };
+		0A681BB81F30F7E800FA4856 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A681BB51F30F7E800FA4856 /* FBSDKLoginKit.framework */; };
+		0A681BB91F30F7E800FA4856 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A681BB61F30F7E800FA4856 /* FBSDKShareKit.framework */; };
 		0A6A80381F27A46500BC6A48 /* SpeedBarNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6A80371F27A46500BC6A48 /* SpeedBarNode.swift */; };
 		0A6A803A1F27D86E00BC6A48 /* SpriteProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6A80391F27D86E00BC6A48 /* SpriteProgressBar.swift */; };
 		0A75A04B1F07CFDA00A9752F /* StoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75A04A1F07CFDA00A9752F /* StoreNode.swift */; };
@@ -56,6 +61,7 @@
 		0A8E3F921F2CD1EE00A01786 /* GameModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E3F911F2CD1ED00A01786 /* GameModeView.swift */; };
 		0AB2462F1F28546B00BB24A5 /* ProgressBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB2462E1F28546A00BB24A5 /* ProgressBarProtocol.swift */; };
 		0ACD33071F1BD80200F7DD0E /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD33061F1BD80200F7DD0E /* SideMenuView.swift */; };
+		0ADBB0E11F35C14500E43897 /* scoreboardTutorialNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBB0E01F35C14500E43897 /* scoreboardTutorialNode.swift */; };
 		0ADCF0D41EDD9B2D00CE1C8B /* ArchiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADCF0D31EDD9B2D00CE1C8B /* ArchiveManager.swift */; };
 		0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE7CD801EFCE55200236992 /* StoreView.swift */; };
 		0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE83A771EDC8F380066E3DD /* BaseClass.swift */; };
@@ -138,6 +144,7 @@
 		0A1C73E91EF71DB00094119E /* MyriadPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Regular.otf"; sourceTree = "<group>"; };
 		0A1C73EA1EF71DB00094119E /* MyriadPro-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Semibold.otf"; sourceTree = "<group>"; };
 		0A1C73EB1EF71DB00094119E /* MyriadPro-SemiboldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-SemiboldIt.otf"; sourceTree = "<group>"; };
+		0A1D3B411F2F8945008EFF49 /* FacebookManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookManager.swift; sourceTree = "<group>"; };
 		0A1D71331ED9824900331753 /* Flea Market Finds.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Flea Market Finds.ttf"; sourceTree = "<group>"; };
 		0A1E096B1EEEC21100041C45 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		0A1E096D1EF0142600041C45 /* OpenSansHebrew-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSansHebrew-Regular.ttf"; path = "../OpenSansHebrew-Regular.ttf"; sourceTree = "<group>"; };
@@ -149,6 +156,10 @@
 		0A3081A51EEA07CF00892266 /* CustomSKLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSKLabelNode.swift; sourceTree = "<group>"; };
 		0A3658A61ED20D9900322024 /* Woosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Woosh.mp3; sourceTree = "<group>"; };
 		0A4FD8321F2113C4006B3F85 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0A5F99621F338F1900BEABE8 /* SideMenuScoreboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuScoreboardView.swift; sourceTree = "<group>"; };
+		0A681BB41F30F7E800FA4856 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		0A681BB51F30F7E800FA4856 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		0A681BB61F30F7E800FA4856 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		0A6A80371F27A46500BC6A48 /* SpeedBarNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedBarNode.swift; sourceTree = "<group>"; };
 		0A6A80391F27D86E00BC6A48 /* SpriteProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteProgressBar.swift; sourceTree = "<group>"; };
 		0A75A04A1F07CFDA00A9752F /* StoreNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreNode.swift; sourceTree = "<group>"; };
@@ -167,6 +178,7 @@
 		0A8E3F911F2CD1ED00A01786 /* GameModeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModeView.swift; sourceTree = "<group>"; };
 		0AB2462E1F28546A00BB24A5 /* ProgressBarProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBarProtocol.swift; sourceTree = "<group>"; };
 		0ACD33061F1BD80200F7DD0E /* SideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		0ADBB0E01F35C14500E43897 /* scoreboardTutorialNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scoreboardTutorialNode.swift; sourceTree = "<group>"; };
 		0ADCF0D31EDD9B2D00CE1C8B /* ArchiveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveManager.swift; sourceTree = "<group>"; };
 		0AE7CD801EFCE55200236992 /* StoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		0AE83A771EDC8F380066E3DD /* BaseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseClass.swift; sourceTree = "<group>"; };
@@ -223,6 +235,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A11F5E61EE3104B0036A00F /* StoreKit.framework in Frameworks */,
+				0A681BB71F30F7E800FA4856 /* FBSDKCoreKit.framework in Frameworks */,
+				0A681BB91F30F7E800FA4856 /* FBSDKShareKit.framework in Frameworks */,
+				0A681BB81F30F7E800FA4856 /* FBSDKLoginKit.framework in Frameworks */,
 				DF8F4E427A0F79FC450494A0 /* Pods_ProSpinner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +319,8 @@
 				0A15F6B51F1E6C4D00083B35 /* TutorialNode.swift */,
 				0A6A80371F27A46500BC6A48 /* SpeedBarNode.swift */,
 				0A8E3F911F2CD1ED00A01786 /* GameModeView.swift */,
+				0A5F99621F338F1900BEABE8 /* SideMenuScoreboardView.swift */,
+				0ADBB0E01F35C14500E43897 /* scoreboardTutorialNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -361,6 +378,7 @@
 				0A289C0B1EEE5C21000AED6B /* TutorialManager.swift */,
 				9109F3DA1F162ED300853867 /* CrashlyticsLogManager.swift */,
 				916B1FAC1F16443D0083E649 /* ShareManager.swift */,
+				0A1D3B411F2F8945008EFF49 /* FacebookManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -425,6 +443,9 @@
 			isa = PBXGroup;
 			children = (
 				0A11F5E51EE3104B0036A00F /* StoreKit.framework */,
+				0A681BB41F30F7E800FA4856 /* FBSDKCoreKit.framework */,
+				0A681BB51F30F7E800FA4856 /* FBSDKLoginKit.framework */,
+				0A681BB61F30F7E800FA4856 /* FBSDKShareKit.framework */,
 				9C975129446750B0FD8E9718 /* Pods_ProSpinner.framework */,
 				0E4E75FA348AA94CACB4B414 /* Pods_ProSpinnerTests.framework */,
 				0FCB592AC0294D9475632625 /* Pods_ProSpinnerUITests.framework */,
@@ -875,6 +896,7 @@
 				0A8B2E9D1ED8C3ED0025856E /* Diamond.swift in Sources */,
 				0A8E3F8A1F2CA1BA00A01786 /* FreeSpinnerColorDropController.swift in Sources */,
 				0A089F461EDF0D7700415EFC /* Spinner.swift in Sources */,
+				0A5F99631F338F1900BEABE8 /* SideMenuScoreboardView.swift in Sources */,
 				0AF10D671F1DBE1A005B94FF /* SoundController.swift in Sources */,
 				0A11F5ED1EE333F20036A00F /* DownloadingViewController.swift in Sources */,
 				91ABEEA61F2F52FF008D3522 /* ScoreboardViewController.swift in Sources */,
@@ -889,6 +911,7 @@
 				91ABEEA81F2F5326008D3522 /* ScoreboardDelegateDataSourceController.swift in Sources */,
 				0AE7CD811EFCE55200236992 /* StoreView.swift in Sources */,
 				917640831F1B58C8006DD6CD /* SoundLibrary.swift in Sources */,
+				0ADBB0E11F35C14500E43897 /* scoreboardTutorialNode.swift in Sources */,
 				0A1625301F1812CE00E67B24 /* FirstInstallSpinners.swift in Sources */,
 				0AE83A781EDC8F380066E3DD /* BaseClass.swift in Sources */,
 				0A8E3F8C1F2CA1FF00A01786 /* FixedSpinnerColorDropController.swift in Sources */,
@@ -912,6 +935,7 @@
 				91ABEEAA1F2F5745008D3522 /* ScoreData.swift in Sources */,
 				0A1625321F19E9D100E67B24 /* DemiSpinnerNode.swift in Sources */,
 				9109F3D91F1615D700853867 /* Reachability.swift in Sources */,
+				0A1D3B421F2F8945008EFF49 /* FacebookManager.swift in Sources */,
 				0A0A24131EFA2D3E00044F8A /* LockedSpinnerNode.swift in Sources */,
 				916B1FAD1F16443D0083E649 /* ShareManager.swift in Sources */,
 			);
@@ -1076,6 +1100,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/alexp/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = ProSpinner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1099,6 +1124,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/alexp/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = ProSpinner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

@@ -8,6 +8,9 @@
 
 import UIKit
 import SpriteKit
+import FBSDKLoginKit
+import FBSDKCoreKit
+import FirebaseAuth
 
 class Constants
 {
@@ -155,6 +158,8 @@ class Constants
         case SideMenu              = "SideMenu"
         case muteSound             = "muteSound"
         case sideMenuBackground    = "sideMenuBackground"
+        case scoreboard = "scoreboard"
+        case scoreboardNode = "scoreboardNode"
     }
     
     enum NodesInLockedSpinnerView: String
@@ -202,6 +207,13 @@ class Constants
         case freeText = "freeText"
         case fixedText = "fixedText"
     }
+    
+    enum scoreboardTutorialNode: String
+    {
+        case scoreboardTutorialNode = "scoreboardTutorialNode"
+        case scoreboardAlertView = "scoreboardAlertView"
+        case scoreboardBackground = "scoreboardBackground"
+    }
 }
 
 let applicationReviewUrl = URL(string: "itms-apps://itunes.apple.com/app/id1257742091") // ProSpinner
@@ -218,6 +230,11 @@ struct PhysicsCategory
     static let greenNode : UInt32 = 4
     static let redNode : UInt32 = 5
     static let blueNode : UInt32 = 6
+}
+
+var currentUser : User?
+{
+    return Auth.auth().currentUser
 }
 
 public extension DispatchQueue {

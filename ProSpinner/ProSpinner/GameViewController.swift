@@ -18,6 +18,7 @@ enum NotificationName: String
     case notifyWithNewTexture = "notifyWithNewTexture"
     case reloadLockedViewAfterPurchase = "reloadLockedViewAfterPurchase"
     case presentScoreboard  = "presentScoreboard"
+    case reloadScoreboard = "reloadScoreboard"
 }
 
 class GameViewController: UIViewController

@@ -30,6 +30,7 @@ class ManuManager: BaseClass,
     var lockedSpinnerView        : LockedSpinnerNode?
     var demiSpinnerNode          : DemiSpinnerNode?
     var gameTutorialNode         : TutorialNode?
+    var scoreboardTutorialNode   : ScoreboardTutorialNode?
     var speedBarNode             : SpeedBarNode?
     
     private var leftArrow        : SKSpriteNode?
@@ -92,6 +93,7 @@ class ManuManager: BaseClass,
         showArrows()
         saveProgressBarPosition()
         updateBestScore()
+        showScoreboardTutorial()
     }
     
 //  MARK: Game life cycle
@@ -353,6 +355,27 @@ class ManuManager: BaseClass,
             self.gameTutorialNode = nil
         }
     }
+    
+    func showScoreboardTutorial()
+    {
+        log.debug("")
+        //if ArchiveManager.firstTimeRegisterScoreboard == false
+        //{
+          //  ArchiveManager.firstTimeRegisterScoreboard = true
+            scoreboardTutorialNode = self.scene?.childNode(withName: Constants.scoreboardTutorialNode.scoreboardTutorialNode.rawValue) as? ScoreboardTutorialNode
+            scoreboardTutorialNode?.showNode()
+        //}
+    }
+    
+    func hideScoreboardTutorial()
+    {
+        log.debug("")
+        scoreboardTutorialNode?.hideNode()
+        {
+            self.scoreboardTutorialNode = nil
+        }
+    }
+
     
     func animateSpinnerLockScaleUp()
     {

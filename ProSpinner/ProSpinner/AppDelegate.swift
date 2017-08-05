@@ -14,6 +14,8 @@ import Crashlytics
 import XCGLogger
 import SwiftyStoreKit
 import UserNotifications
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 // Create a logger object with no destinations
 let log = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
@@ -35,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completeIAPTransactions()
         registerForRemoteNotifications(application: application)
         handleReachability()
-        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         print("FCM token: \(Messaging.messaging().fcmToken ?? "")")
         
@@ -65,6 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+
+        let handled : Bool = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+        return handled
     }
 
     // [START receive_message]

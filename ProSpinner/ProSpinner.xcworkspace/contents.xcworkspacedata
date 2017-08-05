@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:ProSpinner.xcodeproj">
+      location = "group:/Users/alexp/Desktop/ProSpinnerGit/ProSpinner/ProSpinner.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

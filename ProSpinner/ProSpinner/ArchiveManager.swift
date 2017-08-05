@@ -22,6 +22,7 @@ enum UserDefaultKeys: String
     case highScoreFixed             = "highScoreFixed"
     case muteSound                  = "muteSound"
     case tutorial                   = "tutorial"
+    case firstTimeScoreboard        = "firstTimeScoreboard"
 }
 
 class ArchiveManager
@@ -198,6 +199,18 @@ class ArchiveManager
         }
     }
     
+    static var bestScore: Int
+    {
+        if highScoreRecord > highScoreRecordFixed
+        {
+            return highScoreRecord
+        }
+        else
+        {
+            return highScoreRecordFixed
+        }
+    }
+    
     static var firstTimeRun : Bool
     {
         get
@@ -209,6 +222,21 @@ class ArchiveManager
         {
             log.debug("")
             UserDefaults.standard.set(true, forKey: UserDefaultKeys.firstTimeRun.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var firstTimeRegisterScoreboard : Bool
+    {
+        get
+        {
+            log.debug("")
+            return UserDefaults.standard.bool(forKey: UserDefaultKeys.firstTimeScoreboard.rawValue)
+        }
+        set
+        {
+            log.debug("")
+            UserDefaults.standard.set(true, forKey: UserDefaultKeys.firstTimeScoreboard.rawValue)
             UserDefaults.standard.synchronize()
         }
     }

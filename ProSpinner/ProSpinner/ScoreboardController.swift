@@ -25,8 +25,12 @@ class ScoreboardController
     
     func fetchData()
     {
-        playersScores = NetworkManager.getPlayersScoreboard()
-        delegate?.didSuccess()
+        NetworkManager.getPlayersScoreboard()
+        {   scoresArray in
+            
+            self.playersScores = scoresArray
+            self.delegate?.didSuccess()
+        }
     }
     
     func data(atIndex index: Int) -> ScoreData?

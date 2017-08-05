@@ -10,7 +10,8 @@ import Foundation
 
 struct ScoreData
 {
-    let name    : String
-    let score   : Int
-    let imageID : String
+    let name       : String?
+    let score      : Int?
+    let spinnerID  : String?
+    let userID     : String?
 }

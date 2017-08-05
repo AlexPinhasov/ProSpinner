@@ -29,6 +29,7 @@ class GameScene: SKScene,
     var retryView       : RetryView?
     var storeView       : StoreView?
     var sideMenuView    : SideMenuView?
+    var scoreboardView  : SideMenuScoreboardView?
     var gameModeView    : GameModeView?
     
     var lastNodeTouchedName = ""
@@ -44,6 +45,7 @@ class GameScene: SKScene,
         handleSwipeConfiguration()
         addObservers()
         sideMenuView?.showSideView()
+        scoreboardView?.showScoreboardView()
         SoundController.setUpSoundEngine()        
     }
     
@@ -150,7 +152,8 @@ class GameScene: SKScene,
                      Constants.NodesInRetryView.MenuLines.rawValue,
                      Constants.NodesInRetryView.AlertViewBackground.rawValue,
                      Constants.NodesInStoreView.StoreBackground.rawValue,
-                     Constants.NodesInGameModeNode.GameModeBackground.rawValue:
+                     Constants.NodesInGameModeNode.GameModeBackground.rawValue,
+                     Constants.scoreboardTutorialNode.scoreboardBackground.rawValue:
                     
                     if storeView?.isHidden == false
                     {
@@ -163,6 +166,10 @@ class GameScene: SKScene,
                     else if gameModeView?.isHidden == false
                     {
                         hideGameModeView()
+                    }
+                    else if manuManager?.scoreboardTutorialNode?.isHidden == false
+                    {
+                        manuManager?.hideScoreboardTutorial()
                     }
                     
                 case Constants.NodesInStoreView.smallPackButton.rawValue,
@@ -228,6 +235,7 @@ class GameScene: SKScene,
                     selectedGameMode = FreeSpinnerColorDropController(scene: self.scene)
                     notifyGameStarted()
                     sideMenuView?.hideSideMenu()
+                    scoreboardView?.hideScoreboardView()
                     
                 case Constants.NodesInGameModeNode.FixedSpinGameMode.rawValue,
                      Constants.NodesInGameModeNode.GameModeAlert.rawValue,
@@ -239,10 +247,14 @@ class GameScene: SKScene,
                     selectedGameMode = FixedSpinnerColorDropController(scene: self.scene)
                     notifyGameStarted()
                     sideMenuView?.hideSideMenu()
-                    
+                    scoreboardView?.hideScoreboardView()
                     
                 case Constants.NodesInScene.scoreboard.rawValue:
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.presentScoreboard.rawValue), object: nil)
+                    scoreboardView?.didTapScoreboard()
+                    if manuManager?.scoreboardTutorialNode?.isHidden == false
+                    {
+                        manuManager?.hideScoreboardTutorial()
+                    }
                     
                 default: break
                 }
@@ -366,6 +378,7 @@ class GameScene: SKScene,
             diamondsManager?.gameOver()
             spinnerManager?.gameOver()
             sideMenuView?.showSideView()
+            scoreboardView?.showScoreboardView()
         }
     }
     

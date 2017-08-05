@@ -253,17 +253,167 @@ class NetworkManager
             }
         }
     }
+    static var scoreDictionary = [NSDictionary]()
     
-    static func getPlayersScoreboard() -> [ScoreData]
+    static func getPlayersScoreboard(withBlock completion: @escaping ([ScoreData]) -> Void)
     {
-        var scores = [ScoreData]()
+        scoreDictionary.removeAll()
         
-        scores.append(ScoreData(name: "alexop", score: 123, imageID: "2"))
-        scores.append(ScoreData(name: "ido", score: 89, imageID: "4"))
-        scores.append(ScoreData(name: "Liron123", score: 333, imageID: "7"))
-        scores.append(ScoreData(name: "alexop", score: 1, imageID: "8"))
+        guard let status = Network.reachability?.status else { return }
+        log.debug("")
         
-        return scores
+        switch status
+        {
+        case .unreachable: break
+        case .wifi,.wwan:
+            
+            var scoresFound = [ScoreData]()
+            
+            database.child("HighScores").queryOrderedByKey().observeSingleEvent(of: .value, with:
+            { (snapshot) in
+                
+                if let snapshotChildArray = snapshot.value as? NSDictionary
+                {
+                    // gets all scores key
+                    if let keys = snapshotChildArray.allKeys as? [String]
+                    {
+                        for index in 0..<keys.count
+                        {
+                            let key = keys[index]
+                            if let scoreDic = snapshotChildArray.value(forKey: key) as? NSDictionary
+                            {
+                                scoreDictionary.append(scoreDic)
+                            }
+                        }
+                        
+                        if shouldRegisterScore(childArray: snapshotChildArray)
+                        {
+                            registerMyScoreToDB()
+                        }
+                    }
+                    
+                    for dictionary in scoreDictionary
+                    {
+                        guard let name      = dictionary["name"]      as? String else { continue }
+                        guard let score     = dictionary["score"]     as? Int    else { continue }
+                        guard let spinnerID = dictionary["spinnerID"] as? String else { continue }
+                        guard let userID    = dictionary["userID"]    as? String else { continue }
+                        
+                        var scoreToAppend = score
+                        if let currentUser = currentUser
+                        {
+                            if score < ArchiveManager.bestScore && userID == currentUser.uid
+                            {
+                                scoreToAppend = ArchiveManager.bestScore
+                            }
+                        }
+                        scoresFound.append(ScoreData(name   : name ,score  : scoreToAppend ,spinnerID: spinnerID ,userID : userID ))
+                    }
+                }
+
+                scoresFound.sort(by: { return $0.score! > $1.score! })
+
+                scoreDictionary.removeAll()
+                completion(scoresFound)
+            })
+            { (error) in
+                print(error.localizedDescription)
+            }
+        }
     }
     
+    static func shouldRegisterScore(childArray array: NSDictionary) -> Bool
+    {
+        guard let currentUser = currentUser else { return false }
+        
+        for dbScore in scoreDictionary
+        {
+            if let scoreUserID   = dbScore["userID"] as? String,
+               let DatabaseScore = dbScore["score"]  as? Int
+            {
+                if scoreUserID == currentUser.uid
+                {
+                    if ArchiveManager.bestScore > DatabaseScore
+                    {
+                        updateMyScoreOnDB()
+                    }
+                    return false
+                }
+            }
+        }
+        
+        // at this point i know that no record of mine is at the data base or i did not beat my own score
+        
+        let howManyScoresLessThenMine = scoreDictionary.filter(
+        {
+            if let keyScore = $0["score"] as? Int
+            {
+                return  keyScore < ArchiveManager.bestScore
+            }
+            return false
+        })
+        
+        guard howManyScoresLessThenMine.count > 0 else { return false }
+        
+        // at this point i know there are at least 1 score less then mine
+        
+        // if there are less then 50 records then register my score regradless other players score
+        if scoreDictionary.count < 5
+        {
+            return true
+        }
+        removeAScoreFromDB()
+        return true
+    }
+    
+    
+    static func updateMyScoreOnDB()
+    {
+        guard let currentUser = currentUser else { return }
+        database.child("HighScores").child("\(currentUser.uid)/score").setValue(ArchiveManager.bestScore)
+    }
+    
+    static func registerMyScoreToDB()
+    {
+         if let thePost = createUserData()
+         {
+            let score : NSDictionary = ["name"     : thePost.name!,
+                                        "score"    : thePost.score!,
+                                        "spinnerID": thePost.spinnerID!,
+                                        "userID"   : thePost.userID! ]
+            
+            scoreDictionary.append(score)
+            database.child("HighScores").child("\(thePost.userID!)").setValue(score)
+            
+        }
+    }
+    
+    static func removeAScoreFromDB()
+    {
+        scoreDictionary = scoreDictionary.sorted(by: { return $1["score"] as! Int > $0["score"] as!  Int })
+        if let lowestKey = scoreDictionary.first,
+           let userID = lowestKey["userID"] as? String
+        {
+            database.child("HighScores").child(userID).removeValue()
+        }
+        scoreDictionary.removeFirst()
+    }
+    
+    static private func createUserData() -> ScoreData?
+    {
+        var thePost : ScoreData?
+        
+        guard let currentUser = currentUser else { return thePost }
+        guard let userName    = currentUser.displayName else { return thePost }
+        guard let spinnerId   = ArchiveManager.currentSpinner.id else { return thePost }
+        
+        let spinnerID = String(spinnerId) == "1" ? "blackSpinner" : String(spinnerId)
+        
+        thePost = ScoreData(name      : userName,
+                            score    : ArchiveManager.bestScore,
+                            spinnerID: spinnerID,
+                            userID   : currentUser.uid)
+        
+        return thePost
+    }
 }
