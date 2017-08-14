@@ -25,11 +25,15 @@ class ScoreboardController
     
     func fetchData()
     {
+        
         NetworkManager.getPlayersScoreboard()
         {   scoresArray in
             
-            self.playersScores = scoresArray
-            self.delegate?.didSuccess()
+            DispatchQueue.main.async
+            {
+                self.playersScores = scoresArray
+                self.delegate?.didSuccess()
+            }
         }
     }
     

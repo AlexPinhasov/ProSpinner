@@ -31,7 +31,7 @@ class ScoreboardDelegateDataSourceController: NSObject,
             if let scoreData = scoreboardController.data(atIndex: indexPath.row)
             {
                 guard let score = scoreData.score       else { return cell }
-                guard let image = scoreData.spinnerID   else { return cell }
+                guard let imageId = scoreData.spinnerID   else { return cell }
                 guard let userID = scoreData.userID     else { return cell }
                 
                 cell.playerName.text = scoreData.name
@@ -51,9 +51,20 @@ class ScoreboardDelegateDataSourceController: NSObject,
                     cell.kingCrown.alpha = 1.0
                 }
                 
-                if let image = UIImage(named: image)
+                if let image = UIImage(named: imageId)
                 {
                     cell.imageView?.image = image
+                }
+                else
+                {
+                    for spinner in ArchiveManager.spinnersArrayInDisk where String(spinner.id ?? 2) == imageId
+                    {
+                        if let spinnerTexture = spinner.texture
+                        {
+                            cell.imageView?.image = UIImage(cgImage: spinnerTexture.cgImage())
+                            break
+                        }
+                    }
                 }
                 
                 return cell

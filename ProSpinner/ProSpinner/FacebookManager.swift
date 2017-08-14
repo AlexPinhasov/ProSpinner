@@ -18,6 +18,7 @@ class FacebookManager: UIView,
     @IBOutlet weak var Loading: UIActivityIndicatorView!
     
     var loginButton: FBSDKLoginButton = FBSDKLoginButton()
+    var scoreboardViewController : ScoreboardViewController?
     
     override init(frame: CGRect)
     {
@@ -76,7 +77,7 @@ class FacebookManager: UIView,
             let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             Auth.auth().signIn(with: credential) { (user, error) in
                 print("User loged in Firebase")
-                
+                self.scoreboardViewController?.userLoggedIn()
             }
             
         }

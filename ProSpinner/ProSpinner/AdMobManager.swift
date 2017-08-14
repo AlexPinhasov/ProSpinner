@@ -29,8 +29,8 @@ class AdMobManager: NSObject,
         log.debug("")
         super.init()
         self.rootViewController = rootViewController
-        configureGADInterstitial()
-        configureGADBanner()
+        //configureGADInterstitial()
+        //configureGADBanner()
         addObserver()
         
         resetInterstitialCountIfNeeded()

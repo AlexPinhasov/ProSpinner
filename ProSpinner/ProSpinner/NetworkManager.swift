@@ -25,7 +25,7 @@ class NetworkManager
         backgroundQueue.async(execute:
             {
                 log.debug("")
-                database.child("NumberOfSpinners").observeSingleEvent(of: .value, with:
+                database.child("NumberOfSpinners_QA").observeSingleEvent(of: .value, with:
                     { (snapshot) in
                         
                         if let newSpinnersAvailable = snapshot.value as? Int
@@ -255,7 +255,7 @@ class NetworkManager
     }
     static var scoreDictionary = [NSDictionary]()
     
-    static func getPlayersScoreboard(withBlock completion: @escaping ([ScoreData]) -> Void)
+    static func getPlayersScoreboard(withBlock completion: (([ScoreData]) -> Void)?)
     {
         scoreDictionary.removeAll()
         
@@ -268,57 +268,65 @@ class NetworkManager
         case .wifi,.wwan:
             
             var scoresFound = [ScoreData]()
-            
-            database.child("HighScores").queryOrderedByKey().observeSingleEvent(of: .value, with:
-            { (snapshot) in
-                
-                if let snapshotChildArray = snapshot.value as? NSDictionary
-                {
-                    // gets all scores key
-                    if let keys = snapshotChildArray.allKeys as? [String]
-                    {
-                        for index in 0..<keys.count
-                        {
-                            let key = keys[index]
-                            if let scoreDic = snapshotChildArray.value(forKey: key) as? NSDictionary
-                            {
-                                scoreDictionary.append(scoreDic)
-                            }
-                        }
-                        
-                        if shouldRegisterScore(childArray: snapshotChildArray)
-                        {
-                            registerMyScoreToDB()
-                        }
-                    }
+            let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+            backgroundQueue.async(execute:
+            {
+                database.child("HighScores").queryOrderedByKey().observeSingleEvent(of: .value, with:
+                { (snapshot) in
                     
-                    for dictionary in scoreDictionary
+                    if let snapshotChildArray = snapshot.value as? NSDictionary
                     {
-                        guard let name      = dictionary["name"]      as? String else { continue }
-                        guard let score     = dictionary["score"]     as? Int    else { continue }
-                        guard let spinnerID = dictionary["spinnerID"] as? String else { continue }
-                        guard let userID    = dictionary["userID"]    as? String else { continue }
-                        
-                        var scoreToAppend = score
-                        if let currentUser = currentUser
+                        // gets all scores key
+                        if let keys = snapshotChildArray.allKeys as? [String]
                         {
-                            if score < ArchiveManager.bestScore && userID == currentUser.uid
+                            for index in 0..<keys.count
                             {
-                                scoreToAppend = ArchiveManager.bestScore
+                                let key = keys[index]
+                                if let scoreDic = snapshotChildArray.value(forKey: key) as? NSDictionary
+                                {
+                                    scoreDictionary.append(scoreDic)
+                                }
+                            }
+                            
+                            if shouldRegisterScore(childArray: snapshotChildArray)
+                            {
+                                registerMyScoreToDB()
+                            }
+                            
+                            if completion == nil
+                            {
+                                return
                             }
                         }
-                        scoresFound.append(ScoreData(name   : name ,score  : scoreToAppend ,spinnerID: spinnerID ,userID : userID ))
+                        
+                        for dictionary in scoreDictionary
+                        {
+                            guard let name      = dictionary["name"]      as? String else { continue }
+                            guard let score     = dictionary["score"]     as? Int    else { continue }
+                            guard let spinnerID = dictionary["spinnerID"] as? String else { continue }
+                            guard let userID    = dictionary["userID"]    as? String else { continue }
+                            
+                            var scoreToAppend = score
+                            if let currentUser = currentUser
+                            {
+                                if score < ArchiveManager.bestScore && userID == currentUser.uid
+                                {
+                                    scoreToAppend = ArchiveManager.bestScore
+                                }
+                            }
+                            scoresFound.append(ScoreData(name   : name ,score  : scoreToAppend ,spinnerID: spinnerID ,userID : userID ))
+                        }
                     }
+
+                    scoresFound.sort(by: { return $0.score! > $1.score! })
+
+                    scoreDictionary.removeAll()
+                    completion?(scoresFound)
+                })
+                { (error) in
+                    print(error.localizedDescription)
                 }
-
-                scoresFound.sort(by: { return $0.score! > $1.score! })
-
-                scoreDictionary.removeAll()
-                completion(scoresFound)
             })
-            { (error) in
-                print(error.localizedDescription)
-            }
         }
     }
     
@@ -336,6 +344,15 @@ class NetworkManager
                     if ArchiveManager.bestScore > DatabaseScore
                     {
                         updateMyScoreOnDB()
+                    }
+                    
+                    if let spinnerIDString = dbScore["spinnerID"]  as? String,
+                        let spinnerID = Int(spinnerIDString)
+                    {
+                        if ArchiveManager.currentSpinner.id != spinnerID
+                        {
+                            updateMySpinnerOnDB()
+                        }
                     }
                     return false
                 }
@@ -372,6 +389,13 @@ class NetworkManager
         guard let currentUser = currentUser else { return }
         database.child("HighScores").child("\(currentUser.uid)/score").setValue(ArchiveManager.bestScore)
     }
+
+    static func updateMySpinnerOnDB()
+    {
+        guard let currentUser = currentUser else { return }
+        guard let spinnerId = ArchiveManager.currentSpinner.id else { return }
+        database.child("HighScores").child("\(currentUser.uid)/spinnerID").setValue(spinnerId.description)
+    }
     
     static func registerMyScoreToDB()
     {
@@ -405,13 +429,21 @@ class NetworkManager
         
         guard let currentUser = currentUser else { return thePost }
         guard let userName    = currentUser.displayName else { return thePost }
-        guard let spinnerId   = ArchiveManager.currentSpinner.id else { return thePost }
+        var spinnerId = "blackSpinner"
         
-        let spinnerID = String(spinnerId) == "1" ? "blackSpinner" : String(spinnerId)
+        var spinnersReverse = ArchiveManager.spinnersArrayInDisk
+        spinnersReverse = spinnersReverse.reversed()
+        
+        for spinner in spinnersReverse where spinner.unlocked == true
+        {
+            guard let spinnerID = spinner.id else { continue }
+            spinnerId = String(describing: spinnerID)
+            break
+        }
         
         thePost = ScoreData(name      : userName,
                             score    : ArchiveManager.bestScore,
-                            spinnerID: spinnerID,
+                            spinnerID: spinnerId,
                             userID   : currentUser.uid)
         
         return thePost

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import FirebaseAuth
 class ScoreboardViewController: UIViewController,BaseAsyncProtocol
 {
     var scoreboardDelegateDataSourceController : ScoreboardDelegateDataSourceController!
@@ -17,7 +17,7 @@ class ScoreboardViewController: UIViewController,BaseAsyncProtocol
     
     @IBOutlet weak var facebookView: UIView!
     
-    
+    @IBOutlet weak var facebookViewHighetConstraint: NSLayoutConstraint!
     
     override var prefersStatusBarHidden : Bool {
         return true
@@ -32,16 +32,29 @@ class ScoreboardViewController: UIViewController,BaseAsyncProtocol
         scoreTableView.dataSource = scoreboardDelegateDataSourceController
         fetchData()
         facebookView.isHidden = true
-        
+        facebookViewHighetConstraint.constant = 0
+       // try? Auth.auth().signOut()
         guard currentUser == nil else { return }
         
         facebookView.isHidden = false
+        facebookViewHighetConstraint.constant = 119
         let fb = FacebookManager(frame: facebookView.frame)
-        fb.frame.origin.x = -12
-        fb.frame.origin.y = 5
-       
-        facebookView.addSubview(fb)
 
+        fb.scoreboardViewController = self
+        facebookView.addSubview(fb)
+        fb.center = facebookView.center
+        fb.frame.origin.y = 0
+    }
+    
+    func userLoggedIn()
+    {
+        facebookView.isHidden = true
+        facebookViewHighetConstraint.constant = 0
+        scoreboardDelegateDataSourceController.fetchData()
+        Diamond.redCounter += 100
+        Diamond.blueCounter += 100
+        Diamond.greenCounter += 100
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.reloadLockedViewAfterPurchase.rawValue), object: nil)
     }
     
     func fetchData()

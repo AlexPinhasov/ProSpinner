@@ -1107,7 +1107,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.APStudios.ProSpinner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9b65e009-977f-4f5b-b149-7495b1f3ed62";
+				PROVISIONING_PROFILE = "982f7a87-e36a-44d3-bf93-aca123b503ab";
 				PROVISIONING_PROFILE_SPECIFIER = "ProSpinner-Dev";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1131,7 +1131,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.APStudios.ProSpinner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "77c78f69-f643-4c77-ac74-35c92803d9b7";
+				PROVISIONING_PROFILE = "215c8917-e5ee-4488-84d8-43f7deb6c9ce";
 				PROVISIONING_PROFILE_SPECIFIER = "ProSpinner-Ad Hoc";
 				SWIFT_VERSION = 3.0;
 			};

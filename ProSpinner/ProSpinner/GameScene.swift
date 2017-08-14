@@ -146,6 +146,7 @@ class GameScene: SKScene,
                             self.changeVolumeTo(value: 0.8)
                         }
                         handleUIForUnlockedSpinner()
+                        NetworkManager.getPlayersScoreboard(withBlock: nil)
                     }
                     
                 case Constants.NodesInRetryView.ExitButton.rawValue,
@@ -343,6 +344,7 @@ class GameScene: SKScene,
         if  ArchiveManager.gameExplantionDidShow && GameStatus.Playing == false
         {
             sideMenuView?.hideSideMenu()
+            scoreboardView?.hideScoreboardView()
             GameStatus.Playing = true
             retryView?.gameStarted()
             manuManager?.gameStarted(withGameMode: selectedGameMode)

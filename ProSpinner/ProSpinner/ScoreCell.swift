@@ -20,6 +20,7 @@ class ScoreCell: UITableViewCell
     {
         spinnerImage.image = nil
         kingCrown.alpha = 0.35
+        backgroundColor = .white
     }
     
     override func awakeFromNib()
