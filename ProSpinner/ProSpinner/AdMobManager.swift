@@ -14,6 +14,7 @@ class AdMobManager: NSObject,
 {
     var interstitial: GADInterstitial!
     var bannerView: GADBannerView!
+    var retryFetchInterstitial = true
     weak var rootViewController: UIViewController?
     
     static let bannerPath = "ca-app-pub-9437548574063413/3716115489"
@@ -29,8 +30,8 @@ class AdMobManager: NSObject,
         log.debug("")
         super.init()
         self.rootViewController = rootViewController
-        //configureGADInterstitial()
-        //configureGADBanner()
+        configureGADInterstitial()
+        configureGADBanner()
         addObserver()
         
         resetInterstitialCountIfNeeded()
@@ -117,15 +118,19 @@ class AdMobManager: NSObject,
     /// show. This is common since interstitials are shown sparingly to users.
     func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError)
     {
-        log.debug("")
-        guard let status = Network.reachability?.status else { return }
-        
-        switch status
+        if retryFetchInterstitial
         {
-        case .unreachable: break
-        case .wifi,.wwan:
+            retryFetchInterstitial = false
+            log.debug("")
+            guard let status = Network.reachability?.status else { return }
             
-            configureGADInterstitial()
+            switch status
+            {
+            case .unreachable: break
+            case .wifi,.wwan:
+                
+                configureGADInterstitial()
+            }
         }
     }
     

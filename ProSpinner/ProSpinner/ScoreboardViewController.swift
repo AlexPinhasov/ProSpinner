@@ -50,12 +50,26 @@ class ScoreboardViewController: UIViewController,BaseAsyncProtocol
     func userLoggedIn()
     {
         facebookView.isHidden = true
+        loadingIndicator.isHidden = true
+        loadingIndicator.stopAnimating()
         facebookViewHighetConstraint.constant = 0
         scoreboardDelegateDataSourceController.fetchData()
         Diamond.redCounter += 100
         Diamond.blueCounter += 100
         Diamond.greenCounter += 100
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.reloadLockedViewAfterPurchase.rawValue), object: nil)
+    }
+    
+    func tappedFacebookButton()
+    {
+        loadingIndicator.startAnimating()
+        loadingIndicator.isHidden = false
+    }
+    
+    func canceledFacebookLogin()
+    {
+        loadingIndicator.stopAnimating()
+        loadingIndicator.isHidden = true
     }
     
     func fetchData()

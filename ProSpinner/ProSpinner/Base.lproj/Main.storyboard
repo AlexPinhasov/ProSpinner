@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -425,6 +426,9 @@
                                             <constraint firstAttribute="width" constant="179" id="z4k-5v-RcE"/>
                                         </constraints>
                                     </view>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-Jg-U1f">
+                                        <rect key="frame" x="150" y="49" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97637468576431274" green="0.97653776407241821" blue="0.9763532280921936" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -433,8 +437,10 @@
                                     <constraint firstItem="MvE-vf-sfy" firstAttribute="centerX" secondItem="coq-uF-67S" secondAttribute="centerX" id="LfE-I0-l9P"/>
                                     <constraint firstAttribute="height" constant="119" id="OE0-a8-N5u"/>
                                     <constraint firstItem="kLb-UB-9q3" firstAttribute="top" secondItem="coq-uF-67S" secondAttribute="top" constant="12" id="Yug-E1-loV"/>
+                                    <constraint firstItem="Eea-Jg-U1f" firstAttribute="centerY" secondItem="coq-uF-67S" secondAttribute="centerY" id="ZDH-bc-tHp"/>
                                     <constraint firstItem="z2h-sI-zqQ" firstAttribute="top" secondItem="MvE-vf-sfy" secondAttribute="bottom" constant="8" id="ZnM-gF-If4"/>
                                     <constraint firstItem="z2h-sI-zqQ" firstAttribute="centerX" secondItem="kLb-UB-9q3" secondAttribute="centerX" id="dxF-9U-1fs"/>
+                                    <constraint firstItem="Eea-Jg-U1f" firstAttribute="centerX" secondItem="coq-uF-67S" secondAttribute="centerXWithinMargins" id="gg2-i1-3Xf"/>
                                     <constraint firstItem="Niu-Ir-pm3" firstAttribute="leading" secondItem="z2h-sI-zqQ" secondAttribute="trailing" constant="13" id="nCU-KD-KOa"/>
                                     <constraint firstAttribute="bottom" secondItem="z2h-sI-zqQ" secondAttribute="bottom" constant="12" id="p8y-Rh-DJ0"/>
                                     <constraint firstItem="MvE-vf-sfy" firstAttribute="top" secondItem="kLb-UB-9q3" secondAttribute="bottom" constant="8" id="q2G-eJ-LYZ"/>
@@ -482,7 +488,7 @@
                         <outlet property="facebookButtonView" destination="MvE-vf-sfy" id="vmn-2I-k6K"/>
                         <outlet property="facebookView" destination="coq-uF-67S" id="iJf-Vo-kWx"/>
                         <outlet property="facebookViewHighetConstraint" destination="OE0-a8-N5u" id="Llp-jV-ah1"/>
-                        <outlet property="loadingIndicator" destination="mza-Ap-1ph" id="bVU-vE-UMf"/>
+                        <outlet property="loadingIndicator" destination="Eea-Jg-U1f" id="EtJ-f5-0fk"/>
                         <outlet property="scoreTableView" destination="Gt1-Jq-Xu7" id="QGN-KI-48k"/>
                     </connections>
                 </viewController>

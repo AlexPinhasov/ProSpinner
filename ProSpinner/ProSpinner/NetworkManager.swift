@@ -268,7 +268,7 @@ class NetworkManager
         case .wifi,.wwan:
             
             var scoresFound = [ScoreData]()
-            let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+            let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
             backgroundQueue.async(execute:
             {
                 database.child("HighScores").queryOrderedByKey().observeSingleEvent(of: .value, with:

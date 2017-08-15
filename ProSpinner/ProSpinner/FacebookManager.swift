@@ -53,7 +53,7 @@ class FacebookManager: UIView,
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
-        
+        self.scoreboardViewController?.tappedFacebookButton()
         loginButton.isHidden = true
         
         if let error = error {
@@ -66,8 +66,7 @@ class FacebookManager: UIView,
         else if result.isCancelled{
             
             loginButton.isHidden = false
-        
-            
+            self.scoreboardViewController?.canceledFacebookLogin()
         }
             
             
