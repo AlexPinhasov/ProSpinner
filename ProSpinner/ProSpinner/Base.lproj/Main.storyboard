@@ -404,29 +404,40 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="right" verticalHuggingPriority="251" text="and get 100 FREE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2h-sI-zqQ">
-                                        <rect key="frame" x="107.5" y="87" width="105.5" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="right" verticalHuggingPriority="251" text="get 100 FREE diamonds" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2h-sI-zqQ">
+                                        <rect key="frame" x="89" y="87" width="143" height="20"/>
                                         <fontDescription key="fontDescription" name="MyriadPro-Cond" family="Myriad Pro" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="DiamondGroupSmall" translatesAutoresizingMaskIntoConstraints="NO" id="Niu-Ir-pm3">
-                                        <rect key="frame" x="226" y="75" width="49" height="42"/>
+                                        <rect key="frame" x="245" y="75" width="49" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="49" id="uli-Jx-m5a"/>
                                             <constraint firstAttribute="height" constant="42" id="wRC-OP-ilL"/>
                                         </constraints>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MvE-vf-sfy">
+                                        <rect key="frame" x="70.5" y="42" width="179" height="37"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="IZz-Wu-0yf"/>
+                                            <constraint firstAttribute="width" constant="179" id="z4k-5v-RcE"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97637468576431274" green="0.97653776407241821" blue="0.9763532280921936" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="kLb-UB-9q3" firstAttribute="leading" secondItem="coq-uF-67S" secondAttribute="leading" id="8qf-74-PEi"/>
                                     <constraint firstAttribute="bottom" secondItem="Niu-Ir-pm3" secondAttribute="bottom" constant="2" id="Ddd-jD-gE5"/>
+                                    <constraint firstItem="MvE-vf-sfy" firstAttribute="centerX" secondItem="coq-uF-67S" secondAttribute="centerX" id="LfE-I0-l9P"/>
                                     <constraint firstAttribute="height" constant="119" id="OE0-a8-N5u"/>
                                     <constraint firstItem="kLb-UB-9q3" firstAttribute="top" secondItem="coq-uF-67S" secondAttribute="top" constant="12" id="Yug-E1-loV"/>
+                                    <constraint firstItem="z2h-sI-zqQ" firstAttribute="top" secondItem="MvE-vf-sfy" secondAttribute="bottom" constant="8" id="ZnM-gF-If4"/>
                                     <constraint firstItem="z2h-sI-zqQ" firstAttribute="centerX" secondItem="kLb-UB-9q3" secondAttribute="centerX" id="dxF-9U-1fs"/>
                                     <constraint firstItem="Niu-Ir-pm3" firstAttribute="leading" secondItem="z2h-sI-zqQ" secondAttribute="trailing" constant="13" id="nCU-KD-KOa"/>
                                     <constraint firstAttribute="bottom" secondItem="z2h-sI-zqQ" secondAttribute="bottom" constant="12" id="p8y-Rh-DJ0"/>
+                                    <constraint firstItem="MvE-vf-sfy" firstAttribute="top" secondItem="kLb-UB-9q3" secondAttribute="bottom" constant="8" id="q2G-eJ-LYZ"/>
                                     <constraint firstAttribute="trailing" secondItem="kLb-UB-9q3" secondAttribute="trailing" id="sft-nA-9AK"/>
                                 </constraints>
                             </view>
@@ -468,6 +479,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="facebookButtonView" destination="MvE-vf-sfy" id="vmn-2I-k6K"/>
                         <outlet property="facebookView" destination="coq-uF-67S" id="iJf-Vo-kWx"/>
                         <outlet property="facebookViewHighetConstraint" destination="OE0-a8-N5u" id="Llp-jV-ah1"/>
                         <outlet property="loadingIndicator" destination="mza-Ap-1ph" id="bVU-vE-UMf"/>

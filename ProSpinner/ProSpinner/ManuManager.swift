@@ -359,12 +359,12 @@ class ManuManager: BaseClass,
     func showScoreboardTutorial()
     {
         log.debug("")
-        //if ArchiveManager.firstTimeRegisterScoreboard == false
-        //{
-          //  ArchiveManager.firstTimeRegisterScoreboard = true
+        if ArchiveManager.firstTimeRegisterScoreboard == false
+        {
+            ArchiveManager.firstTimeRegisterScoreboard = true
             scoreboardTutorialNode = self.scene?.childNode(withName: Constants.scoreboardTutorialNode.scoreboardTutorialNode.rawValue) as? ScoreboardTutorialNode
             scoreboardTutorialNode?.showNode()
-        //}
+        }
     }
     
     func hideScoreboardTutorial()

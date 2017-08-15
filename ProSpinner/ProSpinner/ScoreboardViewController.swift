@@ -16,7 +16,7 @@ class ScoreboardViewController: UIViewController,BaseAsyncProtocol
     @IBOutlet weak var scoreTableView: UITableView!
     
     @IBOutlet weak var facebookView: UIView!
-    
+    @IBOutlet weak var facebookButtonView: UIView!
     @IBOutlet weak var facebookViewHighetConstraint: NSLayoutConstraint!
     
     override var prefersStatusBarHidden : Bool {
@@ -38,12 +38,13 @@ class ScoreboardViewController: UIViewController,BaseAsyncProtocol
         
         facebookView.isHidden = false
         facebookViewHighetConstraint.constant = 119
-        let fb = FacebookManager(frame: facebookView.frame)
+        let fb = FacebookManager(frame: facebookButtonView.frame)
 
         fb.scoreboardViewController = self
-        facebookView.addSubview(fb)
-        fb.center = facebookView.center
+        facebookButtonView.addSubview(fb)
         fb.frame.origin.y = 0
+        fb.frame.origin.x = 0
+        print(fb)
     }
     
     func userLoggedIn()
